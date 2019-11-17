@@ -1,0 +1,20 @@
+% This is the main file for the ulm class diagram for the robotic path planning project
+\documentclass[11pt]{article}
+\input{packages.tex}
+\title{UML Class Diagram for Robotic Path Planning}
+\author{Brunn, E. \and Flores, J. \and Kumar, V.}
+\begin{document}
+\maketitle
+
+\begin{tikzpicture}
+\begin{umlpackage}{RoboticPathPlanning}
+% Shape Class
+\input{./classes/shape.tex} %x=2,y=2
+\input{./classes/obstacle.tex} %x=10, y=2
+\input{./classes/domain.tex} %x=10, y=-2
+\umlinherit[]{Obstacle}{Shape}
+\umlinherit[]{Domain}{Shape}
+\end{umlpackage}
+\end{tikzpicture}
+
+\end{document}
