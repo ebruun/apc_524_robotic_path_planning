@@ -1,0 +1,18 @@
+\umlclass[x=8, y=-18]{RRTStar}
+% Data
+{
++ searchRadius : float\\
++ neighbourCostList : [int, float, float]\\
+}
+% Methods
+{
+ + step() : void \\
+ 
+ ------\\
+ 
+ + FindNearestNeightbours(self) : void\\
+ + NeighbourCosts(self) : void \\ %Get total branch costs for neighbours, and also the branch costs to new point
+ + CheapestTotalCost(self) : int \\
+ + RewireTree() : void \\
+
+}

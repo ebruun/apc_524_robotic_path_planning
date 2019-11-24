@@ -7,8 +7,8 @@
 }
 % Methods
 {
-+ Solver() \\
-+ Solver(dim : int, trials : int) \\
++ \dunder{init}\dunder (dim : int, trials : int) \\
 ------\\
-+ FindRRTPath (method : str, int : trials) : void
++ SolveRRT (self, method : str, int : trials) : void \\
++ Completion (vertexList : ndarray, goal : ndarray) : bool
 }

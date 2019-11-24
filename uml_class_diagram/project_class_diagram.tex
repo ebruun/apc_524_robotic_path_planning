@@ -22,19 +22,39 @@
 \umlaggreg[]{inputRRT}{Obstacle}
 \umlaggreg[]{inputRRT}{Domain}
 
+\end{umlpackage}
+\end{tikzpicture}
+
+\newpage
+
+\begin{tikzpicture}
+
+\begin{umlpackage}{Solver}
 %% EB CLASSES
 \input{./classes/PLACEHOLDERinput.tex}
 \input{./classes/PLACEHOLDERinput2.tex}
 
 \input{./classes/Solver.tex}
-\umluniassoc[arg1 = currentInput, mult1 = 1, pos1 = 0.95]{Solver}{PLACEHOLDERinput}
+\umluniassoc[arg1 = currentInput, mult1 = 1, pos1 = 0.75]{Solver}{PLACEHOLDERinput}
 
 \input{./classes/RRTAbstract.tex}
 \umlcompo[mult1 = 1, mult2 = 1]{Solver}{RRT}
-\umluniassoc[arg1 = currentInput, mult1 = 1, pos1 = 0.95]{RRT}{PLACEHOLDERinput2}
+\umluniassoc[arg1 = currentInput, mult1 = 1, pos1 = 0.75]{RRT}{PLACEHOLDERinput2}
 
 \input{./classes/Point.tex}
+\umlaggreg{RRT}{Point}
+
 \input{./classes/Branch.tex}
+\umlaggreg{RRT}{Branch}
+
+\input{./classes/RRTRegular.tex}
+\umlinherit{RRTRegular}{RRT}
+
+\input{./classes/RRTStar.tex}
+\umlinherit{RRTStar}{RRT}
+
+\input{./classes/RRTStarFN.tex}
+\umlinherit{RRTStarFN}{RRTStar}
 
 \end{umlpackage}
 \end{tikzpicture}

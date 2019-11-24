@@ -1,13 +1,15 @@
 \umlclass[x=-9, y=-15]{Point}
 % Data
 {
+	coord : list float
 }
 % Methods
 {
-+ \dunder{init}\dunder (self, dim : int, domain : ndarray) \\
++ \dunder{init}\dunder (self, dim : int, domain : ndarray) \\ % Initialize Point class by making random coordinates
 
 ------\\
++ PointNearest(self, VertexList : ndarray) : int\\ % Nearest point in existing vertex list
++ PointExtend(self, stepSize : float) : coord \\% Create new vertex based on max step size
 
-+ PointFree(self, obstacles : ndarray) : bool \\
-+ PointNearest(self, VertexList : ndarray) : int \\
++ PointFree(self, obstacles : ndarray) : bool \\ % Check if point is in free space
 }

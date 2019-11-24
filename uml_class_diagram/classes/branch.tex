@@ -1,6 +1,7 @@
 \umlclass[x=-9, y=-11]{Branch}
 % Data
 {
+	topology : ndarray[Point, Point]
 }
 % Methods
 {
@@ -9,5 +10,6 @@
 ------\\
 
 + BranchFree(self, obstacles : ndarray) : bool \\
-+ BranchCost(self)
++ BranchCost(self) : float\\
++ TreeCost(self) : float
 }
