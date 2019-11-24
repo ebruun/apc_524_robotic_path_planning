@@ -7,6 +7,7 @@
 \maketitle
 
 \begin{tikzpicture}
+
 \begin{umlpackage}{RoboticPathPlanning}
 % Shape Class
 \input{./classes/shape.tex} %x=2,y=2
@@ -16,8 +17,10 @@
 \umlinherit[]{Domain}{Shape}
 
 \input{./classes/InputRRT.tex} %x=10, y=-2
-\umlaggreg[]{InputRRT}{Obstacle}
-\umlaggreg[]{InputRRT}{Domain}
+\umlaggreg[]{inputRRT}{Obstacle}
+\umlaggreg[]{inputRRT}{Domain}
+
+
 
 \end{umlpackage}
 \end{tikzpicture}
