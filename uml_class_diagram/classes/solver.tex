@@ -1,0 +1,14 @@
+\umlclass[x=0, y=-10]{Solver}
+% Data
+{
++ vertexList: ndarray \\
++ parentList : ndarray \\
++ costList : ndarray
+}
+% Methods
+{
++ Solver() \\
++ Solver(dim : int, trials : int) \\
+------\\
++ FindRRTPath (method : str, int : trials) : void
+}

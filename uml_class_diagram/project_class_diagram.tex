@@ -16,11 +16,20 @@
 \umlinherit[]{Obstacle}{Shape}
 \umlinherit[]{Domain}{Shape}
 
-\input{./classes/InputRRT.tex} %x=10, y=-2
+\input{./classes/inputRRT.tex} %x=10, y=-2
 \umlaggreg[]{inputRRT}{Obstacle}
 \umlaggreg[]{inputRRT}{Domain}
 
+%% EB CLASSES
+\input{./classes/PLACEHOLDERinput.tex}
+\input{./classes/PLACEHOLDERinput2.tex}
 
+\input{./classes/Solver.tex}
+\umluniassoc[arg1 = currentInput, mult1 = 1, pos1 = 0.6]{Solver}{PLACEHOLDERinput}
+
+\input{./classes/RRTAbstract.tex} %x=10, y=-2
+\umlcompo[mult1 = 1, mult2 = 1]{Solver}{RRT}
+\umluniassoc[arg1 = currentInput, mult1 = 1, pos1 = 0.6]{RRT}{PLACEHOLDERinput2}
 
 \end{umlpackage}
 \end{tikzpicture}
