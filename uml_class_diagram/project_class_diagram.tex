@@ -22,4 +22,21 @@
 \end{umlpackage}
 \end{tikzpicture}
 
+
+\begin{tik\begin{tikzpicture}
+	\begin{umlpackage}{Input}
+		% Shape Class
+		\input{./classes/shape.tex} %x=2,y=2
+		\input{./classes/obstacle.tex} %x=10, y=2
+		\input{./classes/domain.tex} %x=10, y=-2
+		\umlinherit[]{Obstacle}{Shape}
+		\umlinherit[]{Domain}{Shape}
+		
+		\input{./classes/InputRRT.tex} %x=10, y=-2
+		\umlaggreg[]{InputRRT}{Obstacle}
+		\umlaggreg[]{InputRRT}{Domain}
+		
+	\end{umlpackage}
+\end{tikzpicture}
+
 \end{document}
