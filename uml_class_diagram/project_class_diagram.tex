@@ -1,41 +1,17 @@
 % This is the main file for the ulm class diagram for the robotic path planning project
 \documentclass[11pt]{article}
 \input{packages.tex}
+\input{short_notations.tex}
 \title{UML Class Diagram for Robotic Path Planning}
 \author{Bruun, E. \and Flores, J. \and Kumar, V.}
 \begin{document}
 \maketitle
 
 \begin{tikzpicture}
-\begin{umlpackage}{RoboticPathPlanning}
-% Shape Class
-\input{./classes/shape.tex} %x=2,y=2
-\input{./classes/obstacle.tex} %x=10, y=2
-\input{./classes/domain.tex} %x=10, y=-2
-\umlinherit[]{Obstacle}{Shape}
-\umlinherit[]{Domain}{Shape}
-
-\input{./classes/InputRRT.tex} %x=10, y=-2
-\umlaggreg[]{InputRRT}{Obstacle}
-\umlaggreg[]{InputRRT}{Domain}
-
-\end{umlpackage}
-\end{tikzpicture}
-
-
-\begin{tik\begin{tikzpicture}
 	\begin{umlpackage}{Input}
 		% Shape Class
-		\input{./classes/shape.tex} %x=2,y=2
-		\input{./classes/obstacle.tex} %x=10, y=2
-		\input{./classes/domain.tex} %x=10, y=-2
-		\umlinherit[]{Obstacle}{Shape}
-		\umlinherit[]{Domain}{Shape}
-		
-		\input{./classes/InputRRT.tex} %x=10, y=-2
-		\umlaggreg[]{InputRRT}{Obstacle}
-		\umlaggreg[]{InputRRT}{Domain}
-		
+		\input{./classes/point.tex} %x=2,y=2
+		\input{./classes/shape.tex}
 	\end{umlpackage}
 \end{tikzpicture}
 
