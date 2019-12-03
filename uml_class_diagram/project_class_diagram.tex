@@ -1,27 +1,26 @@
 % This is the main file for the ulm class diagram for the robotic path planning project
 \documentclass[11pt]{article}
 \input{packages.tex}
+\input{short_notations.tex}
 \title{UML Class Diagram for Robotic Path Planning}
 \author{Bruun, E. \and Flores, J. \and Kumar, V.}
 \begin{document}
 \maketitle
 
-\newcommand{\dunder}{\rule{0.1in}{.1pt}}
-
 \begin{tikzpicture}
+\begin{umlpackage}{Input}
+	% Shape Class
+	%\input{./classes/point.tex}
 
-\begin{umlpackage}{RoboticPathPlanning}
-% Shape Class
-\input{./classes/shape.tex} %x=2,y=2
-\input{./classes/obstacle.tex} %x=10, y=2
-\input{./classes/domain.tex} %x=10, y=-2
-\umlinherit[]{Obstacle}{Shape}
-\umlinherit[]{Domain}{Shape}
+	\input{./classes/rectangle.tex}
+	\input{./classes/circle.tex}
+	
+	\input{./classes/shape.tex}
 
-\input{./classes/inputRRT.tex} %x=10, y=-2
-\umlaggreg[]{inputRRT}{Obstacle}
-\umlaggreg[]{inputRRT}{Domain}
-
+	\input{./classes/domain.tex}
+	\input{./classes/obstacle.tex}
+		
+	\input{./classes/rrt_parameters.tex}		
 \end{umlpackage}
 \end{tikzpicture}
 
@@ -59,7 +58,6 @@
 \input{./classes/RRTStarFN.tex}
 \umlinherit{RRTStarFN}{RRTStar}
 
-\end{umlpackage}
 \end{tikzpicture}
 
 \end{document}

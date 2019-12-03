@@ -1,9 +1,15 @@
-\umlclass[x=10, y=-2]{Domain}
+\umlclass[x=13, y=0]{Domain}
 % Data
 {
-dim: int
++ dim: int \\
++ number$\_$of$\_$points: int\\
++ Obstacles: Obstacle\\
++ Origin: Point\\
++ Goal: Point
 }
 % Methods
 {
-CreateDomain(): DO
++ is$\_$point$\_$free(Point p): boolean \\ % Checks whether the point was free
++ refine(double step$\_$size): \\ % Adds a point
++ update$\_$vertex$\_$list() % Updates the current list of vertices
 }
