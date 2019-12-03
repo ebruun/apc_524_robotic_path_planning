@@ -33,17 +33,17 @@
 \input{./classes/PLACEHOLDERinput.tex}
 \input{./classes/PLACEHOLDERinput2.tex}
 
-\input{./classes/Solver.tex}
+\input{./classes/solver.tex}
 \umluniassoc[arg1 = currentInput, mult1 = 1, pos1 = 0.75]{Solver}{PLACEHOLDERinput}
 
 \input{./classes/RRTAbstract.tex}
 \umlcompo[mult1 = 1, mult2 = 1]{Solver}{RRT}
 \umluniassoc[arg1 = currentInput, mult1 = 1, pos1 = 0.75]{RRT}{PLACEHOLDERinput2}
 
-\input{./classes/Point.tex}
+\input{./classes/point.tex}
 \umlaggreg{RRT}{Point}
 
-\input{./classes/Branch.tex}
+\input{./classes/branch.tex}
 \umlaggreg{RRT}{Branch}
 
 \input{./classes/RRTRegular.tex}
@@ -59,7 +59,7 @@
 \umlinherit{RRTStarFN}{RRTStar}
 
 %JF CLASSES
-\input{./classes/Plot.tex}
+\input{./classes/plot.tex}
 \umlaggreg{Plot}{Solver}
 
 \end{umlpackage}
