@@ -4,66 +4,100 @@
 \input{short_notations.tex}
 \title{UML Class Diagram for Robotic Path Planning}
 \author{Bruun, E. \and Flores, J. \and Kumar, V.}
+
+\declare{}
 \begin{document}
 \maketitle
 
+\begin{preview}
 \begin{tikzpicture}
-\begin{umlpackage}{Input}
-	% Shape Class
-	%\input{./classes/point.tex}
+\begin{umlpackage}{RRT}
+% Shape Class
+%\input{./classes/point.tex}
 
-	\input{./classes/rectangle.tex}
-	\input{./classes/circle.tex}
-	
-	\input{./classes/shape.tex}
+% Rectangle class
+\setvalue{Xcoord=0.}
+\setvalue{Ycoord=0.}
+\input{./classes/rectangle.tex}
 
-	\input{./classes/domain.tex}
-	\input{./classes/obstacle.tex}
-		
-	\input{./classes/rrt_parameters.tex}		
-\end{umlpackage}
-\end{tikzpicture}
+\setvalue{Xcoord=0.}
+\setvalue{Ycoord=-4.5}
+\input{./classes/circle.tex}
 
-\newpage
+\setvalue{Xcoord=7.}
+\setvalue{Ycoord=-2.5}
+\input{./classes/shape.tex}
 
-\begin{tikzpicture}
+\setvalue{Xcoord=13.}
+\setvalue{Ycoord=0.}
+\input{./classes/domain.tex}
 
-\begin{umlpackage}{Solver}
-%% EB CLASSES
+\setvalue{Xcoord=13.}
+\setvalue{Ycoord=-5.}
+\input{./classes/obstacle.tex}
+
+\setvalue{Xcoord=24.}
+\setvalue{Ycoord=0.}
+\input{./classes/rrt_parameters.tex}	
+
+\setvalue{Xcoord=24.}
+\setvalue{Ycoord=-15.}
 \input{./classes/PLACEHOLDERinput.tex}
+
+\setvalue{Xcoord=24.}
+\setvalue{Ycoord=-20.}
 \input{./classes/PLACEHOLDERinput2.tex}
 
+\setvalue{Xcoord=10.}
+\setvalue{Ycoord=-15.}
 \input{./classes/solver.tex}
 \umluniassoc[arg1 = currentInput, mult1 = 1, pos1 = 0.75]{Solver}{PLACEHOLDERinput}
 
+\setvalue{Xcoord=10.}
+\setvalue{Ycoord=-20.}
 \input{./classes/RRTAbstract.tex}
 \umlcompo[mult1 = 1, mult2 = 1]{Solver}{RRT}
 \umluniassoc[arg1 = currentInput, mult1 = 1, pos1 = 0.75]{RRT}{PLACEHOLDERinput2}
 
+\setvalue{Xcoord=1.}
+\setvalue{Ycoord=-20.}
 \input{./classes/point.tex}
 \umlaggreg{RRT}{Point}
 
+\setvalue{Xcoord=1.}
+\setvalue{Ycoord=-26.}
 \input{./classes/branch.tex}
 \umlaggreg{RRT}{Branch}
 
+\setvalue{Xcoord=9.}
+\setvalue{Ycoord=-26.}
 \input{./classes/RRTRegular.tex}
 \umlinherit{RRTRegular}{RRT}
 
+\setvalue{Xcoord=9.}
+\setvalue{Ycoord=-29.}
 \input{./classes/RRTRegularHeuristic.tex}
 \umlinherit{RRTRegularHeuristic}{RRTRegular}
 
+\setvalue{Xcoord=18.}
+\setvalue{Ycoord=-26.}
 \input{./classes/RRTStar.tex}
 \umlinherit{RRTStar}{RRT}
 
+\setvalue{Xcoord=18.}
+\setvalue{Ycoord=-31.}
 \input{./classes/RRTStarFN.tex}
 \umlinherit{RRTStarFN}{RRTStar}
 
-%JF CLASSES
+\setvalue{Xcoord=1.}
+\setvalue{Ycoord=-13.}
 \input{./classes/plot.tex}
 \umlaggreg{Plot}{Solver}
 
 \end{umlpackage}
 
 \end{tikzpicture}
+
+\end{preview}
 
 \end{document}
