@@ -1,13 +1,14 @@
 \umlclass[x=\getvalue{Xcoord}, y=\getvalue{Ycoord}]{Vertex}
 % Data
 {
-	coord : list float
+	coords : list float
 }
 % Methods
 {
-+ \dunder{init}\dunder (self, dim : int, domain : ndarray) \\ % Initialize Point class by making random coordinates
++ \dunder{init}\dunder (self) \\
 
 ------\\
-+ p$\_$nearest(self, VertexList : ndarray) : int\\ % Nearest point in existing vertex list
-+ p$\_$extend(self, stepSize : float) : coord \\% Create new vertex based on max step size
++ random(domain : ndarray) : coords \\
++ nearest(vertex$\_$list : ndarray) : int\\ % Nearest point in existing vertex list
++ extend(step$\_$size : float) : coords \\% Create new vertex based on max step size
 }

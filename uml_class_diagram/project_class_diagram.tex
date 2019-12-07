@@ -15,6 +15,14 @@
 %\input{./classes/point.tex}
 
 %% Input Classes
+\setvalue{Xcoord=24.}
+\setvalue{Ycoord=0.}
+\input{./classes/params_rrt.tex}	
+
+\setvalue{Xcoord=24.}
+\setvalue{Ycoord=-5.}
+\input{./classes/params_domain.tex}	
+
 
 %% Geometry Classes
 \setvalue{Xcoord=7.}
@@ -32,11 +40,9 @@
 \umlinherit{Circle}{Shape}
 
 \setvalue{Xcoord=0.}
-\setvalue{Ycoord=-8.5}
+\setvalue{Ycoord=-9.5}
 \input{./classes/freeform.tex}
 \umlinherit{Freeform}{Shape}
-
-
 
 \setvalue{Xcoord=13.}
 \setvalue{Ycoord=0.}
@@ -48,9 +54,6 @@
 
 
 %% Algorithm Classes 
-\setvalue{Xcoord=24.}
-\setvalue{Ycoord=0.}
-\input{./classes/rrt_parameters.tex}	
 
 \setvalue{Xcoord=24.}
 \setvalue{Ycoord=-15.}
@@ -61,7 +64,7 @@
 \input{./classes/PLACEHOLDERinput2.tex}
 
 \setvalue{Xcoord=10.}
-\setvalue{Ycoord=-15.}
+\setvalue{Ycoord=-18.}
 \input{./classes/solver.tex}
 \umluniassoc[arg1 = currentInput, mult1 = 1, pos1 = 0.75]{Solver}{PLACEHOLDERinput}
 
@@ -72,12 +75,12 @@
 \umluniassoc[arg1 = currentInput, mult1 = 1, pos1 = 0.75]{RRT}{PLACEHOLDERinput2}
 
 \setvalue{Xcoord=1.}
-\setvalue{Ycoord=-21.}
+\setvalue{Ycoord=-23.}
 \input{./classes/vertex.tex}
 \umlaggreg{RRT}{Vertex}
 
 \setvalue{Xcoord=1.}
-\setvalue{Ycoord=-26.}
+\setvalue{Ycoord=-28.}
 \input{./classes/edge.tex}
 \umlaggreg{RRT}{Edge}
 
@@ -104,7 +107,7 @@
 
 %% Output Classes
 \setvalue{Xcoord=1.}
-\setvalue{Ycoord=-15.}
+\setvalue{Ycoord=-17.}
 \input{./classes/plot.tex}
 \umlaggreg{Plot}{Solver}
 
