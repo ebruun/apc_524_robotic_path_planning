@@ -1,14 +1,14 @@
 \umlclass[x=\getvalue{Xcoord}, y=\getvalue{Ycoord}]{Circle}
 % Data
 {
-+ dim: int \\
++ dim: 2 \\
++ shape$\_$name: string \\
 + radius: double \\
-+ center: Point \\
-+ shape$\_$name: string
++ center: Point 
 }
 % Methods
 {
-+ \dunder{init}\dunder(double radius, Point center) \\
-+ inside(Point p)\\
-+ intersects(Point p1, Point p2)
++ \dunder{init}\dunder(radius, center) \\
++ inside(pt) : bool\\
++ intersects(pt1, pt2) : bool
 }

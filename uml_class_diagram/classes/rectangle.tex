@@ -1,14 +1,14 @@
 \umlclass[x=\getvalue{Xcoord}, y=\getvalue{Ycoord}]{Rectangle}
 % Data
 {
-+ dim: int \\
-+ bottom$\_$left: Point \\
-+ top$\_$right: Point  \\
-+ shape$\_$name: string
++ dim: 2 \\
++ shape$\_$name: string\\
++ bot$\_$left: Point \\
++ top$\_$right: Point
 }
 % Methods
 {
-+ \dunder{init}\dunder (Point p1, Point p2) \\
-+ inside(Point p)\\
-+ intersects(Point p1, Point p2)
++ \dunder{init}\dunder (bot$\_$left, top$\_$right) \\
++ inside(pt) : bool \\
++ intersects(pt1, pt2) : bool
 }

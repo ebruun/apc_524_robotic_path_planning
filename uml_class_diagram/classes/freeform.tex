@@ -1,0 +1,17 @@
+\umlclass[x=\getvalue{Xcoord}, y=\getvalue{Ycoord}]{Freeform}
+% Data
+{
++ dim: 2 \\
++ shape$\_$name: string \\
++ perim$\_$step : double \\
++ perim$\_$pnts : ndarray
++ image
+}
+% Methods
+{
++ \dunder{init}\dunder(filename) \\
++ inside(pt) : bool \\
++ intersects(pt1, pt2) : bool \\
++ get$\_$image(filename) \\
++ get$\_$perim() : ndarray
+}

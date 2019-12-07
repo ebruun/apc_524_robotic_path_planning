@@ -17,17 +17,26 @@
 %% Input Classes
 
 %% Geometry Classes
+\setvalue{Xcoord=7.}
+\setvalue{Ycoord=-2.5}
+\input{./classes/shape.tex}
+
 \setvalue{Xcoord=0.}
 \setvalue{Ycoord=0.}
 \input{./classes/rectangle.tex}
+\umlinherit{Rectangle}{Shape}
 
 \setvalue{Xcoord=0.}
 \setvalue{Ycoord=-4.5}
 \input{./classes/circle.tex}
+\umlinherit{Circle}{Shape}
 
-\setvalue{Xcoord=7.}
-\setvalue{Ycoord=-2.5}
-\input{./classes/shape.tex}
+\setvalue{Xcoord=0.}
+\setvalue{Ycoord=-8.5}
+\input{./classes/freeform.tex}
+\umlinherit{Freeform}{Shape}
+
+
 
 \setvalue{Xcoord=13.}
 \setvalue{Ycoord=0.}
@@ -63,7 +72,7 @@
 \umluniassoc[arg1 = currentInput, mult1 = 1, pos1 = 0.75]{RRT}{PLACEHOLDERinput2}
 
 \setvalue{Xcoord=1.}
-\setvalue{Ycoord=-20.}
+\setvalue{Ycoord=-21.}
 \input{./classes/vertex.tex}
 \umlaggreg{RRT}{Vertex}
 
@@ -78,7 +87,7 @@
 \umlinherit{RRTRegular}{RRT}
 
 \setvalue{Xcoord=9.}
-\setvalue{Ycoord=-29.}
+\setvalue{Ycoord=-31.}
 \input{./classes/RRTRegularHeuristic.tex}
 \umlinherit{RRTRegularHeuristic}{RRTRegular}
 
@@ -88,14 +97,14 @@
 \umlinherit{RRTStar}{RRT}
 
 \setvalue{Xcoord=18.}
-\setvalue{Ycoord=-31.}
+\setvalue{Ycoord=-33.}
 \input{./classes/RRTStarFN.tex}
 \umlinherit{RRTStarFN}{RRTStar}
 
 
 %% Output Classes
 \setvalue{Xcoord=1.}
-\setvalue{Ycoord=-13.}
+\setvalue{Ycoord=-15.}
 \input{./classes/plot.tex}
 \umlaggreg{Plot}{Solver}
 
