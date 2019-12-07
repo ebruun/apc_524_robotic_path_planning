@@ -1,15 +1,15 @@
 \umlclass[x=\getvalue{Xcoord}, y=\getvalue{Ycoord}]{Edge}
 % Data
 {
-	topology : ndarray[Point, Point]
+	start : Point \\
+	end : Point
 }
 % Methods
 {
-+ \dunder{init}\dunder (start: Point, end: Point) \\
++ \dunder{init}\dunder (start, end) \\
 
 ------\\
 
-+ BranchFree(self, obstacles : ndarray) : bool \\
-+ BranchCost(self) : float\\
-+ TreeCost(self) : float
++ edge$\_$cost(self) : float\\
++ tree$\_$cost(self) : float
 }

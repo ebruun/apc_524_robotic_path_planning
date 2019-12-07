@@ -66,7 +66,7 @@
 \umluniassoc[arg1 = currentInput, mult1 = 1, pos1 = 0.75]{Solver}{PLACEHOLDERinput}
 
 \setvalue{Xcoord=10.}
-\setvalue{Ycoord=-20.}
+\setvalue{Ycoord=-25.}
 \input{./classes/RRTAbstract.tex}
 \umlcompo[mult1 = 1, mult2 = 1]{Solver}{RRT}
 \umluniassoc[arg1 = currentInput, mult1 = 1, pos1 = 0.75]{RRT}{PLACEHOLDERinput2}
@@ -82,17 +82,17 @@
 \umlaggreg{RRT}{Edge}
 
 \setvalue{Xcoord=9.}
-\setvalue{Ycoord=-26.}
+\setvalue{Ycoord=-29.}
 \input{./classes/RRTRegular.tex}
 \umlinherit{RRTRegular}{RRT}
 
 \setvalue{Xcoord=9.}
-\setvalue{Ycoord=-31.}
+\setvalue{Ycoord=-33.}
 \input{./classes/RRTRegularHeuristic.tex}
 \umlinherit{RRTRegularHeuristic}{RRTRegular}
 
 \setvalue{Xcoord=18.}
-\setvalue{Ycoord=-26.}
+\setvalue{Ycoord=-29.}
 \input{./classes/RRTStar.tex}
 \umlinherit{RRTStar}{RRT}
 

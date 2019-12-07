@@ -1,14 +1,14 @@
 \umlclass[x=\getvalue{Xcoord}, y=\getvalue{Ycoord}]{Solver}
 % Data
 {
-+ vertexList: ndarray \\
-+ parentList : int list \\
-+ costList : float list
++ vertex$\_$list: ndarray \\
++ parent$\_$list : int list \\
++ cost$\_$list : float list
 }
 % Methods
 {
 + \dunder{init}\dunder (dim : int, trials : int) \\
 ------\\
-+ SolveRRT (self, method : str, int : trials) : void \\
-+ Completion (vertexList : ndarray, goal : ndarray) : bool
++ solve$\_$rrt (self, method : str, int : trials) : void \\
++ completion (vertex$\_$list : ndarray, goal : ndarray) : bool
 }
