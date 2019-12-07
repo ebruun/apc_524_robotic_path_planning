@@ -1,5 +1,5 @@
 % This is the main file for the ulm class diagram for the robotic path planning project
-\documentclass[11pt]{article}
+\documentclass[10pt]{article}
 \input{packages.tex}
 \input{short_notations.tex}
 \title{UML Class Diagram for Robotic Path Planning}
@@ -14,7 +14,9 @@
 % Shape Class
 %\input{./classes/point.tex}
 
-% Rectangle class
+%% Input Classes
+
+%% Geometry Classes
 \setvalue{Xcoord=0.}
 \setvalue{Ycoord=0.}
 \input{./classes/rectangle.tex}
@@ -35,6 +37,8 @@
 \setvalue{Ycoord=-5.}
 \input{./classes/obstacle.tex}
 
+
+%% Algorithm Classes 
 \setvalue{Xcoord=24.}
 \setvalue{Ycoord=0.}
 \input{./classes/rrt_parameters.tex}	
@@ -60,13 +64,13 @@
 
 \setvalue{Xcoord=1.}
 \setvalue{Ycoord=-20.}
-\input{./classes/point.tex}
-\umlaggreg{RRT}{Point}
+\input{./classes/vertex.tex}
+\umlaggreg{RRT}{Vertex}
 
 \setvalue{Xcoord=1.}
 \setvalue{Ycoord=-26.}
-\input{./classes/branch.tex}
-\umlaggreg{RRT}{Branch}
+\input{./classes/edge.tex}
+\umlaggreg{RRT}{Edge}
 
 \setvalue{Xcoord=9.}
 \setvalue{Ycoord=-26.}
@@ -88,6 +92,8 @@
 \input{./classes/RRTStarFN.tex}
 \umlinherit{RRTStarFN}{RRTStar}
 
+
+%% Output Classes
 \setvalue{Xcoord=1.}
 \setvalue{Ycoord=-13.}
 \input{./classes/plot.tex}

@@ -1,9 +1,11 @@
 \umlclass[x=\getvalue{Xcoord}, y=\getvalue{Ycoord}, type=abstract]{Shape}
 % Data
 {
-+ dim: int
++ dim: int \\
++ shape$\_$name: string
 }
 % Methods
 {
-+ is$\_$point$\_$inside()
++  \textit{inside(Point p)} \\
++  \textit{intersects(Point p1, Point p2)}
 }
