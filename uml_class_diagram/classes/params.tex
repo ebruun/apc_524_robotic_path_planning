@@ -1,0 +1,19 @@
+%This class provides a standard interface to an input file which provides at run-time for program parameters such as step_size
+\umlclass[x=\getvalue{Xcoord}, y=\getvalue{Ycoord},
+				type = abstract,
+				\relstr,
+				anchor=\getvalue{aligninfo},
+				width = \getvalue{widthinfo}]
+				{Params}
+% Data
+{
++ file$\_$name: string
+}
+% Methods
+{
+\dunder{init}\dunder(filename)\\
++ parse$\_$parameters(string file$\_$name) \\
++ void declare$\_$entry(string entry$\_$name, \\ string default$\_$value, \\ Reg$\_$Ex(?) pattern)\\
++ set(string entry$\_$name, string new$\_$value)\\
++ print$\_$paramters()
+}

@@ -1,14 +1,16 @@
 %This class provides a standard interface to an input file which provides at run-time for program parameters such as step_size
-\umlclass[x=\getvalue{Xcoord}, y=\getvalue{Ycoord}]{DomainParams}
+\umlclass[x=\getvalue{Xcoord}, y=\getvalue{Ycoord},
+				\relstr,
+				anchor=\getvalue{aligninfo},
+				width = \getvalue{widthinfo}]
+				{ParamsDomain}
 % Data
 {
-+ file$\_$name: string
++ file$\_$name: string \\
++ info$\_$dims: string \\
++ info$\_$domain: string \\
++ info$\_$obstacles: string
 }
 % Methods
 {
-\dunder{init}\dunder(filename)\\
-+ parse$\_$parameters(string file$\_$name) \\
-+ void declare$\_$entry(string entry$\_$name, \\ string default$\_$value, \\ Reg$\_$Ex(?) pattern)\\
-+ set(string entry$\_$name, string new$\_$value)\\
-+ print$\_$paramters()
 }

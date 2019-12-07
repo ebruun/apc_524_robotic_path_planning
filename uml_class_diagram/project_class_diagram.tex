@@ -14,14 +14,33 @@
 % Shape Class
 %\input{./classes/point.tex}
 
-%% Input Classes
-\setvalue{Xcoord=24.}
-\setvalue{Ycoord=0.}
-\input{./classes/params_rrt.tex}	
+%% Input and Parameter Classes
+\setvalue{Xcoord=18.}
+\setvalue{Ycoord=1.}
+\setvalue{aligninfo=north}
+\setvalue{widthinfo=6cm}
+\newcommand{\relstr}{}
+\input{./classes/params.tex}	
 
 \setvalue{Xcoord=24.}
-\setvalue{Ycoord=-5.}
+\setvalue{Ycoord= 1.}
+\setvalue{aligninfo=west}
+\setvalue{widthinfo=5cm}
+\renewcommand{\relstr}{}
 \input{./classes/params_domain.tex}	
+\umlinherit{ParamsDomain}{Params}
+
+\setvalue{aligninfo=west}
+\setvalue{widthinfo=5cm}
+\renewcommand{\relstr}{below= 3 cm of ParamsDomain.west}
+\input{./classes/params_origingoal.tex}	
+\umlinherit{ParamsOriginGoal}{Params}
+
+\setvalue{aligninfo=west}
+\setvalue{widthinfo=5cm}
+\renewcommand{\relstr}{below=5.5 cm of ParamsDomain.south}
+\input{./classes/params_rrt.tex}	
+\umlinherit{ParamsRRT}{Params}
 
 
 %% Geometry Classes
@@ -44,8 +63,10 @@
 \input{./classes/freeform.tex}
 \umlinherit{Freeform}{Shape}
 
+
+%% Domain Classes
 \setvalue{Xcoord=13.}
-\setvalue{Ycoord=0.}
+\setvalue{Ycoord=-10.}
 \input{./classes/domain.tex}
 
 \setvalue{Xcoord=13.}
