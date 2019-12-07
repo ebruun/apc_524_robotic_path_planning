@@ -1,10 +1,14 @@
-\umlclass[x=\getvalue{Xcoord}, y=\getvalue{Ycoord}]{Freeform}
+\umlclass[x=\getvalue{Xcoord}, y=\getvalue{Ycoord},
+				\relstr,
+				anchor = \getvalue{aligninfo},
+				width = \getvalue{widthinfo}]
+				{Freeform}
 % Data
 {
 + dim: 2 \\
 + shape$\_$name: string \\
 + perim$\_$step : double \\
-+ perim$\_$pnts : ndarrayc \\
++ perim$\_$pnts : ndarray \\
 + image
 }
 % Methods

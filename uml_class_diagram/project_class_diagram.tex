@@ -16,52 +16,56 @@
 
 %% Input and Parameter Classes
 \setvalue{Xcoord=18.}
-\setvalue{Ycoord=1.}
+\setvalue{Ycoord=2.}
 \setvalue{aligninfo=north}
 \setvalue{widthinfo=6cm}
 \newcommand{\relstr}{}
 \input{./classes/params.tex}	
 
-\setvalue{Xcoord=24.}
-\setvalue{Ycoord= 1.}
-\setvalue{aligninfo=west}
+\setvalue{aligninfo=north}
 \setvalue{widthinfo=5cm}
-\renewcommand{\relstr}{}
+\renewcommand{\relstr}{below right= 0cm and 7cm of Params.north}
 \input{./classes/params_domain.tex}	
 \umlinherit{ParamsDomain}{Params}
 
-\setvalue{aligninfo=west}
+\setvalue{aligninfo=north}
 \setvalue{widthinfo=5cm}
-\renewcommand{\relstr}{below= 3 cm of ParamsDomain.west}
+\renewcommand{\relstr}{below right=3cm and 7cm of Params.north}
 \input{./classes/params_origingoal.tex}	
 \umlinherit{ParamsOriginGoal}{Params}
 
-\setvalue{aligninfo=west}
+\setvalue{aligninfo=north}
 \setvalue{widthinfo=5cm}
-\renewcommand{\relstr}{below=5.5 cm of ParamsDomain.south}
+\renewcommand{\relstr}{below right=6cm and 7cm of Params.north}
 \input{./classes/params_rrt.tex}	
 \umlinherit{ParamsRRT}{Params}
 
 
 %% Geometry Classes
 \setvalue{Xcoord=7.}
-\setvalue{Ycoord=-2.5}
+\setvalue{Ycoord=2}
+\setvalue{aligninfo=north}
+\setvalue{widthinfo=4cm}
+\renewcommand{\relstr}{}
 \input{./classes/shape.tex}
 
-\setvalue{Xcoord=0.}
-\setvalue{Ycoord=0.}
+\setvalue{aligninfo=north}
+\setvalue{widthinfo=4cm}
+\renewcommand{\relstr}{below left=0cm and 7 cm of Shape.north}
 \input{./classes/rectangle.tex}
-\umlinherit{Rectangle}{Shape}
+\umlinherit[]{Rectangle}{Shape}
 
-\setvalue{Xcoord=0.}
-\setvalue{Ycoord=-4.5}
+\setvalue{aligninfo=north}
+\setvalue{widthinfo=4cm}
+\renewcommand{\relstr}{below left=4cm and 7 cm of Shape.north}
 \input{./classes/circle.tex}
-\umlinherit{Circle}{Shape}
+\umlinherit[]{Circle}{Shape}
 
-\setvalue{Xcoord=0.}
-\setvalue{Ycoord=-9.5}
+\setvalue{aligninfo=north}
+\setvalue{widthinfo=4cm}
+\renewcommand{\relstr}{below left=8cm and 7 cm of Shape.north}
 \input{./classes/freeform.tex}
-\umlinherit{Freeform}{Shape}
+\umlinherit[]{Freeform}{Shape}
 
 
 %% Domain Classes
