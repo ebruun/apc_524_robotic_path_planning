@@ -1,15 +1,21 @@
-\umlclass[x=\getvalue{Xcoord}, y=\getvalue{Ycoord}]{Domain}
+\umlclass[x=\getvalue{Xcoord}, y=\getvalue{Ycoord}
+				\relstr,
+				anchor = \getvalue{aligninfo},
+				width = \getvalue{widthinfo}]
+				{Domain}
 % Data
 {
 + dim: int \\
-+ number$\_$of$\_$points: int\\
 + Obstacles: Obstacle\\
 + Origin: Point\\
 + Goal: Point
 }
 % Methods
 {
-+ is$\_$point$\_$free(Point p): boolean \\ % Checks whether the point was free
++ \dunder{init}\dunder(ParamsDomain) \\
++ create$\_$domain(self)\\
+
+
++ is$\_$point$\_$free(Point p): bool \\ % Checks whether the point was free
 + refine(double step$\_$size): \\ % Adds a point
-+ update$\_$vertex$\_$list() % Updates the current list of vertices
 }

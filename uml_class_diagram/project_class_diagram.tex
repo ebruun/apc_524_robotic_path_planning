@@ -14,8 +14,8 @@
 % Shape Class
 %\input{./classes/point.tex}
 
-%% Input and Parameter Classes
-\setvalue{Xcoord=18.}
+%% Input and Parameter Classes %%
+\setvalue{Xcoord=16.}
 \setvalue{Ycoord=2.}
 \setvalue{aligninfo=north}
 \setvalue{widthinfo=6cm}
@@ -24,24 +24,25 @@
 
 \setvalue{aligninfo=north}
 \setvalue{widthinfo=5cm}
-\renewcommand{\relstr}{below right= 0cm and 7cm of Params.north}
+\renewcommand{\relstr}{below right= 0cm and 9cm of Params.north}
 \input{./classes/params_domain.tex}	
-\umlinherit{ParamsDomain}{Params}
+\umlinherit[anchors= 180 and 0, geometry=-|-]{ParamsDomain}{Params}
 
 \setvalue{aligninfo=north}
 \setvalue{widthinfo=5cm}
-\renewcommand{\relstr}{below right=3cm and 7cm of Params.north}
+\renewcommand{\relstr}{below right=3cm and 9cm of Params.north}
 \input{./classes/params_origingoal.tex}	
-\umlinherit{ParamsOriginGoal}{Params}
+\umlinherit[anchors= 180 and 0, geometry=-|-]{ParamsOriginGoal}{Params}
 
 \setvalue{aligninfo=north}
 \setvalue{widthinfo=5cm}
-\renewcommand{\relstr}{below right=6cm and 7cm of Params.north}
+\renewcommand{\relstr}{below right=6cm and 9cm of Params.north}
 \input{./classes/params_rrt.tex}	
-\umlinherit{ParamsRRT}{Params}
+\umlinherit[anchors= 180 and 0, geometry=-|-]{ParamsRRT}{Params}
 
 
-%% Geometry Classes
+
+%% Geometry Classes %%
 \setvalue{Xcoord=7.}
 \setvalue{Ycoord=2}
 \setvalue{aligninfo=north}
@@ -53,88 +54,116 @@
 \setvalue{widthinfo=4cm}
 \renewcommand{\relstr}{below left=0cm and 7 cm of Shape.north}
 \input{./classes/rectangle.tex}
-\umlinherit[]{Rectangle}{Shape}
+\umlinherit[anchors= 0 and 180, geometry=-|-]{Rectangle}{Shape}
 
 \setvalue{aligninfo=north}
 \setvalue{widthinfo=4cm}
 \renewcommand{\relstr}{below left=4cm and 7 cm of Shape.north}
 \input{./classes/circle.tex}
-\umlinherit[]{Circle}{Shape}
+\umlinherit[anchors= 0 and 180, geometry=-|-]{Circle}{Shape}
 
 \setvalue{aligninfo=north}
 \setvalue{widthinfo=4cm}
 \renewcommand{\relstr}{below left=8cm and 7 cm of Shape.north}
 \input{./classes/freeform.tex}
-\umlinherit[]{Freeform}{Shape}
+\umlinherit[anchors= 0 and 180, geometry=-|-]{Freeform}{Shape}
 
 
-%% Domain Classes
-\setvalue{Xcoord=13.}
-\setvalue{Ycoord=-10.}
+%% Domain Classes %%
+
+%Domain
+\setvalue{Xcoord=17.}
+\setvalue{Ycoord=-7.}
+\setvalue{aligninfo=north}
+\setvalue{widthinfo=4cm}
+\renewcommand{\relstr}{}
 \input{./classes/domain.tex}
 
-\setvalue{Xcoord=13.}
-\setvalue{Ycoord=-5.}
+%Obstacles
+\setvalue{aligninfo=north}
+\setvalue{widthinfo=4cm}
+\renewcommand{\relstr}{below left=-3cm and 6 cm of Domain.north}
 \input{./classes/obstacle.tex}
 
 
-%% Algorithm Classes 
+%% Algorithm Classes %%
 
-\setvalue{Xcoord=24.}
-\setvalue{Ycoord=-15.}
-\input{./classes/PLACEHOLDERinput.tex}
-
-\setvalue{Xcoord=24.}
-\setvalue{Ycoord=-20.}
-\input{./classes/PLACEHOLDERinput2.tex}
-
+%Solver
 \setvalue{Xcoord=10.}
-\setvalue{Ycoord=-18.}
+\setvalue{Ycoord=-13.}
+\setvalue{aligninfo=north}
+\setvalue{widthinfo=4cm}
+\renewcommand{\relstr}{}
 \input{./classes/solver.tex}
-\umluniassoc[arg1 = currentInput, mult1 = 1, pos1 = 0.75]{Solver}{PLACEHOLDERinput}
 
+%RRT (abstract)
 \setvalue{Xcoord=10.}
-\setvalue{Ycoord=-25.}
+\setvalue{Ycoord=-21.}
+\setvalue{aligninfo=north}
+\setvalue{widthinfo=4cm}
+\renewcommand{\relstr}{}
 \input{./classes/RRTAbstract.tex}
 \umlcompo[mult1 = 1, mult2 = 1]{Solver}{RRT}
-\umluniassoc[arg1 = currentInput, mult1 = 1, pos1 = 0.75]{RRT}{PLACEHOLDERinput2}
 
-\setvalue{Xcoord=1.}
-\setvalue{Ycoord=-23.}
+%Vertex
+\setvalue{aligninfo=north}
+\setvalue{widthinfo=6cm}
+\renewcommand{\relstr}{below left=-2.5cm and 8 cm of RRT.north}
 \input{./classes/vertex.tex}
-\umlaggreg{RRT}{Vertex}
+\umlaggreg[anchors= 180 and 0, geometry=-|-]{RRT}{Vertex}
 
-\setvalue{Xcoord=1.}
-\setvalue{Ycoord=-28.}
+%Edge
+\setvalue{aligninfo=north}
+\setvalue{widthinfo=6cm}
+\renewcommand{\relstr}{below left=2.5cm and 8 cm of RRT.north}
 \input{./classes/edge.tex}
-\umlaggreg{RRT}{Edge}
+\umlaggreg[anchors= 180 and 0, geometry=-|-]{RRT}{Edge}
 
-\setvalue{Xcoord=9.}
-\setvalue{Ycoord=-29.}
+%RRT Regular
+\setvalue{aligninfo=north}
+\setvalue{widthinfo=6cm}
+\renewcommand{\relstr}{below left=5cm and 0 cm of RRT.north}
 \input{./classes/RRTRegular.tex}
-\umlinherit{RRTRegular}{RRT}
+\umlinherit[anchors= 90 and -90, geometry=|-|]{RRTRegular}{RRT}
 
-\setvalue{Xcoord=9.}
-\setvalue{Ycoord=-33.}
+%RRT Regular Heuristic
+\setvalue{aligninfo=north}
+\setvalue{widthinfo=6cm}
+\renewcommand{\relstr}{below left=11cm and 0 cm of RRT.north}
 \input{./classes/RRTRegularHeuristic.tex}
-\umlinherit{RRTRegularHeuristic}{RRTRegular}
+\umlinherit[anchors= 90 and -90, geometry=|-|]{RRTRegularHeuristic}{RRTRegular}
 
-\setvalue{Xcoord=18.}
-\setvalue{Ycoord=-29.}
+%RRT Star
+\setvalue{aligninfo=north}
+\setvalue{widthinfo=6cm}
+\renewcommand{\relstr}{below left=5cm and -8 cm of RRT.north}
 \input{./classes/RRTStar.tex}
-\umlinherit{RRTStar}{RRT}
+\umlinherit[anchors= 90 and -90, geometry=|-|]{RRTStar}{RRT}
 
-\setvalue{Xcoord=18.}
-\setvalue{Ycoord=-33.}
+%RRT Star FN
+\setvalue{aligninfo=north}
+\setvalue{widthinfo=6cm}
+\renewcommand{\relstr}{below left=11cm and -8 cm of RRT.north}
 \input{./classes/RRTStarFN.tex}
-\umlinherit{RRTStarFN}{RRTStar}
+\umlinherit[anchors= 90 and -90, geometry=|-|]{RRTStarFN}{RRTStar}
 
 
-%% Output Classes
-\setvalue{Xcoord=1.}
-\setvalue{Ycoord=-17.}
-\input{./classes/plot.tex}
-\umlaggreg{Plot}{Solver}
+%% Output Classes %%
+
+%Plot Output
+\setvalue{aligninfo=north}
+\setvalue{widthinfo=7cm}
+\renewcommand{\relstr}{below left=-8cm and -12 cm of Solver.north}
+\input{./classes/outputplot.tex}
+\umlaggreg[anchors= 180 and 0, geometry=-|-]{OutputPlot}{Solver}
+\umlaggreg[anchors= 90 and 0, geometry=|-]{OutputPlot}{Domain}
+
+%Text Output
+\setvalue{aligninfo=north}
+\setvalue{widthinfo=7cm}
+\renewcommand{\relstr}{below left=-0cm and -12 cm of Solver.north}
+\input{./classes/outputtext.tex}
+\umlaggreg[anchors= 180 and 0, geometry=-|-]{OutputText}{Solver}
 
 \end{umlpackage}
 
