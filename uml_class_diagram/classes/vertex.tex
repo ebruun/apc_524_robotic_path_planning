@@ -5,14 +5,13 @@
 				{Vertex}
 % Data
 {
-	coords : list float
+	coords : list float\\
+	nearest$\_$vertex : int
 }
 % Methods
 {
 + \dunder{init}\dunder (self) \\
-
-------\\
-+ random(domain : ndarray) : coords \\
-+ nearest(vertex$\_$list : ndarray) : int\\ % Nearest point in existing vertex list
-+ extend(step$\_$size : float) : coords \\% Create new vertex based on max step size
++ random(Domain) : list float \\
++ nearest(Solver) : int\\ % Nearest point in existing vertex list
++ extend(ParamsRRT) : list float \\% Create new vertex based on max step size
 }
