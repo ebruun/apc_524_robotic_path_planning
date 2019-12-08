@@ -7,9 +7,9 @@
 % Data
 {
 + file$\_$name: string \\
-+ info$\_$dims: string \\
-+ info$\_$domain: string \\
-+ info$\_$obstacles: string
++ dims: int \\
++ domain: list[name str, info] \\ %name str = type of geometry (i.e. point, circle, rectangle, freeform)
++ obstacles: list[name str, info] %name str = type of geometry (i.e. point, circle, rectangle, freeform)
 }
 % Methods
 {

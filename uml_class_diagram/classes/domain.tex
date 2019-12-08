@@ -6,16 +6,16 @@
 % Data
 {
 + dim: int \\
-+ Obstacles: Obstacle\\
-+ Origin: Point\\
-+ Goal: Point
++ geometry : Shape \\
++ obstacles : list Obstacle\\
++ goals : list Goal\\
++ origin : Origin\\
++ extents : ndarray
 }
 % Methods
 {
-+ \dunder{init}\dunder(ParamsDomain) \\
++ \dunder{init}\dunder(ParamsDomain, \\
+   ParamsOriginGoal) \\
 + create$\_$domain(self)\\
-
-
-+ is$\_$point$\_$free(Point p): bool \\ % Checks whether the point was free
-+ refine(double step$\_$size): \\ % Adds a point
++ calc$\_$extents(self)
 }

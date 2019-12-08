@@ -72,8 +72,8 @@
 %% Domain Classes %%
 
 %Domain
-\setvalue{Xcoord=17.}
-\setvalue{Ycoord=-7.}
+\setvalue{Xcoord=13.}
+\setvalue{Ycoord=-5.}
 \setvalue{aligninfo=north}
 \setvalue{widthinfo=4cm}
 \renewcommand{\relstr}{}
@@ -81,9 +81,25 @@
 
 %Obstacles
 \setvalue{aligninfo=north}
-\setvalue{widthinfo=4cm}
-\renewcommand{\relstr}{below left=-3cm and 6 cm of Domain.north}
+\setvalue{widthinfo=5cm}
+\renewcommand{\relstr}{below left=-2cm and 6 cm of Domain.north}
 \input{./classes/obstacle.tex}
+\umlaggreg[anchors= 180 and 0, geometry=-|-]{Domain}{Obstacle}
+
+%Origin
+\setvalue{aligninfo=north}
+\setvalue{widthinfo=5cm}
+\renewcommand{\relstr}{below left=1cm and 6 cm of Domain.north}
+\input{./classes/origin.tex}
+\umlaggreg[anchors= 180 and 0, geometry=-|-]{Domain}{Origin}
+
+%Point
+\setvalue{aligninfo=north}
+\setvalue{widthinfo=5cm}
+\renewcommand{\relstr}{below left=4cm and 6 cm of Domain.north}
+\input{./classes/goal.tex}
+\umlaggreg[anchors= 180 and 0, geometry=-|-]{Domain}{Goal}
+
 
 
 %% Algorithm Classes %%
@@ -95,6 +111,7 @@
 \setvalue{widthinfo=4cm}
 \renewcommand{\relstr}{}
 \input{./classes/solver.tex}
+\umlaggreg[anchors= 90 and -90, geometry=|-|]{Solver}{Domain}
 
 %RRT (abstract)
 \setvalue{Xcoord=10.}
