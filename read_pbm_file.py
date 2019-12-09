@@ -56,32 +56,9 @@ class BitmapFile:
 @click.argument('bitmap_file', type=click.Path(exists=True, dir_okay=False))
 def main(bitmap_file):
 	"Reading a bitmap file as shape"
-
 	shape = BitmapFile(bitmap_file)
-	# shape.get_pixel_values()
-	# shape.count_non_white_pixels()
 	shape.obtain_coordinates()
 	shape.plot_shape()
-	# np.savetxt("coordinates_obstacle.csv", shape.vertex_array, delimiter=",")
-	# img = cv2.imread(bitmap_file, cv2.IMREAD_GRAYSCALE)
-	# print(img.shape)
-	# n_rows = img.shape[0]
-	# n_columns = img.shape[1]
-
-	# hx = 1.0/(n_columns-1)
-	# hy = 1.0/(n_rows-1)
-	# counter = 0
-	# for i in range(n_rows):
-	# 	for j in range(n_columns):
-	# 		if img[i,j]==0:
-	# 			counter += 1
-	# vertex_array = np.zeros((counter, 2))
-
-	# compute_coordinates(img, n_rows, n_columns, hx, hy, vertex_array)
-	
-	# np.savetxt("coordinates_obstacle.csv", vertex_array, delimiter=",")
-	
-	# plot(vertex_array)
 	return 0
 
 if __name__=='__main__':
