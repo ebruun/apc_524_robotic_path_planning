@@ -11,7 +11,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 
 
-class BitmapFile:
+class FreeForm2d:
 	"""A class to read a bitmap file and create a coordinate list"""
 	def __init__(self, bitmap_file):
 		self.file = bitmap_file
@@ -44,7 +44,7 @@ class BitmapFile:
 				y_coord = i*self.hy
 				if self.img[i,j]==0:
 					self.vertex_array[counter][0] = x_coord
-					self.vertex_array[counter][1] = 1.-y_coord
+					self.vertex_array[counter][1] = 1-y_coord
 					counter += 1
 
 	def plot_shape(self):
@@ -56,7 +56,7 @@ class BitmapFile:
 @click.argument('bitmap_file', type=click.Path(exists=True, dir_okay=False))
 def main(bitmap_file):
 	"Reading a bitmap file as shape"
-	shape = BitmapFile(bitmap_file)
+	shape = FreeForm2d(bitmap_file)
 	shape.obtain_coordinates()
 	shape.plot_shape()
 	return 0
