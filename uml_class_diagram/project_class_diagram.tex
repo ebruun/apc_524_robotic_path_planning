@@ -9,185 +9,28 @@
 \begin{document}
 \maketitle
 
+\newcommand{\relstr}{}
+
 \begin{tikzpicture}
 \begin{umlpackage}{RRT}
 
 %% Input and Parameter Classes %%
-
-%Parameters (ABSTRACT)
-\setvalue{Xcoord=16.}
-\setvalue{Ycoord=2.}
-\setvalue{aligninfo=north}
-\setvalue{widthinfo=6cm}
-\newcommand{\relstr}{}
-\input{./classes/params.tex}	
-
-%Domain Parameters
-\setvalue{aligninfo=north}
-\setvalue{widthinfo=5cm}
-\renewcommand{\relstr}{below right= 0cm and 9cm of Params.north}
-\input{./classes/params_domain.tex}	
-\umlinherit[anchors= 180 and 0, geometry=-|-]{ParamsDomain}{Params}
-
-%Origin/Goal Parameters
-\setvalue{aligninfo=north}
-\setvalue{widthinfo=5cm}
-\renewcommand{\relstr}{below right=3cm and 9cm of Params.north}
-\input{./classes/params_origingoal.tex}	
-\umlinherit[anchors= 180 and 0, geometry=-|-]{ParamsOriginGoal}{Params}
-
-%RRT Parameters
-\setvalue{aligninfo=north}
-\setvalue{widthinfo=5cm}
-\renewcommand{\relstr}{below right=6cm and 9cm of Params.north}
-\input{./classes/params_rrt.tex}	
-\umlinherit[anchors= 180 and 0, geometry=-|-]{ParamsRRT}{Params}
-
-
+\input{_diagram_input.tex}
 
 %% Geometry Classes %%
-
-%Shape (ABSTRACT)
-\setvalue{Xcoord=7.}
-\setvalue{Ycoord=2}
-\setvalue{aligninfo=north}
-\setvalue{widthinfo=4cm}
-\renewcommand{\relstr}{}
-\input{./classes/shape.tex}
-
-%Rectangle
-\setvalue{aligninfo=north}
-\setvalue{widthinfo=4cm}
-\renewcommand{\relstr}{below left=0cm and 7 cm of Shape.north}
-\input{./classes/rectangle.tex}
-\umlinherit[anchors= 0 and 180, geometry=-|-]{Rectangle}{Shape}
-
-%Circle
-\setvalue{aligninfo=north}
-\setvalue{widthinfo=4cm}
-\renewcommand{\relstr}{below left=4cm and 7 cm of Shape.north}
-\input{./classes/circle.tex}
-\umlinherit[anchors= 0 and 180, geometry=-|-]{Circle}{Shape}
-
-%Freeform
-\setvalue{aligninfo=north}
-\setvalue{widthinfo=4cm}
-\renewcommand{\relstr}{below left=8cm and 7 cm of Shape.north}
-\input{./classes/freeform.tex}
-\umlinherit[anchors= 0 and 180, geometry=-|-]{Freeform}{Shape}
-
+\input{_diagram_geometry.tex}
 
 %% Domain Classes %%
-
-%Domain
-\setvalue{Xcoord=13.}
-\setvalue{Ycoord=-5.}
-\setvalue{aligninfo=north}
-\setvalue{widthinfo=4cm}
-\renewcommand{\relstr}{}
-\input{./classes/domain.tex}
-
-%Obstacles
-\setvalue{aligninfo=north}
-\setvalue{widthinfo=5cm}
-\renewcommand{\relstr}{below left=-2cm and 6 cm of Domain.north}
-\input{./classes/obstacle.tex}
-\umlaggreg[anchors= 180 and 0, geometry=-|-]{Domain}{Obstacle}
-
-%Origin
-\setvalue{aligninfo=north}
-\setvalue{widthinfo=5cm}
-\renewcommand{\relstr}{below left=1cm and 6 cm of Domain.north}
-\input{./classes/origin.tex}
-\umlaggreg[anchors= 180 and 0, geometry=-|-]{Domain}{Origin}
-
-%Point
-\setvalue{aligninfo=north}
-\setvalue{widthinfo=5cm}
-\renewcommand{\relstr}{below left=4cm and 6 cm of Domain.north}
-\input{./classes/goal.tex}
-\umlaggreg[anchors= 180 and 0, geometry=-|-]{Domain}{Goal}
-
-
+\input{_diagram_domain.tex}
 
 %% Algorithm Classes %%
-
-%Solver
-\setvalue{Xcoord=10.}
-\setvalue{Ycoord=-13.}
-\setvalue{aligninfo=north}
-\setvalue{widthinfo=4cm}
-\renewcommand{\relstr}{}
-\input{./classes/solver.tex}
+\input{_diagram_algorithm.tex}
 \umlaggreg[anchors= 90 and -90, geometry=|-|]{Solver}{Domain}
-
-%RRT (ABSTRACT)
-\setvalue{Xcoord=10.}
-\setvalue{Ycoord=-21.}
-\setvalue{aligninfo=north}
-\setvalue{widthinfo=4cm}
-\renewcommand{\relstr}{}
-\input{./classes/RRTAbstract.tex}
-\umlcompo[mult1 = 1, mult2 = 1]{Solver}{RRT}
-
-%Vertex
-\setvalue{aligninfo=north}
-\setvalue{widthinfo=6.5cm}
-\renewcommand{\relstr}{below left=-2.5cm and 8 cm of RRT.north}
-\input{./classes/vertex.tex}
-\umlaggreg[anchors= 180 and 0, geometry=-|-]{RRT}{Vertex}
-
-%Edge
-\setvalue{aligninfo=north}
-\setvalue{widthinfo=6.5cm}
-\renewcommand{\relstr}{below left=2.5cm and 8 cm of RRT.north}
-\input{./classes/edge.tex}
-\umlaggreg[anchors= 180 and 0, geometry=-|-]{RRT}{Edge}
-
-%RRT Regular
-\setvalue{aligninfo=north}
-\setvalue{widthinfo=6cm}
-\renewcommand{\relstr}{below left=5cm and 0 cm of RRT.north}
-\input{./classes/RRTRegular.tex}
-\umlinherit[anchors= 90 and -90, geometry=|-|]{RRTRegular}{RRT}
-
-%RRT Regular Heuristic
-\setvalue{aligninfo=north}
-\setvalue{widthinfo=6cm}
-\renewcommand{\relstr}{below left=11cm and 0 cm of RRT.north}
-\input{./classes/RRTRegularHeuristic.tex}
-\umlinherit[anchors= 90 and -90, geometry=|-|]{RRTRegularHeuristic}{RRTRegular}
-
-%RRT Star
-\setvalue{aligninfo=north}
-\setvalue{widthinfo=6cm}
-\renewcommand{\relstr}{below left=5cm and -8 cm of RRT.north}
-\input{./classes/RRTStar.tex}
-\umlinherit[anchors= 90 and -90, geometry=|-|]{RRTStar}{RRT}
-
-%RRT Star FN
-\setvalue{aligninfo=north}
-\setvalue{widthinfo=6cm}
-\renewcommand{\relstr}{below left=11cm and -8 cm of RRT.north}
-\input{./classes/RRTStarFN.tex}
-\umlinherit[anchors= 90 and -90, geometry=|-|]{RRTStarFN}{RRTStar}
 
 
 %% Output Classes %%
-
-%Plot Output
-\setvalue{aligninfo=north}
-\setvalue{widthinfo=7cm}
-\renewcommand{\relstr}{below left=-8cm and -12 cm of Solver.north}
-\input{./classes/outputplot.tex}
+\input{_diagram_output.tex}
 \umlaggreg[anchors= 180 and 0, geometry=-|-]{OutputPlot}{Solver}
-\umlaggreg[anchors= 90 and 0, geometry=|-]{OutputPlot}{Domain}
-
-%Text Output
-\setvalue{aligninfo=north}
-\setvalue{widthinfo=7cm}
-\renewcommand{\relstr}{below left=-0cm and -12 cm of Solver.north}
-\input{./classes/outputtext.tex}
 \umlaggreg[anchors= 180 and 0, geometry=-|-]{OutputText}{Solver}
 
 \end{umlpackage}
