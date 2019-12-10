@@ -1,10 +1,14 @@
 \documentclass[10pt]{article}
+\input{packages2.tex}
+\input{short_notations.tex}
 
-\usepackage{fullpage}
-\usepackage[normalem]{ulem} % For strikethrough font
 \title{Robotic Path Planning Software Design Documentation}
 % Name
 \author{Bruun, E. \and Flores, J. \and Kumar, V.}
+
+%Just to make the uml class code work here without modification
+\declare{} 
+\newcommand{\relstr}{} 
 
 \begin{document}
 \maketitle
@@ -20,21 +24,38 @@ This software will be developed such that it can be implemented in both 2D and 3
 
 \newpage
 \section{Program Classes}
+Show the division and main components of the program
 
 \subsection{Input (VK)}
 Reading in info and defining domain
 
-\section{Design}
+\begin{tikzpicture}
+\begin{umlpackage}{Input Classes}
+	\input{../uml_class_diagram/_diagram_input.tex}
+\end{umlpackage}
 
-\subsection{UML Class Diagram}
-Top level schematic and description
-\subsubsection{Input}
-Submodule A schematic and description
-\subsubsection{Solver}
-Submodule B schematic and description
-\subsubsection{Output}
-Submodule C schematic and description
+\end{tikzpicture}
 
+\subsection{Geometry (VK \& JF)}
+Shapes used for domain, obstacles
+
+\subsection{Domain (VK \& EB)}
+Assembling the domain in which algorithm acts
+
+\subsection{Algorithm (EB)}
+RRT implemetation
+
+\subsection{Output (JF)}
+Output of the program
+
+
+\newpage
+\section{UML Diagram and Dependencies}
+\includegraphics[trim={1.5cm 2cm 3cm 5cm},clip, width=\columnwidth]{../uml_class_diagram/project_class_diagram.pdf}
+
+\subsection{Discussion}
+
+\newpage
 \section{Algorithms}
 
 \subsection{RRT}
