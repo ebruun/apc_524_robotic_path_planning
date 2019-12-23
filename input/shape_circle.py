@@ -9,16 +9,16 @@ class Circle():
     self.radius = radius
     self.center = center
   
-  def is_point_inside(self, pt: np.ndarray)->bool:
-    if(np.linalg.norm(self.center-pt) <= self.radius):
+  def is_point_inside(self, point: np.ndarray)->bool:
+    if(np.linalg.norm(self.center-point) <= self.radius):
       return True
     else:
       return False
 
-  def is_intersected_by_line(self, pt1: np.ndarray , pt2: np.ndarray):
-    if(self.is_point_inside(pt1) or self.is_point_inside(pt2)):
+  def is_intersected_by_line(self, point_1: np.ndarray , point_2: np.ndarray)->bool:
+    if(self.is_point_inside(point_1) or self.is_point_inside(point_2)):
       return True
-    distance_line_to_center = abs((pt2[1]-pt1[1])*self.center[0]-(pt2[1]-pt1[1])*self.center[1]+pt2[0]*pt1[1]-pt2[1]*pt1[0])/(np.linalg.norm(pt2-pt1))
+    distance_line_to_center = abs((point_2[1]-point_1[1])*self.center[0]-(point_2[1]-point_1[1])*self.center[1]+point_2[0]*point_1[1]-point_2[1]*point_1[0])/(np.linalg.norm(point_2-point_1))
     if(distance_line_to_center <= self.radius):
       return True
     else:
