@@ -27,4 +27,5 @@ setuptools==39.0.1
 six==1.13.0
 wcwidth==0.1.7
 zipp==0.6.0
-
+scikit-image==0.16.1
+open-cv==4.1.2
