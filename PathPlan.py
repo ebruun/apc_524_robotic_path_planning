@@ -5,10 +5,19 @@
 
 from rrt.solver import *
 
+from input.params import ParamsRRT
+from input.params import ParamsOriginGoal
+from input.params import ParamsDomain
+
+
 # Code for reading in data
+input_file = "parameters.txt"
 
 #Algorithm code
-RRT = Solver(2)
+RRT = Solver(ParamsRRT(input_file))
+
 RRT.solve_rrt()
+RRT.check_completion()
+
 
 # Code for visualizing and presenting results
