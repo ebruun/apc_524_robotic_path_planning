@@ -1,9 +1,10 @@
-# PathPlan.py
+# planpath.py
 # Author(s): Edvard Bruun
 
 # Main file for Path Planning Program
 
-from rrt.solver import Solver
+
+from path.solver import Solver
 
 from input.params import ParamsRRT
 from input.params import ParamsOriginGoal
@@ -16,7 +17,7 @@ input_file = "parameters.txt"
 #Algorithm code
 RRT = Solver(ParamsRRT(input_file))
 
-RRT.solve_rrt()
+RRT.algorithm_step()
 RRT.check_completion()
 
 
