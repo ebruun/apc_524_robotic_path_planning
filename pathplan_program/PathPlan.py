@@ -3,7 +3,7 @@
 
 # Main file for Path Planning Program
 
-from rrt.solver import *
+from rrt.solver import Solver
 
 from input.params import ParamsRRT
 from input.params import ParamsOriginGoal
