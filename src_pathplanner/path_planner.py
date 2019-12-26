@@ -6,6 +6,7 @@ The core module of the project, executes the program
 """
 
 
+
 from solver.solution import Solution
 
 from input.params import ParamsRRT
@@ -17,8 +18,8 @@ def run_program():
 	"""Function for executing the program
 
 	Three stages:
-		1. Get program parameters.
-		2. Compute path from origin to goal.
+		1. Get program specific parameters.
+		2. Generate trajectories through path planning algorithm.
 		3. Present results.
 
 	"""
@@ -32,6 +33,8 @@ def run_program():
 
 	print("2. Running Program")
 	RRT = Solution(p1)
+
+	RRT.run_algorithm()
 
 	print("3. Showing Results")
 
