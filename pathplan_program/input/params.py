@@ -16,7 +16,7 @@ class ParamsRRT:
 		self.get_params()
 
 	def get_params(self):
-		print ("-Getting RRT Parameters: ", self.filename)
+		print('-Getting RRT Parameters: ', self.filename)
 
 
 class ParamsOriginGoal:

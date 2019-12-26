@@ -1,5 +1,7 @@
-algorithm package
+Algorithm package
 =================
+
+This package does...
 
 Module contents
 ---------------

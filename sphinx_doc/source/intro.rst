@@ -1,14 +1,16 @@
 Introduction
 ============
 
-test...
+Write an introduction to the project
+
 
 Motivation
 **********
 
-test...
+Why we are doing it
+
 
 Limitations
 ***********
 
-test...
+What the program can't do

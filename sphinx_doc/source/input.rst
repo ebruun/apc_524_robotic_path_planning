@@ -1,19 +1,22 @@
-input package
+Input package
 =============
 
-Submodules
-----------
+This package does...
 
-input.params module
--------------------
+Submodules
+**********
+
+input.params 
+------------
 
 .. automodule:: input.params
    :members:
    :undoc-members:
    :show-inheritance:
 
-input.shape module
-------------------
+
+input.shape
+-----------
 
 .. automodule:: input.shape
    :members:

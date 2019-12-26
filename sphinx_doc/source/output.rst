@@ -1,5 +1,7 @@
-output package
+Output package
 ==============
+
+This package does...
 
 Module contents
 ---------------

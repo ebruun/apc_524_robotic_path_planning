@@ -1,11 +1,13 @@
-solver package
+Solver package
 ==============
 
-Submodules
-----------
+This package does...
 
-solver.solution module
-----------------------
+Submodules
+**********
+
+solver.solution
+---------------
 
 .. automodule:: solver.solution
    :members:

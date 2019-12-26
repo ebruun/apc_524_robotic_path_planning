@@ -1,10 +1,10 @@
-Modules
-================
+Packages & Modules
+==================
 
 .. toctree::
    :maxdepth: 4
 
-   planpath
+   path_planner
    input
    solver
    algorithm
