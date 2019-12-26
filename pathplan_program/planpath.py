@@ -1,10 +1,14 @@
 # planpath.py
 # Author(s): Edvard Bruun
 
-# Main file for Path Planning Program
+"""
+planpath.py
+====================================
+The core module of the project, executes the program
+"""
 
 
-from path.solver import Solver
+from solver.solution import Solution
 
 from input.params import ParamsRRT
 from input.params import ParamsOriginGoal
@@ -15,7 +19,7 @@ from input.params import ParamsDomain
 input_file = "parameters.txt"
 
 #Algorithm code
-RRT = Solver(ParamsRRT(input_file))
+RRT = Solution(ParamsRRT(input_file))
 
 RRT.algorithm_step()
 RRT.check_completion()
