@@ -12,7 +12,7 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../../pathplan_program/'))
+sys.path.insert(0, os.path.abspath('../../src_pathplanner/'))
 
 
 

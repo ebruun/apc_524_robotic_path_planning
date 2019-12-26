@@ -7,6 +7,7 @@ Welcome to Path Planning Algorithm's documentation!
 
    intro
    modules
+   execution
    examples
 
 
