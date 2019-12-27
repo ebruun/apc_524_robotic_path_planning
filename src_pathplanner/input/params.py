@@ -7,10 +7,10 @@ class ParamsRRT:
 	"""Parameters definining the RRT algorithm"""
 
 	filename = "default_file.txt"
-	#method = "RRT"
 	method = "RRT_star"
 	n_trials = 10
 	step_size = 0.1
+	dims = 2
 
 	def __init__(self,file=None):
 		self.filename = file if file is not None else self.filename

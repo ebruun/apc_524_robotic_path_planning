@@ -11,14 +11,11 @@ class Stepper:
 		self.params = input_params
 		
 	def do_singlestep(self,recorder):
-		"""  This function steps through one iteration of the solution algorithm.
+		""" Returns::
 
-	    Returns:lists:
-	       Updated :
+				Recorder object
 
-	          vertex
-	          vertex_parent
-	          vertex_cost
+	        This function steps through one iteration of the solution algorithm.
 
 		"""
 
@@ -29,6 +26,7 @@ class Stepper:
 
 		elif self.params.method is "RRT_star":
 			print("Do RRT_Star, with stepsize ", self.params.step_size)
+			recorder.vertices[2] = 1
 			#update recorder lists
 			return recorder
 			

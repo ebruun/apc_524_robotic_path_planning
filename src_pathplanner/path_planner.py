@@ -2,7 +2,8 @@
 # Author(s): Edvard Bruun
 
 """
-The core module of the project, executes the program
+The core module of the project and executes the program
+
 """
 
 from solver.solution import Solution
@@ -19,6 +20,8 @@ def run_program():
 		1. Get program specific parameters from textfile.
 		2. Solve trajectories with path planning algorithm.
 		3. Present results.
+
+	Example to run...
 
 	"""
 

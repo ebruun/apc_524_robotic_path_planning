@@ -7,6 +7,8 @@ from solver.stepper import Stepper
 class Solution:
 	""" A class to step through the full RRT algorithm.
 
+	Take the :class:`solver.stepper` module
+
 	"""
 
 	def __init__(self,params):
@@ -15,7 +17,11 @@ class Solution:
 		self.stepper = Stepper(params)
 
 	def run_algorithm(self):
-		"""  This function runs through all the iterations of the solution algorithm.
+		"""  Returns::
+
+				void
+
+		This function runs through all the iterations of the solution algorithm.
 
 		"""	
 
@@ -23,6 +29,7 @@ class Solution:
 			print("\nIteration # ", i+1)
 
 			self.solution_record = self.stepper.do_singlestep(self.solution_record)
+			#print(self.solution_record.vertices)
 
 			if self.check_completion():
 				# Finish the loop?
@@ -34,13 +41,14 @@ class Solution:
 
 		
 	def check_completion(self):
-		"""  This function checks if the goal has been reached after an iteration.
+		"""  
+		Returns::
 
-		Returns:
-			bool.::
+			True -- Goal Reached.
+			False -- Goal Not Reached.
 
-			 True -- Goal Reached.
-			 False -- Goal Not Reached.
+		This function checks if the goal has been reached after an iteration.
+
 
 		"""
 

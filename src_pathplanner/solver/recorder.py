@@ -18,6 +18,7 @@ class Recorder:
 	def __init__(self,input_params):
 		self.params = input_params
 
-		self.vertices = np.zeros(self.params.n_trials, dtype=float)
+		self.vertices = np.zeros((self.params.n_trials,self.params.dims), dtype=float)
 		self.parents = np.zeros(self.params.n_trials, dtype=int)
 		self.costs = np.zeros(self.params.n_trials, dtype=float)
+
