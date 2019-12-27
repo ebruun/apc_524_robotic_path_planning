@@ -7,7 +7,8 @@ class ParamsRRT:
 	"""Parameters definining the RRT algorithm"""
 
 	filename = "default_file.txt"
-	method = "RRT"
+	#method = "RRT"
+	method = "RRT_star"
 	n_trials = 10
 	step_size = 0.1
 

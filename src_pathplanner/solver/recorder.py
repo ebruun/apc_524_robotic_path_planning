@@ -4,7 +4,7 @@
 import numpy as np
 
 class Recorder:
-	""" A class to record and save the data from the path planning algorithm.
+	""" A class to save the data from the path planning algorithm.
 
 	:param vertex: list of vertices in the graph
 	:type vertex: tuple(x,y,z) - coords.
@@ -16,6 +16,8 @@ class Recorder:
 	"""
 	
 	def __init__(self,input_params):
-		self.vertices = np.zeros(input_params.n_trials, dtype=float)
-		self.parents = np.zeros(input_params.n_trials, dtype=int)
-		self.costs = np.zeros(input_params.n_trials, dtype=float)
+		self.params = input_params
+
+		self.vertices = np.zeros(self.params.n_trials, dtype=float)
+		self.parents = np.zeros(self.params.n_trials, dtype=int)
+		self.costs = np.zeros(self.params.n_trials, dtype=float)

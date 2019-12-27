@@ -12,18 +12,26 @@ class Solution:
 	def __init__(self,params):
 		self.params = params
 		self.solution_record = Recorder(params)
-		self.solution_step = Stepper()
+		self.stepper = Stepper(params)
 
 	def run_algorithm(self):
 		"""  This function runs through all the iterations of the solution algorithm.
 
 		"""	
 
-		for i in range(5):
-			print("Iteration # ", i+1)
-			self.solution_step.do_singlestep(self.params.method)
-			
-		
+		for i in range(self.params.n_trials):
+			print("\nIteration # ", i+1)
+
+			self.solution_record = self.stepper.do_singlestep(self.solution_record)
+
+			if self.check_completion():
+				# Finish the loop?
+				print("--Completed")
+			else:
+				# continue the loop
+				print("--Not Completed")
+
+
 		
 	def check_completion(self):
 		"""  This function checks if the goal has been reached after an iteration.
@@ -36,11 +44,7 @@ class Solution:
 
 		"""
 
-		completed = True
-
-		if completed:
-			print("--Completed")
-			return True
+		# check if completed
+		completed = False
 		
-		print("--Not Completed")
-		return False
+		return completed
