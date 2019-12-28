@@ -8,7 +8,7 @@ class ParamsRRT:
 
 	filename = "default_file.txt"
 	method = "RRT_star"
-	n_trials = 10
+	n_trials = 5
 	step_size = 0.1
 	dims = 2
 

@@ -31,11 +31,12 @@ def run_program():
 	p1 = ParamsRRT(input_file)
 	p2 = ParamsOriginGoal(input_file)
 	p3 = ParamsDomain(input_file)
+	#Create domain
 
 	print("2. Running Program")
-	RRT = Solution(p1)
+	PathPlan = Solution(p1)
 
-	RRT.run_algorithm()
+	PathPlan.run_algorithm()
 
 	print("3. Showing Results")
 

@@ -1,18 +1,97 @@
 import unittest
 from unittest.mock import Mock
 
-from src_pathplanner.solver.recorder import Recorder
+import numpy as np
+
+from solver.stepper import Stepper
 
 params = Mock()
+params.method = "RRT"
 
-print(params)
+recorder = Mock()
+
 
 class TestStepper(unittest.TestCase):
-    #def setUp(self):
-        #self.func = Recorder()
+	def setUp(self):
+		self.stepper = Stepper(params)
 
-    def test_1(self):
-    	self.assertTrue(True)
+		recorder.vertices = np.zeros((3,2), dtype=float)
+		recorder.vertices.fill(np.nan)
+		recorder.vertices[0,:] = [3.4, 4.5]
+
+		recorder.parents = np.zeros((3,1), dtype=float)
+		recorder.parents.fill(np.nan)
+		recorder.parents[0] = [1]
+
+		recorder.costs = np.zeros((3,1), dtype=float)
+		recorder.costs.fill(np.nan)
+		recorder.costs[0] = [3.444]
+
+	def tearDown(self):
+		self.stepper = None
+		self.recorder = None
+
+	def test_vertices_increment(self):
+
+		step = 1
+		self.stepper.do_singlestep(recorder,step)
+
+		bool_array = (np.isnan(recorder.vertices))
+		bool_index = np.where(bool_array == False)
+		b = np.amax(bool_index[0])
+
+		self.assertEqual(step,b,"vertices list not incremented")
+
+		step += 1
+		self.stepper.do_singlestep(recorder,step)
+
+		bool_array = (np.isnan(recorder.vertices))
+		bool_index = np.where(bool_array == False)
+		b = np.amax(bool_index[0])
+
+		self.assertEqual(step,b,"vertices list not incremented")
+
+	def test_parents_increment(self):
+
+		step = 1
+		self.stepper.do_singlestep(recorder,step)
+
+		bool_array = (np.isnan(recorder.parents))
+		bool_index = np.where(bool_array == False)
+		b = np.amax(bool_index[0])
+
+		self.assertEqual(step,b,"parents list not incremented")
+
+		step += 1
+		self.stepper.do_singlestep(recorder,step)
+
+		bool_array = (np.isnan(recorder.parents))
+		bool_index = np.where(bool_array == False)
+		b = np.amax(bool_index[0])
+
+		self.assertEqual(step,b,"parents list not incremented")
+
+	def test_costs_increment(self):
+
+		step = 1
+		self.stepper.do_singlestep(recorder,step)
+
+		bool_array = (np.isnan(recorder.costs))
+		bool_index = np.where(bool_array == False)
+		b = np.amax(bool_index[0])
+
+		self.assertEqual(step,b,"costs list not incremented")
+
+		step += 1
+		self.stepper.do_singlestep(recorder,step)
+
+		bool_array = (np.isnan(recorder.costs))
+		bool_index = np.where(bool_array == False)
+		b = np.amax(bool_index[0])
+
+		self.assertEqual(step,b,"costs list not incremented")
+
+
 
 if __name__ == '__main__':
-    unittest.main()
+	unittest.main()

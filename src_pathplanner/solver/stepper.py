@@ -1,6 +1,11 @@
 # stepper.py
 # Author(s): Edvard Bruun
 
+import numpy as np
+from algorithm.rrt import RRT
+from algorithm.rrt_basic import RRT_Basic
+from algorithm.rrt_star import RRT_Star
+
 
 class Stepper:
 	""" A class to perform a single path planning step with the chosen algorithm.
@@ -10,7 +15,7 @@ class Stepper:
 	def __init__(self,input_params):
 		self.params = input_params
 		
-	def do_singlestep(self,recorder):
+	def do_singlestep(self,recorder,trial):
 		""" Returns::
 
 				Recorder object
@@ -20,15 +25,16 @@ class Stepper:
 		"""
 
 		if self.params.method is "RRT":
-			print("Do RRT, with stepsize ", self.params.step_size)
-			#update recorder lists
-			return recorder
+			#print("Do RRT, with stepsize ", self.params.step_size)
+			RRT.rrt_step(recorder, trial)
+
+
 
 		elif self.params.method is "RRT_star":
-			print("Do RRT_Star, with stepsize ", self.params.step_size)
-			recorder.vertices[2] = 1
-			#update recorder lists
-			return recorder
+			#print("Do RRT_Star, with stepsize ", self.params.step_size)
+			RRT.rrt_step(recorder, trial)
+
+	
 			
 			
 

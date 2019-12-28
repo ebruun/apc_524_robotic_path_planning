@@ -3,7 +3,9 @@ from unittest.mock import Mock
 
 import numpy as np
 
-from src_pathplanner.solver.recorder import Recorder
+from solver.recorder import Recorder
+
+
 
 testparams = Mock()
 testparams.n_trials = 10
@@ -32,9 +34,14 @@ class TestRecorder(unittest.TestCase):
 						"parents, not right length")
 
 	def test_zeros(self):
-		self.assertFalse(np.any(self.recorder.vertices), "vert, not initialized to zero")
-		self.assertFalse(np.any(self.recorder.parents), "parents, not initialized to zero")
-		self.assertFalse(np.any(self.recorder.costs), "costs, not initialized to zero")
+		self.assertTrue(np.all(np.isnan(self.recorder.vertices)),
+						"vertices, not fully initialized to NaN")
+
+		self.assertTrue(np.all(np.isnan(self.recorder.parents)),
+						"parents, not initialized to NaN")
+
+		self.assertTrue(np.all(np.any(self.recorder.costs)),
+						"costs, not initialized to NaN")
 
 if __name__ == '__main__':
 	unittest.main()

@@ -3,6 +3,7 @@
 
 from solver.recorder import Recorder
 from solver.stepper import Stepper
+#import domain
 
 class Solution:
 	""" A class to step through the full RRT algorithm.
@@ -25,11 +26,10 @@ class Solution:
 
 		"""	
 
-		for i in range(self.params.n_trials):
-			print("\nIteration # ", i+1)
+		for trial in range(self.params.n_trials):
+			print("\nIteration # ", trial+1)
 
-			self.solution_record = self.stepper.do_singlestep(self.solution_record)
-			#print(self.solution_record.vertices)
+			self.stepper.do_singlestep(self.solution_record, trial)
 
 			if self.check_completion():
 				# Finish the loop?
