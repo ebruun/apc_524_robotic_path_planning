@@ -1,15 +1,19 @@
 # rrt.py
 # Author(s): Edvard Bruun
 
+from abc import ABC, abstractmethod
+
 import numpy as np
 
-class RRT:
-	""" A class for RRT algorithm.
+class RRT(ABC):
+	""" An abstract base class for RRT algorithm.
 
 	"""
-	@classmethod
+
+	@abstractmethod
+	def do_something():
+		print("some implementation")
+
+	@abstractmethod
 	def rrt_step(cls, recorder, i):
-		#print("doing algorithm")
-		recorder.vertices[i,:] = [i,i]
-		recorder.parents[i] = i
-		recorder.costs[i] = i
+		pass

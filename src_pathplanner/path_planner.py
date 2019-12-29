@@ -21,9 +21,9 @@ def run_program():
 
 	Three stages:
 		1. Get program specific parameters from textfile.
-		2. Create domain
-		2. Solve trajectories with path planning algorithm.
-		3. Present results.
+		2. Create domain.
+		3. Solve trajectories with path planning algorithm.
+		4. Present results.
 
 	Example to run...
 
@@ -40,9 +40,13 @@ def run_program():
 	d1 = Domain(p2,p3)
 
 	print("3. Running Program")
-	PathPlan = Solution(p1)
+	PathPlan = Solution(p1,d1)
 
 	PathPlan.run_algorithm()
+	PathPlan.check_completion()
+
+
+	print(PathPlan.recorder.vertices)
 
 	print("3. Showing Results")
 

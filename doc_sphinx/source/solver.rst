@@ -10,19 +10,21 @@ Submodules
 solver.solution
 ---------------
 
-.. automodule:: solver.solution
+.. autoclass:: solver.solution.Solution
    :members:
-   :undoc-members:
    :show-inheritance:
+   :special-members:
+   :exclude-members: __weakref__
 
 
 solver.stepper
 ---------------
 
-.. automodule:: solver.stepper
+.. autoclass:: solver.stepper.Stepper
    :members:
-   :undoc-members:
    :show-inheritance:
+   :special-members:
+   :exclude-members: __weakref__
 
 
 solver.recorder

@@ -23,8 +23,9 @@ class Domain:
 		self.create_objects()
 
 	def create_objects(self):
-		print("-Creating objects out of inputs")
+		print("-Creating objects out of input parameters")
 
+		self.goal = self.params_origingoal.goal
 		#print(self.params_origingoal.origin)
 		#print(self.params_origingoal.goal)
 

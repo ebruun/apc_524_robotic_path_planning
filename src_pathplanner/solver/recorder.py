@@ -6,12 +6,12 @@ import numpy as np
 class Recorder:
 	""" A class to save the data from the path planning algorithm.
 
-	:param vertex: list of vertices in the graph
-	:type vertex: tuple(x,y,z) - coords.
-	:param vertex_parent: list of indices of parents of a vertex
-	:type vertex_parent: int
-	:param vertex_cost: list of costs (distances) of a path up to a vertex
-	:type vertex_cost: float	
+	:param vertices: list of vertices in the graph
+	:type vertices: tuple(x,y,z) - coords.
+	:param parents: list of indices of parents of a vertex
+	:type parents: int
+	:param costs: list of costs (distances) of a path up to a vertex
+	:type costs: float	
 
 	"""
 	

@@ -29,7 +29,10 @@ class ParamsOriginGoal:
 	filename = "default_file.txt"
 
 	origin = np.array([0.1, 0.1])
-	goal = ("circle", np.array([2.5, 3.5]), 0.25)
+	goal = [
+			("circle", np.array([1.0, 1.1]), 0.25),
+			("circle", np.array([3.0, 3.5]), 0.25)
+			]
 
 
 	def __init__(self,file=None):
