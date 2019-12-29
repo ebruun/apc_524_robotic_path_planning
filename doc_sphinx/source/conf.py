@@ -31,7 +31,11 @@ release = '0.0.1'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc', 'sphinxcontrib.napoleon']
+extensions = [
+	'sphinx.ext.autodoc',
+	'sphinxcontrib.napoleon',
+	'sphinx.ext.intersphinx'
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -41,8 +45,22 @@ templates_path = ['_templates']
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
+
+
+# -- Napolean configuration ---------------------------------------------------
+
 autodoc_member_order = 'bysource'
+
 napoleon_use_ivar = True
+napoleon_google_docstring = True
+napoleon_numpy_docstring = False
+
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/', None),
+    'numpy': ('http://docs.scipy.org/doc/numpy/', None)
+}
+
+
 
 # -- Options for HTML output -------------------------------------------------
 
