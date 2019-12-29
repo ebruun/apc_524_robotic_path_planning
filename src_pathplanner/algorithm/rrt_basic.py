@@ -8,6 +8,10 @@ from algorithm.rrt import RRT
 class RRT_Basic(RRT):
 	""" A class for RRT algorithm.
 
+	Saving
+		the new solution to the specified iteration number. The type of algorithm chosen
+		is set by :obj:`params` 
+
 	"""
 	@classmethod
 	def rrt_step(cls, recorder,i):

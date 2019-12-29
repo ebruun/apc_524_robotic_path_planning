@@ -26,7 +26,7 @@ class TestStepper(unittest.TestCase):
 
 	def tearDown(self):
 		self.stepper = None
-		self.recorder = None
+		recorder = None
 
 	def get_last_row_index(self,step):
 		self.stepper.do_singlestep(recorder,step)
@@ -104,6 +104,15 @@ class TestStepper(unittest.TestCase):
 		step += 1
 		index = self.get_last_row_index(step)
 		self.assertEqual(step,index,"costs list not incremented")
+
+
+	def test_unknown_method(self):
+		params.method = "unknown"
+		
+		with self.assertRaises(SystemExit) as cm:
+			self.stepper.do_singlestep(recorder,1)
+		
+		self.assertEqual(cm.exception.code, "ERROR: no valid method")
 
 
 

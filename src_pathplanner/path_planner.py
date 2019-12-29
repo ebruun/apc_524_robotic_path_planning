@@ -46,7 +46,6 @@ def run_program():
 	PathPlan.check_completion()
 
 
-	print(PathPlan.recorder.vertices)
 
 	print("3. Showing Results")
 

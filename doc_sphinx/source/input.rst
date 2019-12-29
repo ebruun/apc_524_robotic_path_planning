@@ -3,23 +3,30 @@ Input package
 
 This package does...
 
-Submodules
-**********
 
 input.params 
-------------
+************
 
 .. automodule:: input.params
    :members:
-   :undoc-members:
-   :show-inheritance:
+   :special-members:
+   :exclude-members: __weakref__
+
+
+input.domain 
+************
+
+.. autoclass:: input.domain.Domain
+   :members:
+   :special-members:
+   :exclude-members: __weakref__
 
 
 input.shape
------------
+***********
 
 .. automodule:: input.shape
    :members:
-   :undoc-members:
-   :show-inheritance:
+   :special-members:
+   :exclude-members: __weakref__
 

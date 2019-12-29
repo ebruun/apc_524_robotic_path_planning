@@ -1,4 +1,4 @@
-# stepper.py
+# solution.py
 # Author(s): Edvard Bruun
 
 import numpy as np
@@ -10,33 +10,36 @@ from solver.stepper import Stepper
 class Solution:
 	"""This class executes and saves the solution to the path planning problem.
 
-	Imports the :class:`solver.stepper` module
+	Imports the :class:`solver.stepper.Stepper` class
 
-	Imports the :class:`solver.recorder` module
+	Imports the :class:`solver.recorder.Recorder` class
 
 	"""
 
 	def __init__(self,params,domain):
 		"""Initialize the Solution class.
 
+		The intialization consists of creating new Recorder and Stepper objects, which are initialized based on the params object.
+
 		Note:
 			Input parameters are assigned to instance variables with same name.
 
 		Args:
 			params (:obj:`input.params.ParamsRRT`):
-				Object containing the algorithm parameters
-			domain (:obj:`input.domain`):
-				Object containing the assembled solution domain
+				Object containing the algorithm parameters.
+			domain (:obj:`input.domain.Domain`):
+				Object containing the assembled solution domain.
 
 		Attributes:
-			recorder (:obj:`solver.recorder`):
-				initialized recorder object with parameters
-			stepper (:obj:`solver.stepper`):
-				initialized stepper object with parameters		
+			recorder (:class:`solver.recorder.Recorder`):
+				Initialized recorder object with input parameters.
+			stepper (:obj:`solver.stepper.Stepper`):
+				Initialized stepper object with input parameters.	
+
 			solution_path (:obj:`list` of :obj:`list` of :obj:`int`):
-				a path from origin to each goal in the form of vertex indices.
+				A path from origin to each goal in the form of vertex indices. A single path is generated for each goal.
 			solution_index (:obj:`list` of :obj:`int`):
-				index for final vertex to reach each goal.
+				Index for final vertex to reach each goal. A single index is specified for each goal.
 		
 		"""
 
@@ -57,11 +60,11 @@ class Solution:
 		for trial in range(self.params.n_trials):
 			print("\nIteration # ", trial+1)
 			self.stepper.do_singlestep(self.recorder, trial)
+			
 
 
 	def check_completion(self):
-		"""  This function checks the final list of vertices calculated by the algorithm
-		against the set of established goals.
+		"""  This function checks the final list of vertices calculated by the algorithm against the set of established goals.
 
 		Saves an index that represents the vertex that has reached the goal.
 
@@ -158,7 +161,6 @@ class Solution:
 			# Loop through parents list until you reach parents[i] = '-1',
 			# which is the starting point (no parent)
 			while child > 0:
-				print("hre")
 				parent = int(self.recorder.parents[child])
 				path_list.append(parent)
 				

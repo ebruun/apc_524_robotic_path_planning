@@ -7,7 +7,9 @@ import numpy as np
 #import shapes modules
 
 class Domain:
-	"""The domain within which the algorithm is searching"""
+	"""This class is a container for the domain within which the algorithm is searching.
+
+	"""
 
 	dims = [] # dimension
 	shape = [] # shape object for domain
@@ -16,13 +18,35 @@ class Domain:
 	origin = [] # point
 
 	def __init__(self,params_domain, params_origingoal):
-		# temporary lists, these should be lists of objects
+		"""Initialize the Domain class.
+
+		TBD...Longer description...
+
+		Note:
+			Input parameters are assigned to instance variables with same name.
+
+		Args:
+			params (:obj:`input.params.ParamsDomain`):
+				Object containing the domain parameters.
+			params (:obj:`input.params.ParamsOriginGoal`):
+				Object containing the origin/goal parameters.				
+
+		Attributes:
+			TBD...
+
+		"""
 		self.params_domain = params_domain
 		self.params_origingoal = params_origingoal
 
 		self.create_objects()
 
 	def create_objects(self):
+		"""Describe function...
+
+		TBD...Longer description...
+
+		"""
+
 		print("-Creating objects out of input parameters")
 
 		self.goal = self.params_origingoal.goal
