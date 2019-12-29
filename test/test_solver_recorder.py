@@ -5,8 +5,6 @@ import numpy as np
 
 from solver.recorder import Recorder
 
-
-
 testparams = Mock()
 testparams.n_trials = 10
 testparams.dims = 2
