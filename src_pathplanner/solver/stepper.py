@@ -2,6 +2,7 @@
 # Author(s): Edvard Bruun
 
 import numpy as np
+
 from algorithm.rrt import RRT
 from algorithm.rrt_basic import RRT_Basic
 from algorithm.rrt_star import RRT_Star
@@ -16,15 +17,13 @@ class Stepper:
 		self.params = input_params
 		
 	def do_singlestep(self,recorder,trial):
-		""" Returns::
+		""" This function steps through one iteration of the solution algorithm.
 
-				Recorder object
-
-	        This function steps through one iteration of the solution algorithm.
+			Updates the recorder object lists based on the trial number
 
 		"""
 
-		if self.params.method is "RRT":
+		if self.params.method is "RRT_basic":
 			#print("Do RRT, with stepsize ", self.params.step_size)
 			RRT.rrt_step(recorder, trial)
 

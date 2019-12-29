@@ -6,10 +6,7 @@ import numpy as np
 from solver.stepper import Stepper
 
 params = Mock()
-params.method = "RRT"
-
 recorder = Mock()
-
 
 class TestStepper(unittest.TestCase):
 	def setUp(self):
@@ -31,65 +28,82 @@ class TestStepper(unittest.TestCase):
 		self.stepper = None
 		self.recorder = None
 
-	def test_vertices_increment(self):
-
-		step = 1
+	def get_last_row_index(self,step):
 		self.stepper.do_singlestep(recorder,step)
 
 		bool_array = (np.isnan(recorder.vertices))
 		bool_index = np.where(bool_array == False)
-		b = np.amax(bool_index[0])
+		index = np.amax(bool_index[0])
 
-		self.assertEqual(step,b,"vertices list not incremented")
+		return index
+
+	def test_vertices_increment1(self):
+		params.method = "RRT_basic"
+		
+		step = 1
+		index = self.get_last_row_index(step)
+		self.assertEqual(step,index,"vertices list not incremented")
 
 		step += 1
-		self.stepper.do_singlestep(recorder,step)
+		index = self.get_last_row_index(step)
+		self.assertEqual(step,index,"vertices list not incremented")
 
-		bool_array = (np.isnan(recorder.vertices))
-		bool_index = np.where(bool_array == False)
-		b = np.amax(bool_index[0])
+	def test_vertices_increment2(self):
+		params.method = "RRT_star"
+		
+		step = 1
+		index = self.get_last_row_index(step)
+		self.assertEqual(step,index,"vertices list not incremented")
 
-		self.assertEqual(step,b,"vertices list not incremented")
+		step += 1
+		index = self.get_last_row_index(step)
+		self.assertEqual(step,index,"vertices list not incremented")		
 
-	def test_parents_increment(self):
+
+	def test_parents_increment1(self):
+		params.method = "RRT_basic"
 
 		step = 1
-		self.stepper.do_singlestep(recorder,step)
-
-		bool_array = (np.isnan(recorder.parents))
-		bool_index = np.where(bool_array == False)
-		b = np.amax(bool_index[0])
-
-		self.assertEqual(step,b,"parents list not incremented")
+		index = self.get_last_row_index(step)
+		self.assertEqual(step,index,"parents list not incremented")
 
 		step += 1
-		self.stepper.do_singlestep(recorder,step)
+		index = self.get_last_row_index(step)
+		self.assertEqual(step,index,"parents list not incremented")
 
-		bool_array = (np.isnan(recorder.parents))
-		bool_index = np.where(bool_array == False)
-		b = np.amax(bool_index[0])
-
-		self.assertEqual(step,b,"parents list not incremented")
-
-	def test_costs_increment(self):
+	def test_parents_increment2(self):
+		params.method = "RRT_star"
 
 		step = 1
-		self.stepper.do_singlestep(recorder,step)
-
-		bool_array = (np.isnan(recorder.costs))
-		bool_index = np.where(bool_array == False)
-		b = np.amax(bool_index[0])
-
-		self.assertEqual(step,b,"costs list not incremented")
+		index = self.get_last_row_index(step)
+		self.assertEqual(step,index,"parents list not incremented")
 
 		step += 1
-		self.stepper.do_singlestep(recorder,step)
+		index = self.get_last_row_index(step)
+		self.assertEqual(step,index,"parents list not incremented")
 
-		bool_array = (np.isnan(recorder.costs))
-		bool_index = np.where(bool_array == False)
-		b = np.amax(bool_index[0])
 
-		self.assertEqual(step,b,"costs list not incremented")
+	def test_costs_increment1(self):
+		params.method = "RRT_basic"
+
+		step = 1
+		index = self.get_last_row_index(step)
+		self.assertEqual(step,index,"costs list not incremented")
+
+		step += 1
+		index = self.get_last_row_index(step)
+		self.assertEqual(step,index,"costs list not incremented")
+
+	def test_costs_increment2(self):
+		params.method = "RRT_star"
+
+		step = 1
+		index = self.get_last_row_index(step)
+		self.assertEqual(step,index,"costs list not incremented")
+
+		step += 1
+		index = self.get_last_row_index(step)
+		self.assertEqual(step,index,"costs list not incremented")
 
 
 

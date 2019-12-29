@@ -8,7 +8,7 @@ class RRT:
 
 	"""
 	@classmethod
-	def rrt_step(cls, recorder,i):
+	def rrt_step(cls, recorder, i):
 		#print("doing algorithm")
 		recorder.vertices[i,:] = [i,i]
 		recorder.parents[i] = i

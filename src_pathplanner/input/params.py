@@ -1,12 +1,15 @@
 # params.py
 # Author(s): Edvard Bruun
 
+"""Placeholder class"""
+
 import numpy as np
 
 class ParamsRRT:
 	"""Parameters definining the RRT algorithm"""
 
 	filename = "default_file.txt"
+	#method = "RRT_basic"
 	method = "RRT_star"
 	n_trials = 5
 	step_size = 0.1
@@ -25,7 +28,7 @@ class ParamsOriginGoal:
 
 	filename = "default_file.txt"
 
-	origin = ("circle", np.array([0.1, 0.1]), 0.05)
+	origin = np.array([0.1, 0.1])
 	goal = ("circle", np.array([2.5, 3.5]), 0.25)
 
 
@@ -42,7 +45,9 @@ class ParamsDomain:
 
 	filename = "default_file.txt"
 
-	domain = ("rectangle", np.array([0.0, 0.0]), (3.0,4.0))
+	dims = 2
+
+	shape = ("rectangle", np.array([0.0, 0.0]), (3.0,4.0))
 
 	obstacles = [
 				("rectangle", np.array([2.0, 2.5]), (0.2,0.2)),
