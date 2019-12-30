@@ -63,7 +63,7 @@ class Solution:
 		"""
 		for trial in range(self.params.n_trials):
 			print("\nIteration # ", trial+1)
-			self.stepper.do_singlestep(self.recorder, trial)
+			self.stepper.do_singlestep(self.recorder, self.domain, trial)
 			
 
 	def process_vertex_list(self):
@@ -78,7 +78,7 @@ class Solution:
 		"""
 		for i in range(len(self.domain.goal)):
 			index = self.check_if_goal_reached(self.domain.goal[i])
-			self.find_path(index)
+			self.solution_path.append(self.find_path(index))
 
 
 	def check_if_goal_reached(self,goal):
@@ -103,7 +103,6 @@ class Solution:
 			index (:obj:`int`): The index of the vertex that reached the goal. This is set to :obj:`numpy.nan` if the goal is not reached.
 
 		"""
-
 		index, distance = self.find_nearest_vertex(goal[1])
 
 		print("--Shortest distance:", distance,
@@ -145,7 +144,6 @@ class Solution:
 		for i, vertex in enumerate(self.recorder.vertices):
 
 			if any(x == True for x in np.isnan(vertex)):
-				print("--Looked through all current vertices")
 				break
 			else:
 				dist_new = np.linalg.norm(goal - vertex)
@@ -183,5 +181,5 @@ class Solution:
 		
 		path_list.reverse()		
 
-		self.solution_path.append(path_list)
+		return path_list
 

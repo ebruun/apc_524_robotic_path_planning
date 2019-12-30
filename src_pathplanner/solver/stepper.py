@@ -36,7 +36,7 @@ class Stepper:
 		self.params = params
 
 
-	def do_singlestep(self,recorder,trial):
+	def do_singlestep(self,recorder, domain, trial):
 		""" This function calls the appropriate algorithm to increment the solution by a step.
 
 		Takes the recorder object and calls the specified algorithm to act on it (increment the vertices, parents, costs lists by a single step). The trial number tells the algorithm step function where to save the new data. 
@@ -49,12 +49,12 @@ class Stepper:
 
 		Error:
 			Exits the program with an error if no correct method is specified.	
+		
 		"""
-
 		if self.params.method is "RRT_basic":
-			RRT_Basic.rrt_step(recorder, trial)
+			RRT_Basic.rrt_step(recorder, domain, trial)
 		elif self.params.method is "RRT_star":
-			RRT_Star.rrt_step(recorder, trial)
+			RRT_Star.rrt_step(recorder, domain, trial)
 		else:
 			exit("ERROR: no valid method")
 

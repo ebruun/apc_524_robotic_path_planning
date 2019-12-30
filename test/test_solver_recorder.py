@@ -16,22 +16,23 @@ class TestRecorder(unittest.TestCase):
 	def tearDown(self):
 		self.recorder = None		
 
-	def test_vert_size(self):
+	def test_recorder_00_vert_size(self):
 		self.assertEqual(self.recorder.vertices.shape,
-						(self.recorder.params.n_trials, self.recorder.params.dims),
+						(self.recorder.params.n_trials,
+							self.recorder.params.dims),
 						"vert, not right matrix size")		
 
-	def test_cost_length(self):
+	def test_recorder_01_cost_length(self):
 		self.assertEqual(self.recorder.params.n_trials,
 						len(self.recorder.costs),
 						"costs, not right length")
 
-	def test_parent_length(self):
+	def test_recorder_02_parent_length(self):
 		self.assertEqual(self.recorder.params.n_trials,
 						len(self.recorder.parents),
 						"parents, not right length")
 
-	def test_zeros(self):
+	def test_recorder_03_zeros(self):
 		self.assertTrue(np.all(np.isnan(self.recorder.vertices)),
 						"vertices, not fully initialized to NaN")
 

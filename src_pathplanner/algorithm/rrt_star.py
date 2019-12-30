@@ -10,10 +10,11 @@ class RRT_Star(RRT):
 
 	"""
 	@classmethod
-	def rrt_step(cls, recorder,i):
-		print("doing algorithm")
+	def rrt_step(cls, recorder,domain,i):
+		#print("doing algorithm")
 		recorder.vertices[i,:] = [i,i]
 		recorder.parents[i] = i-1
 		recorder.costs[i] = i
 
-		print(Solution.domain)
+	def do_something():
+		print("some implementation")

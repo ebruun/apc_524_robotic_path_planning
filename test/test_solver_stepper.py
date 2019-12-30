@@ -7,9 +7,11 @@ from solver.stepper import Stepper
 
 params = Mock()
 recorder = Mock()
+domain = Mock()
 
 class TestStepper(unittest.TestCase):
 	def setUp(self):
+		params.method = None
 		self.stepper = Stepper(params)
 
 		recorder.vertices = np.zeros((3,2), dtype=float)
@@ -26,10 +28,9 @@ class TestStepper(unittest.TestCase):
 
 	def tearDown(self):
 		self.stepper = None
-		recorder = None
 
 	def get_last_row_index(self,step):
-		self.stepper.do_singlestep(recorder,step)
+		self.stepper.do_singlestep(recorder,domain,step)
 
 		bool_array = (np.isnan(recorder.vertices))
 		bool_index = np.where(bool_array == False)
@@ -37,7 +38,7 @@ class TestStepper(unittest.TestCase):
 
 		return index
 
-	def test_vertices_increment1(self):
+	def test_stepper_00_vertices_increment1(self):
 		params.method = "RRT_basic"
 		
 		step = 1
@@ -48,7 +49,7 @@ class TestStepper(unittest.TestCase):
 		index = self.get_last_row_index(step)
 		self.assertEqual(step,index,"vertices list not incremented")
 
-	def test_vertices_increment2(self):
+	def test_stepper_01_vertices_increment2(self):
 		params.method = "RRT_star"
 		
 		step = 1
@@ -60,7 +61,7 @@ class TestStepper(unittest.TestCase):
 		self.assertEqual(step,index,"vertices list not incremented")		
 
 
-	def test_parents_increment1(self):
+	def test_stepper_02_parents_increment1(self):
 		params.method = "RRT_basic"
 
 		step = 1
@@ -71,7 +72,8 @@ class TestStepper(unittest.TestCase):
 		index = self.get_last_row_index(step)
 		self.assertEqual(step,index,"parents list not incremented")
 
-	def test_parents_increment2(self):
+
+	def test_stepper_03_parents_increment2(self):
 		params.method = "RRT_star"
 
 		step = 1
@@ -83,7 +85,7 @@ class TestStepper(unittest.TestCase):
 		self.assertEqual(step,index,"parents list not incremented")
 
 
-	def test_costs_increment1(self):
+	def test_stepper_04_costs_increment1(self):
 		params.method = "RRT_basic"
 
 		step = 1
@@ -94,7 +96,8 @@ class TestStepper(unittest.TestCase):
 		index = self.get_last_row_index(step)
 		self.assertEqual(step,index,"costs list not incremented")
 
-	def test_costs_increment2(self):
+
+	def test_stepper_05_costs_increment2(self):
 		params.method = "RRT_star"
 
 		step = 1
@@ -106,14 +109,13 @@ class TestStepper(unittest.TestCase):
 		self.assertEqual(step,index,"costs list not incremented")
 
 
-	def test_unknown_method(self):
+	def test_stepper_06_unknown_method(self):
 		params.method = "unknown"
 		
 		with self.assertRaises(SystemExit) as cm:
-			self.stepper.do_singlestep(recorder,1)
+			self.stepper.do_singlestep(recorder,domain,1)
 		
 		self.assertEqual(cm.exception.code, "ERROR: no valid method")
-
 
 
 if __name__ == '__main__':
