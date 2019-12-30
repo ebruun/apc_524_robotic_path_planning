@@ -1,9 +1,8 @@
 # shape_circle.py
 # Author(s): Vivek Kumar
 import numpy as np
-# from shape import Shape
 
-class Circle():
+class Circle(object):
   """docstring for Circle"""
   def __init__(self, radius: float, center: np.ndarray):
     self.radius = radius
