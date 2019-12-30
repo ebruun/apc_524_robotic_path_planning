@@ -53,3 +53,11 @@ def test_line_intersection():
   assert circle.is_intersected_by_line(point_1, point_2)==False
   point_2 = np.array([0.0, 0.0])
   assert circle.is_intersected_by_line(point_1, point_2)==True
+
+def test_sample_random_point():
+  radius = 10.0
+  center_coords= np.array([1.0,-15.0])
+  circle = Circle(radius, center_coords)
+  for i in range(10):
+    new_random_point = circle.sample_random_point()
+    assert(circle.is_point_inside(new_random_point)==True)

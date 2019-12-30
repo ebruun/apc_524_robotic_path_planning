@@ -1,6 +1,8 @@
 # shape_circle.py
 # Author(s): Vivek Kumar
 import numpy as np
+import math
+import random
 
 class Circle(object):
   """docstring for Circle"""
@@ -22,3 +24,9 @@ class Circle(object):
       return True
     else:
       return False
+
+  def sample_random_point(self)->np.ndarray:
+    r = self.radius*math.sqrt(random.random())
+    theta = random.random()*2.0*math.pi
+    new_random_point = np.asarray([[self.center[0]+r*math.cos(theta), self.center[1]+r*math.sin(theta)]])
+    return new_random_point
