@@ -10,6 +10,8 @@ class RRT(ABC):
 
 	"""
 
+	def __init__(self)
+
 	@abstractmethod
 	def do_something():
 		print("some implementation")

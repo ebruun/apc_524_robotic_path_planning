@@ -138,7 +138,7 @@ class Solution:
 			Don't need to return the distance once the .isinside() function is created for the goal objects
 
 		"""
-		dist_new = 0
+		dist_new = 0.0
 		shortest_distance = float('+inf') 
 		shortest_index = 0
 		
@@ -149,6 +149,7 @@ class Solution:
 				break
 			else:
 				dist_new = np.linalg.norm(goal - vertex)
+				dist_new = round(dist_new,6)
 				
 				if dist_new < shortest_distance:					
 					shortest_distance = dist_new
