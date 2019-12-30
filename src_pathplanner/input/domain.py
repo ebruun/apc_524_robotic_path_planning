@@ -9,8 +9,9 @@ import numpy as np
 class Domain:
 	"""This class is a container for the domain within which the algorithm is searching.
 
-	"""
+	Longer Description...
 
+	"""
 	dims = [] # dimension
 	shape = [] # shape object for domain
 	obstacles = [] # list of shape objects
@@ -20,7 +21,7 @@ class Domain:
 	def __init__(self,params_domain, params_origingoal):
 		"""Initialize the Domain class.
 
-		TBD...Longer description...
+		Longer Description...
 
 		Note:
 			Input parameters are assigned to instance variables with same name.
@@ -41,7 +42,7 @@ class Domain:
 		self.create_objects()
 
 	def create_objects(self):
-		"""Describe function...
+		"""Create shape objects from the parameter strings
 
 		TBD...Longer description...
 
@@ -50,6 +51,5 @@ class Domain:
 		print("-Creating objects out of input parameters")
 
 		self.goal = self.params_origingoal.goal
-		#print(self.params_origingoal.origin)
-		#print(self.params_origingoal.goal)
+
 

@@ -1,11 +1,11 @@
-Input package
+input package
 =============
 
 This package does...
 
 
-input.params 
-************
+params module
+*************
 
 .. automodule:: input.params
    :members:
@@ -13,8 +13,8 @@ input.params
    :exclude-members: __weakref__
 
 
-input.domain 
-************
+domain module
+*************
 
 .. autoclass:: input.domain.Domain
    :members:
@@ -22,8 +22,8 @@ input.domain
    :exclude-members: __weakref__
 
 
-input.shape
-***********
+shape module
+************
 
 .. automodule:: input.shape
    :members:

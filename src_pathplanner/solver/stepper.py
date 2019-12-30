@@ -1,6 +1,12 @@
 # stepper.py
 # Author(s): Edvard Bruun
 
+"""
+Imports the :class:`algorithm.rrt_basic.RRT_Basic` class.
+
+Imports the :class:`algorithm.rrt_star.RRT_Star` class.
+"""
+
 import numpy as np
 from sys import exit
 
@@ -11,21 +17,20 @@ from algorithm.rrt_star import RRT_Star
 class Stepper:
 	"""This class steps through one interation of an algorithm.
 
-	Imports the :class:`algorithm.rrt_basic.RRT_Basic` class.
-
-	Imports the :class:`algorithm.rrt_star.RRT_Star` class.
-
 	"""
 
 	def __init__(self,params):
 		"""Initialize the Stepper class.
 
+		Args:
+			params (:obj:`~input.params.ParamsRRT` object):
+				Object containing the algorithm parameters.
+
 		Note:
 			Input parameters are assigned to instance variables with same name.
 
-		Args:
-			params (:obj:`input.params.ParamsRRT`):
-				Object containing the algorithm parameters.
+		Attributes:
+			params: see Parameters			
 
 		"""
 		self.params = params
@@ -37,7 +42,7 @@ class Stepper:
 		Takes the recorder object and calls the specified algorithm to act on it (increment the vertices, parents, costs lists by a single step). The trial number tells the algorithm step function where to save the new data. 
 
 		Args:
-			recorder (:obj:`solver.recorder.Recorder`):
+			recorder (:obj:`~solver.recorder.Recorder` object):
 				Object containing the algorithm solution lists.
 			trial (:obj:`int`):
 				A counter for the number of steps taken in the algorithm solution.

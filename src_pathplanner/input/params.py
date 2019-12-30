@@ -6,7 +6,10 @@
 import numpy as np
 
 class ParamsRRT:
-	"""Parameters definining the RRT algorithm"""
+	"""Parameters definining the RRT algorithm
+
+	Longer Description...
+	"""
 
 	filename = "default_file.txt"
 	#method = "RRT_basic"
@@ -16,15 +19,27 @@ class ParamsRRT:
 	dims = 2
 
 	def __init__(self,file=None):
-		self.filename = file if file is not None else self.filename
-		self.get_params()
+		"""Initialize the ParamsRRT class.
+
+		Longer Description...
+
+		"""
 
 	def get_params(self):
+		"""Get parameters.
+
+		Longer Description...
+
+		"""
 		print('-Getting RRT Parameters: ', self.filename)
 
 
 class ParamsOriginGoal:
-	"""Parameters defining the start and end goals"""
+	"""Parameters defining the start and end goals
+
+	Longer Description...
+
+	"""
 
 	filename = "default_file.txt"
 
@@ -36,15 +51,29 @@ class ParamsOriginGoal:
 
 
 	def __init__(self,file=None):
+		"""Initialize the ParamsGoalOrigin class.
+
+		Longer Description...
+
+		"""
 		self.filename = file if file is not None else self.filename
 		self.get_params()
 
 	def get_params(self):
+		"""Get parameters.
+
+		Longer Description...
+
+		"""
 		print ("-Getting Origin/Goal Parameters: ", self.filename)	
 
 
 class ParamsDomain:
-	"""Parameters defining the domain"""
+	"""Parameters defining the domain
+
+	Longer Description...
+
+	"""
 
 	filename = "default_file.txt"
 
@@ -59,10 +88,20 @@ class ParamsDomain:
 				]
 
 	def __init__(self,file=None):
+		"""Initialize the ParamsGoalOrigin class.
+
+		Longer Description...
+
+		"""
 		self.filename = file if file is not None else self.filename
 		self.get_params()
 
 	def get_params(self):
+		"""Get parameters.
+
+		Longer Description...
+		
+		"""
 		print ("-Getting Domain Parameters: ", self.filename)
 
 

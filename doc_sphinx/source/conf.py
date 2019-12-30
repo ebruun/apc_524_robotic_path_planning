@@ -34,7 +34,8 @@ release = '0.0.1'
 extensions = [
 	'sphinx.ext.autodoc',
 	'sphinxcontrib.napoleon',
-	'sphinx.ext.intersphinx'
+	'sphinx.ext.intersphinx',
+	'sphinx.ext.todo'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -47,13 +48,18 @@ exclude_patterns = []
 
 
 
+
 # -- Napolean configuration ---------------------------------------------------
+
+add_module_names = False
+add_function_parentheses = True
 
 autodoc_member_order = 'bysource'
 
 napoleon_use_ivar = True
 napoleon_google_docstring = True
 napoleon_numpy_docstring = False
+napoleon_use_rtype = False
 
 intersphinx_mapping = {
     'python': ('https://docs.python.org/', None),

@@ -1,19 +1,19 @@
-Solver package
+solver package
 ==============
 
 This package does...
 
 
-solver.solution
+solution module
 ***************
 
-.. autoclass:: solver.solution.Solution
+.. automodule:: solver.solution
    :members:
    :special-members:
    :exclude-members: __weakref__
 
 
-solver.stepper
+stepper module
 **************
 
 .. autoclass:: solver.stepper.Stepper
@@ -22,7 +22,7 @@ solver.stepper
    :exclude-members: __weakref__
 
 
-solver.recorder
+recorder module
 ***************
 
 .. autoclass:: solver.recorder.Recorder

@@ -4,6 +4,8 @@
 """
 The core module of the project and executes the program
 
+imports...
+
 """
 
 from solver.solution import Solution
@@ -43,7 +45,9 @@ def run_program():
 	PathPlan = Solution(p1,d1)
 
 	PathPlan.run_algorithm()
-	PathPlan.check_completion()
+	PathPlan.process_vertex_list()
+
+	print(PathPlan.solution_path)
 
 
 

@@ -13,14 +13,15 @@ class Recorder:
 
 		The attributes arrays are initialized to the length specified by the number of trials specified in params object. Initialized to value of :obj:`numpy.nan`.
 
+		Args:
+			params (:obj:`~input.params.ParamsRRT` object):
+				Object containing the algorithm parameters.
+
 		Note:
 			Input parameters are assigned to instance variables with same name.
 
-		Args:
-			params (:obj:`input.params.ParamsRRT`):
-				Object containing the algorithm parameters.
-
 		Attributes:
+			params: see Parameters			
 			vertices (:obj:`numpy.ndarray` of :obj:`float`):
 				An array of coordinates for the graph vertices. The number of columns is specified by the dimensions of the solution space (2d or 3d).
 			parents (:obj:`numpy.ndarray` of :obj:`float`):
