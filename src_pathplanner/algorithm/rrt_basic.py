@@ -13,12 +13,25 @@ class RRT_Basic(RRT):
 		is set by :obj:`params` 
 
 	"""
-	@classmethod
-	def rrt_step(cls, recorder,domain,i):
-		#print("doing algorithm")
-		recorder.vertices[i,:] = [i,i]
+
+	def rrt_step(self, recorder,domain,i):
+		print("\nStep", i)
+		new_v = self.new_vertex()
+		b = self.new_edge()
+
+		print (new_v)
+
+		recorder.vertices[i,:] = new_v
+
+		print(recorder.vertices)
 		recorder.parents[i] = i-1
 		recorder.costs[i] = i
 
-	def do_something():
-		print("some implementation")
+
+	def new_vertex(self):
+		new_v = super().new_vertex()
+		return new_v
+
+	def new_edge(self):
+		super().new_edge()
+

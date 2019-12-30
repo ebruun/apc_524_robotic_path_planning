@@ -19,7 +19,7 @@ class Stepper:
 
 	"""
 
-	def __init__(self,params):
+	def __init__(self,params,domain):
 		"""Initialize the Stepper class.
 
 		Args:
@@ -34,6 +34,14 @@ class Stepper:
 
 		"""
 		self.params = params
+
+		if self.params.method is "RRT_basic":
+			self.algorithm = RRT_Basic(domain)
+		elif self.params.method is "RRT_star":
+			self.algorithm = RRT_Star(domain)
+		else:
+			exit("ERROR: no valid method")
+
 
 
 	def do_singlestep(self,recorder, domain, trial):
@@ -51,12 +59,17 @@ class Stepper:
 			Exits the program with an error if no correct method is specified.	
 		
 		"""
+		self.algorithm.rrt_step(recorder,domain,trial)
+
+		"""
+
 		if self.params.method is "RRT_basic":
 			RRT_Basic.rrt_step(recorder, domain, trial)
 		elif self.params.method is "RRT_star":
 			RRT_Star.rrt_step(recorder, domain, trial)
 		else:
 			exit("ERROR: no valid method")
+			"""
 
 
 	

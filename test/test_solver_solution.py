@@ -8,6 +8,7 @@ from solver.solution import Solution
 params = Mock()
 params.n_trials = 5
 params.dims = 2
+params.method = "RRT_basic"
 
 domain = Mock()
 

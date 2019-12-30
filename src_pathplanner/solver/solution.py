@@ -47,7 +47,7 @@ class Solution:
 		self.domain = domain
 
 		self.recorder = Recorder(params)
-		self.stepper = Stepper(params)
+		self.stepper = Stepper(params, domain)
 
 		self.solution_path = [] 
 

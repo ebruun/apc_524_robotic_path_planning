@@ -6,13 +6,13 @@ import numpy as np
 from solver.stepper import Stepper
 
 params = Mock()
+params.method = "RRT_basic"
 recorder = Mock()
 domain = Mock()
 
 class TestStepper(unittest.TestCase):
 	def setUp(self):
-		params.method = None
-		self.stepper = Stepper(params)
+		self.stepper = Stepper(params,domain)
 
 		recorder.vertices = np.zeros((3,2), dtype=float)
 		recorder.vertices.fill(np.nan)
@@ -113,7 +113,7 @@ class TestStepper(unittest.TestCase):
 		params.method = "unknown"
 		
 		with self.assertRaises(SystemExit) as cm:
-			self.stepper.do_singlestep(recorder,domain,1)
+			self.stepper = Stepper(params,domain)
 		
 		self.assertEqual(cm.exception.code, "ERROR: no valid method")
 
