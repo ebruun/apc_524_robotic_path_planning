@@ -39,7 +39,7 @@ class TestRecorder(unittest.TestCase):
 		self.assertTrue(np.all(np.isnan(self.recorder.parents)),
 						"parents, not initialized to NaN")
 
-		self.assertTrue(np.all(np.any(self.recorder.costs)),
+		self.assertTrue(np.all(np.isnan(self.recorder.costs)),
 						"costs, not initialized to NaN")
 
 if __name__ == '__main__':

@@ -62,7 +62,7 @@ class Solution:
 
 		"""
 		for trial in range(self.params.n_trials):
-			print("\nIteration # ", trial+1)
+			#print("\nIteration # ", trial+1)
 			self.stepper.do_singlestep(self.recorder, self.domain, trial)
 			
 
@@ -105,14 +105,13 @@ class Solution:
 		"""
 		index, distance = self.find_nearest_vertex(goal[1])
 
-		print("--Shortest distance:", distance,
-			", Found with vertex at index:", index)
+		#print("--Shortest distance:", distance,", Found with vertex at index:", index)
 
 		if (distance < goal[2]):
-			print('Path found!')
+			#print('Path found!')
 			return index
 		else:
-			print('No path found!')
+			#print('No path found!')
 			index = np.nan
 			return index
 
