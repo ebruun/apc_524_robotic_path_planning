@@ -7,8 +7,17 @@ from solver.stepper import Stepper
 
 params = Mock()
 params.method = "RRT_basic"
+
 recorder = Mock()
+
 domain = Mock()
+domain.dims = 2
+domain.extents = np.array([[0,3], [0,4]])
+domain.obstacles = [
+				("circle", np.array([0.5, 3.5]), 0.20),
+				("circle", np.array([1.5, 3.5]), 0.20),
+				("circle", np.array([1.5, 0.5]), 0.40)
+				]
 
 class TestStepper(unittest.TestCase):
 	def setUp(self):

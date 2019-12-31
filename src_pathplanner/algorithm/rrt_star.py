@@ -10,22 +10,24 @@ class RRT_Star(RRT):
 
 	"""
 
-	def rrt_step(self, recorder,domain,i):
+	def __init__(self,domain,recorder):
+		super().__init__(domain,recorder)
+
+	def rrt_step(self,i):
 		print("\nStep", i)
-		a = self.new_vertex()
-		b = self.new_edge()
-
-		print (a)
-
-		recorder.vertices[i,:] = [i,i]
-		recorder.parents[i] = i-1
-		recorder.costs[i] = i
+		
+		self.new_q = self.new_config()
 
 
-	def new_vertex(self):
-		a = super().new_vertex()
-		return 1
+		self.recorder.vertices[i,:] = self.new_q
+		self.recorder.parents[i] = i-1
+		self.recorder.costs[i] = i
+
+
+	def new_config(self):
+		return super().new_config()
+
+
 
 	def new_edge(self):
 		super().new_edge()
-

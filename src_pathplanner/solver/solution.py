@@ -5,12 +5,18 @@
 Imports the :class:`solver.stepper.Stepper` class
 
 Imports the :class:`solver.recorder.Recorder` class
+
+Imports the :func:`algorithm.vertex.find_nearest_vertex` function
 """
 
 import numpy as np
+from sys import exit
 
 from solver.recorder import Recorder
-from solver.stepper import Stepper
+
+from algorithm.vertex import find_nearest_vertex
+from algorithm.rrt_basic import RRT_Basic
+from algorithm.rrt_star import RRT_Star
 
 
 class Solution:
@@ -47,9 +53,9 @@ class Solution:
 		self.domain = domain
 
 		self.recorder = Recorder(params)
-		self.stepper = Stepper(params, domain)
 
 		self.solution_path = [] 
+		self.algorithm = []
 
 
 	def run_algorithm(self):
@@ -61,9 +67,24 @@ class Solution:
 		<solver.stepper.Stepper.do_singlestep>` function in the loop.
 
 		"""
-		for trial in range(self.params.n_trials):
-			#print("\nIteration # ", trial+1)
-			self.stepper.do_singlestep(self.recorder, self.domain, trial)
+
+		if self.params.method is "RRT_basic":
+			self.algorithm = RRT_Basic(
+				self.domain, 
+				self.recorder,
+				self.params
+			)
+
+		elif self.params.method is "RRT_star":
+			self.algorithm = RRT_Star(
+				self.domain,
+				self.recorder,
+				self.params)
+		else:
+			exit("ERROR: no valid method")		
+
+		for trial in range(1,self.params.n_trials):
+			self.algorithm.rrt_step(trial)
 			
 
 	def process_vertex_list(self):
@@ -103,7 +124,10 @@ class Solution:
 			index (:obj:`int`): The index of the vertex that reached the goal. This is set to :obj:`numpy.nan` if the goal is not reached.
 
 		"""
-		index, distance = self.find_nearest_vertex(goal[1])
+		index, distance = find_nearest_vertex(
+			self.recorder.vertices,
+			goal[1]
+		)
 
 		#print("--Shortest distance:", distance,", Found with vertex at index:", index)
 
@@ -114,45 +138,6 @@ class Solution:
 			#print('No path found!')
 			index = np.nan
 			return index
-
-
-	def find_nearest_vertex(self,goal):
-		"""  This function finds how far the nearest vertex is to a goal.
-
-		The full list of vertices, saved in the :obj:`~solver.recorder.Recorder` object, is checked against a single goal target. Loops through the full list and calculates the L2 norm to the center of the goal. Updates the index and distance for the closest vertex through the loop.
-
-		Parameters:
-			goal (:obj:`~input.shape.Shape` object): A shape object specfied as the target for the algorithm.
-
-		Returns:
-			(tuple): tuple containing:
-
-				shortest_index (:obj:`int`): The index of the vertex that is closest to the goal.
-
-				shortest_distance (:obj:`float`): The distance from the closest vertex to the center point of the object
-
-		Error:
-			TO DO:
-			Don't need to return the distance once the .isinside() function is created for the goal objects
-
-		"""
-		dist_new = 0.0
-		shortest_distance = float('+inf') 
-		shortest_index = 0
-		
-		for i, vertex in enumerate(self.recorder.vertices):
-
-			if any(x == True for x in np.isnan(vertex)):
-				break
-			else:
-				dist_new = np.linalg.norm(goal - vertex)
-				dist_new = round(dist_new,6)
-				
-				if dist_new < shortest_distance:					
-					shortest_distance = dist_new
-					shortest_index = i
-		
-		return shortest_index, shortest_distance
 
 
 	def find_path(self,index):

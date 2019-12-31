@@ -43,7 +43,6 @@ class Stepper:
 			exit("ERROR: no valid method")
 
 
-
 	def do_singlestep(self,recorder, domain, trial):
 		""" This function calls the appropriate algorithm to increment the solution by a step.
 
@@ -59,17 +58,8 @@ class Stepper:
 			Exits the program with an error if no correct method is specified.	
 		
 		"""
-		self.algorithm.rrt_step(recorder,domain,trial)
+		self.algorithm.rrt_step(recorder,trial)
 
-		"""
-
-		if self.params.method is "RRT_basic":
-			RRT_Basic.rrt_step(recorder, domain, trial)
-		elif self.params.method is "RRT_star":
-			RRT_Star.rrt_step(recorder, domain, trial)
-		else:
-			exit("ERROR: no valid method")
-			"""
 
 
 	

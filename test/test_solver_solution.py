@@ -11,6 +11,13 @@ params.dims = 2
 params.method = "RRT_basic"
 
 domain = Mock()
+domain.dims = 2
+domain.extents = np.array([[0,3], [0,4]])
+domain.obstacles = [
+				("circle", np.array([0.5, 3.5]), 0.20),
+				("circle", np.array([1.5, 3.5]), 0.20),
+				("circle", np.array([1.5, 0.5]), 0.40)
+				]
 
 class TestSolution(unittest.TestCase):
 	def setUp(self):
@@ -18,79 +25,6 @@ class TestSolution(unittest.TestCase):
 
 	def tearDown(self):
 		self.solution = None
-
-
-	def test_solution_00_distance_calc_normal1(self):
-		self.solution.recorder.vertices = np.array(
-			[[0.0, 0.0],
-			[1.0, 1.10],
-			[1.0, 1.05]]
-		)
-
-		goal = np.array([1.0,1.0])
-
-		index,dist = self.solution.find_nearest_vertex(goal)
-
-		self.assertEqual(index,2,"shortest index incorrect")
-		self.assertEqual(dist,0.05,"shortest distance incorrect")
-
-
-	def test_solution_01_distance_calc_normal3d(self):
-		self.solution.recorder.vertices = np.array(
-			[[0.0, 0.0, 0.0],
-			[1.0, 1.10, 1.0],
-			[1.0, 1.05, 2.0]]
-		)
-
-		goal = np.array([1.0,1.0,2.0])
-
-		index,dist = self.solution.find_nearest_vertex(goal)
-
-		self.assertEqual(index,2,"shortest index incorrect")
-		self.assertEqual(dist,0.05,"shortest distance incorrect")
-
-	def test_solution_02_distance_calc_zeros(self):
-		self.solution.recorder.vertices = np.array(
-			[[1.0, 1.0],
-			[0.0, 0.00],
-			[1.0, 1.05]]
-		)
-
-		goal = np.array([0.0,0.0])
-
-		index,dist = self.solution.find_nearest_vertex(goal)
-
-		self.assertEqual(index,1,"shortest index incorrect")
-		self.assertEqual(dist,0.0,"shortest distance incorrect")
-
-
-	def test_solution_03_distance_calc_nan(self):
-		self.solution.recorder.vertices = np.array(
-			[[0.0, 0.0],
-			[1.0, 1.1],
-			[np.nan, np.nan]]
-		)
-
-		goal = np.array([1.0,1.0])
-
-		index,dist = self.solution.find_nearest_vertex(goal)
-
-		self.assertEqual(index,1,"shortest index incorrect")
-		self.assertEqual(dist,0.1,"shortest distance incorrect")
-
-	def test_solution_04_distance_calc_inf(self):
-		self.solution.recorder.vertices = np.array(
-			[[float('+inf'), float('+inf')],
-			[float('+inf'), float('+inf')],
-			[float('+inf'), float('+inf')]]
-		)
-
-		goal = np.array([0.0,0.0])
-
-		index,dist = self.solution.find_nearest_vertex(goal)
-
-		self.assertEqual(index,0,"shortest index incorrect")
-		self.assertEqual(dist,float('+inf'),"shortest distance incorrect")
 
 
 	def test_solution_05_goal_check_small(self):

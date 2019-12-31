@@ -15,7 +15,7 @@ class ParamsRRT:
 	method = "RRT_basic"
 	#method = "RRT_star"
 	n_trials = 5
-	step_size = 0.1
+	step_size = 0.2
 	dims = 2
 
 	def __init__(self,file=None):
@@ -82,9 +82,11 @@ class ParamsDomain:
 	shape = ("rectangle", np.array([0.0, 0.0]), (3.0,4.0))
 
 	obstacles = [
-				("rectangle", np.array([2.0, 2.5]), (0.2,0.2)),
-				("rectangle", np.array([1.0, 2.3]), (0.3,0.4)),
-				("circle", np.array([1.5, 3.5]), 0.20)
+				#("rectangle", np.array([2.0, 2.5]), (0.2,0.2)),
+				#("rectangle", np.array([1.0, 2.3]), (0.3,0.4)),
+				("circle", np.array([0.5, 0.5]), 0.20),
+				("circle", np.array([1.5, 3.5]), 0.20),
+				("circle", np.array([1.5, 0.5]), 0.40)
 				]
 
 	def __init__(self,file=None):

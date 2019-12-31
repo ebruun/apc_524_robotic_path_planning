@@ -70,5 +70,6 @@ class Domain:
 
 		self.extents = np.array([[0,3], [0,4]])
 		self.dims = self.params_domain.dims
+		self.origin = self.params_origingoal.origin
 
 

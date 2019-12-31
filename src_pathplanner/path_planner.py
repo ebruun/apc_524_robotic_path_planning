@@ -47,7 +47,11 @@ def run_program():
 	PathPlan.run_algorithm()
 	PathPlan.process_vertex_list()
 
-	print(PathPlan.solution_path)
+	print("\n\n",PathPlan.recorder.vertices)
+	print("\n\n",PathPlan.recorder.parents)
+	print("\n\n",PathPlan.recorder.costs)
+
+
 
 
 
