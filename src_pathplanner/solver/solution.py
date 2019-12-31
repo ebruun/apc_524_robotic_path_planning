@@ -68,14 +68,14 @@ class Solution:
 
 		"""
 
-		if self.params.method is "RRT_basic":
+		if self.params.method is "rrt_basic":
 			self.algorithm = RRT_Basic(
 				self.domain, 
 				self.recorder,
 				self.params
 			)
 
-		elif self.params.method is "RRT_star":
+		elif self.params.method is "rrt_star":
 			self.algorithm = RRT_Star(
 				self.domain,
 				self.recorder,

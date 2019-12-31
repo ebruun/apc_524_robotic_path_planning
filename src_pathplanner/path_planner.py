@@ -48,12 +48,13 @@ def run_program():
 	PathPlan.run_algorithm()
 	PathPlan.process_vertex_list()
 
+
+	print("3. Showing Results")
+
 	print("\n\n",PathPlan.recorder.vertices)
 	print("\n\n",PathPlan.recorder.parents)
 	print("\n\n",PathPlan.recorder.costs)
 	print("\n\n",PathPlan.solution_path)
-
-	print("3. Showing Results")
 
 	Plot().simple_plot1(
 		d1,

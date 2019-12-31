@@ -12,9 +12,9 @@ class ParamsRRT:
 	"""
 
 	filename = "default_file.txt"
-	method = "RRT_basic"
-	#method = "RRT_star"
-	n_trials = 10000
+	method = "rrt_basic"
+	#method = "rrt_star"
+	n_trials = 500
 	step_size = 0.2
 	dims = 2
 

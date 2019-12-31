@@ -8,7 +8,7 @@ from algorithm.vertex import find_nearest_vertex
 params = Mock()
 params.n_trials = 5
 params.dims = 2
-params.method = "RRT_basic"
+params.method = "rrt_basic"
 
 domain = Mock()
 domain.dims = 2
@@ -58,7 +58,7 @@ class TestVertex(unittest.TestCase):
 		self.assertEqual(dist,0.05,"shortest distance incorrect")
 
 
-	def test_solution_02_distance_calc_zeros(self):
+	def test_vertex_02_distance_calc_zeros(self):
 		vertices = np.array(
 			[[1.0, 1.0],
 			[0.0, 0.00],
@@ -73,7 +73,7 @@ class TestVertex(unittest.TestCase):
 		self.assertEqual(dist,0.0,"shortest distance incorrect")
 
 
-	def test_solution_03_distance_calc_nan(self):
+	def test_vertex_03_distance_calc_nan(self):
 		vertices = np.array(
 			[[0.0, 0.0],
 			[1.0, 1.1],
@@ -87,7 +87,7 @@ class TestVertex(unittest.TestCase):
 		self.assertEqual(index,1,"shortest index incorrect")
 		self.assertEqual(dist,0.1,"shortest distance incorrect")
 
-	def test_solution_04_distance_calc_inf(self):
+	def test_vertex_04_distance_calc_inf(self):
 		vertices = np.array(
 			[[float('+inf'), float('+inf')],
 			[float('+inf'), float('+inf')],

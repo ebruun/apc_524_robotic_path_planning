@@ -1,0 +1,101 @@
+import unittest
+from unittest.mock import Mock
+
+import numpy as np
+
+from algorithm.rrt_basic import RRT_Basic
+
+params = Mock()
+params.dims = 2
+params.step_size = 0.2
+
+recorder = Mock()
+
+domain = Mock()
+domain.dims = 2
+domain.origin = np.array([0.1, 0.1])
+domain.extents = np.array([[0,3], [0,4]])
+domain.obstacles = [
+				("circle", np.array([0.5, 3.5]), 0.20),
+				("circle", np.array([1.5, 3.5]), 0.20),
+				("circle", np.array([1.5, 0.5]), 0.40)
+				]
+
+class TestRRT_Basic(unittest.TestCase):
+	def setUp(self):
+
+		recorder.vertices = np.zeros((6,2), dtype=float)
+		recorder.vertices.fill(np.nan)
+
+		recorder.parents = np.zeros(6, dtype=float)
+		recorder.parents.fill(np.nan)
+
+		recorder.costs = np.zeros(6, dtype=float)
+		recorder.costs.fill(np.nan)
+
+		self.algorithm = RRT_Basic(domain, recorder, params)
+
+	def tearDown(self):
+		self.algorithm = None
+
+
+	def get_last_row_index(self,step):
+		self.algorithm.rrt_step(step)
+
+		bool_array = (np.isnan(recorder.vertices))
+		bool_index = np.where(bool_array == False)
+		index = np.amax(bool_index[0])
+
+		return index
+
+
+	def test_rrt_basic_00_vertices_increment(self):
+		recorder.vertices = np.array(
+			[[0.0, 0.0],
+			[1.0, 1.30],
+			[1.0, 1.40],
+			[1.0, 1.50],
+			[np.nan, np.nan],
+			[np.nan, np.nan]]
+		)	
+
+		step = 4
+		index = self.get_last_row_index(step)
+		self.assertEqual(step,index,"vertices list not incremented")
+
+		step += 1
+		index = self.get_last_row_index(step)
+		self.assertEqual(step,index,"vertices list not incremented")
+		
+
+	def test_rrt_basic_01_parents_increment(self):
+		recorder.parents = np.array([0,1,3,np.nan,np.nan,np.nan])
+
+		step = 3
+		index = self.get_last_row_index(step)
+		self.assertEqual(step,index,"parents list not incremented")
+
+		step += 1
+		index = self.get_last_row_index(step)
+		self.assertEqual(step,index,"parents list not incremented")
+
+
+	def test_rrt_basic_02_costs_increment(self):
+		recorder.parents = np.array(
+			[0.0,np.nan,np.nan,np.nan,np.nan,np.nan])
+
+		step = 2
+		index = self.get_last_row_index(step)
+		self.assertEqual(step,index,"costs list not incremented")
+
+		step += 1
+		index = self.get_last_row_index(step)
+		self.assertEqual(step,index,"costs list not incremented")
+
+
+"""
+
+"""
+
+if __name__ == '__main__':
+	unittest.main()
