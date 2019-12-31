@@ -45,11 +45,11 @@ class RRT(ABC):
 
 	@abstractmethod
 	def is_new_edge_blocked(self):
-
 		return Edge.is_colliding(
 			self.recorder.vertices[self.new_parent],
 			self.new_v,
-			self.domain.obstacles)
+			self.domain.obstacles
+		)
 
 
 

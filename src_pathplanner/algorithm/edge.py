@@ -12,7 +12,7 @@ class Edge():
 
 	@classmethod
 	def is_colliding(cls, v1, v2, obstacles):
-		print("New Edge")
+		#print("New Edge")
 
 		edge_points = np.linspace(v1,v2,Edge.n_divisions)
 
@@ -39,13 +39,11 @@ class Edge():
 			dist = np.linalg.norm(obstacle[1] - vertex)
 			dist = round(dist,6)
 
-			print(dist)
-
 			if 	dist < obstacle[2]:
-				print("inside")
+				#print("inside")
 				return True
 
-		print("not inside")
+		#print("not inside")
 		return False
 
 

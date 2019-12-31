@@ -15,7 +15,7 @@ class Domain:
 	dims = [] # dimension
 	shape = [] # shape object for domain
 	obstacles = [] # list of shape objects
-	goal = [] # list of shape objects
+	goals = [] # list of shape objects
 	origin = [] # point
 	extents = [] # max x,y,z coordinates 3d: [[-1,2], [-3, 4], [-5, 5]]
 
@@ -54,7 +54,7 @@ class Domain:
 		# but define them as shape objects later
 		print("-Creating objects out of input parameters")
 
-		self.goal = self.params_origingoal.goal
+		self.goals = self.params_origingoal.goal
 		self.obstacles = self.params_domain.obstacles
 
 

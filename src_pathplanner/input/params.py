@@ -14,7 +14,7 @@ class ParamsRRT:
 	filename = "default_file.txt"
 	method = "RRT_basic"
 	#method = "RRT_star"
-	n_trials = 5
+	n_trials = 10000
 	step_size = 0.2
 	dims = 2
 
@@ -45,8 +45,8 @@ class ParamsOriginGoal:
 
 	origin = np.array([0.1, 0.1])
 	goal = [
-			("circle", np.array([1.0, 1.1]), 0.25),
-			("circle", np.array([3.0, 3.5]), 0.25)
+			("circle", np.array([1.0, 1.1]), 0.10),
+			("circle", np.array([2.5, 3.5]), 0.10)
 			]
 
 

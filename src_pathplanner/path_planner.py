@@ -16,6 +16,7 @@ from input.params import ParamsDomain
 
 from input.domain import Domain
 
+from output.plot1 import Plot
 
 
 def run_program():
@@ -50,12 +51,17 @@ def run_program():
 	print("\n\n",PathPlan.recorder.vertices)
 	print("\n\n",PathPlan.recorder.parents)
 	print("\n\n",PathPlan.recorder.costs)
-
-
-
-
+	print("\n\n",PathPlan.solution_path)
 
 	print("3. Showing Results")
+
+	Plot().simple_plot1(
+		d1,
+		PathPlan.recorder.parents,
+		PathPlan.recorder.vertices,
+		PathPlan.solution_path
+		)
+
 
 
 if __name__ == '__main__':

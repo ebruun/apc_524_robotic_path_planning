@@ -21,7 +21,7 @@ class RRT_Basic(RRT):
 		print("\nVertex", trial+1)
 		
 		self.new_q = self.new_config()
-		self.new_v, self.new_parent, cost = self.new_vertex()
+		self.new_v, self.new_parent, self.new_cost = self.new_vertex()
 
 		if self.is_new_edge_blocked():
 			print("blocked")

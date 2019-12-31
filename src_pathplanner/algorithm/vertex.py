@@ -47,12 +47,12 @@ class Vertex():
 
 	@classmethod
 	def new_config(cls,domain):
-		print("New config")
+		#print("New config")
 
 		not_free = True
 
 		while not_free:
-			print("--loop to find config")
+			#print("--loop to find config")
 
 			new_q = cls.random_config(domain)
 
@@ -62,11 +62,11 @@ class Vertex():
 
 	@classmethod
 	def new_vertex(cls, vertices, new_q, step_size):
-		print("New vertex")
+		#print("New vertex")
 
 		index, distance = find_nearest_vertex(vertices, new_q)
 
-		print ("closest index", index)
+		#print ("closest index", index)
 
 		v_near = vertices[index]
 
