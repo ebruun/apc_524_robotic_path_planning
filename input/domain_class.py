@@ -1,3 +1,4 @@
+# 
 import numpy as np
 import sys
 
@@ -12,6 +13,7 @@ class Domain(Circle, Rectangle):
     self.origin = np.asarray(origin_goal_info["origin"])
     self.goal = np.asarray(origin_goal_info["goal"])
 
+  # Create the domain
   def create_domain(self):
     """ Create a domain object """
     if(self.domain_info["shape"]=="rectangle"):
@@ -24,13 +26,16 @@ class Domain(Circle, Rectangle):
     else:
       print("Not Implemented")
 
-    # Assert that origin and domain are inside the domain
+    # Assert that origin and goal are inside the domain
     assert(self.domain.is_point_inside(self.origin)==True)
     assert(self.domain.is_point_inside(self.goal)==True)
 
+  # Perform some sanity checks
   def is_obstacle_inside(self, obstacle):
     pass
 
+  # Sample random point
+  def
 
 def main():
   parsed_data = ParseDataJSON("./tests/test_rrt_inputs.json")
