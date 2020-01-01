@@ -59,16 +59,3 @@ class Rectangle():
     new_random_point[1] = new_random_point[1]*(self.height)+self.vertices[0][1]
     print(new_random_point)
     return new_random_point
-
-
-def main():
-  p1 = np.array([-2,0])
-  p2 = np.array([2,0.5])
-  p3 = np.array([1,-1])
-  p4 = np.array([1,1])
-
-  print(check_line_intersection(p1,p2,p3,p4))
-
-  return 0
-if __name__ == '__main__':
-  main()
