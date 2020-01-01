@@ -9,5 +9,5 @@ from input.parse_data_class import ParseDataJSON
 
 
 def test_empty_file():
-	data = ParseDataJSON('./tests/empty.json')
+	data = ParseDataJSON('./tests/test_rrt_inputs.json')
 	data.parse_data()
