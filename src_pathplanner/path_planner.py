@@ -9,13 +9,8 @@ imports...
 """
 
 from solver.solution import Solution
-
-from input.params import ParamsRRT
-from input.params import ParamsOriginGoal
-from input.params import ParamsDomain
-
+from input.params import ParamsRRT, ParamsOriginGoal, ParamsDomain
 from input.domain import Domain
-
 from output.plot1 import Plot
 
 

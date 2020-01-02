@@ -31,7 +31,7 @@ def find_nearest_vertex(vertex_list,goal):
 		else:
 			dist_new = np.linalg.norm(goal - vertex)
 			dist_new = round(dist_new,6)
-			
+
 			if dist_new < shortest_distance:					
 				shortest_distance = dist_new
 				shortest_index = i
@@ -47,26 +47,20 @@ class Vertex():
 
 	@classmethod
 	def new_config(cls,domain):
-		#print("New config")
 
-		not_free = True
+		new_q = cls.random_config(domain)
+		print(new_q)
 
-		while not_free:
-			#print("--loop to find config")
-
+		while not cls.is_inside_domain(domain,new_q):
 			new_q = cls.random_config(domain)
-
-			if cls.inside_domain(domain,new_q):
-				return new_q
+	
+		return new_q
 
 
 	@classmethod
 	def new_vertex(cls, vertices, new_q, step_size):
-		#print("New vertex")
 
 		index, distance = find_nearest_vertex(vertices, new_q)
-
-		#print ("closest index", index)
 
 		v_near = vertices[index]
 
@@ -74,10 +68,8 @@ class Vertex():
 			return new_q, index, distance
 		else:
 			vector = (new_q - v_near)/distance
-			new_v = v_near + vector*step_size
-
+			new_v = np.round(v_near + vector*step_size,6)
 			return new_v, index, step_size
-
 
 
 	def random_config(domain):
@@ -100,7 +92,7 @@ class Vertex():
 		return rand_v
 
 
-	def inside_domain(domain,vertex):
+	def is_inside_domain(domain,vertex):
 		"""
 		 Check if inside domain, since it can be irregular object
 

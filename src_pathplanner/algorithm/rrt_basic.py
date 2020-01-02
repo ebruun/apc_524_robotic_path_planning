@@ -24,7 +24,6 @@ class RRT_Basic(RRT):
 		self.new_v, self.new_parent, self.new_cost = self.new_vertex()
 
 		if self.is_new_edge_blocked():
-			#print("blocked")
 			self.rrt_step(trial)
 
 		self.recorder.vertices[trial,:] = self.new_v

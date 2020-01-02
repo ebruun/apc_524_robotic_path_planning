@@ -93,9 +93,6 @@ class TestRRT_Basic(unittest.TestCase):
 		self.assertEqual(step,index,"costs list not incremented")
 
 
-"""
-
-"""
 
 if __name__ == '__main__':
 	unittest.main()
