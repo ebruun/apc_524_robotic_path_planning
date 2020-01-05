@@ -7,7 +7,7 @@ import random
 
 class Circle():
   """A class used to create circular objects which could act as domain or obstacle shape
-  
+
   :param shape_info: Radius and center information
   :type shape_info: dict
   
@@ -17,6 +17,7 @@ class Circle():
     """
     self.radius = shape_info["radius"]
     self.center = shape_info["center"]
+    self.centroid = shape_info["center"]
   
   def is_point_inside(self, point: np.ndarray)->bool:
     """Checks if a given point is inside the circle
