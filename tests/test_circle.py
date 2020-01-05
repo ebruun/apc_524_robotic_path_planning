@@ -1,63 +1,64 @@
+# test_circle.py
+# Author(s): Vivek Kumar
+# Last Updated: January 2019
 import numpy as np
-
-
 from input.shape_circle import Circle
 
 
 def test_point_inside():
-  radius = 1.0
-  center_coords= np.array([0.0,0.0])
-  circle = Circle(radius, center_coords)
+  shape_info = {'radius': 1.0, 'center':np.array([0.0, 0.0])}
+  circle = Circle(shape_info)
   # center is inside
-  assert circle.is_point_inside(center_coords)==True
-  point = np.array([0.0, radius-1.0e-7])
+  assert circle.is_point_inside(shape_info['center'])==True
+  point = np.array([0.0, shape_info['radius']-1.0e-7])
   assert circle.is_point_inside(point)==True
-  point = np.array([0.0, radius-1.0e-15])
+  point = np.array([0.0, shape_info['radius']-1.0e-15])
   assert circle.is_point_inside(point)==True # Floating arithmetic limit 
-  point = np.array([0.0, radius+1.0e-7])
+  point = np.array([0.0, shape_info['radius']+1.0e-7])
   assert circle.is_point_inside(point)==False 
-  point = np.array([0.0, radius+1.0e-15])
+  point = np.array([0.0, shape_info['radius']+1.0e-15])
   assert circle.is_point_inside(point)==False # Floating arithmetic limit 
+
 # 
 def test_point_on_perimeter():
-  radius = 1.0
-  center_coords= np.array([0.0,0.0])
-  circle = Circle(radius, center_coords)
-  point = np.array([0.0,radius])
+  shape_info = {'radius': 1.0, 'center':np.array([0.0, 0.0])}
+  circle = Circle(shape_info)
+
+  point = np.array([0.0,shape_info['radius']])
   assert circle.is_point_inside(point)==True
-  point = np.array([0.0,-radius])
+  point = np.array([0.0,-shape_info['radius']])
   assert circle.is_point_inside(point)==True
-  point = np.array([radius, 0.0])
+  point = np.array([shape_info['radius'], 0.0])
   assert circle.is_point_inside(point)==True
-  point = np.array([-radius, 0.0])
+  point = np.array([-shape_info['radius'], 0.0])
   assert circle.is_point_inside(point)==True
 
 def test_tangent_line():
-  radius = 1.0
-  center_coords= np.array([0.0,0.0])
-  circle = Circle(radius, center_coords)
+  shape_info = {'radius': 1.0, 'center':np.array([0.0, 0.0])}
+  circle = Circle(shape_info)
+
   point_1 = np.array([-2.0, 1.0])
   point_2 = np.array([2.0, 1.0])
-  assert circle.is_intersected_by_line(point_1, point_2)==True
+  assert circle.is_intersected_by_edge(point_1, point_2)==True
   point_2 = np.array([2.0, 2.0])
-  assert circle.is_intersected_by_line(point_1, point_2)==False
+  assert circle.is_intersected_by_edge(point_1, point_2)==False
 
-def test_line_intersection():
-  radius = 1.0
-  center_coords= np.array([0.0,0.0])
-  circle = Circle(radius, center_coords)
+def test_is_intersected_by_edge():
+  shape_info = {'radius': 1.0, 'center':np.array([0.0, 0.0])}
+  circle = Circle(shape_info)
   point_1 = np.array([-2.0, 1.0])
   point_2 = np.array([2.0, -1.0])
-  assert circle.is_intersected_by_line(point_1, point_2)==True
+  assert circle.is_intersected_by_edge(point_1, point_2)==True
   point_2 = np.array([2.0, 2.0])
-  assert circle.is_intersected_by_line(point_1, point_2)==False
-  point_2 = np.array([0.0, 0.0])
-  assert circle.is_intersected_by_line(point_1, point_2)==True
+  assert circle.is_intersected_by_edge(point_1, point_2)==False
+  point_2 = np.array([1.0, 1.0])
+  assert circle.is_intersected_by_edge(point_1, point_2)==True
+  point_2 = np.array([-1.0, 1.0])
+  assert circle.is_intersected_by_edge(point_1, point_2)==False
 
 def test_sample_random_point():
-  radius = 10.0
-  center_coords= np.array([1.0,-15.0])
-  circle = Circle(radius, center_coords)
+  shape_info = {'radius': 1.0, 'center':np.array([0.0, 0.0])}
+  circle = Circle(shape_info)
   for i in range(10):
     new_random_point = circle.sample_random_point()
     assert(circle.is_point_inside(new_random_point)==True)
