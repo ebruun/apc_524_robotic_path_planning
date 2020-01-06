@@ -10,7 +10,7 @@ from input.shape_free_form import FreeForm2D
 
 
 def test_get_pixel_values():
-  shape_info = {'bitmap_file': './tests/test_rectangle.pbm'}
+  shape_info = {'bitmap_file': './test/test_rectangle.pbm'}
   free_shape = FreeForm2D(shape_info)
   assert free_shape.n_rows == 55
   assert free_shape.n_columns == 200
@@ -18,7 +18,7 @@ def test_get_pixel_values():
   assert free_shape.hy == (1./199.)*(54./199.)
 
 def test_is_point_inside():
-  shape_info = {'bitmap_file': './tests/test_rectangle.pbm'}
+  shape_info = {'bitmap_file': './test/test_rectangle.pbm'}
   free_shape = FreeForm2D(shape_info)
   point_1 = np.array([1.8,0.03])
   assert(free_shape.is_point_inside(point_1)==True)
@@ -27,7 +27,7 @@ def test_is_point_inside():
   assert(free_shape.is_point_inside(free_shape.centroid)==True)
 
 def test_is_intersected_by_edge():
-  shape_info = {'bitmap_file': './tests/test_rectangle.pbm'}
+  shape_info = {'bitmap_file': './test/test_rectangle.pbm'}
   free_shape = FreeForm2D(shape_info)
   point_1 = np.array([-1.0, 0.0])
   point_2 = np.array([4.0, 0.3])
@@ -43,7 +43,7 @@ def test_is_intersected_by_edge():
 
 
 def test_new_random_point():
-  shape_info = {'bitmap_file': './tests/test_rectangle.pbm'}
+  shape_info = {'bitmap_file': './test/test_rectangle.pbm'}
   free_shape = FreeForm2D(shape_info)
   for i in range(10):
     new_random_point = free_shape.sample_random_point()
