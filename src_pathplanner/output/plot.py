@@ -24,6 +24,7 @@ class Plot:
 
         """
 		self.filename = "../../output/visualizations/" + filename + ".html"
+        self.domain = domain
         self.dims = domain.dims
 
 		self.data = []
@@ -50,13 +51,13 @@ class Plot:
 		
 		#TO DO... 
 
-	def plot_origin_goals(self, domain):
+	def plot_origin_goals(self):
 		"""  This function plots the origin and goal points.  """
 
 		if self.dims == 2:
 			origin = go.Scatter(
-				x = [domain.origin[0]],
-				y = [domain.origin[1]],
+				x = [self.domain.origin[0]],
+				y = [self.domain.origin[1]],
 				line=dict(
                     color="orange",
                     width=10
@@ -65,15 +66,15 @@ class Plot:
             )
             self.data.append(origin)
 
-            goals = go.Scatter(
-				x = [domain.goals[0]],
-				y = [domain.goals[1]],
+           	goals = go.Scatter(
+				x = [goal[0] for goal in self.domain.goals],
+				y = [goal[1] for goal in self.domain.goals],
 				line=dict(
-                    color="green",
-                    width=10
-                ),
-                mode="markers"
-            )
+                color="green",
+                width=10
+               	),
+               	mode="markers"
+           	)
             self.data.append(goals)
 
         elif self.dims == 3:
@@ -119,5 +120,10 @@ class Plot:
         """
         Render the plot to a file
         """
-        #TO DO figure out animation and add as another argument 
         py.offline.plot(self.fig, filename=self.filename, auto_open=auto_open)
+
+    def animate(self):
+    	"""
+        Animates the file with a simple play button
+        """
+
