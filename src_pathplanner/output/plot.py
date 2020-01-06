@@ -29,8 +29,7 @@ class Plot:
 
 		self.data = []
         self.layout = {'title': 'Plot',
-                       'showlegend': False
-                       }
+                       'showlegend': False}
 
         self.fig = {'data': self.data,
                     'layout': self.layout}
@@ -42,11 +41,14 @@ class Plot:
 		if self.dims == 2:  # plot in 2D 
 		range_x = self.domain.extents[0]
 		range_y = self.domain.extents[1]
-
+		self.fig.update_xaxes(range=range_x)
+		self.fig.update_yaxes(range=range_y)
+		
 		elif self.dims == 3: # plot in 3D
 		range_x = self.domain.extents[0]
 		range_y = self.domain.extents[1]
 		range_z = self.domain.extents[2]
+		self.fig.update_layout(scene = dict(aspectmode='data'))
 
 		else: 
 			print("Cannot plot in > 3 dimensions")
@@ -208,6 +210,30 @@ class Plot:
 	        
 	        else:  # can't plot in higher dimensions
 	            print("Cannot plot in > 3 dimensions")
+
+	def set_axes(self):
+
+		if self.dims == 2:  # plot in 2D 
+		range_x = self.domain.extents[0]
+		self.fig.update_layout(
+			xaxis = dict(
+				range = range_x,
+				constrain = 'domain',
+			),
+		    yaxis = dict(
+		    	scaleanchor = "x",
+		    	scaleratio = 1,
+		    ),
+		)
+		
+		elif self.dims == 3: # plot in 3D
+		range_x = self.domain.extents[0]
+		range_y = self.domain.extents[1]
+		range_z = self.domain.extents[2]
+		self.fig.update_layout(scene = dict(aspectmode='data'))
+
+		else: 
+			print("Cannot plot in > 3 dimensions")
 
 	def draw(self, auto_open=True):
         """
