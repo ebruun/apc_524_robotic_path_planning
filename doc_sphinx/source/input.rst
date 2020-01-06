@@ -1,25 +1,32 @@
-Input package
+input package
 =============
 
 This package does...
 
-Submodules
-**********
 
-input.params 
-------------
+params module
+*************
 
 .. automodule:: input.params
    :members:
-   :undoc-members:
-   :show-inheritance:
+   :special-members:
+   :exclude-members: __weakref__
 
 
-input.shape
------------
+domain module
+*************
+
+.. autoclass:: input.domain.Domain
+   :members:
+   :special-members:
+   :exclude-members: __weakref__
+
+
+shape module
+************
 
 .. automodule:: input.shape
    :members:
-   :undoc-members:
-   :show-inheritance:
+   :special-members:
+   :exclude-members: __weakref__
 

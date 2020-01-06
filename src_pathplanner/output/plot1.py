@@ -1,0 +1,97 @@
+# plot1.py
+# Author(s): Edvard Bruun
+
+"""
+Placeholder for the plotting class
+"""
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+class Plot():
+
+
+	@classmethod
+	def simple_plot1(cls, domain, parents, vertices, path_verts):
+		fig, ax = plt.subplots()
+
+		ax.set_xlim([0, 3])
+		ax.set_ylim([0, 4])
+		ax.set_aspect('equal')
+
+		parents = [int(i) for i in parents]
+
+		for i in range(len(parents)):
+			if parents[i] < 0:
+				continue
+			plt.plot([vertices[i, 0], vertices[parents[i], 0]], 
+					 [vertices[i, 1], vertices[parents[i], 1]], c='k')
+
+
+		for path in path_verts:
+
+			if any(np.isnan(path)):
+				#print("nan")
+				continue			
+
+			for i in path:
+
+				if (parents[i] < 0):
+					#print("end")
+					continue
+
+				plt.plot([vertices[i, 0], vertices[parents[i], 0]], 
+						 [vertices[i, 1], vertices[parents[i], 1]], c='r')    
+
+
+		for o in domain.obstacles:
+			ax.add_artist(plt.Circle(tuple(o[1]), o[2]))
+
+
+		for goal in domain.goals:
+			ax.add_artist(plt.Circle(tuple(goal[1]), goal[2],
+				ec=(0.004, 0.596, 0.105),
+				fc=(1, 1, 1)))
+
+			plt.scatter(goal[1][0], goal[1][1],
+				zorder=3,
+				c=np.array([[0.004, 0.596, 0.105]]),
+				s=30)
+
+		plt.scatter(domain.origin[0], domain.origin[1],
+			zorder=3,
+			c=np.array([[0.004, 0.596, 0.105]]),
+			s=30)
+
+		for path in path_verts:
+
+			if any(np.isnan(path)):
+				#print("nan")
+				continue
+
+				plt.scatter(
+					vertices[path, 0],
+					vertices[path, 1],
+					c=np.array([[1, 0, 0]]),
+					s=3,
+					zorder=2)
+
+		plt.scatter(
+			vertices[0:, 0],
+			vertices[0:, 1],
+			c=np.array([[0, 0, 0]]),
+			s=7)
+
+		plt.show()
+
+
+	@classmethod
+	def simple_plot2(cls, domain):
+		fig, ax = plt.subplots()
+
+		ax.set_xlim([0, 3])
+		ax.set_ylim([0, 4])
+
+		ax.set_aspect('equal')	
+		plt.plot([1,2,3,4])
+		plt.show() 

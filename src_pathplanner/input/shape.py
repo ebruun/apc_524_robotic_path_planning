@@ -5,7 +5,7 @@ from abc import ABC, abstractmethod
 
 class Shape(ABC):
 	"""docstring for Shape"""
-	def __init__(self, name):
+	def __init__(self, shape_info:dict):
 		self.name = name
 
 	

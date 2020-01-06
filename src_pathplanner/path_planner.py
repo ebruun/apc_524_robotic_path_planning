@@ -2,24 +2,28 @@
 # Author(s): Edvard Bruun
 
 """
-The core module of the project, executes the program
+The core module of the project and executes the program
+
+imports...
+
 """
 
-
 from solver.solution import Solution
-
-from input.params import ParamsRRT
-from input.params import ParamsOriginGoal
-from input.params import ParamsDomain
+from input.params import ParamsRRT, ParamsOriginGoal, ParamsDomain
+from input.domain import Domain
+from output.plot1 import Plot
 
 
 def run_program():
 	"""Function for executing the program
 
 	Three stages:
-		1. Get program parameters.
-		2. Compute path from origin to goal.
-		3. Present results.
+		1. Get program specific parameters from textfile.
+		2. Create domain.
+		3. Solve trajectories with path planning algorithm.
+		4. Present results.
+
+	Example to run...
 
 	"""
 
@@ -27,13 +31,33 @@ def run_program():
 	input_file = "parameters.txt"
 
 	p1 = ParamsRRT(input_file)
-	p2 = ParamsOriginGoal(input_file)
-	p3 = ParamsDomain(input_file)
+	p2 = ParamsDomain(input_file)
+	p3 = ParamsOriginGoal(input_file)
+	
+	print("2. Create Domain")
+	d1 = Domain(p2,p3)
 
-	print("2. Running Program")
-	RRT = Solution(p1)
+	print("3. Running Program")
+	PathPlan = Solution(p1,d1)
+
+	PathPlan.run_algorithm()
+	PathPlan.process_vertex_list()
+
 
 	print("3. Showing Results")
+
+	print("\n\n",PathPlan.recorder.vertices)
+	print("\n\n",PathPlan.recorder.parents)
+	print("\n\n",PathPlan.recorder.costs)
+	print("\n\n",PathPlan.solution_path)
+
+	Plot().simple_plot1(
+		d1,
+		PathPlan.recorder.parents,
+		PathPlan.recorder.vertices,
+		PathPlan.solution_path
+		)
+
 
 
 if __name__ == '__main__':
