@@ -35,7 +35,7 @@ class Plot:
         self.fig = {'data': self.data,
                     'layout': self.layout}
 
-	def plot_domain(self, domain):
+	def plot_domain(self):
 		"""  This function plots the shape of the domain.  """
 
 		#TO DO...
@@ -46,7 +46,7 @@ class Plot:
 		else: 
 			print("Cannot plot in > 3 dimensions")
 		
-	def plot_obstacles(self, domain):
+	def plot_obstacles(self):
 		"""  This function plots the obstacles in the domain.  """
 		
 		#TO DO... 
@@ -91,9 +91,9 @@ class Plot:
             self.data.append(origin)
 
             goals = go.Scatter(
-				x = [domain.goals[0]],
-				y = [domain.goals[1]],
-				z = [domain.goals[2]],
+				x = [goal[0] for goal in self.domain.goals],
+				y = [goal[1] for goal in self.domain.goals],
+				z = [goal[2] for goal in self.domain.goals],
 				line=dict(
                     color="green",
                     width=10
@@ -111,12 +111,100 @@ class Plot:
 			pass
 
 		else:
-
 			vertices = solution.recorder.vertices 
-			parents = solution.recorder.parents 
-			solution_path = solution.solution_path
+			parents = [int(parent) for parent in solution.recorder.parents] 
+			path_verts = solution.solution_path
 
-	 def draw(self, auto_open=True):
+			if self.dimensions == 2:  # plot in 2D
+	            
+	            #Plot entire graph
+	            x, y = [], []
+	            for i, parent in enumerate(parents):
+					if parent < 0:
+						continue
+	                x.append(vertices[i, 0], vertices[parent, 0])
+	                y.append(vertices[i, 1], vertices[parent, 1])
+	            graph = go.Scatter(
+	                x=x,
+	                y=y,
+	                line=dict(
+	                    color="black",
+	                    width=2
+	                ),
+	                mode="lines"
+	            )
+	            self.data.append(graph)
+
+	            #Plot final path 
+	            x2, y2 = [], []
+	            for path in path_verts:
+					if any(np.isnan(path)):
+						continue			
+					for i in path:
+						if (parents[i] < 0):
+							continue
+						x2.append(vertices[i, 0], vertices[parent, 0])
+		                y2.append(vertices[i, 1], vertices[parent, 1])
+		            path = go.Scatter(
+		                x=x2,
+		                y=y2,
+		                line=dict(
+		                    color="red",
+		                    width=4
+		                ),
+		                mode="lines"
+		            )
+		            self.data.append(path)
+	        
+	        elif X.dimensions == 3:  # plot in 3D
+	            
+	            #Plot entire graph
+	            x, y, z = [], [], []
+	            for i, parent in enumerate(parents):
+					if parent < 0:
+						continue
+	                x.append(vertices[i, 0], vertices[parent, 0])
+	                y.append(vertices[i, 1], vertices[parent, 1])
+	 				z.append(vertices[i, 2], vertices[parent, 2])
+				graph = go.Scatter3d(
+	                x=x,
+	                y=y,
+	                z=z,
+	                line=dict(
+	                    color="black",
+	                    width=2
+	                ),
+	                mode="lines"
+	            )
+	            self.data.append(graph)
+
+	            #Plot final path 
+	            x2, y2, z2 = [], [], []
+	            for path in path_verts:
+					if any(np.isnan(path)):
+						continue			
+					for i in path:
+						if (parents[i] < 0):
+							continue
+						x2.append(vertices[i, 0], vertices[parents[i], 0])
+		                y2.append(vertices[i, 1], vertices[parents[i], 1])
+		                z2.append(vertices[i, 2], vertices[parents[i], 2])
+		            path = go.Scatter(
+		                x=x2,
+		                y=y2,
+		                z=z2,
+		                line=dict(
+		                    color="red",
+		                    width=4
+		                ),
+		                mode="lines"
+		            )
+		            self.data.append(path)
+	        
+	        else:  # can't plot in higher dimensions
+	            print("Cannot plot in > 3 dimensions")
+
+	def draw(self, auto_open=True):
         """
         Render the plot to a file
         """
