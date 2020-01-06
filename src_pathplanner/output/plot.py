@@ -40,8 +40,13 @@ class Plot:
 
 		#TO DO...
 		if self.dims == 2:  # plot in 2D 
+		range_x = self.domain.extents[0]
+		range_y = self.domain.extents[1]
 
 		elif self.dims == 3: # plot in 3D
+		range_x = self.domain.extents[0]
+		range_y = self.domain.extents[1]
+		range_z = self.domain.extents[2]
 
 		else: 
 			print("Cannot plot in > 3 dimensions")
