@@ -1,11 +1,14 @@
 # plot.py
 # Author(s): Jessica Flores
 
+"""
+Plotting class
+"""
+
 import numpy as np
 import plotly as py
 
 from plotly import graph_objs as go
-#from input.domain import Domain
 from solver.solution import Solution
 
 class Plot:
@@ -21,7 +24,7 @@ class Plot:
 
         """
 		self.filename = "../../output/visualizations/" + filename + ".html"
-        self.dim = domain.dimension
+        self.dims = domain.dims
 
 		self.data = []
         self.layout = {'title': 'Plot',
@@ -35,9 +38,9 @@ class Plot:
 		"""  This function plots the shape of the domain.  """
 
 		#TO DO...
-		if self.dim == 2:  # plot in 2D 
+		if self.dims == 2:  # plot in 2D 
 
-		elif self.dim == 3: # plot in 3D
+		elif self.dims == 3: # plot in 3D
 
 		else: 
 			print("Cannot plot in > 3 dimensions")
@@ -47,10 +50,10 @@ class Plot:
 		
 		#TO DO... 
 
-	def plot_origin_goal(self, domain):
+	def plot_origin_goals(self, domain):
 		"""  This function plots the origin and goal points.  """
 
-		if self.dim == 2:
+		if self.dims == 2:
 			origin = go.Scatter(
 				x = [domain.origin[0]],
 				y = [domain.origin[1]],
@@ -62,18 +65,18 @@ class Plot:
             )
             self.data.append(origin)
 
-            goal = go.Scatter(
-				x = [domain.goal[0]],
-				y = [domain.goal[1]],
+            goals = go.Scatter(
+				x = [domain.goals[0]],
+				y = [domain.goals[1]],
 				line=dict(
                     color="green",
                     width=10
                 ),
                 mode="markers"
             )
-            self.data.append(goal)
+            self.data.append(goals)
 
-        elif self.dim == 3:
+        elif self.dims == 3:
 			origin = go.Scatter(
 				x = [domain.origin[0]],
 				y = [domain.origin[1]],
@@ -86,17 +89,17 @@ class Plot:
             )
             self.data.append(origin)
 
-            goal = go.Scatter(
-				x = [domain.goal[0]],
-				y = [domain.goal[1]],
-				z = [domain.goal[2]],
+            goals = go.Scatter(
+				x = [domain.goals[0]],
+				y = [domain.goals[1]],
+				z = [domain.goals[2]],
 				line=dict(
                     color="green",
                     width=10
                 ),
                 mode="markers"
             )
-            self.data.append(goal)
+            self.data.append(goals)
 
         else:  
             print("Cannot plot in > 3 dimensions")
@@ -108,8 +111,9 @@ class Plot:
 
 		else:
 
-			vertices = solution.vertices 
-			parents = solution.parents 
+			vertices = solution.recorder.vertices 
+			parents = solution.recorder.parents 
+			solution_path = solution.solution_path
 
 	 def draw(self, auto_open=True):
         """
