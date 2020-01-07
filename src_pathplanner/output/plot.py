@@ -26,12 +26,13 @@ class Plot:
 		self.domain = domain
 		self.dims = domain.dims
 
-		self.data = []
-		self.layout = {'title': 'Plot',
-					   'showlegend': False}
+		#self.data = []
+		#self.layout = {'title': 'Plot',
+		#			   'showlegend': False}
 
-		self.fig = {'data': self.data,
-					'layout': self.layout}
+		self.fig = go.Figure()
+		#{'data': self.data,
+		#			'layout': self.layout}
 
 	def plot_domain(self):
 		"""  This function plots the shape of the domain.  """
@@ -61,7 +62,7 @@ class Plot:
 		"""  This function plots the origin and goal points.  """
 
 		if self.dims == 2:
-			origin = go.Scatter(
+			self.fig.add_trace(go.Scatter(
 				x = [self.domain.origin[0]],
 				y = [self.domain.origin[1]],
 				line=dict(
@@ -69,10 +70,9 @@ class Plot:
 					width=10
 				),
 				mode="markers"
-			)
-			self.data.append(origin)
+			))
 
-			goal_points = go.Scatter(
+			self.fig.add_trace(go.Scatter(
 				x = [goal[1][0] for goal in self.domain.goals],
 				y = [goal[1][1] for goal in self.domain.goals],
 				line=dict(
@@ -80,8 +80,19 @@ class Plot:
 				width=10
 				),
 				mode="markers"
-			)
-			self.data.append(goal_points)
+			))
+
+			for goal in self.domain.goals:
+				self.fig.add_shape(
+					go.layout.Shape(
+						type = goal[0],
+						xref="x",
+						yref="y",
+						x0=goal[1][0]-goal[2],
+						y0=goal[1][1]-goal[2],
+						x1=goal[1][0]+goal[2],
+						y1=goal[1][1]+goal[2],
+						line_color="green"))
 
 		elif self.dims == 3:
 			origin = go.Scatter(
