@@ -53,7 +53,7 @@ def run_program():
 	print("\n\n solution_path",PathPlan.solution_path)
 
 	
-	p1 = Plot("testrun", d1)
+	p1 = Plot("test run", d1)
 	p1.plot_obstacles()
 	p1.plot_origin_goals()
 	p1.plot_solution_graph(PathPlan)

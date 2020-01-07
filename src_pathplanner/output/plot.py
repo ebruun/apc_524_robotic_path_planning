@@ -23,6 +23,7 @@ class Plot:
 
 		"""
 		self.filename = "./output/" + filename + ".html"
+		self.title = filename
 		self.domain = domain
 		self.dims = domain.dims
 
@@ -75,7 +76,7 @@ class Plot:
 			pass 
 
 	def plot_origin_goals(self):
-		"""  This function plots the origin and goal points.  """
+		"""  This function plots the origin point and goal points/shapes.  """
 
 		if self.dims == 2:
 			self.fig.add_trace(go.Scatter(
@@ -85,18 +86,21 @@ class Plot:
 					color="orange",
 					width=10
 				),
-				mode="markers"
+				mode="markers",
+				showlegend=False
 			))
 
-			self.fig.add_trace(go.Scatter(
-				x = [goal[1][0] for goal in self.domain.goals],
-				y = [goal[1][1] for goal in self.domain.goals],
-				line=dict(
-				color="green",
-				width=10
-				),
-				mode="markers"
-			))
+			#plot goal point (optional?)
+			# self.fig.add_trace(go.Scatter(
+			# 	x = [goal[1][0] for goal in self.domain.goals],
+			# 	y = [goal[1][1] for goal in self.domain.goals],
+			# 	line=dict(
+			# 	color="green",
+			# 	width=10
+			# 	),
+			# 	mode="markers",
+			# 	showlegend=False
+			# ))
 
 			for goal in self.domain.goals:
 				self.fig.add_shape(
@@ -120,7 +124,8 @@ class Plot:
 					color="orange",
 					width=10
 				),
-				mode="markers"
+				mode="markers",
+				showlegend=False
 			)
 			self.data.append(origin)
 
@@ -132,7 +137,8 @@ class Plot:
 					color="green",
 					width=10
 				),
-				mode="markers"
+				mode="markers",
+				showlegend=False
 			)
 			self.data.append(goals)
 
@@ -162,7 +168,8 @@ class Plot:
 							color="black",
 							width=2
 						),
-						mode='lines+markers'
+						mode='lines+markers',
+						showlegend=False
 					))
 				
 				#self.data.append(graph)
@@ -182,7 +189,8 @@ class Plot:
 								color="red",
 								width=4
 							),
-							mode='lines+markers'
+							mode='lines+markers',
+							showlegend=False
 						))
 						
 			
@@ -241,6 +249,9 @@ class Plot:
 				print("Cannot plot in > 3 dimensions")
 
 	def set_axes(self):
+
+		self.fig.update_layout(
+				title=self.title)
 
 		if self.dims == 2:  # plot in 2D 
 			range_x = self.domain.extents[0]
