@@ -11,7 +11,8 @@ imports...
 from solver.solution import Solution
 from input.params import ParamsRRT, ParamsOriginGoal, ParamsDomain
 from input.domain import Domain
-from output.plot1 import Plot
+from output.plot import Plot
+from output.plot1 import Plot1
 
 
 def run_program():
@@ -46,19 +47,21 @@ def run_program():
 
 	print("3. Showing Results")
 
-	print("\n\n",PathPlan.recorder.vertices)
-	print("\n\n",PathPlan.recorder.parents)
-	print("\n\n",PathPlan.recorder.costs)
-	print("\n\n",PathPlan.solution_path)
+	print("\n\n Vertices",PathPlan.recorder.vertices)
+	print("\n\n Parents",PathPlan.recorder.parents)
+	#print("\n\n Costs",PathPlan.recorder.costs)
+	print("\n\n solution_path",PathPlan.solution_path)
 
-	Plot().simple_plot1(
-		d1,
+	
+	p1 = Plot("testrun", d1)
+	p1.plot_origin_goals()
+	p1.plot_solution_graph(PathPlan)
+	p1.draw()
+
+	Plot1.simple_plot1(d1,
 		PathPlan.recorder.parents,
 		PathPlan.recorder.vertices,
-		PathPlan.solution_path
-		)
-
-
+		PathPlan.solution_path)
 
 if __name__ == '__main__':
 	run_program()

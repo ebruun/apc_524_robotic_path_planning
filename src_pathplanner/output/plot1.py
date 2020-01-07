@@ -8,7 +8,7 @@ Placeholder for the plotting class
 import matplotlib.pyplot as plt
 import numpy as np
 
-class Plot():
+class Plot1():
 
 
 	@classmethod
@@ -82,7 +82,7 @@ class Plot():
 			c=np.array([[0, 0, 0]]),
 			s=7)
 
-		plt.show()
+		plt.savefig('plot.pdf')
 
 
 	@classmethod
