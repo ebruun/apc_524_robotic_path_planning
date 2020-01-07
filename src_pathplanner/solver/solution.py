@@ -21,7 +21,7 @@ from algorithm.rrt_star import RRT_Star
 
 class Solution:
 	"""This class executes and saves the solution to the path planning problem.
-
+	sdfsfdsf sdfasfsfs sdfsdfs
 	"""
 
 	def __init__(self,params,domain):
