@@ -56,7 +56,19 @@ class Plot:
 	def plot_obstacles(self):
 		"""  This function plots the obstacles in the domain.  """
 		
-		#TO DO... 
+		if self.dims == 2:
+		for obstacle in self.domain.obstacles:
+				self.fig.add_shape(
+					go.layout.Shape(
+						type = obstacle[0],
+						xref="x",
+						yref="y",
+						x0=obstacle[1][0]-obstacle[2],
+						y0=obstacle[1][1]-obstacle[2],
+						x1=obstacle[1][0]+obstacle[2],
+						y1=obstacle[1][1]+obstacle[2],
+						line_color="blue"
+				)) 
 
 	def plot_origin_goals(self):
 		"""  This function plots the origin and goal points.  """
@@ -92,7 +104,8 @@ class Plot:
 						y0=goal[1][1]-goal[2],
 						x1=goal[1][0]+goal[2],
 						y1=goal[1][1]+goal[2],
-						line_color="green"))
+						line_color="green"
+				))
 
 		elif self.dims == 3:
 			origin = go.Scatter(
@@ -245,6 +258,7 @@ class Plot:
 					scaleratio = 1,
 				),
 			)
+			fig.update_yaxes(range=[self.domain.extents[1]])
 		
 		elif self.dims == 3: # plot in 3D
 			# range_x = self.domain.extents[0]
