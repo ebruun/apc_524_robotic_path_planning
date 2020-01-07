@@ -26,14 +26,14 @@ class Plot:
 		self.title = filename
 		self.domain = domain
 		self.dims = domain.dims
-
-		#self.data = []
-		#self.layout = {'title': 'Plot',
-		#			   'showlegend': False}
+		# self.frames = []
+		# self.data = []
+		# self.layout = []
 
 		self.fig = go.Figure()
-		#{'data': self.data,
-		#			'layout': self.layout}
+		# self.figure = {'data': self.data,
+		# 		'layout': self.layout,
+		# 		'frames': self.frames}
 
 	def plot_domain(self):
 		"""  This function plots the shape of the domain.  """
@@ -114,6 +114,20 @@ class Plot:
 						y1=goal[1][1]+goal[2],
 						line_color="green"
 				))
+
+			# self.fig.add_shape(
+			# 	go.layout.Shape(
+			# 			type="path",
+			# 			path="M 0,9 1\
+			# 				C 1,1 0,9 1 0,7 1,2 0,6\
+			# 				C 1,4 0,5 1,9 0.7 2 1,1\
+			# 				c 0 0,2 -0,1 0,5 -0,2 0,5\
+			# 				c -0,2 0 -0,3 -0,3 -0,6 -0,4\
+			# 				c -0,3 0 -0,4 0,2 -0,6 0,2\
+			# 				C 0,4 1,3 0,3 0,9 0,5 0,9\
+			# 				C 0,6 0,8 0,7 1 0,9 1z",
+			# 			line_color="MediumPurple"
+			# 	))
 
 		elif self.dims == 3:
 			origin = go.Scatter(
@@ -282,8 +296,55 @@ class Plot:
 		"""
 		py.offline.plot(self.fig, filename=self.filename, auto_open=auto_open)
 
-	def animate(self):
+	def animate_solution_graph(self, solution=None):
 		"""
 		Animates the file with a simple play button
 		"""
+		if solution == None:
+			pass
+
+		else:
+			vertices = solution.recorder.vertices 
+			parents = [int(parent) for parent in solution.recorder.parents] 
+			path_verts = solution.solution_path
+
+			if self.dims == 2:  # plot in 2D
+				
+				#Plot entire graph
+				for i, parent in enumerate(parents):
+					if parent < 0:
+						continue
+					self.fig.add_frames(go.Scatter(
+						x=[vertices[i, 0],vertices[parent, 0]],
+						y=[vertices[i, 1],vertices[parent, 1]],
+						line=dict(
+							color="black",
+							width=2
+						),
+						mode='lines+markers',
+						showlegend=False
+					))
+				
+
+				#Plot final path 
+		
+				for path in path_verts:
+					if any(np.isnan(path)):
+						continue
+					for i in path:
+						if (parents[i] < 0):
+							continue
+						self.fig.add_frames(go.Scatter(
+							x=[vertices[i, 0], vertices[parents[i], 0]],
+							y=[vertices[i, 1], vertices[parents[i], 1]],
+							line=dict(
+								color="red",
+								width=4
+							),
+							mode='lines+markers',
+							showlegend=False
+						))
+
+			else:
+				pass
 
