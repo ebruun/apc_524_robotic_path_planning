@@ -247,9 +247,9 @@ class Plot:
 			)
 		
 		elif self.dims == 3: # plot in 3D
-			range_x = self.domain.extents[0]
-			range_y = self.domain.extents[1]
-			range_z = self.domain.extents[2]
+			# range_x = self.domain.extents[0]
+			# range_y = self.domain.extents[1]
+			# range_z = self.domain.extents[2]
 			self.fig.layout.update(scene = dict(aspectmode='data'))
 
 		else: 
