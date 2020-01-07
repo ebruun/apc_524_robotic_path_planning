@@ -51,5 +51,15 @@ class RRT(ABC):
 			self.domain.obstacles
 		)
 
+	def update_path_cost(self,index):
+
+		print(self.recorder.costs)
+		print(self.recorder.parents)
+		print("new cost", self.new_cost)
+		print("new parent", self.new_parent)
+
+		self.recorder.costs[index] = self.recorder.costs[self.new_parent] + self.new_cost
+
+		pass
 
 

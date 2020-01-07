@@ -124,6 +124,19 @@ class Solution:
 			index (:obj:`int`): The index of the vertex that reached the goal. This is set to :obj:`numpy.nan` if the goal is not reached.
 
 		"""
+
+		##############
+		# REPLACE WITH .is_point_inside() of the goal object
+		# LOOP THROUGH self.recorder.vertices LIST
+		#
+		# FOR NOW: 
+		# 	RETURN THE INDEX OF THE FIRST POINT TO FALL INSIDE
+		# 	RETURN np.nan if nothing falls within
+		#
+		# LATER: CHANGE THE SUCCESS CRITERIA TO CHOOSE THE VERTEX THAT IS INSIDE
+		#	THAT ALSO HAS THE LOWEST VALUE IN self.recorder.costs
+		##############
+
 		index, distance = find_nearest_vertex(
 			self.recorder.vertices,
 			goal[1]

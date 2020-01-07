@@ -27,6 +27,7 @@ def find_nearest_vertex(vertex_list,goal):
 	for i, vertex in enumerate(vertex_list):
 
 		if any(x == True for x in np.isnan(vertex)):
+			# Ends loop when final vertex reached
 			break
 		else:
 			dist_new = np.linalg.norm(goal - vertex)
@@ -48,8 +49,14 @@ class Vertex():
 	@classmethod
 	def new_config(cls,domain):
 
+
+		######################
+		# REPLACE with .sample_random_point()
+		# RETURN THE NEW POINT
+		#######################
+
 		new_q = cls.random_config(domain)
-		print(new_q)
+		#print(new_q)
 
 		while not cls.is_inside_domain(domain,new_q):
 			new_q = cls.random_config(domain)
@@ -72,6 +79,9 @@ class Vertex():
 			return new_v, index, step_size
 
 
+	######################
+	# DELETE THIS FUNCTION ONCE .sample_random_point() IMPLEMENTED
+	######################
 	def random_config(domain):
 		"""
 		 Generate coordinates between domain extents
@@ -79,6 +89,7 @@ class Vertex():
 		 Round to 3 decimal
 
 		"""
+
 		rand_v = []
 
 		for i in range(domain.dims):
@@ -92,6 +103,10 @@ class Vertex():
 		return rand_v
 
 
+
+	######################
+	# DELETE THIS FUNCTION ONCE .sample_random_point() IMPLEMENTED
+	#######################
 	def is_inside_domain(domain,vertex):
 		"""
 		 Check if inside domain, since it can be irregular object

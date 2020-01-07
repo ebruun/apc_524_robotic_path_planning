@@ -26,9 +26,12 @@ class RRT_Basic(RRT):
 		if self.is_new_edge_blocked():
 			self.rrt_step(trial)
 
+		
+
 		self.recorder.vertices[trial,:] = self.new_v
 		self.recorder.parents[trial] = self.new_parent
-		self.recorder.costs[trial] = self.new_cost
+		self.recorder.costs[trial] = self.recorder.costs[self.new_parent] + self.new_cost
+		#self.update_path_cost(trial)
 
 
 	def new_config(self):

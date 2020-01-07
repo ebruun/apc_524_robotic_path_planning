@@ -34,6 +34,7 @@ def run_program():
 	p2 = ParamsDomain(input_file)
 	p3 = ParamsOriginGoal(input_file)
 	
+
 	print("2. Create Domain")
 	d1 = Domain(p2,p3)
 
@@ -51,12 +52,14 @@ def run_program():
 	print("\n\n",PathPlan.recorder.costs)
 	print("\n\n",PathPlan.solution_path)
 
+	"""
 	Plot().simple_plot1(
 		d1,
 		PathPlan.recorder.parents,
 		PathPlan.recorder.vertices,
 		PathPlan.solution_path
 		)
+	"""
 
 
 
