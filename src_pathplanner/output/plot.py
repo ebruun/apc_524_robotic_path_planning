@@ -152,47 +152,39 @@ class Plot:
 			if self.dims == 2:  # plot in 2D
 				
 				#Plot entire graph
-				x, y = [], []
 				for i, parent in enumerate(parents):
 					if parent < 0:
 						continue
-					x.append(vertices[i, 0])
-					x.append(vertices[parent, 0])
-					y.append(vertices[i, 1])
-					y.append(vertices[parent, 1])
-				graph = go.Scatter(
-					x=x,
-					y=y,
-					line=dict(
-						color="black",
-						width=2
-					),
-					mode="lines"
-				)
-				self.data.append(graph)
+					self.fig.add_trace(go.Scatter(
+						x=[vertices[i, 0],vertices[parent, 0]],
+						y=[vertices[i, 1],vertices[parent, 1]],
+						line=dict(
+							color="black",
+							width=2
+						),
+						mode='lines+markers'
+					))
+				
+				#self.data.append(graph)
 
 				#Plot final path 
-				x2, y2 = [], []
+		
 				for path in path_verts:
 					if any(np.isnan(path)):
 						continue
 					for i in path:
 						if (parents[i] < 0):
 							continue
-						x2.append(vertices[i, 0])
-						x2.append(vertices[parent, 0])
-						y2.append(vertices[i, 1])
-						y2.append(vertices[parent, 1])
-					path = go.Scatter(
-						x=x2,
-						y=y2,
-						line=dict(
-							color="red",
-							width=4
-						),
-						mode="lines"
-					)
-					self.data.append(path)
+						self.fig.add_trace(go.Scatter(
+							x=[vertices[i, 0], vertices[parents[i], 0]],
+							y=[vertices[i, 1], vertices[parents[i], 1]],
+							line=dict(
+								color="red",
+								width=4
+							),
+							mode='lines+markers'
+						))
+						
 			
 			elif self.dims == 3:  # plot in 3D
 				
