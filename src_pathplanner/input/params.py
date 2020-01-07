@@ -14,9 +14,9 @@ class ParamsRRT:
 	filename = "default_file.txt"
 	#method = "rrt_basic"
 	method = "rrt_star"
-	n_trials = 10
+	n_trials = 300
 	step_size = 0.2
-	neighborhood = 0.3
+	neighborhood = 0.6
 	dims = 2
 
 	def __init__(self,file=None):

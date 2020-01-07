@@ -2,6 +2,7 @@
 # Author(s): Edvard Bruun
 
 from abc import ABC, abstractmethod
+import numpy as np
 
 from algorithm.vertex import Vertex
 from algorithm.vertex import find_nearest_vertex
@@ -51,15 +52,45 @@ class RRT(ABC):
 			self.domain.obstacles
 		)
 
-	def update_path_cost(self,index):
+############################
+	def is_new_edge_blocked2(self,v1,v2):
+		n_divisions = 10
+		edge_points = np.linspace(v1,v2,n_divisions)
 
-		print(self.recorder.costs)
-		print(self.recorder.parents)
-		print("new cost", self.new_cost)
-		print("new parent", self.new_parent)
+		for point in edge_points:
+			if self.inside_obstacles(self.domain.obstacles,point):
+				print("inside")
+				return True
 
-		self.recorder.costs[index] = self.recorder.costs[self.new_parent] + self.new_cost
+		#print("not inside")
+		return False
 
-		pass
+	def inside_obstacles(self,obstacles,vertex):
+		"""
+		 Check if inside obstacles
+
+		 TODO: use the obstackes shape method .isinside
+		"""	
+
+		for obstacle in obstacles:
+
+			#if obstacle.isinside(vertex)
+				#return True
+
+			#replace this below once the onbstacle is defined as object
+			dist = np.linalg.norm(obstacle[1] - vertex)
+			dist = round(dist,6)
+
+			if 	dist < obstacle[2]:
+				#print("inside")
+				return True
+
+		#print("not inside")
+		return False
+#####################################
+
+	def update_path_cost(self,new_parent,new_cost):
+
+		return self.recorder.costs[new_parent] + new_cost
 
 

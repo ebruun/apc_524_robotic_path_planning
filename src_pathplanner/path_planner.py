@@ -45,21 +45,21 @@ def run_program():
 	PathPlan.process_vertex_list()
 
 
-	print("3. Showing Results")
+	print("\n\n3. Showing Results")
 
 	print("\n\n",PathPlan.recorder.vertices)
 	print("\n\n",PathPlan.recorder.parents)
 	print("\n\n",PathPlan.recorder.costs)
 	print("\n\n",PathPlan.solution_path)
 
-	"""
+	
 	Plot().simple_plot1(
 		d1,
 		PathPlan.recorder.parents,
 		PathPlan.recorder.vertices,
 		PathPlan.solution_path
 		)
-	"""
+	
 
 
 
