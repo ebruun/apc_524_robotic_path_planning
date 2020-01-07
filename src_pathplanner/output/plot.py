@@ -73,8 +73,8 @@ class Plot:
             self.data.append(origin)
 
             goals = go.Scatter(
-                x = [goal[0] for goal in self.domain.goals],
-                y = [goal[1] for goal in self.domain.goals],
+                x = [goal[1][0] for goal in self.domain.goals],
+                y = [goal[1][1] for goal in self.domain.goals],
                 line=dict(
                 color="green",
                 width=10
