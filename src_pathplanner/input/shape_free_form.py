@@ -13,7 +13,9 @@ import random
 
 import cv2
 
-class FreeForm2D():
+from input.shape import Shape
+
+class FreeForm2D(Shape):
   """A class used to create free form shape as a domain or obstacleshape
 
   :param shape_info: information about the bitmap file
@@ -21,6 +23,9 @@ class FreeForm2D():
   
   """
   def __init__(self, shape_info:dict):
+
+    super().__init__(shape_info)
+
     self.file = shape_info['bitmap_file']
     self.obtain_geometric_info()
 

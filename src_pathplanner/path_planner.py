@@ -16,7 +16,7 @@ from input.parse_data_class import ParseDataJSON
 from input.domain_class import Domain
 
 from solver.solution import Solution
-from output.plot1 import Plot
+from output.plot1 import Plot1
 
 
 def run_program():
@@ -62,7 +62,7 @@ def run_program():
 	# print("\n\n",PathPlan.recorder.costs)
 	# print("\n\n",PathPlan.solution_path)
 	
-	Plot().simple_plot1(
+	Plot1().simple_plot1(
 		domain_object,
 		PathPlan.recorder.parents,
 		PathPlan.recorder.vertices,

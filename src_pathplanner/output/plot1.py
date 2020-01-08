@@ -8,7 +8,7 @@ Placeholder for the plotting class
 import matplotlib.pyplot as plt
 import numpy as np
 
-class Plot():
+class Plot1():
 
 
 	@classmethod

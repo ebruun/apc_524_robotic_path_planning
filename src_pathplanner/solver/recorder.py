@@ -44,7 +44,7 @@ class Recorder:
 		self.costs.fill(np.nan)
 
 		if history:
-			self.parents_history = np.zeros((self.params.n_trials,self.params.n_trials*2),
+			self.parents_history = np.zeros((self.params["n_trials"],self.params["n_trials"]*2),
 				dtype=float)
 			self.parents_history.fill(np.nan)
 		else:

@@ -3,7 +3,9 @@
 # Last Updated: January 2019
 import numpy as np
 
-class Rectangle():
+from input.shape import Shape
+
+class Rectangle(Shape):
   """A class used to create rectangular objects which could act as domain or obstacle shape
 
   :param shape_info: information about the lower left and upper right corners
@@ -16,6 +18,8 @@ class Rectangle():
     This is the constructor of the the rectangle class. A rectangle object is initialized by specifying the lower left corner and upper right corner points.
 
     """
+    super().__init__(shape_info)
+
     self.ll_corner = np.asarray(shape_info['lower_left'])
     self.ur_corner = np.asarray(shape_info['upper_right'])
     # Assert the order of points

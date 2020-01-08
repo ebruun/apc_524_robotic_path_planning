@@ -5,7 +5,9 @@ import numpy as np
 import math
 import random
 
-class Circle():
+from input.shape import Shape
+
+class Circle(Shape):
   """A class used to create circular objects which could act as domain or obstacle shape
 
   :param shape_info: Radius and center information
@@ -15,6 +17,7 @@ class Circle():
   def __init__(self, shape_info:dict):
     """Constructor method
     """
+    super().__init__(shape_info)
     self.radius = shape_info["radius"]
     self.center = np.asarray(shape_info["center"]).flatten()
     self.centroid = shape_info["center"]

@@ -5,8 +5,9 @@ from abc import ABC, abstractmethod
 
 class Shape(ABC):
 	"""docstring for Shape"""
+	@abstractmethod
 	def __init__(self, shape_info:dict):
-		self.name = name
+		self.name = shape_info["shape_type"]
 
 	
 	@abstractmethod
