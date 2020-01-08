@@ -21,9 +21,10 @@
 		},
 
 	"RRTAlgorithmInfo":{
-		"method": "rrt_basic",
+		"method": "rrt_star",
 		"n_trials": 2000,
 		"step_size": 0.2,
-		"dim": 2
+		"dim": 2,
+		"neighborhood": 0.3
 		}
 }
