@@ -52,7 +52,7 @@ class Domain:
 
 		# these are just defined as numbers now
 		# but define them as shape objects later
-		print("-Creating objects out of input parameters")
+		# print("-Creating objects out of input parameters")
 
 		self.goals = self.params_origingoal.goal
 		self.obstacles = self.params_domain.obstacles

@@ -47,28 +47,13 @@ class Vertex():
 	"""
 
 	@classmethod
-	def new_config(cls,domain):
-
-
-		######################
-		# REPLACE with .sample_random_point()
-		# RETURN THE NEW POINT
-		#######################
-
-		new_q = cls.random_config(domain)
-		#print(new_q)
-
-		while not cls.is_inside_domain(domain,new_q):
-			new_q = cls.random_config(domain)
-	
+	def new_config(cls,domain_object):
+		new_q = domain_object.domain.sample_random_point()
 		return new_q
-
 
 	@classmethod
 	def new_vertex(cls, vertices, new_q, step_size):
-
 		index, distance = find_nearest_vertex(vertices, new_q)
-
 		v_near = vertices[index]
 
 		if distance < step_size:
@@ -77,61 +62,3 @@ class Vertex():
 			vector = (new_q - v_near)/distance
 			new_v = np.round(v_near + vector*step_size,6)
 			return new_v, index, step_size
-
-
-	######################
-	# DELETE THIS FUNCTION ONCE .sample_random_point() IMPLEMENTED
-	######################
-	def random_config(domain):
-		"""
-		 Generate coordinates between domain extents
-
-		 Round to 3 decimal
-
-		"""
-
-		rand_v = []
-
-		for i in range(domain.dims):
-			rand_v.append(np.random.uniform(
-				domain.extents[i][0],
-				domain.extents[i][1])
-			)
-
-		rand_v = [round(elem, 3) for elem in rand_v ]
-		
-		return rand_v
-
-
-
-	######################
-	# DELETE THIS FUNCTION ONCE .sample_random_point() IMPLEMENTED
-	#######################
-	def is_inside_domain(domain,vertex):
-		"""
-		 Check if inside domain, since it can be irregular object
-
-		 TODO: use the domain shape method .isinside
-		"""
-
-		# return domain.shape.isinside(vertex)
-
-		# for now just return true,since it's a regular rectangle so will for sure be inside the fomain
-
-		return True
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
