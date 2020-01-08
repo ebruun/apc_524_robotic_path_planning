@@ -62,7 +62,7 @@ class Circle(Shape):
     # Move the coordinate system so that the center is at (0,0)
     tmp_point_1[0] = tmp_point_1[0] - self.center[0]
     tmp_point_1[1] = tmp_point_1[1] - self.center[1]
-
+    
     tmp_point_2[0] = tmp_point_2[0] - self.center[0]
     tmp_point_2[1] = tmp_point_2[1] - self.center[1]
 
@@ -97,4 +97,4 @@ class Circle(Shape):
     r = self.radius*math.sqrt(random.random())
     theta = random.random()*2.0*math.pi
     new_random_point = np.asarray([[self.center[0]+r*math.cos(theta), self.center[1]+r*math.sin(theta)]])
-    return new_random_point
+    return new_random_point[0] #zero so in form [x, y], instead of [[x,y]]
