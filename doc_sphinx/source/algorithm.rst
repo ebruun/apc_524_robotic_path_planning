@@ -1,21 +1,21 @@
-Algorithm package
+algorithm package
 =================
 
 This package does...
 
 
-algorithm.rrt
-*************
+algorithm module
+****************
 
-.. autoclass:: algorithm.rrt.RRT
+.. automodule:: algorithm.rrt
    :members:
    :show-inheritance:
    :special-members:
    :exclude-members: __weakref__
 
 
-algorithm.rrt_basics 
-********************
+rrt_basic module
+****************
 
 .. autoclass:: algorithm.rrt_basic.RRT_Basic
    :members:
@@ -24,11 +24,19 @@ algorithm.rrt_basics
    :exclude-members: __weakref__
 
 
-algorithm.rrt_star
-******************
+rrt_star module
+***************
 
 .. autoclass:: algorithm.rrt_star.RRT_Star
    :members:
    :show-inheritance:
+   :special-members:
+   :exclude-members: __weakref__
+
+vertex module
+*************
+
+.. automodule:: algorithm.vertex
+   :members:
    :special-members:
    :exclude-members: __weakref__

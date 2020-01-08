@@ -14,7 +14,7 @@ class ParamsRRT:
 	filename = "default_file.txt"
 	#method = "rrt_basic"
 	method = "rrt_star"
-	n_trials = 2000
+	n_trials = 200
 	step_size = 0.2
 	neighborhood = 0.30
 	dims = 2

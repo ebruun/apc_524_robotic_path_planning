@@ -1,11 +1,18 @@
 # rrt.py
 # Author(s): Edvard Bruun
 
+"""
+Imports the :class:`~algorithm.vertex.Vertex` class
+
+Imports the :func:`~algorithm.vertex.find_nearest_vertex` function
+"""
+
 from abc import ABC, abstractmethod
 import numpy as np
 
 from algorithm.vertex import Vertex
 from algorithm.vertex import find_nearest_vertex
+
 
 class RRT(ABC):
 	""" An abstract base class for RRT algorithm.
@@ -27,12 +34,18 @@ class RRT(ABC):
 
 	@abstractmethod
 	def rrt_step(cls, i):
+		""" step function.
+
+		"""
 		pass
 
 	def new_config(self):
 		return Vertex.new_config(self.domain_object)
 
 	def new_vertex(self):
+		""" new vertex function
+
+		"""
 		return Vertex.new_vertex(
 			self.recorder.vertices,
 			self.new_q,
@@ -40,6 +53,9 @@ class RRT(ABC):
 		)
 
 	def update_path_cost(self,new_parent,new_cost):
+		""" Update path costs
+
+		"""
 		return self.recorder.costs[new_parent] + new_cost
 
 	def is_new_edge_blocked(self,v1,v2):
