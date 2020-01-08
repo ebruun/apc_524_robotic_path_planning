@@ -70,26 +70,18 @@ class Solution:
 
 		"""
 
-<<<<<<< HEAD
 		if self.params["method"] == "rrt_basic":
 			print("We are using rrt_basic")
-=======
-		if self.params.method is "rrt_basic":
 			self.recorder = Recorder(self.params,history = 0)
->>>>>>> rrt_star_feature
 			self.algorithm = RRT_Basic(
 				self.domain_object, 
 				self.recorder,
 				self.params
 			)
 
-<<<<<<< HEAD
 		elif self.params["method"] == "rrt_star":
 			print("We are using rrt_star")
-=======
-		elif self.params.method is "rrt_star":
 			self.recorder = Recorder(self.params, history = 1)
->>>>>>> rrt_star_feature
 			self.algorithm = RRT_Star(
 				self.domain_object,
 				self.recorder,
