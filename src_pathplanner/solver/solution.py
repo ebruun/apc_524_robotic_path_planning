@@ -54,7 +54,7 @@ class Solution:
 		self.params = params
 		self.domain_object = domain_object
 
-		self.recorder = []
+		self.recorder = Recorder(self.params)
 
 		self.solution_path = [] 
 		self.algorithm = []
@@ -72,7 +72,6 @@ class Solution:
 
 		if self.params["method"] == "rrt_basic":
 			print("We are using rrt_basic")
-			self.recorder = Recorder(self.params,history = 0)
 			self.algorithm = RRT_Basic(
 				self.domain_object, 
 				self.recorder,
@@ -81,7 +80,6 @@ class Solution:
 
 		elif self.params["method"] == "rrt_star":
 			print("We are using rrt_star")
-			self.recorder = Recorder(self.params, history = 1)
 			self.algorithm = RRT_Star(
 				self.domain_object,
 				self.recorder,
@@ -100,7 +98,13 @@ class Solution:
 		"""
 
 		for goal in self.domain_object.goals:
-			index = self.check_if_goal_reached(goal)
+			reached_goal_index = self.check_if_goal_reached(goal)
+
+			if np.isnan(reached_goal_index[0]):
+				index = reached_goal_index[0]
+			else:
+				index = self.find_lowest_cost(reached_goal_index)
+
 			self.solution_path.append(self.find_path(index))
 
 
@@ -119,14 +123,39 @@ class Solution:
 			index (:obj:`int`): The index of the vertex that reached the goal. This is set to :obj:`numpy.nan` if the goal is not reached.
 		"""
 
+		reached_goal_index = []
+
 		for i, vertex in enumerate(self.recorder.vertices):
 			if any(x == True for x in np.isnan(vertex)):
-				break
+				return reached_goal_index
 			else:
 				if(goal.is_point_inside(vertex)):
-					return i
-		index = np.nan
-		return index
+					reached_goal_index.append(i)
+
+		if len(reached_goal_index) == 0:
+			reached_goal_index.append(np.nan)
+			return reached_goal_index
+		else:
+			return reached_goal_index
+
+
+	def find_lowest_cost(self,reached_goal_index):
+
+		cost = 0.0
+		lowest_cost = float('+inf') 
+
+		for index in reached_goal_index:
+
+			cost = self.recorder.costs[index]
+
+			if cost > lowest_cost:
+				pass
+			else:
+				lowest_cost = cost
+				lowest_cost_index = index
+
+		return lowest_cost_index
+
 
 
 	def find_path(self,index):

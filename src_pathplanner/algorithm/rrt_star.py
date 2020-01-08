@@ -116,10 +116,6 @@ class RRT_Star(RRT):
 		"""fill out
 		"""
 
-		#print(self.recorder.vertices)
-		#print(self.recorder.parents)
-		#print(self.recorder.costs)
-
 		cost = 0.0
 		lowest_cost = float('+inf') 
 

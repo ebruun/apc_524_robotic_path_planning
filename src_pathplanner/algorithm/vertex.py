@@ -39,7 +39,6 @@ def find_nearest_vertex(vertex_list,goal):
 	return shortest_index, shortest_distance
 
 
-
 class Vertex():
 	""" A class for new vertex in algorithm.
 

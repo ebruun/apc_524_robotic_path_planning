@@ -35,19 +35,21 @@ def run_program():
 	print("1. Reading Parameters")
 	# The input file
 	input_file = "./input/rrt_input_file.json"
-	#input_file = "./input/rrt_input_file_circle.json"
+	
 	# Parsed JSON data
 	program_input = ParseDataJSON(input_file)
 	program_input.parse_data()
 
 	# Split up the parsed input
 	domain_info = program_input.data_dict["DomainInfo"]
+
 	origin_goal_info = program_input.data_dict["OriginGoalInfo"]
 	obstacles_info = program_input.data_dict["ObstaclesInfo"]
 	rrt_algorithm_info = program_input.data_dict["RRTAlgorithmInfo"]
 
 	print("2. Create Domain")
 	domain_object = Domain(domain_info, obstacles_info, origin_goal_info)
+	print(domain_object)
 
 	print("3. Running Program")
 	PathPlan = Solution(rrt_algorithm_info,domain_object)

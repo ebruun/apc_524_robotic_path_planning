@@ -18,8 +18,11 @@ class RRT_Basic(RRT):
     super().__init__(domain_object,recorder,params)
 
   def rrt_step(self,trial):
+    print("\nVertex", trial+1)
+
     self.new_q = self.new_config()
     self.new_v, self.new_parent, self.new_cost = self.new_vertex()
+    
     while self.is_new_edge_blocked(self.recorder.vertices[self.new_parent],self.new_v):  
       self.new_q = self.new_config()
       self.new_v, self.new_parent, self.new_cost = self.new_vertex()

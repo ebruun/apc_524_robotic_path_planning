@@ -22,7 +22,7 @@
 
 	"RRTAlgorithmInfo":{
 		"method": "rrt_star",
-		"n_trials": 100,
+		"n_trials": 200,
 		"step_size": 0.2,
 		"dim": 2,
 		"neighborhood": 0.3

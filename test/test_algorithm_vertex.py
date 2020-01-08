@@ -6,27 +6,45 @@ import numpy as np
 from algorithm.vertex import find_nearest_vertex
 from algorithm.vertex import Vertex
 
-params = Mock()
-params.n_trials = 5
-params.dims = 2
-params.method = "rrt_basic"
+from input.domain_class import Domain
 
-domain = Mock()
-domain.obstacles = [
-				("circle", np.array([0.5, 3.5]), 0.20),
-				("circle", np.array([1.5, 3.5]), 0.20),
-				("circle", np.array([1.5, 0.5]), 0.40)
-				]
+domain_info = {
+	'dim': 2, 
+	'shape_type': 'rectangle',
+	'lower_left': [0.0, 0.0],
+	'upper_right': [3.0, 4.0]
+	}
+
+origin_goal_info = {
+	'origin': [0.1, 0.1],
+	'goals': {
+		'goal_1': {'dim': 2, 'shape_type': 'circle', 'radius': 0.2, 'center': [0.3, 2.1]},
+		'goal_2': {'dim': 2, 'shape_type': 'circle', 'radius': 0.1, 'center': [2.5, 3.5]}
+		}
+	}
+
+obstacles_info = {
+	'obstacle_1':{'dim': 2, 'shape_type': 'circle', 'radius': 0.1, 'center': [0.5, 0.5]},
+	'obstacle_2': {'dim': 2, 'shape_type': 'circle', 'radius': 0.2, 'center': [1.5, 3.5]},
+	'obstacle_3': {'dim': 2, 'shape_type': 'circle', 'radius': 0.4, 'center': [1.5, 0.5]}
+	}
+
+rrt_algorithm_info = {
+	'method': 'rrt_basic',
+	'n_trials': 100,
+	'step_size': 0.2,
+	'dim': 2,
+	'neighborhood': 0.3
+	}
+
+
+domain_test = Domain(domain_info, obstacles_info, origin_goal_info)
 
 class TestVertex(unittest.TestCase):
 	def setUp(self):
-		domain.dims = 2
-		domain.extents = np.array([[0,3], [0,4]])
 		pass
 
 	def tearDown(self):
-		domain.dims = None
-		domain.extents = None
 		pass
 
 
@@ -121,14 +139,12 @@ class TestVertex(unittest.TestCase):
 
 
 	def test_vertex_06_random_config(self):
-		domain.dims = 3
-		domain.extents = np.array([[0,3], [0,4], [-2, 3]])
 
-		rand_config = Vertex.random_config(domain)
+		rand_config = Vertex.new_config(domain_test)
 
 		self.assertEqual(
 			len(rand_config),
-			domain.dims,
+			domain_test.dim,
 			"config not right dimensions")
 
 
