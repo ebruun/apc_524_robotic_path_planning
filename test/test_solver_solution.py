@@ -142,6 +142,7 @@ class TestSolution(unittest.TestCase):
 
 	def test_solution_09_runalgorithm_star(self):
 		params.method = "rrt_star"
+		params.neighborhood = 0.2
 
 		self.solution.run_algorithm()
 

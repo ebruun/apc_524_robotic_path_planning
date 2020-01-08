@@ -32,11 +32,9 @@ class RRT(ABC):
 	def rrt_step(cls, i):
 		pass
 
-	@abstractmethod
 	def new_config(self):
 		return Vertex.new_config(self.domain)
 
-	@abstractmethod
 	def new_vertex(self):
 		return Vertex.new_vertex(
 			self.recorder.vertices,
@@ -44,16 +42,13 @@ class RRT(ABC):
 			self.params.step_size
 		)
 
-	@abstractmethod
-	def is_new_edge_blocked(self):
-		return Edge.is_colliding(
-			self.recorder.vertices[self.new_parent],
-			self.new_v,
-			self.domain.obstacles
-		)
+	def update_path_cost(self,new_parent,new_cost):
+		return self.recorder.costs[new_parent] + new_cost
 
-############################
-	def is_new_edge_blocked2(self,v1,v2):
+
+	#Replace with shape checks
+	############################
+	def is_new_edge_blocked(self,v1,v2):
 		n_divisions = 10
 		edge_points = np.linspace(v1,v2,n_divisions)
 
@@ -89,8 +84,6 @@ class RRT(ABC):
 		return False
 #####################################
 
-	def update_path_cost(self,new_parent,new_cost):
 
-		return self.recorder.costs[new_parent] + new_cost
 
 

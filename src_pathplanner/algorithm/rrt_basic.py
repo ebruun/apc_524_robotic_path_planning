@@ -23,22 +23,12 @@ class RRT_Basic(RRT):
 		self.new_q = self.new_config()
 		self.new_v, self.new_parent, self.new_cost = self.new_vertex()
 
-		#if self.is_new_edge_blocked():
-		if self.is_new_edge_blocked2(self.new_v,self.recorder.vertices[self.new_parent]):	
-			self.rrt_step(trial)
+		while self.is_new_edge_blocked(self.recorder.vertices[self.new_parent],self.new_v):	
+			self.new_q = self.new_config()
+			self.new_v, self.new_parent, self.new_cost = self.new_vertex()		
 
 		self.recorder.vertices[trial,:] = self.new_v
 		self.recorder.parents[trial] = self.new_parent
 		self.recorder.costs[trial] = self.recorder.costs[self.new_parent] + self.new_cost
-		#self.update_path_cost(trial)
 
-
-	def new_config(self):
-		return super().new_config()
-
-	def new_vertex(self):
-		return super().new_vertex()
-
-	def is_new_edge_blocked(self):
-		return super().is_new_edge_blocked()
 

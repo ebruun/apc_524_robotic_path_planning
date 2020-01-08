@@ -97,6 +97,7 @@ class Solution:
 		Calls the :meth:`~solver.solution.Solution.find_path()` function in the loop. Finds the path from the origin to the vertex to reach the goal.
 
 		"""
+
 		for i in range(len(self.domain.goals)):
 			index = self.check_if_goal_reached(self.domain.goals[i])
 			self.solution_path.append(self.find_path(index))
