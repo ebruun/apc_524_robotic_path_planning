@@ -13,7 +13,6 @@ params.method = "rrt_star"
 
 
 recorder = Mock()
-recorder.parent_history = []
 
 domain = Mock()
 domain.dims = 2
@@ -37,6 +36,9 @@ class TestRRT_Star(unittest.TestCase):
 		recorder.costs = np.zeros(6, dtype=float)
 		recorder.costs.fill(np.nan)
 
+		recorder.parents_history = np.zeros((6,6*2), dtype=float)
+		recorder.parents_history.fill(np.nan)
+
 		self.algorithm = RRT_Star(domain, recorder, params)
 
 	def tearDown(self):
@@ -51,7 +53,6 @@ class TestRRT_Star(unittest.TestCase):
 		index = np.amax(bool_index[0])
 
 		return index
-
 
 	def test_rrt_star_00_vertices_increment(self):
 		

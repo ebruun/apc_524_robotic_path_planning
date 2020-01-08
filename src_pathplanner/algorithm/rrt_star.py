@@ -21,9 +21,9 @@ class RRT_Star(RRT):
 		self.neighbor_indices = []
 		self.neighbor_dist = []
 
-		self.recorder.parents_history[0][0:2] = -1
+		self.recorder.parents_history[0,0:2] = -1
 
-		self.toggle = 1 #Plot things
+		self.toggle = 0 #Plot things
 
 
 	def rrt_step(self,trial):

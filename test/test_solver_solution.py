@@ -4,6 +4,7 @@ from unittest.mock import Mock
 import numpy as np
 
 from solver.solution import Solution
+from solver.recorder import Recorder
 
 params = Mock()
 params.n_trials = 5
@@ -24,8 +25,10 @@ domain.obstacles = [
 class TestSolution(unittest.TestCase):
 	def setUp(self):
 		self.solution = Solution(params,domain)
+		self.solution.recorder = Recorder(params, history = 1)
 
 	def tearDown(self):
+		self.solution.recorder = None
 		self.solution = None
 
 
