@@ -16,7 +16,6 @@ from input.parse_data_class import ParseDataJSON
 from input.domain_class import Domain
 
 from solver.solution import Solution
-<<<<<<< HEAD
 from input.params import ParamsRRT, ParamsOriginGoal, ParamsDomain
 from input.domain import Domain
 from output.plot import Plot
@@ -60,7 +59,6 @@ def run_program():
 	
 	PathPlan.process_vertex_list()
 
-<<<<<<< HEAD
 	print("4. Showing Results")
 
 	print("\n\n Vertices",PathPlan.recorder.vertices)
@@ -69,14 +67,12 @@ def run_program():
 	print("\n\n solution_path",PathPlan.solution_path)
 
 	
-	p1 = Plot("test run", d1)
-	p1.plot_obstacles()
-	p1.plot_origin_goals()
-	p1.plot_solution_graph(PathPlan)
-	p1.set_layout()
-	p1.draw()
-
-=======
+	plot_object = Plot("test run", domain_object)
+	plot_object.plot_obstacles()
+	plot_object.plot_origin_goals()
+	plot_object.plot_solution_graph(PathPlan)
+	plot_object.set_layout()
+	plot_object.draw()
 
 	Plot1().simple_plot1(
 		domain_object,
@@ -84,7 +80,6 @@ def run_program():
 		PathPlan.recorder.vertices,
 		PathPlan.solution_path
 		)
->>>>>>> development
 
 if __name__ == '__main__':
 	run_program()
