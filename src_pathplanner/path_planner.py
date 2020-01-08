@@ -35,8 +35,8 @@ def run_program():
 
 	print("1. Reading Parameters")
 	# The input file
-	input_file = "./input/rrt_input_file.json"
-	#input_file = "./input/rrt_input_file_circle.json"
+	#input_file = "./input/rrt_input_file.json"
+	input_file = "./input/rrt_input_file_circle.json"
 	# Parsed JSON data
 	program_input = ParseDataJSON(input_file)
 	program_input.parse_data()
@@ -60,7 +60,7 @@ def run_program():
 	# print("\n\n Vertices",PathPlan.recorder.vertices)
 	# print("\n\n Parents",PathPlan.recorder.parents)
 	# #print("\n\n Costs",PathPlan.recorder.costs)
-	# print("\n\n solution_path",PathPlan.solution_path)
+	print("\n\n solution_path",PathPlan.solution_path)
 
 	plot_object = Plot("test run", domain_object)
 	plot_object.plot_obstacles()
@@ -69,12 +69,12 @@ def run_program():
 	plot_object.set_layout()
 	plot_object.draw()
 
-	Plot1().simple_plot1(
-		domain_object,
-		PathPlan.recorder.parents,
-		PathPlan.recorder.vertices,
-		PathPlan.solution_path
-		)
+	# Plot1().simple_plot1(
+	# 	domain_object,
+	# 	PathPlan.recorder.parents,
+	# 	PathPlan.recorder.vertices,
+	# 	PathPlan.solution_path
+	# 	)
 
 
 if __name__ == '__main__':

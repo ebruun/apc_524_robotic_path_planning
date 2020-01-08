@@ -51,7 +51,8 @@ class Plot:
 							y0=y_min,
 							x1=x_max,
 							y1=y_max,
-							line_color="blue"
+							line_color="blue",
+							opacity=0.5,
 					))
 				elif obstacle.name == "rectangle":
 					ll_corner = obstacle.ll_corner
@@ -68,7 +69,8 @@ class Plot:
 							y0=ll_corner[1],
 							x1=ur_corner[0],
 							y1=ur_corner[1],
-							line_color="blue"
+							line_color="blue",
+							opacity=0.5,
 					))
 		else:
 			pass 
@@ -117,7 +119,8 @@ class Plot:
 							y0=y_min,
 							x1=x_max,
 							y1=y_max,
-							line_color="green"
+							line_color="green",
+							opacity=0.5,
 					))
 
 			# self.fig.add_shape(
@@ -276,10 +279,13 @@ class Plot:
 			
 			if self.domain.domain_shape == "circle":
 				center = self.domain.domain.center
-				x_min = center[0]-self.domain.radius
-				x_max = center[0]+self.domain.radius
-				y_min = center[1]-self.domain.radius
-				y_max = center[1]+self.domain.radius
+				print(center)
+				print(self.domain.domain.radius)
+				x_min = center[0]-self.domain.domain.radius
+				print(x_min)
+				x_max = center[0]+self.domain.domain.radius
+				y_min = center[1]-self.domain.domain.radius
+				y_max = center[1]+self.domain.domain.radius
 				self.fig.add_shape(
 					go.layout.Shape(
 						type = "circle",
@@ -294,7 +300,7 @@ class Plot:
 			                width=15
         				)
 				))
-				extents = [[x_min,x_max][y_min,y_max]]
+				extents = [[x_min,x_max],[y_min,y_max]]
 
 			elif self.domain.domain_shape == "rectangle":
 				ll_corner = self.domain.domain.ll_corner
