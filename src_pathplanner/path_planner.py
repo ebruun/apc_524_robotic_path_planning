@@ -16,8 +16,6 @@ from input.parse_data_class import ParseDataJSON
 from input.domain_class import Domain
 
 from solver.solution import Solution
-from input.params import ParamsRRT, ParamsOriginGoal, ParamsDomain
-from input.domain import Domain
 from output.plot import Plot
 from output.plot1 import Plot1
 
@@ -61,10 +59,10 @@ def run_program():
 
 	print("4. Showing Results")
 
-	print("\n\n Vertices",PathPlan.recorder.vertices)
-	print("\n\n Parents",PathPlan.recorder.parents)
-	#print("\n\n Costs",PathPlan.recorder.costs)
-	print("\n\n solution_path",PathPlan.solution_path)
+	# print("\n\n Vertices",PathPlan.recorder.vertices)
+	# print("\n\n Parents",PathPlan.recorder.parents)
+	# #print("\n\n Costs",PathPlan.recorder.costs)
+	# print("\n\n solution_path",PathPlan.solution_path)
 
 	
 	plot_object = Plot("test run", domain_object)

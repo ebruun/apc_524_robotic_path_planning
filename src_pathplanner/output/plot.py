@@ -25,7 +25,7 @@ class Plot:
 		self.filename = "./output/" + filename + ".html"
 		self.title = filename
 		self.domain = domain
-		self.dims = domain.dims
+		self.dims = domain.dim
 
 		self.fig = go.Figure()
 		
@@ -35,18 +35,24 @@ class Plot:
 		if self.dims == 2:
 			
 			for obstacle in self.domain.obstacles:
-				self.fig.add_shape(
-					go.layout.Shape(
-						type = obstacle[0],
-						xref="x",
-						yref="y",
-						fillcolor="blue",
-						x0=obstacle[1][0]-obstacle[2],
-						y0=obstacle[1][1]-obstacle[2],
-						x1=obstacle[1][0]+obstacle[2],
-						y1=obstacle[1][1]+obstacle[2],
-						line_color="blue"
-				))
+				if obstacle.name == "circle":
+					x_min = obstacle["center"][0]-obstacle["radius"]
+					x_max = obstacle["center"][0]+obstacle["radius"]
+					y_min = obstacle["center"][1]-obstacle["radius"]
+					y_max = obstacle["center"][1]+obstacle["radius"]
+					self.fig.add_shape(
+						go.layout.Shape(
+							type = shape_type,
+							xref="x",
+							yref="y",
+							fillcolor="blue",
+							x0=x_min,
+							y0=y_min,
+							x1=x_max,
+							y1=y_max,
+							line_color="blue"
+					))
+				#elif shape_type == :
 		else:
 			pass 
 

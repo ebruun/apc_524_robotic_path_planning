@@ -7,7 +7,7 @@ from algorithm.rrt import RRT
 from input.shape_circle import Circle
 
 #Delete later
-from output.plot1 import Plot
+from output.plot1 import Plot1
 import matplotlib.pyplot as plt
 
 class RRT_Star(RRT):
