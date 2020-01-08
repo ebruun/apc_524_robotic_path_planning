@@ -15,14 +15,14 @@
 		},
 
 	"ObstaclesInfo":{
-		"obstacle_1":{"dim":2, "shape_type": "circle", "radius":0.2, "center":[0.5,0.5]},
+		"obstacle_1":{"dim":2, "shape_type": "circle", "radius":0.1, "center":[0.5,0.5]},
 		"obstacle_2":{"dim":2, "shape_type": "circle", "radius":0.2, "center":[1.5,3.5]},
 		"obstacle_3":{"dim":2, "shape_type": "circle", "radius":0.4, "center":[1.5,0.5]}
 		},
 
 	"RRTAlgorithmInfo":{
 		"method": "rrt_star",
-		"n_trials": 2000,
+		"n_trials": 100,
 		"step_size": 0.2,
 		"dim": 2,
 		"neighborhood": 0.3
