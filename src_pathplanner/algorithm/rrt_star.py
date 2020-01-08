@@ -21,7 +21,9 @@ class RRT_Star(RRT):
 		self.neighbor_indices = []
 		self.neighbor_dist = []
 
-		self.toggle = 0 #Plot things
+		self.recorder.parents_history[0][0:2] = -1
+
+		self.toggle = 1 #Plot things
 
 
 	def rrt_step(self,trial):
@@ -32,10 +34,11 @@ class RRT_Star(RRT):
 
 		while self.is_new_edge_blocked(self.recorder.vertices[self.new_parent],self.new_v):	
 			self.new_q = self.new_config()
-			self.new_v, self.new_parent, self.new_cost = self.new_vertex()				
+			self.new_v, self.new_parent, self.new_cost = self.new_vertex()			
 		
 		self.recorder.vertices[trial,:] = self.new_v
 
+		
 		self.plot_tests(trial,trial+1, self.toggle)
 
 		# New code for RRT_Star
@@ -46,12 +49,20 @@ class RRT_Star(RRT):
 		self.recorder.parents[trial] = self.new_parent 
 		self.recorder.costs[trial] = self.update_path_cost(self.new_parent,self.new_cost)
 
+
+
+		print(self.recorder.parents[trial])
+		self.recorder.parents_history[:,trial*2] = self.recorder.parents
 		self.plot_tests(trial+1,trial+1,self.toggle)
 
 		print("\nREWIRE")
 		self.rewire(trial)
 
+
+		self.recorder.parents_history[:,(trial*2 + 1)] = self.recorder.parents
+		print(self.recorder.parents_history[:,trial*2:trial*2 + 2])
 		self.plot_tests(trial+1,trial+1,self.toggle)
+
 
 
 	def find_vertices_in_neighborhood(self):

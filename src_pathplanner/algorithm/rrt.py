@@ -1,13 +1,18 @@
 # rrt.py
 # Author(s): Edvard Bruun
 
+"""
+Imports the :class:`~algorithm.vertex.Vertex` class
+
+Imports the :func:`~algorithm.vertex.find_nearest_vertex` function
+"""
+
 from abc import ABC, abstractmethod
 import numpy as np
 
 from algorithm.vertex import Vertex
 from algorithm.vertex import find_nearest_vertex
 
-from algorithm.edge import Edge
 
 class RRT(ABC):
 	""" An abstract base class for RRT algorithm.
@@ -15,6 +20,9 @@ class RRT(ABC):
 	"""
 	@abstractmethod
 	def __init__(self,domain,recorder,params):
+		""" init function.
+
+		"""
 		self.domain = domain
 		self.recorder = recorder
 		self.params = params
@@ -30,12 +38,21 @@ class RRT(ABC):
 
 	@abstractmethod
 	def rrt_step(cls, i):
+		""" step function.
+
+		"""
 		pass
 
 	def new_config(self):
+		""" New config function
+
+		"""
 		return Vertex.new_config(self.domain)
 
 	def new_vertex(self):
+		""" new vertex function
+
+		"""
 		return Vertex.new_vertex(
 			self.recorder.vertices,
 			self.new_q,
@@ -43,12 +60,18 @@ class RRT(ABC):
 		)
 
 	def update_path_cost(self,new_parent,new_cost):
+		""" Update path costs
+
+		"""
 		return self.recorder.costs[new_parent] + new_cost
 
 
 	#Replace with shape checks
 	############################
 	def is_new_edge_blocked(self,v1,v2):
+		""" REPLACED WITH VIVEK FUNCTIONS
+
+		"""
 		n_divisions = 10
 		edge_points = np.linspace(v1,v2,n_divisions)
 
@@ -62,9 +85,7 @@ class RRT(ABC):
 
 	def inside_obstacles(self,obstacles,vertex):
 		"""
-		 Check if inside obstacles
-
-		 TODO: use the obstackes shape method .isinside
+		 DELETE THIS LATER
 		"""	
 
 		for obstacle in obstacles:

@@ -8,7 +8,7 @@ class Recorder:
 
 	"""
 	
-	def __init__(self,params):
+	def __init__(self,params,history=None):
 		"""Initialize the Recorder class.
 
 		The attributes arrays are initialized to the length specified by the number of trials specified in params object. Initialized to value of :obj:`numpy.nan`.
@@ -43,4 +43,10 @@ class Recorder:
 		self.costs = np.zeros(self.params.n_trials, dtype=float)
 		self.costs.fill(np.nan)
 
+		if history:
+			self.parents_history = np.zeros((self.params.n_trials,self.params.n_trials*2),
+				dtype=float)
+			self.parents_history.fill(np.nan)
+		else:
+			self.parents_history = 0
 

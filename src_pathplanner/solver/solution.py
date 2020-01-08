@@ -2,11 +2,13 @@
 # Author(s): Edvard Bruun
 
 """
-Imports the :class:`solver.stepper.Stepper` class
+Imports the :class:`~solver.recorder.Recorder` class
 
-Imports the :class:`solver.recorder.Recorder` class
+Imports the :class:`~algorithm.rrt_basic.RRT_Basic` class
 
-Imports the :func:`algorithm.vertex.find_nearest_vertex` function
+Imports the :class:`~algorithm.rrt_basic.RRT_Star` class
+
+Imports the :func:`~algorithm.vertex.find_nearest_vertex` function
 """
 
 import numpy as np
@@ -14,14 +16,14 @@ from sys import exit
 
 from solver.recorder import Recorder
 
-from algorithm.vertex import find_nearest_vertex
 from algorithm.rrt_basic import RRT_Basic
 from algorithm.rrt_star import RRT_Star
+
+from algorithm.vertex import find_nearest_vertex
 
 
 class Solution:
 	"""This class executes and saves the solution to the path planning problem.
-	sdfsfdsf sdfasfsfs sdfsdfs
 	"""
 
 	def __init__(self,params,domain):
@@ -52,7 +54,7 @@ class Solution:
 		self.params = params
 		self.domain = domain
 
-		self.recorder = Recorder(params)
+		self.recorder = []
 
 		self.solution_path = [] 
 		self.algorithm = []
@@ -69,6 +71,7 @@ class Solution:
 		"""
 
 		if self.params.method is "rrt_basic":
+			self.recorder = Recorder(self.params,history = 0)
 			self.algorithm = RRT_Basic(
 				self.domain, 
 				self.recorder,
@@ -76,6 +79,7 @@ class Solution:
 			)
 
 		elif self.params.method is "rrt_star":
+			self.recorder = Recorder(self.params, history = 1)
 			self.algorithm = RRT_Star(
 				self.domain,
 				self.recorder,

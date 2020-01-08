@@ -41,7 +41,10 @@ def run_program():
 	print("3. Running Program")
 	PathPlan = Solution(p1,d1)
 
+
 	PathPlan.run_algorithm()
+
+	print(PathPlan.recorder.parents_history)
 	PathPlan.process_vertex_list()
 
 
@@ -60,10 +63,6 @@ def run_program():
 		PathPlan.solution_path
 		)
 	
-	
-	
-
-
 
 if __name__ == '__main__':
 	run_program()

@@ -11,7 +11,9 @@ params.step_size = 0.2
 params.neighborhood = 0.3
 params.method = "rrt_star"
 
+
 recorder = Mock()
+recorder.parent_history = []
 
 domain = Mock()
 domain.dims = 2
