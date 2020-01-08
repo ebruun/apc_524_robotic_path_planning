@@ -16,7 +16,7 @@ class Circle():
     """Constructor method
     """
     self.radius = shape_info["radius"]
-    self.center = np.asarray(shape_info["center"])
+    self.center = np.asarray(shape_info["center"]).flatten()
     self.centroid = shape_info["center"]
   
   def is_point_inside(self, point: np.ndarray)->bool:
@@ -50,22 +50,25 @@ class Circle():
         False -- The does not intersect
         
     """
-    assert(self.is_point_inside(point_1)==False)
-    assert(self.is_point_inside(point_2)==False)
+    assert self.is_point_inside(point_1)==False
+    assert self.is_point_inside(point_2)==False
+    
+    tmp_point_1 = point_1.copy()
+    tmp_point_2 = point_2.copy()
 
     # Move the coordinate system so that the center is at (0,0)
-    point_1[0] = point_1[0] - self.center[0]
-    point_1[1] = point_1[1] - self.center[1]
+    tmp_point_1[0] = tmp_point_1[0] - self.center[0]
+    tmp_point_1[1] = tmp_point_1[1] - self.center[1]
 
-    point_2[0] = point_2[0] - self.center[0]
-    point_2[1] = point_2[1] - self.center[1]
+    tmp_point_2[0] = tmp_point_2[0] - self.center[0]
+    tmp_point_2[1] = tmp_point_2[1] - self.center[1]
 
     # Check the link for the details of the implementation
-    a = (point_2[0]-point_1[0])**2 + (point_2[1]-point_1[1])**2
+    a = (tmp_point_2[0]-tmp_point_1[0])**2 + (tmp_point_2[1]-tmp_point_1[1])**2
 
-    b = 2.0*(point_1[0]*(point_2[0]-point_1[0])+point_1[1]*(point_2[1]-point_1[1]))
+    b = 2.0*(tmp_point_1[0]*(tmp_point_2[0]-tmp_point_1[0])+tmp_point_1[1]*(tmp_point_2[1]-tmp_point_1[1]))
 
-    c = point_1[0]**2 + point_1[1]**2 - self.radius**2
+    c = tmp_point_1[0]**2 + tmp_point_1[1]**2 - self.radius**2
 
     if(b**2 - 4.0*a*c < 0):
       return False
