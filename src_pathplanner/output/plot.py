@@ -9,6 +9,7 @@ import numpy as np
 import plotly as py
 
 from plotly import graph_objs as go
+from PIL import Image
 
 class Plot:
 	""" A class to plot the domain, obstacles, start and end points, as well as 
@@ -34,7 +35,7 @@ class Plot:
 		
 		if self.dims == 2:
 			
-			for obstacle in self.domain.obstacles:
+			for i,obstacle in enumerate(self.domain.obstacles):
 				if obstacle.name == "circle":
 					center = obstacle.center
 					x_min = center[0]-obstacle.radius
@@ -72,6 +73,22 @@ class Plot:
 							line_color="blue",
 							opacity=0.5,
 					))
+				elif obstacle.name == "free_form":
+					img = Image.open(obstacle.file)
+					img.save('obstacle'i'.png')
+					png_img = Image.open('obstacle'i'.png')
+					self.fig.add_layout_image(
+						dict(
+							source=png_img,
+							xref="x",
+							yref="y",
+							x=obstacle.x_min_val,
+							y=obstacle.y_max_val,
+							))
+
+				else:
+					raise Exception('The obstacle shape is not implemented')
+
 		else:
 			pass 
 

@@ -47,8 +47,11 @@ class Domain():
     elif(self.domain_shape=="circle"):
       assert(self.dim==2)
       self.domain = Circle(self.domain_info)
+    elif(self.domain_shape=="free_form"):
+      assert(self.dim==2)
+      self.domain = FreeForm2D(self.domain_info)
     else:
-      raise Exception('The obstacle shape is not implemented')
+      raise Exception('The domain shape is not implemented')
 
     # Assert that origin and goal are inside the domain
     assert(self.domain.is_point_inside(self.origin)==True)
