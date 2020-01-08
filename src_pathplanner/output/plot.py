@@ -26,33 +26,8 @@ class Plot:
 		self.title = filename
 		self.domain = domain
 		self.dims = domain.dims
-		# self.frames = []
-		# self.data = []
-		# self.layout = []
 
 		self.fig = go.Figure()
-		# self.figure = {'data': self.data,
-		# 		'layout': self.layout,
-		# 		'frames': self.frames}
-
-	def plot_domain(self):
-		"""  This function plots the shape of the domain.  """
-
-		#TO DO...
-		if self.dims == 2:  # plot in 2D 
-			range_x = self.domain.extents[0]
-			range_y = self.domain.extents[1]
-			self.fig.update_xaxes(range=range_x)
-			self.fig.update_yaxes(range=range_y)
-		
-		elif self.dims == 3: # plot in 3D
-			range_x = self.domain.extents[0]
-			range_y = self.domain.extents[1]
-			range_z = self.domain.extents[2]
-			self.fig.update_layout(scene = dict(aspectmode='data'))
-
-		else: 
-			print("Cannot plot in > 3 dimensions")
 		
 	def plot_obstacles(self):
 		"""  This function plots the obstacles in the domain.  """
@@ -162,7 +137,7 @@ class Plot:
 	def plot_solution_graph(self, solution=None):
 		"""  This function plots the solution graph if given. """
 		if solution == None:
-			pass
+			print("provide solution object as argument")
 
 		else:
 			vertices = solution.recorder.vertices 
@@ -262,7 +237,7 @@ class Plot:
 			else:  # can't plot in higher dimensions
 				print("Cannot plot in > 3 dimensions")
 
-	def set_axes(self):
+	def set_layout(self):
 
 		self.fig.update_layout(
 				title=self.title)

@@ -57,7 +57,7 @@ def run_program():
 	p1.plot_obstacles()
 	p1.plot_origin_goals()
 	p1.plot_solution_graph(PathPlan)
-	p1.set_axes()
+	p1.set_layout()
 	p1.draw()
 
 	Plot1.simple_plot1(d1,
