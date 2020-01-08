@@ -100,6 +100,9 @@ class FreeForm2D():
         False -- The does not intersect
         
     """
+    assert self.is_point_inside(point_1)==False
+    assert self.is_point_inside(point_2)==False
+    
     # Compute the number of points based on the hx value
     length_of_edge = np.linalg.norm(point_1-point_2)
     # Divide the edge into appropriate number of segments
