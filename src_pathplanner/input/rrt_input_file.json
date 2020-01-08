@@ -1,9 +1,8 @@
 {
 	"DomainInfo":{
 		"dim" : 2,
-		"shape_type": "rectangle",
-		"lower_left": [0.0, 0.0],
-		"upper_right": [3.0,4.0]
+		"shape_type": "circle",
+		"radius":5.0, "center":[1.5, 2.0]
 		},
 
 	"OriginGoalInfo":{
@@ -17,12 +16,14 @@
 	"ObstaclesInfo":{
 		"obstacle_1":{"dim":2, "shape_type": "circle", "radius":0.2, "center":[0.5,0.5]},
 		"obstacle_2":{"dim":2, "shape_type": "circle", "radius":0.2, "center":[1.5,3.5]},
-		"obstacle_3":{"dim":2, "shape_type": "circle", "radius":0.4, "center":[1.5,0.5]}
+		"obstacle_3":{"dim":2, "shape_type": "circle", "radius":0.4, "center":[1.5,0.5]},
+		"obstacle_4":{"dim":2, "shape_type": "rectangle", "lower_left": [2.0, 1.5],
+		"upper_right": [2.5,3.0]}
 		},
 
 	"RRTAlgorithmInfo":{
 		"method": "rrt_basic",
-		"n_trials": 10,
+		"n_trials": 1000,
 		"step_size": 0.2,
 		"dim": 2,
 		"neighborhood": 0.3

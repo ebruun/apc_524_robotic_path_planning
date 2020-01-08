@@ -36,13 +36,14 @@ class Plot:
 			
 			for obstacle in self.domain.obstacles:
 				if obstacle.name == "circle":
-					x_min = obstacle["center"][0]-obstacle["radius"]
-					x_max = obstacle["center"][0]+obstacle["radius"]
-					y_min = obstacle["center"][1]-obstacle["radius"]
-					y_max = obstacle["center"][1]+obstacle["radius"]
+					center = obstacle.center
+					x_min = center[0]-obstacle.radius
+					x_max = center[0]+obstacle.radius
+					y_min = center[1]-obstacle.radius
+					y_max = center[1]+obstacle.radius
 					self.fig.add_shape(
 						go.layout.Shape(
-							type = shape_type,
+							type = "circle",
 							xref="x",
 							yref="y",
 							fillcolor="blue",
@@ -52,7 +53,23 @@ class Plot:
 							y1=y_max,
 							line_color="blue"
 					))
-				#elif shape_type == :
+				elif obstacle.name == "rectangle":
+					ll_corner = obstacle.ll_corner
+					ur_corner = obstacle.ur_corner
+					extents = [[ll_corner[0],ur_corner[0]],[ll_corner[1],ur_corner[1]]]
+			
+					self.fig.add_shape(
+						go.layout.Shape(
+							type = "rect",
+							xref="x",
+							yref="y",
+							fillcolor="blue",
+							x0=ll_corner[0],
+							y0=ll_corner[1],
+							x1=ur_corner[0],
+							y1=ur_corner[1],
+							line_color="blue"
+					))
 		else:
 			pass 
 
@@ -84,17 +101,24 @@ class Plot:
 			# ))
 
 			for goal in self.domain.goals:
-				self.fig.add_shape(
-					go.layout.Shape(
-						type = goal[0],
-						xref="x",
-						yref="y",
-						x0=goal[1][0]-goal[2],
-						y0=goal[1][1]-goal[2],
-						x1=goal[1][0]+goal[2],
-						y1=goal[1][1]+goal[2],
-						line_color="green"
-				))
+				if goal.name == "circle":
+					center = goal.center
+					x_min = center[0]-goal.radius
+					x_max = center[0]+goal.radius
+					y_min = center[1]-goal.radius
+					y_max = center[1]+goal.radius
+					self.fig.add_shape(
+						go.layout.Shape(
+							type = "circle",
+							xref="x",
+							yref="y",
+							fillcolor="green",
+							x0=x_min,
+							y0=y_min,
+							x1=x_max,
+							y1=y_max,
+							line_color="green"
+					))
 
 			# self.fig.add_shape(
 			# 	go.layout.Shape(
@@ -249,7 +273,35 @@ class Plot:
 				title=self.title)
 
 		if self.dims == 2:  # plot in 2D 
-			range_x = self.domain.extents[0]
+			
+			if self.domain.domain_shape == "circle":
+				center = self.domain.domain.center
+				x_min = center[0]-self.domain.radius
+				x_max = center[0]+self.domain.radius
+				y_min = center[1]-self.domain.radius
+				y_max = center[1]+self.domain.radius
+				self.fig.add_shape(
+					go.layout.Shape(
+						type = "circle",
+						xref="x",
+						yref="y",
+						x0=x_min,
+						y0=y_min,
+						x1=x_max,
+						y1=y_max,
+						line=dict(
+			                color="Black",
+			                width=15
+        				)
+				))
+				extents = [[x_min,x_max][y_min,y_max]]
+
+			elif self.domain.domain_shape == "rectangle":
+				ll_corner = self.domain.domain.ll_corner
+				ur_corner = self.domain.domain.ur_corner
+				extents = [[ll_corner[0],ur_corner[0]],[ll_corner[1],ur_corner[1]]]
+			
+			range_x = extents[0]
 			self.fig.layout.update(
 				xaxis = dict(
 					range = range_x,
@@ -260,7 +312,7 @@ class Plot:
 					scaleratio = 1,
 				),
 			)
-			self.fig.update_yaxes(range=self.domain.extents[1])
+			self.fig.update_yaxes(range=extents[1])
 		
 		elif self.dims == 3: # plot in 3D
 			# range_x = self.domain.extents[0]
