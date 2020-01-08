@@ -61,7 +61,7 @@ class RRT_Star(RRT):
 		del self.neighbor_dist[:]
 
 		offset = self.neighbor_offset
-		neighbor_circle = Circle({'radius':offset*self.params.neighborhood, 'center':self.new_v})
+		neighbor_circle = Circle({'radius':offset*self.params["neighborhood"], 'center':self.new_v})
 		
 		indices_in_box = self.find_indices_in_extents()
 	
@@ -87,8 +87,8 @@ class RRT_Star(RRT):
 		"""
 
 		offset = self.neighbor_offset
-		hx = [(self.new_v[0] - offset*self.params.neighborhood), (self.new_v[0] + offset*self.params.neighborhood)]
-		hy = [(self.new_v[1] - offset*self.params.neighborhood), (self.new_v[1] + offset*self.params.neighborhood)]
+		hx = [(self.new_v[0] - offset*self.params["neighborhood"]), (self.new_v[0] + offset*self.params["neighborhood"])]
+		hy = [(self.new_v[1] - offset*self.params["neighborhood"]), (self.new_v[1] + offset*self.params["neighborhood"])]
 
 		a = self.recorder.vertices[:,0] > hx[0]
 		b = self.recorder.vertices[:,0] < hx[1]
