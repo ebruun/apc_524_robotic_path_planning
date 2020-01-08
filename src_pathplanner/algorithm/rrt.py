@@ -44,13 +44,15 @@ class RRT(ABC):
 
 	def is_new_edge_blocked(self,v1,v2):
 		for obstacle in self.domain_object.obstacles:
+			if(obstacle.is_point_inside(v1) or obstacle.is_point_inside(v2)):
+				return True
 			if(obstacle.is_intersected_by_edge(v1,v2)):
 				return True
 		return False
 
-	def inside_obstacles(self,obstacles,vertex):
-		for obstacle in obstacles:
-			if(obstacle.is_point_inside(vertex)):
-				return True
-		#print("not inside")
-		return False
+	# def inside_obstacles(self,obstacles,vertex):
+	# 	for obstacle in obstacles:
+	# 		if(obstacle.is_point_inside(vertex)):
+	# 			return True
+	# 	#print("not inside")
+	# 	return False
