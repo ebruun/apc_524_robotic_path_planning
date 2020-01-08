@@ -75,8 +75,8 @@ class Plot:
 					))
 				elif obstacle.name == "free_form":
 					img = Image.open(obstacle.file)
-					img.save('obstacle'i'.png')
-					png_img = Image.open('obstacle'i'.png')
+					img.save("obstacle{}.png".format(i))
+					png_img = Image.open("obstacle{}.png".format(i))
 					self.fig.add_layout_image(
 						dict(
 							source=png_img,
