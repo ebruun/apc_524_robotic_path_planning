@@ -50,11 +50,10 @@ def run_program():
 
 	domain_object = Domain(domain_info, obstacles_info, origin_goal_info)
 
+
 	print("3. Running Program")
 	PathPlan = Solution(rrt_algorithm_info,domain_object)
 	PathPlan.run_algorithm()
-
-	
 	PathPlan.process_vertex_list()
 
 	print("4. Showing Results")
@@ -64,7 +63,6 @@ def run_program():
 	# #print("\n\n Costs",PathPlan.recorder.costs)
 	# print("\n\n solution_path",PathPlan.solution_path)
 
-	
 	plot_object = Plot("test run", domain_object)
 	plot_object.plot_obstacles()
 	plot_object.plot_origin_goals()
@@ -78,6 +76,7 @@ def run_program():
 		PathPlan.recorder.vertices,
 		PathPlan.solution_path
 		)
+
 
 if __name__ == '__main__':
 	run_program()

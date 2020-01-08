@@ -21,6 +21,8 @@ class RRT_Star(RRT):
 		self.neighbor_indices = []
 		self.neighbor_dist = []
 
+		self.recorder.parents_history[0,0:2] = -1
+
 		self.toggle = 0 #Plot things
 
 
@@ -32,26 +34,30 @@ class RRT_Star(RRT):
 
 		while self.is_new_edge_blocked(self.recorder.vertices[self.new_parent],self.new_v):	
 			self.new_q = self.new_config()
-			self.new_v, self.new_parent, self.new_cost = self.new_vertex()				
+			self.new_v, self.new_parent, self.new_cost = self.new_vertex()			
 		
 		self.recorder.vertices[trial,:] = self.new_v
 
+		
 		self.plot_tests(trial,trial+1, self.toggle)
 
 		# New code for RRT_Star
-		print("Neighborhood calcs")
+		print("--Neighborhood calcs")
 		self.find_vertices_in_neighborhood()
 		self.new_parent,self.new_cost = self.find_parent_shortest_path()
 
 		self.recorder.parents[trial] = self.new_parent 
 		self.recorder.costs[trial] = self.update_path_cost(self.new_parent,self.new_cost)
 
+		self.recorder.parents_history[:,trial*2] = self.recorder.parents
 		self.plot_tests(trial+1,trial+1,self.toggle)
 
-		print("\nREWIRE")
+		print("--REWIRE")
 		self.rewire(trial)
 
+		self.recorder.parents_history[:,(trial*2 + 1)] = self.recorder.parents
 		self.plot_tests(trial+1,trial+1,self.toggle)
+
 
 
 	def find_vertices_in_neighborhood(self):
@@ -61,7 +67,10 @@ class RRT_Star(RRT):
 		del self.neighbor_dist[:]
 
 		offset = self.neighbor_offset
-		neighbor_circle = Circle({'radius':offset*self.params["neighborhood"], 'center':self.new_v})
+		neighbor_circle = Circle({
+			'shape_type':"circle",
+			'radius':offset*self.params["neighborhood"],
+			'center':self.new_v})
 		
 		indices_in_box = self.find_indices_in_extents()
 	
@@ -117,18 +126,18 @@ class RRT_Star(RRT):
 		for index,dist in zip(self.neighbor_indices, self.neighbor_dist):
 
 			cost = self.update_path_cost(index,dist)
-			print("\ncost to get from vertex",index, cost)
+			#print("\ncost to get from vertex",index, cost)
 
 			if cost > lowest_cost:
 				pass
 			else:
 				if not self.is_new_edge_blocked(self.new_v,self.recorder.vertices[index]):
-					print("lower cost, parent is now",index)
+					#print("lower cost, parent is now",index)
 					lowest_cost = cost
 					new_parent_index = index
 					new_parent_dist = dist
 
-		print("new parent index", new_parent_index, "with cost", new_parent_dist)
+		#print("new parent index", new_parent_index, "with cost", new_parent_dist)
 		return new_parent_index, new_parent_dist
 
 
@@ -136,14 +145,14 @@ class RRT_Star(RRT):
 		"""fill out
 		"""
 		
-		print("cost of vertex", trial, "is", self.recorder.costs[trial])
+		#print("cost of vertex", trial, "is", self.recorder.costs[trial])
 		for index,dist in zip(self.neighbor_indices, self.neighbor_dist):
 			
-			print("--to vertex:", index, self.recorder.costs[index], "is it more than", (self.recorder.costs[trial] + dist) )
+			#print("--to vertex:", index, self.recorder.costs[index], "is it more than", (self.recorder.costs[trial] + dist) )
 
 			if (self.recorder.costs[trial] + dist) < self.recorder.costs[index]:
 
-				print("do it....rewire index", self.recorder.parents[index], "to", trial )
+				#print("do it....rewire index", self.recorder.parents[index], "to", trial )
 
 				if not self.is_new_edge_blocked(self.new_v,self.recorder.vertices[index]):
 					self.recorder.costs[index] = self.recorder.costs[trial] + dist
@@ -152,7 +161,7 @@ class RRT_Star(RRT):
 
 	def plot_tests(self,t1,t2,toggle):
 		if toggle:
-			Plot().simple_plot3(
+			Plot1().simple_plot3(
 				self.domain,
 				self.recorder.parents,
 				self.recorder.vertices,

@@ -3,7 +3,6 @@
 
 import numpy as np
 
-
 def find_nearest_vertex(vertex_list,goal):
 	"""  This function finds how far the nearest vertex is to a goal.
 
