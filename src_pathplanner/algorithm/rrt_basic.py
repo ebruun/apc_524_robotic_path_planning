@@ -6,37 +6,25 @@ import numpy as np
 from algorithm.rrt import RRT
 
 class RRT_Basic(RRT):
-	""" A class for RRT algorithm.
 
-	Saving
-		the new solution to the specified iteration number. The type of algorithm chosen
-		is set by :obj:`params` 
+  """ A class for RRT algorithm.
 
-	"""
-	def __init__(self,domain,recorder,params):
-		super().__init__(domain,recorder,params)
+  Saving
+    the new solution to the specified iteration number. The type of algorithm chosen
+    is set by :obj:`params` 
 
+  """
+  def __init__(self,domain_object,recorder,params):
+    super().__init__(domain_object,recorder,params)
 
-	def rrt_step(self,trial):
-		print("Vertex", trial+1)
-		
-		self.new_q = self.new_config()
-		self.new_v, self.new_parent, self.new_cost = self.new_vertex()
+  def rrt_step(self,trial):
+    self.new_q = self.new_config()
+    self.new_v, self.new_parent, self.new_cost = self.new_vertex()
+    while self.is_new_edge_blocked(self.recorder.vertices[self.new_parent],self.new_v):  
+      self.new_q = self.new_config()
+      self.new_v, self.new_parent, self.new_cost = self.new_vertex()
 
-		if self.is_new_edge_blocked():
-			self.rrt_step(trial)
-
-		self.recorder.vertices[trial,:] = self.new_v
-		self.recorder.parents[trial] = self.new_parent
-		self.recorder.costs[trial] = self.new_cost
-
-
-	def new_config(self):
-		return super().new_config()
-
-	def new_vertex(self):
-		return super().new_vertex()
-
-	def is_new_edge_blocked(self):
-		return super().is_new_edge_blocked()
+    self.recorder.vertices[trial,:] = self.new_v
+    self.recorder.parents[trial] = self.new_parent
+    self.recorder.costs[trial] = self.recorder.costs[self.new_parent] + self.new_cost
 

@@ -8,7 +8,8 @@ from algorithm.rrt_star import RRT_Star
 params = Mock()
 params.dims = 2
 params.step_size = 0.2
-params.method = "rrt_basic"
+params.neighborhood = 0.3
+params.method = "rrt_star"
 
 recorder = Mock()
 
@@ -22,7 +23,7 @@ domain.obstacles = [
 				("circle", np.array([1.5, 0.5]), 0.40)
 				]
 
-class TestRRT_Basic(unittest.TestCase):
+class TestRRT_Star(unittest.TestCase):
 	def setUp(self):
 
 		recorder.vertices = np.zeros((6,2), dtype=float)

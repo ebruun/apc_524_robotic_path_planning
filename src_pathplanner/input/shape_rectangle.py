@@ -16,8 +16,8 @@ class Rectangle():
     This is the constructor of the the rectangle class. A rectangle object is initialized by specifying the lower left corner and upper right corner points.
 
     """
-    self.ll_corner = shape_info['lower_left']
-    self.ur_corner = shape_info['upper_right']
+    self.ll_corner = np.asarray(shape_info['lower_left'])
+    self.ur_corner = np.asarray(shape_info['upper_right'])
     # Assert the order of points
     assert(self.ll_corner[0] < self.ur_corner[0])
     assert(self.ll_corner[1] < self.ur_corner[1])

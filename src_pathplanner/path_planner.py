@@ -1,5 +1,5 @@
 # path_planner.py
-# Author(s): Edvard Bruun
+# Author(s): Edvard Bruun, Vivek Kumar
 
 """
 The core module of the project and executes the program
@@ -7,8 +7,16 @@ The core module of the project and executes the program
 imports...
 
 """
+# Python imports
+import sys
+import time
+
+# Import inputs
+from input.parse_data_class import ParseDataJSON
+from input.domain_class import Domain
 
 from solver.solution import Solution
+<<<<<<< HEAD
 from input.params import ParamsRRT, ParamsOriginGoal, ParamsDomain
 from input.domain import Domain
 from output.plot import Plot
@@ -28,24 +36,32 @@ def run_program():
 
 	"""
 
-	print("1. Parameters")
-	input_file = "parameters.txt"
+	print("1. Reading Parameters")
+	# The input file
+	input_file = "./input/rrt_input_file.json"
+	# Parsed JSON data
+	program_input = ParseDataJSON(input_file)
+	program_input.parse_data()
 
-	p1 = ParamsRRT(input_file)
-	p2 = ParamsDomain(input_file)
-	p3 = ParamsOriginGoal(input_file)
-	
+	# Split up the parsed input
+	domain_info = program_input.data_dict["DomainInfo"]
+	origin_goal_info = program_input.data_dict["OriginGoalInfo"]
+	obstacles_info = program_input.data_dict["ObstaclesInfo"]
+	rrt_algorithm_info = program_input.data_dict["RRTAlgorithmInfo"]
+
 	print("2. Create Domain")
-	d1 = Domain(p2,p3)
+
+	domain_object = Domain(domain_info, obstacles_info, origin_goal_info)
 
 	print("3. Running Program")
-	PathPlan = Solution(p1,d1)
-
+	PathPlan = Solution(rrt_algorithm_info,domain_object)
 	PathPlan.run_algorithm()
+
+	
 	PathPlan.process_vertex_list()
 
-
-	print("3. Showing Results")
+<<<<<<< HEAD
+	print("4. Showing Results")
 
 	print("\n\n Vertices",PathPlan.recorder.vertices)
 	print("\n\n Parents",PathPlan.recorder.parents)
@@ -60,10 +76,15 @@ def run_program():
 	p1.set_layout()
 	p1.draw()
 
-	Plot1.simple_plot1(d1,
+=======
+
+	Plot1().simple_plot1(
+		domain_object,
 		PathPlan.recorder.parents,
 		PathPlan.recorder.vertices,
-		PathPlan.solution_path)
+		PathPlan.solution_path
+		)
+>>>>>>> development
 
 if __name__ == '__main__':
 	run_program()

@@ -12,10 +12,11 @@ class ParamsRRT:
 	"""
 
 	filename = "default_file.txt"
-	method = "rrt_basic"
-	#method = "rrt_star"
-	n_trials = 200
+	#method = "rrt_basic"
+	method = "rrt_star"
+	n_trials = 2000
 	step_size = 0.2
+	neighborhood = 0.30
 	dims = 2
 
 	def __init__(self,file=None):
@@ -43,9 +44,9 @@ class ParamsOriginGoal:
 
 	filename = "default_file.txt"
 
-	origin = np.array([0.1, 0.1])
+	origin = np.array([1.0, 0.2])
 	goal = [
-			("circle", np.array([0.3, 2.1]), 0.2),
+			("circle", np.array([0.6, 2.1]), 0.20),
 			("circle", np.array([2.5, 3.5]), 0.10)
 			]
 
@@ -84,9 +85,9 @@ class ParamsDomain:
 	obstacles = [
 				#("rectangle", np.array([2.0, 2.5]), (0.2,0.2)),
 				#("rectangle", np.array([1.0, 2.3]), (0.3,0.4)),
-				("circle", np.array([0.5, 0.5]), 0.20),
+				("circle", np.array([1.0, 0.5]), 0.20),
 				("circle", np.array([1.5, 3.5]), 0.20),
-				("circle", np.array([1.5, 0.5]), 0.40)
+				("circle", np.array([1.5, 0.5]), 0.10)
 				]
 
 	def __init__(self,file=None):

@@ -8,21 +8,38 @@ class Edge():
 
 	"""
 
+	#splitting the line between two vertices into points to check
+	######################
+	# DELETE THIS ONCE .is_intersected_by_edge() IMPLEMENTED
+	######################
 	n_divisions = 4
 
 	@classmethod
 	def is_colliding(cls, v1, v2, obstacles):
-		#print("New Edge")
+		
+		##############
+		# REPLACE WITH .is_intersected_by_edge()
+		# CREATE A LOOP HERE TO LOOK THROUGH ALL THE OBSTACLES
+		# INSTEAD OF DOING THAT IN THE FUNCTION BELOW
+		# RETURN = FALSE (not inside)
+		# TRUE = (inside), terminate loop
+		##############
 
 		edge_points = np.linspace(v1,v2,Edge.n_divisions)
 
 		for point in edge_points:
 			if cls.inside_obstacles(obstacles,point):
+				#print("inside")
 				return True
 
+		#print("not inside")
 		return False
 
 
+
+	######################
+	# DELETE THIS FUNCTION ONCE .is_intersected_by_edge() IMPLEMENTED
+	######################
 	def inside_obstacles(obstacles,vertex):
 		"""
 		 Check if inside obstacles
