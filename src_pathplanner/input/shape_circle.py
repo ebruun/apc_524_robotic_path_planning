@@ -16,7 +16,7 @@ class Circle():
     """Constructor method
     """
     self.radius = shape_info["radius"]
-    self.center = shape_info["center"]
+    self.center = np.asarray(shape_info["center"])
     self.centroid = shape_info["center"]
   
   def is_point_inside(self, point: np.ndarray)->bool:
@@ -67,7 +67,6 @@ class Circle():
 
     c = point_1[0]**2 + point_1[1]**2 - self.radius**2
 
-    print(b**2 - 4.0*a*c)
     if(b**2 - 4.0*a*c < 0):
       return False
 
@@ -77,7 +76,6 @@ class Circle():
 
     t_1 = (-b + math.sqrt(b**2 -4.*a*c))/(2.0*a)
     t_2 = (-b - math.sqrt(b**2 -4.*a*c))/(2.0*a)
-    print(t_1, t_2)
     if((0 <= t_1 <=1) and (0 <= t_2 <=1)):
       return True
 

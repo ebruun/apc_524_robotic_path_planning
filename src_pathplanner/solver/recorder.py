@@ -33,14 +33,14 @@ class Recorder:
 
 		self.params = params
 
-		self.vertices = np.zeros((self.params.n_trials,self.params.dims),
+		self.vertices = np.zeros((self.params["n_trials"],self.params["dim"]),
 			dtype=float)
 		self.vertices.fill(np.nan)
 
-		self.parents = np.zeros(self.params.n_trials, dtype=float)
+		self.parents = np.zeros(self.params["n_trials"], dtype=float)
 		self.parents.fill(np.nan)
 
-		self.costs = np.zeros(self.params.n_trials, dtype=float)
+		self.costs = np.zeros(self.params["n_trials"], dtype=float)
 		self.costs.fill(np.nan)
 
 

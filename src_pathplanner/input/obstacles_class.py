@@ -25,27 +25,25 @@ class Obstacle():
     """Constructor method
     """
     self.obstacle_info = obstacle_info
+    self.dim = self.obstacle_info["dim"]
+    self.obstacle_shape = self.obstacle_info["shape_type"]
+
     self.origin = np.asarray(origin_goal_info["origin"])
-    self.goal = np.asarray(origin_goal_info["goal"])
 
     self.create_obstacle()
 
   def create_obstacle(self):
     """Returns the obstacle object
     """
-    if(self.obstacle_info["shape"]=="rectangle"):
-      vertices = np.asarray(self.obstacle_info["vertices"])
-      self.obstacle = Rectangle(vertices)
-    elif(self.obstacle_info["shape"]=="circle"):
-      radius = self.obstacle_info["radius"]
-      center = np.asarray(self.obstacle_info["center"])
-      self.obstacle = Circle(radius, center)
-    elif(self.obstacle_info["shape"]=="free_form"):
-      self.obstacle = FreeForm2D(self.obstacle_info["bitmap_file"])
+    if(self.obstacle_shape=="rectangle"):
+      self.obstacle = Rectangle(self.obstacle_info)
+    elif(self.obstacle_shape=="circle"):
+      self.obstacle = Circle(self.obstacle_info)
+    elif(self.obstacle_shape=="free_form"):
+      self.obstacle = FreeForm2D(self.obstacle_info)
     else:
       raise Exception('The obstacle shape is not implemented')
 
     # Assert that origin and domain are not inside the obstacle
     assert(self.obstacle.is_point_inside(self.origin)==False)
-    assert(self.obstacle.is_point_inside(self.goal)==False)
 
