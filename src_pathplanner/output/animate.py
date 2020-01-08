@@ -6,11 +6,11 @@ Plotting class
 """
 
 import numpy as np
-import plotly as py
+import plotly.express as px
 
 from plotly import graph_objs as go
 
-class Plot:
+class Animate:
 	""" A class to plot the domain, obstacles, start and end points, as well as 
 		optionally the solution graph of the path planning algorithm.	
 	"""
@@ -161,7 +161,24 @@ class Plot:
 						showlegend=False
 					))
 				
-				#self.data.append(graph)
+				for i, parent in enumerate(parents):
+					if parent < 0:
+						continue
+					self.fig.add_trace(go.Scatter(
+						x=[vertices[i, 0],vertices[parent, 0]],
+						y=[vertices[i, 1],vertices[parent, 1]],
+						line=dict(
+							color="black",
+							width=2
+						),
+						mode='lines+markers',
+						showlegend=False
+					))
+				frames = [dict(data= [dict(type='scatter',
+				                           x=df.Date[:k+1],
+				                           y=low[:k+1])],
+						               traces= [0],
+						              )for k  in  range(1, len(low)-1)] 
 
 				#Plot final path 
 		
@@ -253,6 +270,22 @@ class Plot:
 					scaleanchor = "x",
 					scaleratio = 1,
 				),
+				showlegend=False,
+				hovermode='closet',
+				updatemenus=[dict(type='buttons', showactive=False,
+                                y=1.05,
+                                x=1.15,
+                                xanchor='right',
+                                yanchor='top',
+                                pad=dict(t=0, r=10),
+                                buttons=[dict(label='Play',
+                                              method='animate',
+                                              args=[None, 
+                                                    dict(frame=dict(duration=3, 
+                                                                    redraw=False),
+                                                         transition=dict(duration=0),
+                                                         fromcurrent=True,
+                                                         mode='immediate')])])]
 			)
 			self.fig.update_yaxes(range=self.domain.extents[1])
 		
@@ -271,55 +304,5 @@ class Plot:
 		"""
 		py.offline.plot(self.fig, filename=self.filename, auto_open=auto_open)
 
-	def animate_solution_graph(self, solution=None):
-		"""
-		Animates the file with a simple play button
-		"""
-		if solution == None:
-			pass
 
-		else:
-			vertices = solution.recorder.vertices 
-			parents = [int(parent) for parent in solution.recorder.parents] 
-			path_verts = solution.solution_path
-
-			if self.dims == 2:  # plot in 2D
-				
-				#Plot entire graph
-				for i, parent in enumerate(parents):
-					if parent < 0:
-						continue
-					self.fig.add_frames(go.Scatter(
-						x=[vertices[i, 0],vertices[parent, 0]],
-						y=[vertices[i, 1],vertices[parent, 1]],
-						line=dict(
-							color="black",
-							width=2
-						),
-						mode='lines+markers',
-						showlegend=False
-					))
-				
-
-				#Plot final path 
-		
-				for path in path_verts:
-					if any(np.isnan(path)):
-						continue
-					for i in path:
-						if (parents[i] < 0):
-							continue
-						self.fig.add_frames(go.Scatter(
-							x=[vertices[i, 0], vertices[parents[i], 0]],
-							y=[vertices[i, 1], vertices[parents[i], 1]],
-							line=dict(
-								color="red",
-								width=4
-							),
-							mode='lines+markers',
-							showlegend=False
-						))
-
-			else:
-				pass
 
