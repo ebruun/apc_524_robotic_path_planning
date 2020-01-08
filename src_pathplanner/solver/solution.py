@@ -87,8 +87,6 @@ class Solution:
 
 		for trial in range(1,self.params["n_trials"]):
 			self.algorithm.rrt_step(trial)
-			
-
 
 	def process_vertex_list(self):
 		"""  This function post-processes the full vertex list resulting from  completing the algorithm.
@@ -97,8 +95,8 @@ class Solution:
 		Calls the :meth:`~solver.solution.Solution.find_path()` function in the loop. Finds the path from the origin to the vertex to reach the goal.
 		"""
 
-		for i in range(len(self.domain_object.goals)):
-			index = self.check_if_goal_reached(self.domain_object.goals[i])
+		for goal in self.domain_object.goals:
+			index = self.check_if_goal_reached(goal)
 			self.solution_path.append(self.find_path(index))
 
 
@@ -121,12 +119,10 @@ class Solution:
 				break
 			else:
 				if(goal.is_point_inside(vertex)):
-					index = i
-					distance = np.linalg.norm(goal.center - vertex)
-					return index
-				else:
-					index = np.nan
-					return index
+					return i
+
+		index = np.nan
+		return index
 
 
 	def find_path(self,index):
