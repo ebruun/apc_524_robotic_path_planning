@@ -45,11 +45,11 @@ class Plot():
 
 
 		for o in domain_object.obstacles:
-			ax.add_artist(plt.Circle(tuple(np.asarray(o.center).flatten()), o.radius))
+			ax.add_artist(plt.Circle(tuple(np.asarray(o.center)), o.radius))
 
 
 		for goal in domain_object.goals:
-			ax.add_artist(plt.Circle(tuple(np.asarray(goal.center).flatten()), goal.radius,
+			ax.add_artist(plt.Circle(tuple(np.asarray(goal.center)), goal.radius,
 				ec=(0.004, 0.596, 0.105),
 				fc=(1, 1, 1)))
 
