@@ -1,7 +1,7 @@
 solver package
 ==============
 
-This package does...
+This package contains the classes to execute and store the results of the path planning problem on the specified domain with the specified algorithm.
 
 
 solution module

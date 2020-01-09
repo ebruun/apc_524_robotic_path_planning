@@ -16,7 +16,7 @@ params module
 domain module
 *************
 
-.. autoclass:: input.domain.Domain
+.. autoclass:: input.domain_class.Domain
    :members:
    :special-members:
    :exclude-members: __weakref__
