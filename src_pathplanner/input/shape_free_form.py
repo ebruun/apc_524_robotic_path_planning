@@ -127,7 +127,7 @@ class FreeForm2D(Shape):
     """Generates a random point in the shape free form
 
     Returns:
-      A new point::
+      A new point
 
     """
     random_point = (self.all_points_array[np.random.randint(self.all_points_array.shape[0], size=1), :]).flatten()

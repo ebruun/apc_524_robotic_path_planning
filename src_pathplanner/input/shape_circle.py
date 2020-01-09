@@ -91,7 +91,7 @@ class Circle(Shape):
     """Generates a random point in the circle
 
     Returns:
-      A new point::
+      A new point
         
     """
     r = self.radius*math.sqrt(random.random())

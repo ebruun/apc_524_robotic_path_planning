@@ -1,11 +1,11 @@
 algorithm package
 =================
 
-This package does...
+This package contains the classes that define the different RRT algorithms used to solve the path planning problem.
 
 
-algorithm module
-****************
+abstract rrt module
+*******************
 
 .. automodule:: algorithm.rrt
    :members:
