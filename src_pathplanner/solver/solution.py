@@ -6,7 +6,7 @@ Imports the :class:`~solver.recorder.Recorder` class
 
 Imports the :class:`~algorithm.rrt_basic.RRT_Basic` class
 
-Imports the :class:`~algorithm.rrt_basic.RRT_Star` class
+Imports the :class:`~algorithm.rrt_star.RRT_Star` class
 
 Imports the :func:`~algorithm.vertex.find_nearest_vertex` function
 """
@@ -29,10 +29,10 @@ class Solution:
 	def __init__(self,params,domain_object):
 		"""Initialize the Solution class.
 
-		The intialization consists of creating new Recorder and Stepper objects, which are initialized based on the params object.
+		The intialization consists of creating new Recorder object, which is initialized based on the params object passed.
 
 		Note:
-			The input parameters are assigned to instance variables with same name.
+			The input parameters obkect is assigned to an instance attribute with same name.
 
 		Parameters:
 			params (:obj:`~input.params.ParamsRRT` object):
