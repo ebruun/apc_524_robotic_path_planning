@@ -99,7 +99,7 @@ class Plot:
 					raise Exception('The obstacle shape is not implemented')
 
 		else:
-			pass 
+			raise Exception('Plotting in > 2 dimensions is not yet implemented')
 
 	def plot_origin_goals(self):
 		"""  This function plots the origin point and goal points/shapes.  """
@@ -108,11 +108,9 @@ class Plot:
 			self.fig.add_trace(go.Scatter(
 				x = [self.domain.origin[0]],
 				y = [self.domain.origin[1]],
-				line=dict(
-					color="orange",
-					width=10
-				),
 				mode="markers",
+				marker=dict(color="orange",
+				size=10),
 				showlegend=False
 			))
 
@@ -177,7 +175,6 @@ class Plot:
 
 				else:
 					raise Exception('The obstacle shape is not implemented')
-
 
 
 		elif self.dims == 3:

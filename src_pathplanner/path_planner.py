@@ -74,6 +74,7 @@ def run_program():
 	plot_object.plot_solution_graph(PathPlan)
 	plot_object.set_layout()
 	plot_object.draw()
+	print("Finished! See plot in output folder")
 
 	# Plot1().simple_plot1(
 	# 	domain_object,
