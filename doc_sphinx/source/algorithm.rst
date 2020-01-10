@@ -17,7 +17,7 @@ abstract rrt module
 rrt_basic module
 ****************
 
-.. autoclass:: algorithm.rrt_basic.RRT_Basic
+.. automodule:: algorithm.rrt_basic
    :members:
    :show-inheritance:
    :special-members:
@@ -27,7 +27,7 @@ rrt_basic module
 rrt_star module
 ***************
 
-.. autoclass:: algorithm.rrt_star.RRT_Star
+.. automodule:: algorithm.rrt_star
    :members:
    :show-inheritance:
    :special-members:

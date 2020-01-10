@@ -28,7 +28,7 @@ class Circle(Shape):
     Computes the distance of the point from the center of the circle and compares it with the radius
     
     Returns:
-      bool.::
+      bool::
 
         True -- Point is inside
         False -- Point is not inside

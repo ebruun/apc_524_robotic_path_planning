@@ -55,7 +55,7 @@ class RRT(ABC):
 			new_parent (:obj:`int`):
 				A single value representing the parent of the new vertex generated during an iteration. To be saved to the :obj:`~solver.recorder.Recorder` object.
 			new_cost (:obj:`float`):
-				A single value representing the total path cost to reach the new vertex generated during an iteration. To be saved to the :obj:`~solver.recorder.Recorder` object.					
+				A single value representing the incremental path cost (distance) from the parent to the new vertex generated during an iteration.				
 
 		"""		
 		self.domain_object = domain_object
@@ -73,16 +73,15 @@ class RRT(ABC):
 
 	@abstractmethod
 	def rrt_step(cls, i):
-		""" This function executes a single step in the specified algorithm.
+		""" This function executes a single step in the specified algorithm. Empty placeholder in abstract class definition since each algorithm defines a step in a different way.
 
-		This function is empty as each algorithm defines a step in a different way.
 		"""
 		pass
 
 	def new_config(self):
 		""" This function returns a new random configuration point found in the domain area.
 
-		Calls the :func:`~algorithm.vertex.Vertex.new_config` function.
+		Calls the :meth:`~algorithm.vertex.Vertex.new_config()` method.
 
 		Returns:
 			new_q (:obj:`numpy.ndarray` of :obj:`float`): The coordinates of the new random configuration.
@@ -91,7 +90,16 @@ class RRT(ABC):
 		return Vertex.new_config(self.domain_object)
 
 	def new_vertex(self):
-		""" new vertex function
+		""" This function returns a new vertex based on the random configuration generated.
+
+		Calls the :meth:`~algorithm.vertex.Vertex.new_vertex()` method.
+
+		Returns:
+			new_v (:obj:`numpy.ndarray` of :obj:`float`): The coordinates of the new vertex.
+
+			new_parent (:obj:`int`): The index of the new vertex's parent.
+
+			new_cost (:obj:`int`): The distance between the parent and the new vertex.
 
 		"""
 		return Vertex.new_vertex(
@@ -101,12 +109,40 @@ class RRT(ABC):
 		)
 
 	def update_path_cost(self,new_parent,new_cost):
-		""" Update path costs
+		""" This function returns the updated total path cost to a vertex.
+
+		Given a parent index and new incremental distance, the total path cost for the new vertex is found  by referencing the total cost up to the parent froms the `costs` list in the :obj:`~solver.recorder.Recorder` object and adding the new distance to this value.
+		
+		Example::
+
+			new_total_cost = self.recorder.costs[new_parent] + new_cost
+
+		Parameters:
+			new_parent (:obj:`int`): index of the parent for the new vertex.
+			new_cost (:obj:`float`): incrememntal cost to go from parent to new vertex.
+
+		Returns:
+			new_total_cost (:obj:`float`): The total cost to reach the new vertex.
 
 		"""
 		return self.recorder.costs[new_parent] + new_cost
 
+
 	def is_new_edge_blocked(self,v1,v2):
+		""" This function checks whether a path between two vertices (edge) is blocked by an obstacle.
+		
+		Loops through the number of obstacles specified in the domain and checks whether the specified start and end points of an edge will be blocked. Calls the the :meth:`~input.shape.Shape.is_point_inside()` and :meth:`~input.shape.Shape.is_intersected_by_edge()` methods for the specific obstacle.
+
+		Parameters:
+			v1 (:obj:`numpy.ndarray` of :obj:`float`): coordinates of start vertex of a line.
+			v2 (:obj:`numpy.ndarray` of :obj:`float`): coordinates of end vertex of a line.
+
+		Returns:
+			bool::
+
+				True -- the edge is blocked
+				False -- the edge is not blocked
+		"""
 		for obstacle in self.domain_object.obstacles:
 			if(obstacle.is_point_inside(v1) or obstacle.is_point_inside(v2)):
 				return True

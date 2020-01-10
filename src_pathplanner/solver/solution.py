@@ -8,7 +8,6 @@ Imports the :class:`~algorithm.rrt_basic.RRT_Basic` class
 
 Imports the :class:`~algorithm.rrt_star.RRT_Star` class
 
-Imports the :func:`~algorithm.vertex.find_nearest_vertex` function
 """
 import numpy as np
 from sys import exit
@@ -16,7 +15,6 @@ from sys import exit
 from solver.recorder import Recorder
 from algorithm.rrt_basic import RRT_Basic
 from algorithm.rrt_star import RRT_Star
-from algorithm.vertex import find_nearest_vertex
 
 class Solution:
 	"""This class executes the path planning algorithm, and evaluates the completion of the path from the origin to the goals.
@@ -110,7 +108,7 @@ class Solution:
 	def check_if_goal_reached(self,goal):
 		"""  This function checks which vertices have reached a single goal.
 
-		Uses the goal object's `.is_point_inside()` function to find and save all the vertices that are inside and hence have reached the goal.
+		Uses the goal object's :meth:`~input.shape.Shape.is_point_inside()` method to find and save all the vertices that are inside and hence have reached the goal.
 
 		Parameters:
 			goal: A shape object specfied as the target for the algorithm.	

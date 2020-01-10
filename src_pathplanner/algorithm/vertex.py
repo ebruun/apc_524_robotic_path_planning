@@ -46,11 +46,17 @@ class Vertex():
 
 	@classmethod
 	def new_config(cls,domain_object):
+		"""fill out
+
+		"""
 		new_q = domain_object.domain.sample_random_point()
 		return new_q
 
 	@classmethod
 	def new_vertex(cls, vertices, new_q, step_size):
+		"""fill out
+		
+		"""
 		index, distance = find_nearest_vertex(vertices, new_q)
 		v_near = vertices[index]
 

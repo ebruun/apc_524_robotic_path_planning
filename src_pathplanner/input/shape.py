@@ -12,6 +12,14 @@ class Shape(ABC):
 	
 	@abstractmethod
 	def is_point_inside(self):
+		""" Abstract method for checking if point falls inside a shape.
+		"""
+		pass
+
+	@abstractmethod
+	def is_intersected_by_edge(self):
+		""" Abstract method for checking if a line is intersected by a shape.
+		"""
 		pass
 
 		

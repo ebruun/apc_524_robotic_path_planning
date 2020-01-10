@@ -1,75 +1,153 @@
 # rrt_star.py
 # Author(s): Edvard Bruun
 
+"""
+Imports the :class:`~algorithm.rrt.RRT` class
+
+Imports the :class:`~input.shape_circle.Circle` class
+
+"""
+
 import numpy as np
 
 from algorithm.rrt import RRT
 from input.shape_circle import Circle
 
-#Delete later
+############### DELETE THIS ##############
 from output.plot1 import Plot1
 import matplotlib.pyplot as plt
+############### DELETE THIS ##############
 
 class RRT_Star(RRT):
-	""" A class for RRT algorithm.
+	""" A class for the RRT Star algorithm, which inherits from the :class:`~algorithm.rrt.RRT` abstract class.
 
 	"""
 
-	def __init__(self,domain,recorder,params):
-		super().__init__(domain,recorder,params)
+	def __init__(self,domain_object,recorder,params):
+		"""Initializes with abstract base class definition.
+		
+		Additional variables are initialized for the RRT Star algorithm. The first entry in any additional :class:`~solver.recorder.Recorder` object attributes are initialized.
+
+		Example::
+
+			self.recorder.parents_history[0,0:2] = -1	
+
+		Attributes:
+			neighbour_offset (:obj:`float`):
+				A 10% increase modifier. Used to define the rectangular extents around a new vertex that will be used to select a subset of vertices to check if they are inside the circular neighborhood.
+
+			neighbor_indices (:obj:`list` of :obj:`int`): 
+				A list of the indices of the vertices that are found in the neighborhood of the newly generated vertex.
+
+			neighbor_dist (:obj:`list` of :obj:`float`): 
+				A list of the incremental path costs from all neighboring vertices to the newly generated vertex.	
+
+		"""
+		super().__init__(domain_object,recorder,params)
 		self.neighbor_offset = 1.1 #10% larger radius to look in
 		self.neighbor_indices = []
 		self.neighbor_dist = []
 
 		self.recorder.parents_history[0,0:2] = -1
 
+		############### DELETE THIS ##############
 		self.toggle = 0 #Plot things
+		############### DELETE THIS ##############
 
 
 	def rrt_step(self,trial):
+		"""This function performs a single step/iteration using the RRT Star algorithm.
+
+		Notes::
+
+			Step 1. Find new configuration
+
+			Step 2. Turn new configuration into a new vertex
+
+			Step 3. Keep sampling new configurations until a new vertex creates a free edge
+			
+			Step 4. Record the iteration data (update: recorder.vertices)
+
+			Step 5. Find the neighboring vertices in a radius around the new vertex
+
+			Step 6. Connect the new vertex to a neighboring vertex that will lead to the shortest total path
+
+			Step 7. Record the iteration data (update: recorder.parents, recorder.parents_history, recorder.costs lists)
+
+			Step 8. Optimize the current solution by rewiring the vertex/edge graph to shorten paths
+
+			Step 9. Record the iteration data (update: recorder.parents_history list)
+
+		"""
 		print("\nVertex", trial+1)
-		
+
+		# Step 1. Find new configuration
 		self.new_q = self.new_config()
+
+		# Step 2. Turn new configuration into a new vertex
 		self.new_v, self.new_parent, self.new_cost = self.new_vertex()
 
+		# Step 3. Keep sampling new configurations until a free edge is created with new vertex
 		while self.is_new_edge_blocked(self.recorder.vertices[self.new_parent],self.new_v):	
 			self.new_q = self.new_config()
 			self.new_v, self.new_parent, self.new_cost = self.new_vertex()			
 		
+		# Step 4. Record the iteration data (update: recorder.vertices list)
 		self.recorder.vertices[trial,:] = self.new_v
 
-		
-		self.plot_tests(trial,trial+1, self.toggle)
 
-		# New code for RRT_Star
+		############### DELETE THIS ##############
+		self.plot_tests(trial,trial+1, self.toggle)
+		############### DELETE THIS ##############
+
+
+		# Step 5. Find the neighboring vertices in a radius around the new vertex 
 		print("--Neighborhood calcs")
 		self.find_vertices_in_neighborhood()
+
+		# Step 6. Connect the new vertex to a neighboring vertex that will lead to the shortest total path
 		self.new_parent,self.new_cost = self.find_parent_shortest_path()
 
+		# Step 7. Record the iteration data (update: recorder.parents, recorder.parents_history, recorder.costs lists)
 		self.recorder.parents[trial] = self.new_parent 
-		self.recorder.costs[trial] = self.update_path_cost(self.new_parent,self.new_cost)
-
 		self.recorder.parents_history[:,trial*2] = self.recorder.parents
-		self.plot_tests(trial+1,trial+1,self.toggle)
+		self.recorder.costs[trial] = self.update_path_cost(self.new_parent,self.new_cost)
+		
 
+		############### DELETE THIS ##############
+		self.plot_tests(trial+1,trial+1,self.toggle)
+		############### DELETE THIS ##############
+
+
+		# Step 8. Optimize the current solution by rewiring the vertex/edge graph to shorten paths
 		print("--REWIRE")
 		self.rewire(trial)
 
+		# Step 9. Record the iteration data (update: recorder.parents_history list)
 		self.recorder.parents_history[:,(trial*2 + 1)] = self.recorder.parents
-		self.plot_tests(trial+1,trial+1,self.toggle)
 
+
+		############### DELETE THIS ##############
+		self.plot_tests(trial+1,trial+1,self.toggle)
+		############### DELETE THIS ##############
 
 
 	def find_vertices_in_neighborhood(self):
-		"""fill out
+		""" This function finds the indices and distances to vertices that are found within a radius of the new vertex.
+
+		A :class:`~input.shape_circle.Circle` object is initialized with the neighborhood distance specified by the user as its radius. The :meth:`~input.shape_circle.Circle.is_point_inside()` is used to check which vertices fall inside this circular neighborhood.
+		
+		To reduce the number of points that need to be checked, the :meth:`~algorithm.rrt_star.RRT_Star.find_indices_in_extents()` is used to a find a subset of vertices.
+
+		Indices of neighboring vertices are appended to the `neighbor_indices` list. Distances from the new vertex to the neighboring vertex are saved the the `neighbor_dist` list.
+
 		"""
 		del self.neighbor_indices[:]
 		del self.neighbor_dist[:]
 
-		offset = self.neighbor_offset
 		neighbor_circle = Circle({
 			'shape_type':"circle",
-			'radius':offset*self.params["neighborhood"],
+			'radius':self.params["neighborhood"],
 			'center':self.new_v})
 		
 		indices_in_box = self.find_indices_in_extents()
@@ -79,7 +157,6 @@ class RRT_Star(RRT):
 			point = self.recorder.vertices[index,:]
 
 			if neighbor_circle.is_point_inside(point):
-				#print("yes, in the hood")
 
 				dist_new = np.linalg.norm(point - self.new_v)
 				dist_new = round(dist_new,6)
@@ -87,14 +164,17 @@ class RRT_Star(RRT):
 				self.neighbor_indices.append(index)
 				self.neighbor_dist.append(dist_new)
 
-		#print (self.neighbor_indices)
-		#print (self.neighbor_dist)
-
 
 	def find_indices_in_extents(self):
-		"""fill out
-		"""
+		""" This function finds a subset of vertex indices in a rectangular domain around the new vertex.
 
+		Leveraging the computational speed of numpy array slicing to select a reduced set of vertices based on rectangular coordinates. As an additional buffer the rectangular extents are modified to be larger than the neighborhood radius by multiplying thus value by the `neighbor_offset` variable.
+
+		Returns:
+			indices_in_box (:obj:`list` of :obj:`int`):
+				The indices of vertices found in a rectangular extent around the new vertex.
+
+		"""
 		offset = self.neighbor_offset
 		hx = [(self.new_v[0] - offset*self.params["neighborhood"]), (self.new_v[0] + offset*self.params["neighborhood"])]
 		hy = [(self.new_v[1] - offset*self.params["neighborhood"]), (self.new_v[1] + offset*self.params["neighborhood"])]
@@ -122,18 +202,15 @@ class RRT_Star(RRT):
 		for index,dist in zip(self.neighbor_indices, self.neighbor_dist):
 
 			cost = self.update_path_cost(index,dist)
-			#print("\ncost to get from vertex",index, cost)
 
 			if cost > lowest_cost:
 				pass
 			else:
 				if not self.is_new_edge_blocked(self.new_v,self.recorder.vertices[index]):
-					#print("lower cost, parent is now",index)
 					lowest_cost = cost
 					new_parent_index = index
 					new_parent_dist = dist
 
-		#print("new parent index", new_parent_index, "with cost", new_parent_dist)
 		return new_parent_index, new_parent_dist
 
 
@@ -141,7 +218,6 @@ class RRT_Star(RRT):
 		"""fill out
 		"""
 		
-		#print("cost of vertex", trial, "is", self.recorder.costs[trial])
 		for index,dist in zip(self.neighbor_indices, self.neighbor_dist):
 			
 			#print("--to vertex:", index, self.recorder.costs[index], "is it more than", (self.recorder.costs[trial] + dist) )
@@ -155,12 +231,14 @@ class RRT_Star(RRT):
 					self.recorder.parents[index] = trial
 
 
+	############### DELETE THIS ##############
 	def plot_tests(self,t1,t2,toggle):
 		if toggle:
 			Plot1().simple_plot3(
-				self.domain,
+				self.domain_object,
 				self.recorder.parents,
 				self.recorder.vertices,
 				t1, t2
 				)
 			plt.pause(0.05)
+	############### DELETE THIS ##############
