@@ -4,33 +4,44 @@
 import numpy as np
 
 class Recorder:
-	"""This class serves as a container for the algorithm solution.
+	"""This class acts as a container for the algorithm solution values.
 
 	"""
 	
 	def __init__(self,params):
 		"""Initialize the Recorder class.
 
-		The attributes arrays are initialized to the length specified by the number of trials specified in params object. Initialized to value of :obj:`numpy.nan`.
-
-		Args:
-			params (:obj:`~input.params.ParamsRRT` object):
-				Object containing the algorithm parameters.
+		The attributes arrays are initialized to the length specified by the number of trials in the params dictionary passed. These arrays are initialized to value of :obj:`numpy.nan`. Algorithm specific attributes are initialized are created and initialized.
 
 		Note:
-			Input parameters are assigned to instance variables with same name.
+			The input parameters dictionary is assigned to an instance attribute with same name.
+
+		Parameters:
+			params: Dictionary containing the user-specified algorithm parameters.
 
 		Attributes:
-			params: see Parameters			
+			params: see Parameters	
+					
 			vertices (:obj:`numpy.ndarray` of :obj:`float`):
-				An array of coordinates for the graph vertices. The number of columns is specified by the dimensions of the solution space (2d or 3d).
+				A multi-column array of coordinates for the graph vertices. The number of rows is equal to the number of trials specified by the user. The number of columns is based on the dimensions of the solution space (2d=x,y and 3d=x,y,z) specified by the user.
+
 			parents (:obj:`numpy.ndarray` of :obj:`float`):
-				An array of indices for the parents of the graph vertices. Specified as float to allow 'NaN' assignement.
+				A single column array of indices for the parent of the vertex at the specified row index. Specifies the connectivity of the graph. The number of rows is equal to the number of trials specified by the user.
+
 			costs (:obj:`numpy.ndarray` of :obj:`float`):
-				An array of costs (distances) to reach the vertex at the specified index.
+				A single column array of total cost (distance) to reach the vertex at the specified row index. The number of rows is equal to the number of trials specified by the user.
+
+			parents_history (:obj:`numpy.ndarray` of :obj:`float`):
+				algorithm specific variable (rrt_star). A multi-column array of indices for the parent of the vertex at the specified row index. This variable tracks the evolution of the graph connectivity during the solution, to be used for the plotting and animation modules. The number of rows is equal to the number of trials specified by the user. The number of columns is equal to 2 times the number of trials specified by the user. Two adjacent columns represent the connectivity of the graph before and after after re-wiring.
+
+		Note:
+			vertex `j` is connected to vertex `i`. Therefore the parent of vertex j is i, recorder.parents[j] == i
+
+			record.parents_history[:,n] = the parent list (connectivity) of the graph before re-wiring in iteration n
+
+			record.parents_history[:,n+1] = the parent list (connectivity) of the graph after re-wiring in iteration n
 
 		"""
-
 		self.params = params
 
 		self.vertices = np.zeros((self.params["n_trials"],self.params["dim"]),
@@ -47,5 +58,3 @@ class Recorder:
 			self.parents_history = np.zeros((self.params["n_trials"],self.params["n_trials"]*2),
 				dtype=float)
 			self.parents_history.fill(np.nan)
-
-

@@ -119,7 +119,7 @@ class Rectangle(Shape):
     """Generates a random point in the rectangle
 
     Returns:
-      A new point::
+      A new point
         
     """
     new_random_point = np.random.rand(2)
