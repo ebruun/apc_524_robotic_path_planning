@@ -1,7 +1,7 @@
-## APC524 Final Project
+# APC524 Final Project
 
-# Edvard Bruun, Vivek Kumar, Jessica Flores
+# Team: Edvard Bruun, Vivek Kumar, Jessica Flores
 
-# Robotic Path Planning Approach for Structural Design
+# Title: Robotic Path Planning Approach for Structural Design
 
 
