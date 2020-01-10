@@ -85,7 +85,7 @@ class Vertex():
 				break # Ends loop when final vertex in current saved state is reached
 			else:
 				dist_new = np.linalg.norm(new_q - vertex)
-				dist_new = round(dist_new,6)
+				#dist_new = round(dist_new,6)
 
 				if dist_new < shortest_distance:					
 					shortest_distance = dist_new

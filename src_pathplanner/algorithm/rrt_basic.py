@@ -33,7 +33,7 @@ class RRT_Basic(RRT):
 			Step 4. Record the iteration data (update: recorder.vertices, recorder.parents, recorder.costs lists)
 
 		"""
-		print("\nVertex", trial+1)
+		print("-- -- Calculating Vertex:", trial+1)
 
 		# Step 1. Find new configuration
 		self.new_q = self.new_config()
