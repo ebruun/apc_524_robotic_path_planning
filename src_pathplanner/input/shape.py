@@ -4,11 +4,11 @@ import numpy as np
 from abc import ABC, abstractmethod
 
 class Shape(ABC):
-	"""docstring for Shape"""
+	"""docstring for Shape class"""
 
 	@abstractmethod
 	def __init__(self, shape_info:dict):
-		"""docstring
+		"""docstring for init
 		"""
 		self.name = shape_info["shape_type"]
 	

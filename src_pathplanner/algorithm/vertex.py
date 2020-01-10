@@ -10,9 +10,9 @@ class Vertex():
 
 	@classmethod
 	def new_config(cls,domain_object):
-		""" This function returns a new random configuration point found in the domain area.
+		""" This function returns a new random configuration (point) found in the domain area.
 
-		Calls the :meth:`~algorithm.vertex.Vertex.new_config()` method.
+		Calls The :meth:`~input.shape.Shape.sample_random_point()` method to generate a random configuration within the shape that defines the domain.
 
 		Parameters:
 			domain_object (:obj:`~input.domain_class.Domain` object):
@@ -26,8 +26,27 @@ class Vertex():
 
 	@classmethod
 	def new_vertex(cls, vertices, new_q, step_size):
-		"""fill out
-		
+		""" This function returns a new vertex in the domain area.
+
+		Calls The :meth:`~algorithm.vertex.Vertex.find_nearest_vertex()` method to find the vertex in the current vertices list in the :obj:`~solver.recorder.Recorder` object that is closest to the randomly generated configuration point.
+
+		The new vertex is generated along the straight line connecting the closest vertex to the new configuration. The new vertex is at a maximum distance specified in the step size parameter set by the user. If the new configuration falls closer than the step size distance then the configuration is taken as the new vertex.
+
+		Parameters:
+			vertices (:obj:`numpy.ndarray` of :obj:`float`):
+				The current set of vertices that make up the solution.
+			new_q (:obj:`numpy.ndarray` of :obj:`float`):
+				The coordinates of the newly generated configuration.
+			step_size ( :obj:`float`):
+				The maximum distance between the closest vertex and the new vetex.					
+
+		Returns:
+			new_v (:obj:`numpy.ndarray` of :obj:`float`): The coordinates of the new vertex.
+
+			index (:obj:`int`): The index of the new vertex's parent.
+
+			distance (:obj:`int`): The distance between the parent and the new vertex.
+
 		"""
 		index, distance = cls.find_nearest_vertex(vertices, new_q)
 		v_near = vertices[index]
@@ -40,19 +59,20 @@ class Vertex():
 			return new_v, index, step_size
 
 	@classmethod
-	def find_nearest_vertex(self,vertex_list,goal):
-		"""  This function finds how far the nearest vertex is to a goal.
-
-		The full list of vertices, saved in the :obj:`~solver.recorder.Recorder` object, is checked against a single goal target. Loops through the full list and calculates the L2 norm to the center of the goal. Updates the index and distance for the closest vertex through the loop.
+	def find_nearest_vertex(self,vertex_list,new_q):
+		"""  This function finds the closest vertex and its distance to a randomly generated configuration point.
 
 		Parameters:
-			goal (:obj:`~input.shape.Shape` object): A shape object specfied as the target for the algorithm.
+			vertices (:obj:`numpy.ndarray` of :obj:`float`):
+				The current set of vertices that make up the solution.
+			new_q (:obj:`numpy.ndarray` of :obj:`float`):
+				The coordinates of the newly generated configuration.
 
 		Returns:
 
-			shortest_index (:obj:`int`): The index of the vertex that is closest to the goal.
+			shortest_index (:obj:`int`): The index of the vertex that is closest to the new configuration.
 
-			shortest_distance (:obj:`float`): The distance from the closest vertex to the center point of the object
+			shortest_distance (:obj:`float`): The distance from the closest vertex to the new configuration.
 
 		"""
 		dist_new = 0.0
@@ -62,10 +82,9 @@ class Vertex():
 		for i, vertex in enumerate(vertex_list):
 
 			if any(x == True for x in np.isnan(vertex)):
-				# Ends loop when final vertex reached
-				break
+				break # Ends loop when final vertex in current saved state is reached
 			else:
-				dist_new = np.linalg.norm(goal - vertex)
+				dist_new = np.linalg.norm(new_q - vertex)
 				dist_new = round(dist_new,6)
 
 				if dist_new < shortest_distance:					

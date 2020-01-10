@@ -135,7 +135,7 @@ class RRT_Star(RRT):
 	def find_vertices_in_neighborhood(self):
 		""" This function finds the indices and distances to vertices that are found within a radius of the new vertex.
 
-		A :class:`~input.shape_circle.Circle` object is initialized with the neighborhood distance specified by the user as its radius. The :meth:`~input.shape_circle.Circle.is_point_inside()` is used to check which vertices fall inside this circular neighborhood.
+		A :class:`~input.shape_circle.Circle` object is initialized with the neighborhood distance specified by the user as its radius. The :meth:`~input.shape_circle.Circle.is_point_inside()` method is used to check which vertices fall inside this circular neighborhood.
 		
 		To reduce the number of points that need to be checked, the :meth:`~algorithm.rrt_star.RRT_Star.find_indices_in_extents()` is used to a find a subset of vertices.
 
