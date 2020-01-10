@@ -51,7 +51,7 @@ def run_program():
 	obstacles_info = program_input.data_dict["ObstaclesInfo"]
 	rrt_algorithm_info = program_input.data_dict["RRTAlgorithmInfo"]
 
-	print("2. Create Domain")
+	print("2. Creating Domain")
 	domain_object = Domain(domain_info, obstacles_info, origin_goal_info)
 	print(domain_object)
 
@@ -62,27 +62,19 @@ def run_program():
 
 	print("4. Showing Results")
 
-	print("\n\n Vertices\n ",PathPlan.recorder.vertices)
-	print("\n\n Parents\n ",PathPlan.recorder.parents)
-	print("\n\n Costs\n ",PathPlan.recorder.costs)
-	print("\n\n solution_path\n ",PathPlan.solution_path)
+	print("\n\n Vertices\n",PathPlan.recorder.vertices)
+	print("\n\n Parents\n",PathPlan.recorder.parents)
+	print("\n\n Costs\n",PathPlan.recorder.costs)
+	print("\n\n solution_path\n",PathPlan.solution_path)
 
 	print("5. Plotting...")
 	plot_object = Plot("test run", domain_object)
+	plot_object.plot_domain()
 	plot_object.plot_obstacles()
 	plot_object.plot_origin_goals()
 	plot_object.plot_solution_graph(PathPlan)
-	plot_object.set_layout()
 	plot_object.draw()
 	print("Finished! See plot in output folder")
-
-	# Plot1().simple_plot1(
-	# 	domain_object,
-	# 	PathPlan.recorder.parents,
-	# 	PathPlan.recorder.vertices,
-	# 	PathPlan.solution_path
-	# 	)
-
 
 
 if __name__ == '__main__':

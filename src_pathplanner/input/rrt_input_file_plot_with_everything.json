@@ -9,7 +9,7 @@
 	"OriginGoalInfo":{
 		"origin" : [0.1,0.1],
 		"goals":{
-			"goal_1":{"dim":2, "shape_type": "free_form", "bitmap_file":"./input/bitmap_files/cat.pbm", "bb_lower_left":[-2.0,2.0], "bb_upper_right":[0.0,4.0]},
+			"goal_1":{"dim":2, "shape_type": "free_form", "bitmap_file":"./input/bitmap_files/obstacle.pbm", "bb_lower_left":[-2.0,2.0], "bb_upper_right":[0.0,4.0]},
 			"goal_2":{"dim":2, "shape_type":"circle", "radius":0.1, "center":[2.5, 3.5]},
 			"goal_3":{"dim":2, "shape_type":"rectangle", "lower_left": [-3.2, -2.0],
 			"upper_right": [-2.8,-1.8]},
@@ -24,14 +24,14 @@
 		"obstacle_4":{"dim":2, "shape_type": "rectangle", "lower_left": [2.0, 1.5],
 		"upper_right": [2.5,3.0]},
 		"obstacle_5":{"dim":2, "shape_type": "free_form", "bitmap_file":"./input/bitmap_files/obstacle.pbm", "bb_lower_left":[-2.5,-2.5], "bb_upper_right":[0.0,0.0]},
-		"obstacle_6":{"dim":2, "shape_type": "free_form", "bitmap_file":"./input/bitmap_files/cat.pbm", "bb_lower_left":[2.5,-1.0], "bb_upper_right":[3.5,0.0]}
+		"obstacle_6":{"dim":2, "shape_type": "free_form", "bitmap_file":"./input/bitmap_files/obstacle.pbm", "bb_lower_left":[2.5,-1.0], "bb_upper_right":[3.5,0.0]}
 	},
 
 	"RRTAlgorithmInfo":{
 		"method": "rrt_star",
-		"n_trials": 1700,
-		"step_size": 0.2,
+		"n_trials": 100,
+		"step_size": 0.3,
 		"dim": 2,
-		"neighborhood": 0.3
+		"neighborhood": 0.6
 		}
 }

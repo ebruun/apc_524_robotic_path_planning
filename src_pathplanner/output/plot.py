@@ -11,6 +11,8 @@ import plotly as py
 from plotly import graph_objs as go
 from PIL import Image
 import subprocess
+import os.path
+from os import path
 
 class Plot:
 	""" A class to plot the domain, obstacles, start and end points, as well as 
@@ -95,6 +97,8 @@ class Plot:
 							sizing="stretch", 
 							))
 
+					subprocess.call("rm {}".format(png_file), shell=True)
+
 				else:
 					raise Exception('The obstacle shape is not implemented')
 
@@ -102,7 +106,7 @@ class Plot:
 			raise Exception('Plotting in > 2 dimensions is not yet implemented')
 
 	def plot_origin_goals(self):
-		"""  This function plots the origin point and goal points/shapes.  """
+		"""  This function plots the origin point and goal shapes.  """
 
 		if self.dims == 2:
 			self.fig.add_trace(go.Scatter(
@@ -110,7 +114,7 @@ class Plot:
 				y = [self.domain.origin[1]],
 				mode="markers",
 				marker=dict(color="orange",
-				size=10),
+				size=15),
 				showlegend=False
 			))
 
@@ -126,12 +130,12 @@ class Plot:
 							type = "circle",
 							xref="x",
 							yref="y",
-							fillcolor="green",
+							fillcolor="#00FF00",
 							x0=x_min,
 							y0=y_min,
 							x1=x_max,
 							y1=y_max,
-							line_color="green",
+							line_color="#00FF00",
 							opacity=0.5,
 					))
 				elif goal.name == "rectangle":
@@ -143,12 +147,12 @@ class Plot:
 							type = "rect",
 							xref="x",
 							yref="y",
-							fillcolor="green",
+							fillcolor="#00FF00",
 							x0=ll_corner[0],
 							y0=ll_corner[1],
 							x1=ur_corner[0],
 							y1=ur_corner[1],
-							line_color="green",
+							line_color="#00FF00",
 							opacity=0.5,
 					))
 				elif goal.name == "free_form":
@@ -156,7 +160,7 @@ class Plot:
 					bb_ur_corner = goal.bb_upper_right
 					
 					file = goal.file
-					subprocess.call("mogrify -format png -fill '#228b22' -opaque '#000000' -transparent '#FFFFFF' {}".format(file), shell=True)
+					subprocess.call("mogrify -format png -fill '#00FF00' -opaque '#000000' -transparent '#FFFFFF' {}".format(file), shell=True)
 					png_file = file.replace(".pbm", ".png")
 					png_img = Image.open(png_file)
 					
@@ -173,44 +177,18 @@ class Plot:
 							sizing="stretch", 
 							))
 
+					subprocess.call("rm {}".format(png_file), shell=True)
+
 				else:
 					raise Exception('The obstacle shape is not implemented')
 
-
-		elif self.dims == 3:
-			origin = go.Scatter(
-				x = [domain.origin[0]],
-				y = [domain.origin[1]],
-				z = [domain.origin[2]],
-				line=dict(
-					color="orange",
-					width=10
-				),
-				mode="markers",
-				showlegend=False
-			)
-			self.data.append(origin)
-
-			goals = go.Scatter(
-				x = [goal[1][0] for goal in self.domain.goals],
-				y = [goal[1][1] for goal in self.domain.goals],
-				z = [goal[1][2] for goal in self.domain.goals],
-				line=dict(
-					color="green",
-					width=10
-				),
-				mode="markers",
-				showlegend=False
-			)
-			self.data.append(goals)
-
 		else:  
-			print("Cannot plot in > 3 dimensions")
+			raise Exception('Plotting in > 2 dimensions is not yet implemented')
 
 	def plot_solution_graph(self, solution=None):
 		"""  This function plots the solution graph if given. """
 		if solution == None:
-			print("provide solution object as argument")
+			pass
 
 		else:
 			vertices = solution.recorder.vertices 
@@ -236,7 +214,6 @@ class Plot:
 				
 
 				#Plot final path 
-		
 				for path in path_verts:
 					if any(np.isnan(path)):
 						continue
@@ -254,62 +231,13 @@ class Plot:
 							showlegend=False
 						))
 						
-			
-			elif self.dims == 3:  # plot in 3D
-				
-				#Plot entire graph
-				x, y, z = [], [], []
-				for i, parent in enumerate(parents):
-					if parent < 0:
-						continue
-					x.append(vertices[i, 0])
-					x.append(vertices[parent, 0])
-					y.append(vertices[i, 1])
-					y.append(vertices[parent, 1])
-					z.append(vertices[i, 2])
-					z.append(vertices[parent, 2])
-				graph = go.Scatter3d(
-					x=x,
-					y=y,
-					z=z,
-					line=dict(
-						color="black",
-						width=2
-					),
-					mode="lines"
-				)
-				self.data.append(graph)
-
-				#Plot final path 
-				x2, y2, z2 = [], [], []
-				for path in path_verts:
-					if any(np.isnan(path)):
-						continue			
-					for i in path:
-						if (parents[i] < 0):
-							continue
-						x2.append(vertices[i, 0])
-						x2.append(vertices[parents[i], 0])
-						y2.append(vertices[i, 1])
-						y2.append(vertices[parents[i], 1])
-						z2.append(vertices[i, 2])
-						z2.append(vertices[parents[i], 2])
-					path = go.Scatter(
-						x=x2,
-						y=y2,
-						z=z2,
-						line=dict(
-							color="red",
-							width=4
-						),
-						mode="lines"
-					)
-					self.data.append(path)
-			
 			else:  # can't plot in higher dimensions
-				print("Cannot plot in > 3 dimensions")
+				raise Exception('Plotting in > 2 dimensions is not yet implemented')
 
-	def set_layout(self):
+	def plot_domain(self):
+		"""
+		Sets title and axes bounds for the plot, plots domain shape if not a rectangle.
+		"""
 
 		self.fig.update_layout(
 				title=self.title)
@@ -356,14 +284,8 @@ class Plot:
 			)
 			self.fig.update_yaxes(range=extents[1])
 		
-		elif self.dims == 3: # plot in 3D
-			# range_x = self.domain.extents[0]
-			# range_y = self.domain.extents[1]
-			# range_z = self.domain.extents[2]
-			self.fig.layout.update(scene = dict(aspectmode='data'))
-
 		else: 
-			print("Cannot plot in > 3 dimensions")
+			raise Exception('Plotting in > 2 dimensions is not yet implemented')
 
 	def draw(self, auto_open=True):
 		"""
