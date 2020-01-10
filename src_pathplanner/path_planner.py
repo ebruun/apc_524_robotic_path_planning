@@ -18,7 +18,6 @@ import matplotlib.pyplot as plt
 
 from solver.solution import Solution
 from output.plot import Plot
-from output.plot1 import Plot1
 
 
 def run_program():

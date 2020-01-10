@@ -13,8 +13,6 @@ import numpy as np
 from algorithm.rrt import RRT
 from input.shape_circle import Circle
 
-############### DELETE THIS ##############
-from output.plot1 import Plot1
 import matplotlib.pyplot as plt
 ############### DELETE THIS ##############
 

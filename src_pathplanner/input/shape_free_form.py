@@ -43,7 +43,6 @@ class FreeForm2D(Shape):
     self.n_columns = self.img.shape[1]
     self.hx = 1./(self.n_rows-1) # This makes sure that the x-values are b/w 0-1
     self.hy = (1./(self.n_columns-1)) *((self.n_rows-1)/(self.n_columns-1))
-    
     self.all_points_array = [[j*self.hx, 1.0-i*self.hy] for i in range(self.n_rows) for j in range(self.n_columns) if self.img[i,j]==0]
     self.all_points_array = np.asarray(self.all_points_array)
 
