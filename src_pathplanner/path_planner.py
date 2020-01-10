@@ -35,8 +35,8 @@ def run_program():
 
 	print("1. Reading Parameters")
 	# The input file
-	# input_file = "./input/rrt_input_file.json"
-	input_file = "./input/rrt_input_file_free_form_obstacle.json"
+	input_file = "./input/rrt_input_file.json"
+	# input_file = "./input/rrt_input_file_free_form_obstacle.json"
 	# Parsed JSON data
 	program_input = ParseDataJSON(input_file)
 	program_input.parse_data()
@@ -59,22 +59,17 @@ def run_program():
 
 	print("4. Showing Results")
 
+	print("\n\n",PathPlan.recorder.vertices)
+	print("\n\n",PathPlan.recorder.parents)
+	print("\n\n",PathPlan.recorder.costs)
+	print("\n\n",PathPlan.solution_path)
 	
-	
-	plt.scatter(domain_object.obstacles[0].all_points_array[:,0], domain_object.obstacles[0].all_points_array[:,1], color='g', alpha=0.10)
-	plt.scatter(PathPlan.recorder.vertices[:,0], PathPlan.recorder.vertices[:,1], color='k', marker='o')
-	plt.show()
-	# print("\n\n",PathPlan.recorder.vertices)
-	# print("\n\n",PathPlan.recorder.parents)
-	# print("\n\n",PathPlan.recorder.costs)
-	# print("\n\n",PathPlan.solution_path)
-	
-	# Plot1().simple_plot1(
-	# 	domain_object,
-	# 	PathPlan.recorder.parents,
-	# 	PathPlan.recorder.vertices,
-	# 	PathPlan.solution_path
-	# 	)
+	Plot1().simple_plot1(
+		domain_object,
+		PathPlan.recorder.parents,
+		PathPlan.recorder.vertices,
+		PathPlan.solution_path
+		)
 
 
 if __name__ == '__main__':
