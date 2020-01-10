@@ -48,7 +48,7 @@ class Domain():
       assert(self.dim==2)
       self.domain = Circle(self.domain_info)
     else:
-      raise Exception('The obstacle shape is not implemented')
+      raise Exception('The domain shape is not implemented')
 
     # Assert that origin and goal are inside the domain
     assert(self.domain.is_point_inside(self.origin)==True)
@@ -57,10 +57,11 @@ class Domain():
 
   def create_obstacles(self):
     self.obstacles = [Obstacle(self.obstacle_info[key], self.origin_goal_info).obstacle for key in self.obstacle_info]
+    self.is_obstacle_inside()
 
   def create_goals(self):
     self.goals = [Obstacle(self.goal_info[key], self.origin_goal_info).obstacle for key in self.goal_info]
 
   # Perform some sanity checks
-  def is_obstacle_inside(self, obstacle):
+  def is_obstacle_inside(self):
     pass
