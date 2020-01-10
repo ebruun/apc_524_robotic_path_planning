@@ -109,8 +109,8 @@ class FreeForm2D(Shape):
       shape_points = self.all_points_array[self.all_points_array[:,1] < point[1]+2.1*self.hy]
       shape_points = shape_points[shape_points[:,1] > point[1] -2.1*self.hy]
       number_of_shape_points = shape_points.shape[0]
-      _eps = 1.0e-3
-      test_radius = max(self.hx,self.hy)*(1.+_eps)
+      _eps = 1.0e-1
+      test_radius = max(self.hx,self.hy)*(2.+_eps)
       for shape_point in shape_points:
         if(np.linalg.norm(point-shape_point) <= test_radius):
           return True
