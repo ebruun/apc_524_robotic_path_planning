@@ -88,7 +88,7 @@ class Plot:
 							xref="x",
 							yref="y",
 							x=bb_ll_corner[0],
-							y=bb_ll_corner[1],
+							y=bb_ur_corner[1],
 							sizex=bb_ur_corner[0]-bb_ll_corner[0],
 							sizey=bb_ur_corner[1]-bb_ll_corner[1],
 							opacity=1.0,

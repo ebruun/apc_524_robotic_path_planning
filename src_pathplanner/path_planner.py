@@ -37,7 +37,8 @@ def run_program():
 	print("1. Reading Parameters")
 	# The input file
 	#input_file = "./input/rrt_input_file.json"
-	input_file = "./input/rrt_input_file_free_form_obstacle.json"
+	#input_file = "./input/rrt_input_file_free_form_obstacle.json"
+	input_file = "./input/rrt_input_file_plot_with_everthing.json"
 
 	# Parsed JSON data
 	program_input = ParseDataJSON(input_file)
