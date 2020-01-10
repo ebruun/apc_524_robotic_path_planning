@@ -79,7 +79,7 @@ class RRT_Star(RRT):
 			Step 9. Record the iteration data (update: recorder.parents_history list)
 
 		"""
-		print("\nVertex", trial+1)
+		print("-- -- Calculating Vertex:", trial+1)
 
 		# Step 1. Find new configuration
 		self.new_q = self.new_config()
@@ -102,7 +102,6 @@ class RRT_Star(RRT):
 
 
 		# Step 5. Find the neighboring vertices in a radius around the new vertex 
-		print("--Neighborhood calcs")
 		self.find_vertices_in_neighborhood()
 
 		# Step 6. Connect the new vertex to a neighboring vertex that will lead to the shortest total path
@@ -120,7 +119,6 @@ class RRT_Star(RRT):
 
 
 		# Step 8. Optimize the current solution by rewiring the vertex/edge graph to shorten paths
-		print("--REWIRE")
 		self.rewire(trial)
 
 		# Step 9. Record the iteration data (update: recorder.parents_history list)
@@ -159,7 +157,7 @@ class RRT_Star(RRT):
 			if neighbor_circle.is_point_inside(point):
 
 				dist_new = np.linalg.norm(point - self.new_v)
-				dist_new = round(dist_new,6)
+				#dist_new = round(dist_new,6)
 
 				self.neighbor_indices.append(index)
 				self.neighbor_dist.append(dist_new)

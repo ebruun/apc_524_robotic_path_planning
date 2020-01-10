@@ -63,7 +63,7 @@ class Solution:
 
 		"""
 		if self.params["method"] == "rrt_basic":
-			print("We are using rrt_basic")
+			print("-- Using Basic RRT Algorithm")
 			self.algorithm = RRT_Basic(
 				self.domain_object, 
 				self.recorder,
@@ -71,13 +71,13 @@ class Solution:
 			)
 
 		elif self.params["method"] == "rrt_star":
-			print("We are using rrt_star")
+			print("-- Using RRT Star Algorithm")
 			self.algorithm = RRT_Star(
 				self.domain_object,
 				self.recorder,
 				self.params)
 		else:
-			exit("ERROR: no valid method")		
+			exit("ERROR: No Valid Method")		
 
 		for trial in range(1,self.params["n_trials"]):
 			self.algorithm.rrt_step(trial)
