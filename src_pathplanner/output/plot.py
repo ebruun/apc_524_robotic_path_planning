@@ -10,6 +10,7 @@ import plotly as py
 
 from plotly import graph_objs as go
 from PIL import Image
+import subprocess
 
 class Plot:
 	""" A class to plot the domain, obstacles, start and end points, as well as 
@@ -75,9 +76,12 @@ class Plot:
 				elif obstacle.name == "free_form":
 					bb_ll_corner = obstacle.bb_lower_left
 					bb_ur_corner = obstacle.bb_upper_right
+					
 					file = obstacle.file
+					subprocess.call("mogrify -format png -transparent '#FFFFFF' {}".format(file), shell=True)
 					png_file = file.replace(".pbm", ".png")
 					png_img = Image.open(png_file)
+					
 					self.fig.add_layout_image(
 						dict(
 							source=png_img,
