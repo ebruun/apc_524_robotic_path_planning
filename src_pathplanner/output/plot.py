@@ -48,13 +48,13 @@ class Plot:
 							type = "circle",
 							xref="x",
 							yref="y",
-							fillcolor="blue",
+							fillcolor="black",
 							x0=x_min,
 							y0=y_min,
 							x1=x_max,
 							y1=y_max,
-							line_color="blue",
-							opacity=0.5,
+							line_color="black",
+							opacity=1.0,
 					))
 				elif obstacle.name == "rectangle":
 					ll_corner = obstacle.ll_corner
@@ -65,13 +65,13 @@ class Plot:
 							type = "rect",
 							xref="x",
 							yref="y",
-							fillcolor="blue",
+							fillcolor="black",
 							x0=ll_corner[0],
 							y0=ll_corner[1],
 							x1=ur_corner[0],
 							y1=ur_corner[1],
-							line_color="blue",
-							opacity=0.5,
+							line_color="black",
+							opacity=1.0,
 					))
 				elif obstacle.name == "free_form":
 					bb_ll_corner = obstacle.bb_lower_left
@@ -136,6 +136,49 @@ class Plot:
 							line_color="green",
 							opacity=0.5,
 					))
+				elif goal.name == "rectangle":
+					ll_corner = goal.ll_corner
+					ur_corner = goal.ur_corner
+					
+					self.fig.add_shape(
+						go.layout.Shape(
+							type = "rect",
+							xref="x",
+							yref="y",
+							fillcolor="green",
+							x0=ll_corner[0],
+							y0=ll_corner[1],
+							x1=ur_corner[0],
+							y1=ur_corner[1],
+							line_color="green",
+							opacity=0.5,
+					))
+				elif goal.name == "free_form":
+					bb_ll_corner = goal.bb_lower_left
+					bb_ur_corner = goal.bb_upper_right
+					
+					file = goal.file
+					subprocess.call("mogrify -format png -fill '#228b22' -opaque '#000000' -transparent '#FFFFFF' {}".format(file), shell=True)
+					png_file = file.replace(".pbm", ".png")
+					png_img = Image.open(png_file)
+					
+					self.fig.add_layout_image(
+						dict(
+							source=png_img,
+							xref="x",
+							yref="y",
+							x=bb_ll_corner[0],
+							y=bb_ur_corner[1],
+							sizex=bb_ur_corner[0]-bb_ll_corner[0],
+							sizey=bb_ur_corner[1]-bb_ll_corner[1],
+							opacity=0.5,
+							sizing="stretch", 
+							))
+
+				else:
+					raise Exception('The obstacle shape is not implemented')
+
+
 
 		elif self.dims == 3:
 			origin = go.Scatter(
@@ -187,7 +230,7 @@ class Plot:
 						x=[vertices[i, 0],vertices[parent, 0]],
 						y=[vertices[i, 1],vertices[parent, 1]],
 						line=dict(
-							color="black",
+							color="grey",
 							width=2
 						),
 						mode='lines+markers',

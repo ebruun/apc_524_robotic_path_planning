@@ -38,7 +38,7 @@ def run_program():
 	# The input file
 	#input_file = "./input/rrt_input_file.json"
 	#input_file = "./input/rrt_input_file_free_form_obstacle.json"
-	input_file = "./input/rrt_input_file_plot_with_everthing.json"
+	input_file = "./input/rrt_input_file_plot_with_everything.json"
 
 	# Parsed JSON data
 	program_input = ParseDataJSON(input_file)
@@ -67,6 +67,7 @@ def run_program():
 	print("\n\n Costs\n ",PathPlan.recorder.costs)
 	print("\n\n solution_path\n ",PathPlan.solution_path)
 
+	print("5. Plotting...")
 	plot_object = Plot("test run", domain_object)
 	plot_object.plot_obstacles()
 	plot_object.plot_origin_goals()
