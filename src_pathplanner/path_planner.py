@@ -14,6 +14,7 @@ import time
 # Import inputs
 from input.parse_data_class import ParseDataJSON
 from input.domain_class import Domain
+import matplotlib.pyplot as plt
 
 from solver.solution import Solution
 from output.plot import Plot
@@ -35,20 +36,23 @@ def run_program():
 
 	print("1. Reading Parameters")
 	# The input file
-	#input_file = "./input/rrt_input_file.json"
-	input_file = "./input/rrt_input_file_circle.json"
+	input_file = "./input/rrt_input_file.json"
+	# input_file = "./input/rrt_input_file_free_form_obstacle.json"
+
 	# Parsed JSON data
 	program_input = ParseDataJSON(input_file)
 	program_input.parse_data()
 
 	# Split up the parsed input
 	domain_info = program_input.data_dict["DomainInfo"]
+
 	origin_goal_info = program_input.data_dict["OriginGoalInfo"]
 	obstacles_info = program_input.data_dict["ObstaclesInfo"]
 	rrt_algorithm_info = program_input.data_dict["RRTAlgorithmInfo"]
 
 	print("2. Create Domain")
 	domain_object = Domain(domain_info, obstacles_info, origin_goal_info)
+	print(domain_object)
 
 	print("3. Running Program")
 	PathPlan = Solution(rrt_algorithm_info,domain_object)
@@ -57,10 +61,10 @@ def run_program():
 
 	print("4. Showing Results")
 
-	# print("\n\n Vertices",PathPlan.recorder.vertices)
-	# print("\n\n Parents",PathPlan.recorder.parents)
-	# #print("\n\n Costs",PathPlan.recorder.costs)
-	print("\n\n solution_path",PathPlan.solution_path)
+	print("\n\n Vertices\n ",PathPlan.recorder.vertices)
+	print("\n\n Parents\n ",PathPlan.recorder.parents)
+	print("\n\n Costs\n ",PathPlan.recorder.costs)
+	print("\n\n solution_path\n ",PathPlan.solution_path)
 
 	plot_object = Plot("test run", domain_object)
 	plot_object.plot_obstacles()
@@ -69,12 +73,13 @@ def run_program():
 	plot_object.set_layout()
 	plot_object.draw()
 
-	# Plot1().simple_plot1(
-	# 	domain_object,
-	# 	PathPlan.recorder.parents,
-	# 	PathPlan.recorder.vertices,
-	# 	PathPlan.solution_path
-	# 	)
+	Plot1().simple_plot1(
+		domain_object,
+		PathPlan.recorder.parents,
+		PathPlan.recorder.vertices,
+		PathPlan.solution_path
+		)
+
 
 
 if __name__ == '__main__':

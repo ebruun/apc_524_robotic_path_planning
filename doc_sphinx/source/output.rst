@@ -1,9 +1,9 @@
-Output package
+output package
 ==============
 
 This package does...
 
-Module contents
+plot module
 ---------------
 
 .. automodule:: output

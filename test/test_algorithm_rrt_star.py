@@ -4,25 +4,41 @@ from unittest.mock import Mock
 import numpy as np
 
 from algorithm.rrt_star import RRT_Star
+from input.domain_class import Domain
 
-params = Mock()
-params.dims = 2
-params.step_size = 0.2
-params.neighborhood = 0.3
-params.method = "rrt_star"
+domain_info = {
+	'dim': 2, 
+	'shape_type': 'rectangle',
+	'lower_left': [0.0, 0.0],
+	'upper_right': [3.0, 4.0]
+	}
 
+origin_goal_info = {
+	'origin': [0.1, 0.1],
+	'goals': {
+		'goal_1': {'dim': 2, 'shape_type': 'circle', 'radius': 0.2, 'center': [0.3, 2.1]},
+		'goal_2': {'dim': 2, 'shape_type': 'circle', 'radius': 0.1, 'center': [2.5, 3.5]}
+		}
+	}
+
+obstacles_info = {
+	'obstacle_1':{'dim': 2, 'shape_type': 'circle', 'radius': 0.1, 'center': [0.5, 0.5]},
+	'obstacle_2': {'dim': 2, 'shape_type': 'circle', 'radius': 0.2, 'center': [1.5, 3.5]},
+	'obstacle_3': {'dim': 2, 'shape_type': 'circle', 'radius': 0.4, 'center': [1.5, 0.5]}
+	}
+
+rrt_algorithm_info = {
+	'method': 'rrt_star',
+	'n_trials': 100,
+	'step_size': 0.2,
+	'dim': 2,
+	'neighborhood': 0.3
+	}
+
+
+domain_test = Domain(domain_info, obstacles_info, origin_goal_info)
 
 recorder = Mock()
-
-domain = Mock()
-domain.dims = 2
-domain.origin = np.array([0.1, 0.1])
-domain.extents = np.array([[0,3], [0,4]])
-domain.obstacles = [
-				("circle", np.array([0.5, 3.5]), 0.20),
-				("circle", np.array([1.5, 3.5]), 0.20),
-				("circle", np.array([1.5, 0.5]), 0.40)
-				]
 
 class TestRRT_Star(unittest.TestCase):
 	def setUp(self):
@@ -39,7 +55,7 @@ class TestRRT_Star(unittest.TestCase):
 		recorder.parents_history = np.zeros((6,6*2), dtype=float)
 		recorder.parents_history.fill(np.nan)
 
-		self.algorithm = RRT_Star(domain, recorder, params)
+		self.algorithm = RRT_Star(domain_test, recorder, rrt_algorithm_info)
 
 	def tearDown(self):
 		self.algorithm = None
@@ -98,15 +114,6 @@ class TestRRT_Star(unittest.TestCase):
 		index = self.get_last_row_index(step)
 		self.assertEqual(step,index,"costs list not incremented")
 
-"""
-	def test_stepper_06_unknown_method(self):
-		params.method = "unknown"
-		
-		with self.assertRaises(SystemExit) as cm:
-			self.stepper = Stepper(params,domain)
-		
-		self.assertEqual(cm.exception.code, "ERROR: no valid method")
-"""
 
 if __name__ == '__main__':
 	unittest.main()

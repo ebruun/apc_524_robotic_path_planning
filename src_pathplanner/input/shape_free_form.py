@@ -27,6 +27,8 @@ class FreeForm2D(Shape):
     super().__init__(shape_info)
 
     self.file = shape_info['bitmap_file']
+    self.bb_lower_left = shape_info['bb_lower_left'] # The lower left location of the bounding box
+    self.bb_upper_right = shape_info['bb_upper_right'] # The upper right location of the bounding box
     self.obtain_geometric_info()
 
 
@@ -50,15 +52,38 @@ class FreeForm2D(Shape):
     self.y_min_val = np.min(self.all_points_array[:,1])
     
 
-    # Move 
+    # Traslate the coordinates
     self.all_points_array[:,0] = self.all_points_array[:,0]-self.x_min_val
     self.all_points_array[:,1] = self.all_points_array[:,1]-self.y_min_val
-
+    
+    # The original bounding box
     self.x_min_val = np.min(self.all_points_array[:,0])
     self.y_min_val = np.min(self.all_points_array[:,1])
     self.x_max_val = np.max(self.all_points_array[:,0])
     self.y_max_val = np.max(self.all_points_array[:,1])
     
+    original_bb_width = self.x_max_val - self.x_min_val
+    original_bb_height = self.y_max_val - self.y_min_val
+
+    new_bb_width = self.bb_upper_right[0] - self.bb_lower_left[0]
+    new_bb_height = self.bb_upper_right[1] - self.bb_lower_left[1]
+
+    x_scale = new_bb_width/original_bb_width
+    y_scale = new_bb_height/original_bb_height
+
+    self.all_points_array[:,0] = self.all_points_array[:,0]*x_scale
+    self.all_points_array[:,1] = self.all_points_array[:,1]*y_scale
+
+    self.all_points_array[:,0] = self.all_points_array[:,0]+self.bb_lower_left[0]
+    self.all_points_array[:,1] = self.all_points_array[:,1]+self.bb_lower_left[1]
+
+    self.x_min_val = np.min(self.all_points_array[:,0])
+    self.y_min_val = np.min(self.all_points_array[:,1])
+    self.x_max_val = np.max(self.all_points_array[:,0])
+    self.y_max_val = np.max(self.all_points_array[:,1])
+
+    self.hx = self.hx*x_scale
+    self.hy = self.hy*y_scale
     # Compute the centroid of the shape
     self.centroid = np.mean(self.all_points_array, axis=0)
 
@@ -84,8 +109,8 @@ class FreeForm2D(Shape):
       shape_points = self.all_points_array[self.all_points_array[:,1] < point[1]+2.1*self.hy]
       shape_points = shape_points[shape_points[:,1] > point[1] -2.1*self.hy]
       number_of_shape_points = shape_points.shape[0]
-      _eps = 1.0e-3
-      test_radius = max(self.hx,self.hy)*(1.+_eps)
+      _eps = 1.0e-1
+      test_radius = max(self.hx,self.hy)*(2.+_eps)
       for shape_point in shape_points:
         if(np.linalg.norm(point-shape_point) <= test_radius):
           return True
@@ -127,7 +152,7 @@ class FreeForm2D(Shape):
     """Generates a random point in the shape free form
 
     Returns:
-      A new point::
+      A new point
 
     """
     random_point = (self.all_points_array[np.random.randint(self.all_points_array.shape[0], size=1), :]).flatten()

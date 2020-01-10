@@ -5,6 +5,7 @@ import numpy as np
 
 from solver.solution import Solution
 from solver.recorder import Recorder
+from input.domain_class import Domain
 
 params = Mock()
 params.n_trials = 5
@@ -22,40 +23,89 @@ domain.obstacles = [
 				("circle", np.array([1.5, 0.5]), 0.40)
 				]
 
+domain_info = {
+	'dim': 2, 
+	'shape_type': 'rectangle',
+	'lower_left': [0.0, 0.0],
+	'upper_right': [3.0, 4.0]
+	}
+
+origin_goal_info = {
+	'origin': [0.1, 0.1],
+	'goals': {
+		'goal_1': {'dim': 2, 'shape_type': 'circle', 'radius': 0.2, 'center': [0.3, 2.1]},
+		'goal_2': {'dim': 2, 'shape_type': 'circle', 'radius': 0.1, 'center': [2.5, 3.5]}
+		}
+	}
+
+obstacles_info = {
+	'obstacle_1':{'dim': 2, 'shape_type': 'circle', 'radius': 0.2, 'center': [0.5, 3.5]},
+	'obstacle_2': {'dim': 2, 'shape_type': 'circle', 'radius': 0.2, 'center': [1.5, 3.5]},
+	'obstacle_3': {'dim': 2, 'shape_type': 'circle', 'radius': 0.4, 'center': [1.5, 0.5]}
+	}
+
+rrt_algorithm_info = {
+	'method': 'rrt_basic',
+	'n_trials': 5,
+	'step_size': 0.2,
+	'dim': 2,
+	'neighborhood': 0.3
+	}
+
+domain_test = Domain(domain_info, obstacles_info, origin_goal_info)	
+
+print(domain_test.goals)
+
 class TestSolution(unittest.TestCase):
 	def setUp(self):
-		self.solution = Solution(params,domain)
-		self.solution.recorder = Recorder(params, history = 1)
+		self.solution = Solution(rrt_algorithm_info,domain_test)
 
 	def tearDown(self):
-		self.solution.recorder = None
 		self.solution = None
 
 
-	def test_solution_00_goal_check_small(self):
+	def test_solution_00_goal_check_multiple(self):
+		origin_goal_info = {
+			'origin': [0.1, 0.1],
+			'goals': {
+				'goal_1': {'dim': 2, 'shape_type': 'circle', 'radius': 0.25, 'center': [1.0, 1.1]}
+				}
+			}		
+
+		domain_test = Domain(domain_info, obstacles_info, origin_goal_info)
+		self.solution = Solution(rrt_algorithm_info,domain_test)
+
 		self.solution.recorder.vertices = np.array(
-			[[1.0, 1.0],
+			[[0.5, 1.0],
 			[1.0, 1.09],
 			[1.0, 1.05]]
 		)
 
-		goal = ("", np.array([1.0, 1.1]), 0.25)
+		#self.solution.recorder.parents = np.array([[-1 0,0]])
 
-		a = self.solution.check_if_goal_reached(goal)
+		a = self.solution.check_if_goal_reached(domain_test.goals[0])
 
-		self.assertEqual(a,1,"index of goal vertex wrong")
+		self.assertEqual(a,[1,2],"index list of goal vertex wrong")
 
 
-	def test_solution_01_goal_check_big(self):
+	def test_solution_01_goal_check_none(self):
+		origin_goal_info = {
+			'origin': [0.1, 0.1],
+			'goals': {
+				'goal_1': {'dim': 2, 'shape_type': 'circle', 'radius': 0.25, 'center': [1.0, 1.1]}
+				}
+			}		
+
+		domain_test = Domain(domain_info, obstacles_info, origin_goal_info)
+		self.solution = Solution(rrt_algorithm_info,domain_test)
+
 		self.solution.recorder.vertices = np.array(
-			[[1.0, 1.50],
-			[1.0, 1.39],
-			[1.0, 1.35]]
+			[[0.5, 1.0],
+			[0.5, 1.09],
+			[0.5, 1.05]]
 		)
 
-		goal = ("", np.array([1.0, 1.1]), 0.25)
-
-		a = self.solution.check_if_goal_reached(goal)
+		a = self.solution.check_if_goal_reached(domain_test.goals[0])
 
 		self.assertTrue(np.isnan(a),"index of goal vertex wrong")
 
@@ -105,12 +155,17 @@ class TestSolution(unittest.TestCase):
 
 
 	def test_solution_07_solutionpath(self):
+		origin_goal_info = {
+			'origin': [0.1, 0.1],
+			'goals': {
+				'goal_1': {'dim': 2, 'shape_type': 'circle', 'radius': 0.25, 'center': [1.0, 1.41]},
+				'goal_2': {'dim': 2, 'shape_type': 'circle', 'radius': 0.25, 'center': [1.0, 3.10]},
+				'goal_3': {'dim': 2, 'shape_type': 'circle', 'radius': 0.25, 'center': [1.0, 1.71]},
+				}
+			}		
 
-		domain.goals = [
-			("cirlce", np.array([1.0, 1.41]), 0.25),
-			("cirlce", np.array([1.0, 3.10]), 0.25),
-			("circle", np.array([1.0, 1.71]), 0.25)
-		]
+		domain_test = Domain(domain_info, obstacles_info, origin_goal_info)
+		self.solution = Solution(rrt_algorithm_info,domain_test)
 
 		self.solution.recorder.vertices = np.array(
 			[[1.0, 1.20],
@@ -121,15 +176,18 @@ class TestSolution(unittest.TestCase):
 			[1.0, 1.70]]
 		)
 
+		self.solution.recorder.costs = np.array([0, 21, 31.2, 10.0, 3.2, 4.0])
 		self.solution.recorder.parents = np.array([-1, 0, 4, 1, 3, 3])
 
 		self.solution.process_vertex_list()
 
 		self.assertEqual(len(self.solution.solution_path), 3,
 			"not enough path lists saved")
+		
 
 	def test_solution_08_runalgorithm_basic(self):
-		params.method = "rrt_basic"
+		rrt_algorithm_info['method'] = "rrt_basic"
+		self.solution = Solution(rrt_algorithm_info,domain_test)
 
 		self.solution.run_algorithm()
 
@@ -144,8 +202,8 @@ class TestSolution(unittest.TestCase):
 
 
 	def test_solution_09_runalgorithm_star(self):
-		params.method = "rrt_star"
-		params.neighborhood = 0.2
+		rrt_algorithm_info['method'] = "rrt_star"
+		self.solution = Solution(rrt_algorithm_info,domain_test)
 
 		self.solution.run_algorithm()
 
@@ -160,7 +218,8 @@ class TestSolution(unittest.TestCase):
 
 
 	def test_solution_10_unknown_method(self):
-		params.method = "unknown"
+		rrt_algorithm_info['method'] = "unknown"
+		self.solution = Solution(rrt_algorithm_info,domain_test)
 		
 		with self.assertRaises(SystemExit) as cm:
 			self.solution.run_algorithm()

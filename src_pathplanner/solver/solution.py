@@ -6,73 +6,64 @@ Imports the :class:`~solver.recorder.Recorder` class
 
 Imports the :class:`~algorithm.rrt_basic.RRT_Basic` class
 
-Imports the :class:`~algorithm.rrt_basic.RRT_Star` class
+Imports the :class:`~algorithm.rrt_star.RRT_Star` class
 
-Imports the :func:`~algorithm.vertex.find_nearest_vertex` function
 """
-
 import numpy as np
 from sys import exit
 
 from solver.recorder import Recorder
-
 from algorithm.rrt_basic import RRT_Basic
 from algorithm.rrt_star import RRT_Star
 
-from algorithm.vertex import find_nearest_vertex
-
-
 class Solution:
-	"""This class executes and saves the solution to the path planning problem.
+	"""This class executes the path planning algorithm, and evaluates the completion of the path from the origin to the goals.
 	"""
 
 	def __init__(self,params,domain_object):
 		"""Initialize the Solution class.
 
-		The intialization consists of creating new Recorder and Stepper objects, which are initialized based on the params object.
+		Creates new Recorder object, which is initialized based on the params dictionary passed.
 
 		Note:
-			The input parameters are assigned to instance variables with same name.
+			The input parameters dictionary is assigned to an instance attribute with same name.
 
 		Parameters:
-			params (:obj:`~input.params.ParamsRRT` object):
-				Object containing the algorithm parameters.
-			domain (:obj:`~input.domain.Domain` object):
+			params: Dictionary containing the user-specified algorithm parameters.
+			domain (:obj:`~input.domain_class.Domain` object):
 				Object containing the assembled solution domain.
 
 		Attributes:
 			params: see Parameters
 			domain: see Parameters
 			recorder (:class:`~solver.recorder.Recorder` object):
-				Initialized recorder object with input parameters.
-			stepper (:obj:`~solver.stepper.Stepper` object):
-				Initialized stepper object with input parameters.	
+				Initialized recorder object with the given input parameters.	
 			solution_path (:obj:`list` of :obj:`list` of :obj:`int`):
-				A path from origin to each goal in the form of vertex indices. A single path is generated for each goal.
+				Initialized as empty. Stores a path from origin to each goal in the form of vertex indices. A single path is generated for each goal.
+			algorithm: Initialized as empty. Assigned the algorithm object, which is used to solve the path planning problem.
 		
 		"""
 		self.params = params
 		self.domain_object = domain_object
 
-		self.recorder = []
+		self.recorder = Recorder(self.params)
 
 		self.solution_path = [] 
 		self.algorithm = []
 
-
 	def run_algorithm(self):
-		"""  This function runs through the full algorithm.
+		"""  This function runs through the full path planning algorithm.
 
-		A single trial of the algorithm is executed in each iteration of the loop called in this function. The maximum number of trials is specified in the :obj:`~input.params.ParamsRRT` object.
+		The chosen algorithm is initialized based on the input parameters. A single trial of the algorithm is executed in each iteration of the loop called in this function. The maximum number of trials is specified in the inout parameters.
 
-		Calls the :meth:`stepper.do_singlestep() 
-		<solver.stepper.Stepper.do_singlestep>` function in the loop.
+		Note:
+			Exits with an error if the user selects and algorithm that has not been implemented.	
+
+		Calls the :meth:`RRT.rrt_step() <algorithm.rrt.RRT.rrt_step()>` function in the loop.
 
 		"""
-
 		if self.params["method"] == "rrt_basic":
 			print("We are using rrt_basic")
-			self.recorder = Recorder(self.params,history = 0)
 			self.algorithm = RRT_Basic(
 				self.domain_object, 
 				self.recorder,
@@ -81,7 +72,6 @@ class Solution:
 
 		elif self.params["method"] == "rrt_star":
 			print("We are using rrt_star")
-			self.recorder = Recorder(self.params, history = 1)
 			self.algorithm = RRT_Star(
 				self.domain_object,
 				self.recorder,
@@ -93,50 +83,96 @@ class Solution:
 			self.algorithm.rrt_step(trial)
 
 	def process_vertex_list(self):
-		"""  This function post-processes the full vertex list resulting from  completing the algorithm.
-		Loop iterations based on number of goals to evaluate against.
-		Calls the :meth:`~solver.solution.Solution.check_if_goal_reached` function in the loop. Returns the index of the vertex to reach the goal.
-		Calls the :meth:`~solver.solution.Solution.find_path()` function in the loop. Finds the path from the origin to the vertex to reach the goal.
-		"""
+		"""  This function post-processes the full vertex list generated from completing the specified number of iterations.
 
+		Iterates through the number of goals specified in the domain to find how many vertices in the :obj:`~solver.recorder.Recorder` object are within the goal area. Calls the :meth:`~solver.solution.Solution.check_if_goal_reached` function.
+
+		Out of the vertices that have reached the goal it then find the index of the vertex that results in the lowest cost (most optimal) path to the goal. Calls the :meth:`~solver.solution.Solution.find_lowest_cost()` function.
+
+		Appends the full lowest cost path (from origin to goal) returned by the :meth:`~solver.solution.Solution.find_path()` function to the `solution_path` variable.
+
+		Note:
+			If no vertex has reached the goal then the saved path is :obj:`numpy.nan`
+
+		"""
 		for goal in self.domain_object.goals:
-			index = self.check_if_goal_reached(goal)
+			reached_goal_index = self.check_if_goal_reached(goal)
+
+			if np.isnan(reached_goal_index[0]):
+				index = reached_goal_index[0]
+			else:
+				index = self.find_lowest_cost(reached_goal_index)
+
 			self.solution_path.append(self.find_path(index))
 
-
 	def check_if_goal_reached(self,goal):
-		"""  This function checks if a single goal has been reached.
-		Calls the :meth:`~solver.solution.Solution.find_nearest_vertex()` function to find the index of the closest vertex and its distance to the center of the goal.
-		Checks to see if the closest vertex is within the boundary (perimeter) of the goal object. If it is within the boundary then the goal is reached.
-		Error:
-			TO DO:
-			Goal - currently in the form ["string", middle point, radius]
-			distance is measured from the center of the goal object, and its perimeter is the outer edge
-			Change this check to .isinside(point) function once the goal is defined as a shape
+		"""  This function checks which vertices have reached a single goal.
+
+		Uses the goal object's :meth:`~input.shape.Shape.is_point_inside()` method to find and save all the vertices that are inside and hence have reached the goal.
+
 		Parameters:
-			goal (:obj:`~input.shape.Shape` object): A shape object specfied as the target for the algorithm.	
+			goal: A shape object specfied as the target for the algorithm.	
 		Returns:
-			index (:obj:`int`): The index of the vertex that reached the goal. This is set to :obj:`numpy.nan` if the goal is not reached.
+			reached_goal_index (:obj:`list` of :obj:`int`): A list of indices of all the vertices in the :obj:`~solver.recorder.Recorder` object that have reached the goal. This is set to the single value of :obj:`numpy.nan` if the goal is not reached.
+
 		"""
+		reached_goal_index = []
 
 		for i, vertex in enumerate(self.recorder.vertices):
 			if any(x == True for x in np.isnan(vertex)):
-				break
+				return reached_goal_index
 			else:
 				if(goal.is_point_inside(vertex)):
-					return i
-		index = np.nan
-		return index
+					reached_goal_index.append(i)
 
+		if len(reached_goal_index) == 0:
+			reached_goal_index.append(np.nan)
+			return reached_goal_index
+		else:
+			return reached_goal_index
+
+	def find_lowest_cost(self,reached_goal_index):
+		""" This function searches through a list of vertex indexes and returns the one with the lowest total path cost.
+
+		Evaluates the total cost to reach each vertex specified in the input list, using the corresponding path costs in the :obj:`~solver.recorder.Recorder` object.
+
+		Parameters:
+			reached_goal_index (:obj:`list` of :obj:`int`): A list of indices of all the vertices in the :obj:`~solver.recorder.Recorder` object that have reached the goal.	
+		Returns:
+			lowest_cost_index (:obj:`int`): The index of the vertex with the lowest total path cost to the goal.
+
+		"""
+		cost = 0.0
+		lowest_cost = float('+inf') 
+
+		for index in reached_goal_index:
+
+			cost = self.recorder.costs[index]
+
+			if cost > lowest_cost:
+				pass
+			else:
+				lowest_cost = cost
+				lowest_cost_index = index
+
+		return lowest_cost_index
 
 	def find_path(self,index):
-		"""  This function creates a path of indices from the origin to the end vertex.
-		Finds the sequence of nodes working back from a specifed vertex index to the starting origin using the values in the parents list, saved in the :obj:`~solver.recorder.Recorder` object.
-		The list of vertex indices for the full path is appended to the :attr:`solution_path` list of lists.
+		"""  This function creates a list of indices of vertices that represent the lowest cost path from the origin to the end vertex.
+
+		Finds the sequence of nodes working back from a specifed vertex index to the starting origin using the values by looping through the parents list, saved in the :obj:`~solver.recorder.Recorder` object. The loop terminates with the parent index of -1 is reached, which indicates the origin (has no parent).
+
+		The list of vertex indices for the full path is appended to the `solution_path` variable.
+
+		Parameters:
+			index (:obj:`int`): The index of the end vertex.
+		Returns:
+			path_list(:obj:`list` of :obj:`int`): A list of ordered vertex indices for the path from the origin to end vertex.
 		
 		Note:
-			Parent of vertex i is j, then parents[i] == j
-			For the origin vertex, parents[0] == -1
+			Parent of vertex i is j, then recorder.parents[i] == j
+
+			For the origin vertex, recorder.parents[0] == -1
 		"""
 		path_list = []
 		path_list.append(index)
