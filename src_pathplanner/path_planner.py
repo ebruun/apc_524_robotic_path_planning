@@ -36,8 +36,8 @@ def run_program():
 
 	print("1. Reading Parameters")
 	# The input file
-	input_file = "./input/rrt_input_file.json"
-	# input_file = "./input/rrt_input_file_free_form_obstacle.json"
+	#input_file = "./input/rrt_input_file.json"
+	input_file = "./input/rrt_input_file_free_form_obstacle.json"
 
 	# Parsed JSON data
 	program_input = ParseDataJSON(input_file)
@@ -73,12 +73,12 @@ def run_program():
 	plot_object.set_layout()
 	plot_object.draw()
 
-	Plot1().simple_plot1(
-		domain_object,
-		PathPlan.recorder.parents,
-		PathPlan.recorder.vertices,
-		PathPlan.solution_path
-		)
+	# Plot1().simple_plot1(
+	# 	domain_object,
+	# 	PathPlan.recorder.parents,
+	# 	PathPlan.recorder.vertices,
+	# 	PathPlan.solution_path
+	# 	)
 
 
 
