@@ -4,10 +4,13 @@ import numpy as np
 from abc import ABC, abstractmethod
 
 class Shape(ABC):
-  """docstring for Shape"""
-  @abstractmethod
-  def __init__(self, shape_info:dict):
-    self.name = shape_info["shape_type"]
+	"""docstring for Shape"""
+
+	@abstractmethod
+	def __init__(self, shape_info:dict):
+		"""docstring
+		"""
+		self.name = shape_info["shape_type"]
 	
 	@abstractmethod
 	def is_point_inside(self):
@@ -21,8 +24,8 @@ class Shape(ABC):
 		"""
 		pass
 
-  @abstractmethod
-  def sample_random_point(self)->np.ndarray:
-    """ Abstract method for generating a random new point inside a shape.
-    """
-    pass
+	@abstractmethod
+	def sample_random_point(self)->np.ndarray:
+		""" Abstract method for generating a random new point inside a shape.
+		"""
+		pass
