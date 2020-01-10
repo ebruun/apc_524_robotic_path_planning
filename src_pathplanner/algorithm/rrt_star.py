@@ -13,8 +13,6 @@ import numpy as np
 from algorithm.rrt import RRT
 from input.shape_circle import Circle
 
-import matplotlib.pyplot as plt
-############### DELETE THIS ##############
 
 class RRT_Star(RRT):
 	""" A class for the RRT Star algorithm, which inherits from the :class:`~algorithm.rrt.RRT` abstract class.
@@ -47,11 +45,6 @@ class RRT_Star(RRT):
 		self.neighbor_dist = []
 
 		self.recorder.parents_history[0,0:2] = -1
-
-		############### DELETE THIS ##############
-		self.toggle = 0 #Plot things
-		############### DELETE THIS ##############
-
 
 	def rrt_step(self,trial):
 		"""This function performs a single step/iteration using the RRT Star algorithm.
@@ -93,12 +86,6 @@ class RRT_Star(RRT):
 		# Step 4. Record the iteration data (update: recorder.vertices list)
 		self.recorder.vertices[trial,:] = self.new_v
 
-
-		############### DELETE THIS ##############
-		self.plot_tests(trial,trial+1, self.toggle)
-		############### DELETE THIS ##############
-
-
 		# Step 5. Find the neighboring vertices in a radius around the new vertex 
 		self.find_vertices_in_neighborhood()
 
@@ -109,11 +96,7 @@ class RRT_Star(RRT):
 		self.recorder.parents[trial] = self.new_parent 
 		self.recorder.parents_history[:,trial*2] = self.recorder.parents
 		self.recorder.costs[trial] = self.update_path_cost(self.new_parent,self.new_cost)
-		
-
-		############### DELETE THIS ##############
-		self.plot_tests(trial+1,trial+1,self.toggle)
-		############### DELETE THIS ##############
+	
 
 
 		# Step 8. Optimize the current solution by rewiring the vertex/edge graph to shorten paths
@@ -122,10 +105,6 @@ class RRT_Star(RRT):
 		# Step 9. Record the iteration data (update: recorder.parents_history list)
 		self.recorder.parents_history[:,(trial*2 + 1)] = self.recorder.parents
 
-
-		############### DELETE THIS ##############
-		self.plot_tests(trial+1,trial+1,self.toggle)
-		############### DELETE THIS ##############
 
 
 	def find_vertices_in_neighborhood(self):
@@ -234,15 +213,3 @@ class RRT_Star(RRT):
 					self.recorder.costs[index] = self.recorder.costs[trial] + dist
 					self.recorder.parents[index] = trial
 
-
-	############### DELETE THIS ##############
-	def plot_tests(self,t1,t2,toggle):
-		if toggle:
-			Plot1().simple_plot3(
-				self.domain_object,
-				self.recorder.parents,
-				self.recorder.vertices,
-				t1, t2
-				)
-			plt.pause(0.05)
-	############### DELETE THIS ##############

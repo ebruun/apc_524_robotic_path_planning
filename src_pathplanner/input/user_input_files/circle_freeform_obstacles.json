@@ -15,7 +15,9 @@
 		},
 
 	"ObstaclesInfo":{
-		"obstacle_1":{"dim":2, "shape_type": "free_form", "bitmap_file":"./input/bitmap_files/obstacle.pbm", "bb_lower_left":[-2.5,-2.5], "bb_upper_right":[0.0,0.0]}
+		"obstacle_1":{"dim":2, "shape_type": "free_form", 
+			"bitmap_file":"./input/bitmap_files/obstacle.pbm", 
+			"bb_lower_left":[-2.5,-2.5], "bb_upper_right":[0.0,0.0]}
 		},
 
 	"RRTAlgorithmInfo":{

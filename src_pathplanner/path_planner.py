@@ -1,5 +1,5 @@
 # path_planner.py
-# Author(s): Edvard Bruun, Vivek Kumar
+# Author(s): Edvard Bruun, Vivek Kumar, Jessica Flores
 
 """
 The core module to execute the program
@@ -12,16 +12,12 @@ Imports the :class:`~input.domain.Domain` class
 
 Imports the :class:`~solver.solution.Solution` class
 
-Imports the :class:`~output.plot1.Plot1` class
+Imports the :class:`~output.plot.Plot` class
 
 """
 # Python imports
 import sys
 import time
-
-############### DELETE THIS ##############
-import matplotlib.pyplot as plt
-############### DELETE THIS ##############
 
 # Import inputs
 from input.parse_data_class import ParseDataJSON
@@ -37,7 +33,8 @@ def run_program():
 		Step 1. Read input parameters file (user-specified)
 		Step 2. Create problem domain
 		Step 3. Execute path planning algorithm
-		Step 4. Generate result plot
+		Step 4. Print results to screen and save as text file
+		Step 5. Create results plot
 
 	Function Code::
 		
@@ -61,6 +58,9 @@ def run_program():
 
 		# Step 4.
 		print_results()
+		save_results()
+
+		# Step 5.
 		plot_results()
 
 
@@ -68,9 +68,10 @@ def run_program():
 
 	print("\nStep 1. Reading Parameters")
 	# The input file
-	#input_file = "./input/rrt_input_file.json"
-	#input_file = "./input/rrt_input_file_free_form_obstacle.json"
-	input_file = "./input/rrt_input_file_plot_with_everything.json"
+	#input_file = "./input/user_input_files/circle_regular_obstacles.json"
+	#input_file = "./input/user_input_files/circle_freeform_obstacles.json"
+	#input_file = "./input/user_input_files/circle_mixed_obstacles.json"
+	input_file = "./input/user_input_files/circle_mixed_goals_obstacles.json"
 
 	# Parsed JSON data
 	program_input = ParseDataJSON(input_file)
@@ -91,20 +92,26 @@ def run_program():
 	PathPlan.run_algorithm()
 	PathPlan.process_vertex_list()
 
-	print("Step 4. Showing Results")
+	print("Step 4. Print and Save Results")
+	################# REPLACE WITH PRINTING FUNCTION #######################
+	# print_results()
+	# save_results()
 	print("\n\n Vertices\n",PathPlan.recorder.vertices)
 	print("\n\n Parents\n",PathPlan.recorder.parents)
 	print("\n\n Costs\n",PathPlan.recorder.costs)
-	print("\n\n solution_path\n",PathPlan.solution_path)
+	################# REPLACE WITH PRINTING FUNCTION #######################
 
-	print("Step 5. Plotting...")
-	plot_object = Plot("test run", domain_object)
+	################# REPLACE WITH SINGLE FUNCTION #######################
+	print("Step 5. Plotting Results")
+	plot_object = Plot("Path Planning Solution", domain_object)
+	# plot_results(arg1,arg2,arg3,...)
 	plot_object.plot_domain()
 	plot_object.plot_obstacles()
 	plot_object.plot_origin_goals()
 	plot_object.plot_solution_graph(PathPlan)
 	plot_object.draw()
 	print("Finished! See plot in output folder")
+	################# REPLACE WITH SINGLE FUNCTION #######################
 
 
 if __name__ == '__main__':
