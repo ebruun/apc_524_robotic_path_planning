@@ -5,15 +5,15 @@ Showing the input/output from several program runs.
 
 Two domains defined with the following types of geometry::
 
-	Regular (circles, rectangles)
-	Freeform (bitmap images)
+	Rectangle
+	Circle
 
-The domains solved with the following algorithms::
+The domains are solved with the following algorithms::
 
 	Basic RRT
 	RRT Star
 
-Regular Geometry
+Circlur Domain
 ****************
 
 Input Files
@@ -23,13 +23,13 @@ Basic RRT Output
 ----------------
 Show plots and results
 
-Basic RRT Output
+RRT Star Output
 ----------------
 Show plots and results
 
 
-Freeform Geometry
-*****************
+Rectangular Domain
+******************
 
 Input Files
 -----------
@@ -38,6 +38,6 @@ Basic RRT Output
 ----------------
 Show plots and results
 
-Basic RRT Output
+RRT Star Output
 ----------------
 Show plots and results

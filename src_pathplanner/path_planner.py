@@ -30,10 +30,10 @@ def run_program():
 	"""
 	Steps in program::
 
-		Step 1. Read input parameters file (user-specified)
+		Step 1. Read parameters file (user-specified)
 		Step 2. Create problem domain
 		Step 3. Execute path planning algorithm
-		Step 4. Print results to screen and save as text file
+		Step 4. Print results to screen, save text file
 		Step 5. Create results plot
 
 	Function Code::
@@ -49,7 +49,7 @@ def run_program():
 		rrt_algorithm_info = program_input.data_dict["RRTAlgorithmInfo"]
 		
 		# Step 2. 
-		domain_info = program_input.data_dict["DomainInfo"]
+		domain_object = Domain(domain_info, obstacles_info, origin_goal_info)
 
 		# Step 3. 
 		PathPlan = Solution(rrt_algorithm_info,domain_object)
@@ -79,7 +79,6 @@ def run_program():
 
 	# Split up the parsed input
 	domain_info = program_input.data_dict["DomainInfo"]
-
 	origin_goal_info = program_input.data_dict["OriginGoalInfo"]
 	obstacles_info = program_input.data_dict["ObstaclesInfo"]
 	rrt_algorithm_info = program_input.data_dict["RRTAlgorithmInfo"]
