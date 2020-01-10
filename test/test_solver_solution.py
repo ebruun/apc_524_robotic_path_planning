@@ -7,21 +7,6 @@ from solver.solution import Solution
 from solver.recorder import Recorder
 from input.domain_class import Domain
 
-params = Mock()
-params.n_trials = 5
-params.dims = 2
-params.step_size = 0.2
-params.method = "rrt_basic"
-
-domain = Mock()
-domain.dims = 2
-domain.origin = np.array([0.1, 0.1])
-domain.extents = np.array([[0,3], [0,4]])
-domain.obstacles = [
-				("circle", np.array([0.5, 3.5]), 0.20),
-				("circle", np.array([1.5, 3.5]), 0.20),
-				("circle", np.array([1.5, 0.5]), 0.40)
-				]
 
 domain_info = {
 	'dim': 2, 
@@ -224,7 +209,7 @@ class TestSolution(unittest.TestCase):
 		with self.assertRaises(SystemExit) as cm:
 			self.solution.run_algorithm()
 		
-		self.assertEqual(cm.exception.code, "ERROR: no valid method")
+		self.assertEqual(cm.exception.code, "ERROR: No Valid Method")
 
 
 if __name__ == '__main__':

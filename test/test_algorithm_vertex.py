@@ -3,9 +3,7 @@ from unittest.mock import Mock, patch
 
 import numpy as np
 
-from algorithm.vertex import find_nearest_vertex
 from algorithm.vertex import Vertex
-
 from input.domain_class import Domain
 
 domain_info = {
@@ -57,10 +55,10 @@ class TestVertex(unittest.TestCase):
 
 			goal = np.array([1.0,1.0])
 
-			index,dist = find_nearest_vertex(vertices,goal)
+			index,dist = Vertex.find_nearest_vertex(vertices,goal)
 
 			self.assertEqual(index,2,"shortest index incorrect")
-			self.assertEqual(dist,0.05,"shortest distance incorrect")
+			self.assertAlmostEqual(dist,0.05,7,"shortest distance incorrect")
 
 
 	def test_vertex_01_distance_calc_normal3d(self):
@@ -72,10 +70,10 @@ class TestVertex(unittest.TestCase):
 
 		goal = np.array([1.0,1.0,2.0])
 
-		index,dist = find_nearest_vertex(vertices,goal)
+		index,dist = Vertex.find_nearest_vertex(vertices,goal)
 
 		self.assertEqual(index,2,"shortest index incorrect")
-		self.assertEqual(dist,0.05,"shortest distance incorrect")
+		self.assertAlmostEqual(dist,0.05,7,"shortest distance incorrect")
 
 
 	def test_vertex_02_distance_calc_zeros(self):
@@ -87,10 +85,10 @@ class TestVertex(unittest.TestCase):
 
 		goal = np.array([0.0,0.0])
 
-		index,dist = find_nearest_vertex(vertices,goal)
+		index,dist = Vertex.find_nearest_vertex(vertices,goal)
 
 		self.assertEqual(index,1,"shortest index incorrect")
-		self.assertEqual(dist,0.0,"shortest distance incorrect")
+		self.assertAlmostEqual(dist,0.0,7,"shortest distance incorrect")
 
 
 	def test_vertex_03_distance_calc_between(self):
@@ -102,10 +100,10 @@ class TestVertex(unittest.TestCase):
 
 		goal = np.array([0.0,0.5])
 
-		index,dist = find_nearest_vertex(vertices,goal)
+		index,dist = Vertex.find_nearest_vertex(vertices,goal)
 
 		self.assertEqual(index,0,"shortest index incorrect")
-		self.assertEqual(dist,0.5,"shortest distance incorrect")
+		self.assertAlmostEqual(dist,0.5,7,"shortest distance incorrect")
 
 
 	def test_vertex_04_distance_calc_nan(self):
@@ -117,10 +115,10 @@ class TestVertex(unittest.TestCase):
 
 		goal = np.array([1.0,1.0])
 
-		index,dist = find_nearest_vertex(vertices,goal)
+		index,dist = Vertex.find_nearest_vertex(vertices,goal)
 
 		self.assertEqual(index,1,"shortest index incorrect")
-		self.assertEqual(dist,0.1,"shortest distance incorrect")
+		self.assertAlmostEqual(dist,0.1,7,"shortest distance incorrect")
 
 
 	def test_vertex_05_distance_calc_inf(self):
@@ -132,7 +130,7 @@ class TestVertex(unittest.TestCase):
 
 		goal = np.array([0.0,0.0])
 
-		index,dist = find_nearest_vertex(vertices,goal)
+		index,dist = Vertex.find_nearest_vertex(vertices,goal)
 
 		self.assertEqual(index,0,"shortest index incorrect")
 		self.assertEqual(dist,float('+inf'),"shortest distance incorrect")
@@ -183,7 +181,7 @@ class TestVertex(unittest.TestCase):
 
 		self.assertEqual(v,new_q, "new vertex incorrect")
 		self.assertEqual(i, 1, "index of vertex wrong")
-		self.assertEqual(d, 0.141421, "distance of vertex wrong")
+		self.assertAlmostEqual(d, 0.141421,6, "distance of vertex wrong")
 
 
 	def test_vertex_08_new_vertex_close3D(self):
