@@ -6,11 +6,20 @@
 
 ## Creating Documentation Files
 
+Ensure that ghostscript installed if ps2pdf error for latex `make`
+
+```
+https://command-not-found.com/ps2pdf
+```
+
 ### Project report
+
+
 ```
 $ cd apc_524_robotic_path_planning/documentation/final_report
 $ make
 ```
+
 
 ### Sphinx documentation
 
