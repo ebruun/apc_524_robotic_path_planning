@@ -2,10 +2,45 @@
 
 # Team: Edvard Bruun, Vivek Kumar, Jessica Flores
 
-# Title: Robotic Path Planning Approach for Structural Design
+# Title: Robotic Path Planning Algorithm
 
+## Creating Documentation Files
 
-## Following documents were added
+### Project report
+```
+$ cd apc_524_robotic_path_planning/documentation/final_report
+$ make
+```
+
+### Sphinx documentation
+
+Creates all out in `build` directory
+
+for PDF:
+```
+$ cd apc_524_robotic_path_planning/documentation/doc_spinx
+$ make latexpdf
+```
+
+for html:
+```
+$ cd apc_524_robotic_path_planning/documentation/doc_spinx
+$ make html
+```
+
+### UML class diagram
+
 * UML Class Diagram: Uses tikz-uml package for LaTeX. Documentation can be found at: https://perso.ensta-paris.fr/~kielbasi/tikzuml/var/files/html/web-tikz-uml-userguide.html
 
-## Classes Shown
+```
+$ cd apc_524_robotic_path_planning/documentation/uml_class_diagram
+$ make
+```
+
+
+
+
+
+
+
+  
