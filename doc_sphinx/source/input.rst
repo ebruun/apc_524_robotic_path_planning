@@ -52,7 +52,7 @@ obstacles module
 domain module
 *************
 
-.. automodule:: input.domain_class.Domain
+.. automodule:: input.domain_class
    :members:
    :special-members:
    :exclude-members: __weakref__

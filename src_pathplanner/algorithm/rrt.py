@@ -4,14 +4,12 @@
 """
 Imports the :class:`~algorithm.vertex.Vertex` class
 
-Imports the :func:`~algorithm.vertex.find_nearest_vertex` function
 """
 
 from abc import ABC, abstractmethod
 import numpy as np
 
 from algorithm.vertex import Vertex
-from algorithm.vertex import find_nearest_vertex
 
 
 class RRT(ABC):

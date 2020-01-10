@@ -168,7 +168,7 @@ class RRT_Star(RRT):
 	def find_indices_in_extents(self):
 		""" This function finds a subset of vertex indices in a rectangular domain around the new vertex.
 
-		Leveraging the computational speed of numpy array slicing to select a reduced set of vertices based on rectangular coordinates. As an additional buffer the rectangular extents are modified to be larger than the neighborhood radius by multiplying thus value by the `neighbor_offset` variable.
+		Leveraging the computational speed of numpy array slicing to select a reduced set of vertices based on rectangular coordinates. As an additional buffer the rectangular extents are modified to be larger than the neighborhood radius by multiplying this value by the `neighbor_offset` variable.
 
 		Returns:
 			indices_in_box (:obj:`list` of :obj:`int`):
@@ -193,9 +193,17 @@ class RRT_Star(RRT):
 
 
 	def find_parent_shortest_path(self):
-		"""fill out
-		"""
+		""" This function finds a vertex in the neighborhood that will lead to the lowest total cost to the new vertex.
 
+		Calls the the :meth:`~algorithm.rrt.RRT.update_path_cost()` method to find the new total costs to go from any of the neighboring vertices to the new vertex. The :meth:`~algorithm.rrt.RRT.is_new_edge_blocked()` method is called to determine whether the new edge is unobstructed. 
+
+		The lowest cost neighbor vertex that leads to an unobstructed edge becomes the parent for the new vertex.
+
+		Returns:
+			new_parent_index (:obj:`int`): The index of the vertex in the neighborhood that leads to the lowest cost unobstructed path to the new vertex
+			new_parent_dist (:obj:`float`): The incremental cost (distance) between the parent and new vertex
+
+		"""
 		cost = 0.0
 		lowest_cost = float('+inf') 
 
@@ -215,16 +223,16 @@ class RRT_Star(RRT):
 
 
 	def rewire(self,trial):
-		"""fill out
-		"""
+		""" This function updates the vertex conectivity in the neighboring area to reduce overall path costs. 
+
+		Checks to see if the total path from the new vertex to any of the remaining neighboring vertices leads to a shorter overall path. If it does then the connectivity of that neighboring vertex is changed so that the new vertex overwrites its old parent vertex.
 		
+		If a shorter path is found then the :meth:`~algorithm.rrt.RRT.is_new_edge_blocked()` method is called to determine whether the new edge is unobstructed. The vertex/edge connecticity is only rewired if the new edge is unobstructed.
+
+		"""
 		for index,dist in zip(self.neighbor_indices, self.neighbor_dist):
-			
-			#print("--to vertex:", index, self.recorder.costs[index], "is it more than", (self.recorder.costs[trial] + dist) )
 
 			if (self.recorder.costs[trial] + dist) < self.recorder.costs[index]:
-
-				#print("do it....rewire index", self.recorder.parents[index], "to", trial )
 
 				if not self.is_new_edge_blocked(self.new_v,self.recorder.vertices[index]):
 					self.recorder.costs[index] = self.recorder.costs[trial] + dist
