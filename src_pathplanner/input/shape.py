@@ -3,7 +3,7 @@
 
 # Python modules
 import numpy as np
-from abc import ABC, abstractmethod
+from abc import ABC, abstractmethod, abstractproperty
 
 class Shape(ABC):
   """The abstract base class for the various shapes to be used in the software"""
@@ -26,7 +26,7 @@ class Shape(ABC):
     self.dim = shape_info["dim"]
   
   @abstractmethod
-  def is_point_inside(self, point):
+  def is_point_inside(self):
     """ Abstract method for checking if point falls inside a shape.
 
     Parameters:
@@ -42,7 +42,7 @@ class Shape(ABC):
     pass
 
   @abstractmethod
-  def is_intersected_by_edge(self, point_1, point_2):
+  def is_intersected_by_edge(self):
     """ Abstract method for checking if an edge connecting two vertices in the rrt graph is intersected by a shape.
     
     Parameters:
