@@ -3,7 +3,7 @@
 # Last Updated: January 2019
 import numpy as np
 import sys
-
+# Package modules
 from input.shape_circle import Circle
 from input.shape_rectangle import Rectangle
 from input.shape_free_form import FreeForm2D
@@ -14,15 +14,34 @@ class Domain():
   """A class used to represent the domain in the RRT software.
 
   Domain represents the spatial expanse in which the RRT algorithms looks for paths to reach the goal from the starting point (origin)
-
-  :param domain_information: The information of the domain being created
-  :type domain_information: dict
-  :param origin_goal_info: The coordinates of the path starting location (origin) and where the path should end (goal)
-  :type origin_goal_info: dict
-  
   """
-  def __init__(self, domain_info:dict, obstacle_info:dict, origin_goal_info:dict):
+  def __init__(self, domain_info, obstacle_info, origin_goal_info):
     """Constructor method
+
+    Parameters:
+      domain_info:
+        Dictionary containing information about the domain
+      obstacle_info:
+        Dictionary containing information about the obstacles in the domain
+      origin_goal_info:
+        Dictionary containing information about the origin and goal
+
+    Attributes:
+      domain_info:
+        Dictionary containing information about the domain
+      dim :
+        Dimensions of the domain
+      domain_shape:
+        The shape of the domain
+      obstacle_info:
+        Dictionary containing information about the obstacles in the domain
+      origin_goal_info:
+        Dictionary containing information about the origin and goal
+      origin:
+        The point from where the rrt algorithm begins
+      goal_info:
+        The separated goal information
+
     """
     self.domain_info = domain_info
     self.dim = self.domain_info["dim"]
@@ -59,10 +78,14 @@ class Domain():
 
 
   def create_obstacles(self):
+    """Creates the obstacles based on the shape and geometrical information provided in the obstacle information list
+    """
     self.obstacles = [Obstacle(self.obstacle_info[key], self.origin_goal_info).obstacle for key in self.obstacle_info]
     self.is_obstacle_inside()
 
   def create_goals(self):
+    """Creates the goals based on the shape and geometrical information provided in the origin-goal information list
+    """
     self.goals = [Obstacle(self.goal_info[key], self.origin_goal_info).obstacle for key in self.goal_info]
 
   # Perform some sanity checks
