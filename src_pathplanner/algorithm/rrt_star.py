@@ -121,6 +121,7 @@ class RRT_Star(RRT):
 		del self.neighbor_dist[:]
 
 		neighbor_circle = Circle({
+			'dim': 2,
 			'shape_type':"circle",
 			'radius':self.params["neighborhood"],
 			'center':self.new_v})
