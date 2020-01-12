@@ -113,6 +113,7 @@ class Rectangle(Shape):
     """
     assert(self.is_point_inside(point_1)==False)
 
+    # The implementation of code repetition was preferred as it was faster than the for loop
     if(self.check_line_segment_intersection(self.vertices[0], self.vertices[1], point_1, point_2)):
       return True
 
