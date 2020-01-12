@@ -30,7 +30,7 @@ class Shape(ABC):
     """ Abstract method for checking if point falls inside a shape.
 
     Parameters:
-      point (:obj:`np.ndarray`):
+      point (:obj:`numpy.ndarray`):
         The (1,dim) numpy array defining the point to be tested
 
     Returns:

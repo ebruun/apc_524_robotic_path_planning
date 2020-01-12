@@ -2,29 +2,40 @@
 # Author(s): Vivek Kumar
 # Last Updated: January 2019
 
+# Python modules
 import numpy as np
-from scipy.spatial import ConvexHull
-from scipy.spatial import Delaunay
-import matplotlib as mpl
-import matplotlib.pyplot as plt
 import sys
 import math
 import random
-
+# Thir party modules
 import cv2
-
+# Package modules
 from input.shape import Shape
 
 class FreeForm2D(Shape):
-  """A class used to create free form shape as a domain or obstacleshape
+  """A class used to create free form objects which could act as obstacle shape.
 
-  :param shape_info: information about the bitmap file
-  :type shape_info: dict
-  
+  The class generates 2D free form shapes using ASCII bitmap files.
   """
-  def __init__(self, shape_info:dict):
+  def __init__(self, shape_info):
+    """Constructor method
 
+    Parameters:
+      shape_info (:obj: `dict`):
+        dictionary containing information about the shape object to be created
+    
+    Attributes:
+      file (:obj:`str`):
+        The bitmap file to be used to create the object
+      bb_lower_left (:obj: `np.ndarray`)
+        The lower left corner of the bounding box of the free form
+      bb_upper_right (:obj: `np.ndarray`)
+        The upper right corner of the bounding box of the free form
+
+    """
     super().__init__(shape_info)
+    
+    assert self.dim == 2 # Only implemented for 2D objects
 
     self.file = shape_info['bitmap_file']
     self.bb_lower_left = shape_info['bb_lower_left'] # The lower left location of the bounding box
@@ -35,16 +46,40 @@ class FreeForm2D(Shape):
   def obtain_geometric_info(self):
     """Computes geomterical information from the bitmap points
 
-    This function converts the bitmap 0,1 array to coordinates and computes geometrical properties such as centroid and bounding box for the free form shape
+    This function converts the bitmap [0,1] array to coordinates and computes geometrical properties such as centroid
+  
+    Attributes:
+      img ():
+        The bitmap image]
+      hx (:obj: `float`):
+        The center to center distance between pixels along horizontal[0] direction
+      hy (:obj: `float`):
+        The center to center distance between pixels along vertical[1] direction
+      all_points_array (:obj: `np.ndarray`):
+        The numpy array containg the coordinate of the points of the free form image
+      x_min_val (:obj: `float`):
+        The minimum value of the x-coordinate
+      x_max_val (:obj: `float`):
+        The maximum value of the x-coordinate
+      y_min_val (:obj: `float`):
+        The minimum value of the y-coordinate
+      y_max_val (:obj: `float`):
+        The maximum value of the y-coordinate
+      centroid (:obj: `np.ndarray`)
+        The centroid of the free form shape
+
+    Note:
+      The image final form is a scaled version of the original image to fit the bounding box
+
     """
     self.img = cv2.imread(self.file, cv2.IMREAD_GRAYSCALE)
 
-    self.n_rows = self.img.shape[0]
-    self.n_columns = self.img.shape[1]
-    self.hx = 1./(self.n_rows-1) # This makes sure that the x-values are b/w 0-1
-    self.hy = (1./(self.n_columns-1)) *((self.n_rows-1)/(self.n_columns-1))
-    self.all_points_array = [[j*self.hx, 1.0-i*self.hy] for i in range(self.n_rows) for j in range(self.n_columns) if self.img[i,j]==0]
-    self.all_points_array = np.asarray(self.all_points_array)
+    n_rows = self.img.shape[0]
+    n_columns = self.img.shape[1]
+    self.hx = 1./(n_rows-1) # This makes sure that the x-values are b/w 0-1
+    self.hy = (1./(n_columns-1)) *((n_rows-1)/(n_columns-1))
+    
+    self.all_points_array = np.asarray([[j*self.hx, 1.0-i*self.hy] for i in range(n_rows) for j in range(n_columns) if self.img[i,j]==0])
 
     # The left most corner 
     self.x_min_val = np.min(self.all_points_array[:,0])
@@ -88,11 +123,20 @@ class FreeForm2D(Shape):
 
   # Check if a new point is inside the shape
   # This is slow!!!
-  def is_point_inside(self, point:np.ndarray)->bool:
-    """Checks if a given point is inside the circle
+  def is_point_inside(self, point):
+    """Checks if a given point is inside the free form shape
 
-    Computes the distance of the point from the center of the circle and compares it with the radius
+    The following steps are performed::
+      Step 1. Checks if the point is inside the bounding box of the shape
+
+      Step 2. If the point is inside the bounding box, find the points in the free form which are within a certain y  values
+
+      Step 3. Establish the radius in which to look for points of the free form and check if such a point exist
     
+    Parameters:
+      point (:obj:`np.ndarray`):
+        The (1,dim) numpy array defining the point to be tested
+
     Returns:
       bool.::
 
@@ -104,10 +148,10 @@ class FreeForm2D(Shape):
     if(point[0] < self.x_min_val or point[0] > self.x_max_val or point[1] < self.y_min_val or point[1] > self.y_max_val):
       return False
     else:
-      # Select all the points whose y values are within a tolerance of max(2.*hx, 2.*hy)
-      shape_points = self.all_points_array[self.all_points_array[:,1] < point[1]+2.1*self.hy]
-      shape_points = shape_points[shape_points[:,1] > point[1] -2.1*self.hy]
-      number_of_shape_points = shape_points.shape[0]
+      # Select all the points whose y values are within +/- y_band
+      y_band = 2.1*self.hy
+      shape_points = self.all_points_array[self.all_points_array[:,1] < point[1]+y_band]
+      shape_points = shape_points[shape_points[:,1] > point[1] -y_band]
       _eps = 1.0e-1
       test_radius = max(self.hx,self.hy)*(2.+_eps)
       for shape_point in shape_points:
@@ -115,18 +159,32 @@ class FreeForm2D(Shape):
           return True
       return False
 
-  def is_intersected_by_edge(self, point_1:np.ndarray, point_2: np.ndarray)->bool:
+  def is_intersected_by_edge(self, point_1, point_2):
     """Checks if the line segment connecting two points intersects the free
     
-    The method is adopted from `here`_. It is assumed that both the points are outside the circle
+    Here the intersection of the line segment defined by the points (point_1 and point_2) is tested 
 
-    .. _here: https://math.stackexchange.com/questions/275529/check-if-line-intersects-with-circles-perimeter
+    Note:
+      The method assumes/asserts that the two points are outside the free form
+    
+    The following steps are performed:
+      Step 1. Compute the length of the segment and compute the number of points to be chosen between the point_1 and point_2
+
+      Step 2. Divide the line segment into appropriate number of points to test
+
+      Step 3. Check if any of the points is inside the shape
+
+    Parameters:
+      point_1 (:obj:`np.ndarray`):
+        The (1,dim) numpy array defining one end of the edge
+      point_2 (:obj:`np.ndarray`):
+        The (1,dim) numpy array defining the other end of the edge
 
     Returns:
       bool::
 
-        True -- The line intersects or is tangent
-        False -- The does not intersect
+        True -- The edge intersects
+        False -- The edge does not intersect
         
     """
     assert self.is_point_inside(point_1)==False
@@ -147,8 +205,15 @@ class FreeForm2D(Shape):
         return True
     return False
 
-  def sample_random_point(self)->np.ndarray:
+  def sample_random_point(self):
     """Generates a random point in the shape free form
+
+    The following steps are performed:
+      Step 1. Randomly select a point in the free form shape
+
+      Step 2. Move the point by a randomly chosen delta value in x and y direction
+
+      Step 3. If the new point lies within the shape return the point else find a new point
 
     Returns:
       A new point

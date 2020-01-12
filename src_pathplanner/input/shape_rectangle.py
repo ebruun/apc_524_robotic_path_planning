@@ -10,7 +10,7 @@ from input.shape import Shape
 class Rectangle(Shape):
   """A class used to create rectangular objects which could act as domain or obstacle shape.  
   """
-  def __init__(self, shape_info:dict):
+  def __init__(self, shape_info):
     """Constructor method
     
     Parameters:
@@ -18,19 +18,17 @@ class Rectangle(Shape):
         dictionary containing information about the shape object to be created
     
     Attributes:
-      ll_corner (:obj:`np.ndarray`):
+      ll_corner (:obj:`numpy.ndarray`):
         The lower left corner of the rectangle
-      ur_corner (:obj:`np.ndarray`):
+      ur_corner (:obj:`numpy.ndarray`):
         The upper right corner of the rectangle
-      centroid (:obj: `np.ndarray`)
-        The centroid of the circle
-      vertices (:obj: `np.ndarray`)
+      vertices (:obj: `numpy.ndarray`):
         The vertices of the rectangle
-      width (:obj: `float`)
+      width (:obj: `float`):
         The width (horizontal length) of the rectangle
-      height (:obj: `float`)
+      height (:obj: `float`):
         The height (vertical length) of the rectangle
-      centroid (:obj: `np.ndarray`)
+      centroid (:obj: `numpy.ndarray`):
         The centroid of the rectangle
 
     """
@@ -52,11 +50,15 @@ class Rectangle(Shape):
     self.centroid = np.mean(self.vertices, axis=0)
 
 
-  def is_point_inside(self, point: np.ndarray)->bool:
+  def is_point_inside(self, point):
     """Checks if a given point is inside the rectangle
 
     Find the method at https://math.stackexchange.com/a/190373
     
+    Parameters:
+      point (:obj:`np.ndarray`):
+        The (1,dim) numpy array defining the point to be tested
+
     Returns:
       bool.::
 
@@ -69,11 +71,21 @@ class Rectangle(Shape):
     else:
       return False
 
-  def check_line_segment_intersection(self, point_1:np.ndarray, point_2:np.ndarray, point_3:np.ndarray, point_4:np.ndarray)->bool:
-    """Checks if two line segments defined by the end points (point_1, point_2) and (point_3, point_4) intersect each other
+  def check_line_segment_intersection(self, point_1, point_2, point_3, point_4):
+    """Checks if two line segments defined by the end points intersect each other
 
     Find the method at     https://en.wikipedia.org/wiki/Line%E2%80%93line_intersection
-    
+
+    Parameters:
+      point_1 (:obj:`np.ndarray`):
+        The (1,dim) numpy array defining one end of the line segment 1
+      point_2 (:obj:`np.ndarray`):
+        The (1,dim) numpy array defining the other end of the line segment 1
+      point_3 (:obj:`np.ndarray`):
+        The (1,dim) numpy array defining one end of the line segment 2
+      point_4 (:obj:`np.ndarray`):
+        The (1,dim) numpy array defining the other end of the line segment 2
+
     Returns:
       bool.::
 
@@ -96,13 +108,19 @@ class Rectangle(Shape):
       else:
         return False
 
-  def is_intersected_by_edge(self, point_1:np.ndarray, point_2: np.ndarray)->bool:
+  def is_intersected_by_edge(self, point_1, point_2):
     """Checks if the line segment connecting two points intersects the rectangle
     
     Here the intersection of the line segment defined by the points (point_1 and point_2) is tested against all the sides of the rectangle.
 
     Note:
-      The method assumes/asserts that the two points are outside the circle.
+      The method assumes/asserts that the two points are outside the rectangle.
+
+    Parameters:
+      point_1 (:obj:`np.ndarray`):
+        The (1,dim) numpy array defining one end of the edge
+      point_2 (:obj:`np.ndarray`):
+        The (1,dim) numpy array defining the other end of the edge
 
     Returns:
       bool::
@@ -128,7 +146,7 @@ class Rectangle(Shape):
 
     return False
 
-  def sample_random_point(self)->np.ndarray:
+  def sample_random_point(self):
     """Generates a random point in the rectangle
 
     Returns:

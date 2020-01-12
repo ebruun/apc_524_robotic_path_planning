@@ -12,7 +12,7 @@ from input.shape import Shape
 class Circle(Shape):
   """A class used to create circular objects which could act as domain or obstacle shape.
   """
-  def __init__(self, shape_info:dict):
+  def __init__(self, shape_info):
     """Constructor method
 
     Parameters:
@@ -24,7 +24,7 @@ class Circle(Shape):
         The radius of the circle
       center (:obj:`np.ndarray`):
         The center of the circle
-      centroid (:obj: `np.ndarray`)
+      centroid (:obj: `np.ndarray`):
         The centroid of the circle
     """
     super().__init__(shape_info)
@@ -32,10 +32,14 @@ class Circle(Shape):
     self.center = np.asarray(shape_info["center"]).flatten()
     self.centroid = shape_info["center"]
   
-  def is_point_inside(self, point: np.ndarray)->bool:
+  def is_point_inside(self, point):
     """Checks if a given point is inside the circle
 
     Computes the distance of the point from the center of the circle and compares it with the radius. A point on the perimeter is considered as inside
+    
+    Parameters:
+      point (:obj:`np.ndarray`):
+        The (1,dim) numpy array defining the point to be tested
     
     Returns:
       bool::
@@ -49,13 +53,19 @@ class Circle(Shape):
     else:
       return False
 
-  def is_intersected_by_edge(self, point_1: np.ndarray , point_2: np.ndarray)->bool:
+  def is_intersected_by_edge(self, point_1 , point_2):
     """Checks if the line segment connecting two points intersects the circle
     
     The method is adopted from https://math.stackexchange.com/a/275537.
 
     Note:
       The method assumes/asserts that the two points are outside the circle.
+
+    Parameters:
+      point_1 (:obj:`np.ndarray`):
+        The (1,dim) numpy array defining one end of the edge
+      point_2 (:obj:`np.ndarray`):
+        The (1,dim) numpy array defining the other end of the edge
 
     Returns:
       bool::
@@ -103,13 +113,13 @@ class Circle(Shape):
 
     return False
 
-  def sample_random_point(self)->np.ndarray:
+  def sample_random_point(self):
     """Generates a random point in the circle
 
     The current implementation is adopted from https://stackoverflow.com/a/50746409 to have a uniform distribution of points
     
     Returns:
-     point (:obj:`np.ndarray`)
+     point (:obj:`np.ndarray`):
     """
     r = self.radius*math.sqrt(random.random())
     theta = random.random()*2.0*math.pi
