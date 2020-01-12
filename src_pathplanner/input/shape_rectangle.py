@@ -1,21 +1,37 @@
 # shape_rectangle.py
 # Author(s): Vivek Kumar
 # Last Updated: January 2019
-import numpy as np
 
+# Python modules
+import numpy as np
+# Package modules
 from input.shape import Shape
 
 class Rectangle(Shape):
-  """A class used to create rectangular objects which could act as domain or obstacle shape
-
-  :param shape_info: information about the lower left and upper right corners
-  :type shape_info: dict
-  
+  """A class used to create rectangular objects which could act as domain or obstacle shape.  
   """
   def __init__(self, shape_info:dict):
     """Constructor method
     
-    This is the constructor of the the rectangle class. A rectangle object is initialized by specifying the lower left corner and upper right corner points.
+    Parameters:
+      shape_info (:obj: `dict`):
+        dictionary containing information about the shape object to be created
+    
+    Attributes:
+      ll_corner (:obj:`np.ndarray`):
+        The lower left corner of the rectangle
+      ur_corner (:obj:`np.ndarray`):
+        The upper right corner of the rectangle
+      centroid (:obj: `np.ndarray`)
+        The centroid of the circle
+      vertices (:obj: `np.ndarray`)
+        The vertices of the rectangle
+      width (:obj: `float`)
+        The width (horizontal length) of the rectangle
+      height (:obj: `float`)
+        The height (vertical length) of the rectangle
+      centroid (:obj: `np.ndarray`)
+        The centroid of the rectangle
 
     """
     super().__init__(shape_info)
@@ -37,11 +53,9 @@ class Rectangle(Shape):
 
 
   def is_point_inside(self, point: np.ndarray)->bool:
-    """Checks if a given point is inside the circle
+    """Checks if a given point is inside the rectangle
 
-    Find the method here: https://math.stackexchange.com/questions/190111/how-to-check-if-a-point-is-inside-a-rectangle
-
-    Currently the implementation is complicated as it takes into account that the rectangle could be a rotated one and not axis-aligned.
+    Find the method at https://math.stackexchange.com/a/190373
     
     Returns:
       bool.::
@@ -55,13 +69,10 @@ class Rectangle(Shape):
     else:
       return False
 
-  # Possibly move to a line class
-  def check_line_intersection(self, point_1:np.ndarray, point_2:np.ndarray, point_3:np.ndarray, point_4:np.ndarray)->bool:
+  def check_line_segment_intersection(self, point_1:np.ndarray, point_2:np.ndarray, point_3:np.ndarray, point_4:np.ndarray)->bool:
     """Checks if two line segments defined by the end points (point_1, point_2) and (point_3, point_4) intersect each other
 
-    Find the method here:
-
-    https://en.wikipedia.org/wiki/Line%E2%80%93line_intersection
+    Find the method at     https://en.wikipedia.org/wiki/Line%E2%80%93line_intersection
     
     Returns:
       bool.::
@@ -88,29 +99,30 @@ class Rectangle(Shape):
   def is_intersected_by_edge(self, point_1:np.ndarray, point_2: np.ndarray)->bool:
     """Checks if the line segment connecting two points intersects the rectangle
     
-    Here the intersection of the line segment defined by the points (point_1 and point_2) is tested against all the sides of the rectangle. Since it is assumed that the points are always outside the rectangle if the edge intersects any side it is bound to cross the rectangle
+    Here the intersection of the line segment defined by the points (point_1 and point_2) is tested against all the sides of the rectangle.
+
+    Note:
+      The method assumes/asserts that the two points are outside the circle.
 
     Returns:
       bool::
 
-        True -- The line intersects or is tangent
-        False -- The does not intersect
+        True -- The line segment intersects or is tangent
+        False -- The line segment does not intersect
         
     """
     assert(self.is_point_inside(point_1)==False)
-    assert(self.is_point_inside(point_2)==False)
-    # The algorithm below assumes that the two points being connected are outside the rectangle
-    # TO DO: Make it a loop so that can be extended to n-sided polygon
-    if(self.check_line_intersection(self.vertices[0], self.vertices[1], point_1, point_2)):
+
+    if(self.check_line_segment_intersection(self.vertices[0], self.vertices[1], point_1, point_2)):
       return True
 
-    if(self.check_line_intersection(self.vertices[1], self.vertices[2], point_1, point_2)):
+    if(self.check_line_segment_intersection(self.vertices[1], self.vertices[2], point_1, point_2)):
       return True
 
-    if(self.check_line_intersection(self.vertices[2], self.vertices[3], point_1, point_2)):
+    if(self.check_line_segment_intersection(self.vertices[2], self.vertices[3], point_1, point_2)):
       return True
     
-    if(self.check_line_intersection(self.vertices[3], self.vertices[0], point_1, point_2)):
+    if(self.check_line_segment_intersection(self.vertices[3], self.vertices[0], point_1, point_2)):
       return True
 
     return False

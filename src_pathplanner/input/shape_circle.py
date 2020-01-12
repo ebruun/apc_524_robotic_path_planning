@@ -55,7 +55,7 @@ class Circle(Shape):
     The method is adopted from https://math.stackexchange.com/a/275537.
 
     Note:
-      The method assumes that the two points are outside the circle.
+      The method assumes/asserts that the two points are outside the circle.
 
     Returns:
       bool::
