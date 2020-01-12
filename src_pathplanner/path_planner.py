@@ -12,12 +12,15 @@ Imports the :class:`~input.domain.Domain` class
 
 Imports the :class:`~solver.solution.Solution` class
 
+Imports the :class:`~output.results.Results` class
+
 Imports the :class:`~output.plot.Plot` class
 
 """
 # Python imports
 import sys
 import time
+import re
 
 # Import inputs
 from input.parse_data_class import ParseDataJSON
@@ -75,6 +78,7 @@ def run_program():
 	#input_file = "./input/user_input_files/circle_freeform_obstacles.json"
 	#input_file = "./input/user_input_files/circle_mixed_obstacles.json"
 	input_file = "./input/user_input_files/circle_mixed_goals_obstacles.json"
+	title = re.search('user_input_files/(.+?).json', input_file).group(1)
 
 	# Parsed JSON data
 	program_input = ParseDataJSON(input_file)
@@ -97,14 +101,12 @@ def run_program():
 	print("\nStep 4. Printing and Saving Results")
 	results_object = Results(PathPlan)
 	results_object.print_results()
-	results_object.save_results()
+	results_object.save_results(title)
 
 	print("\nStep 5. Plotting Results")
-	plot_object = Plot("Path Planning Solution", domain_object)
+	plot_object = Plot(title, domain_object)
 	plot_object.plot_results(PathPlan)
-	print("Finished! See plot in output folder")
-
-
+	
 
 if __name__ == '__main__':
 	run_program()

@@ -26,7 +26,7 @@ class Plot:
 		:type filename: string
 
 		"""
-		self.filename = "./output/" + filename + ".html"
+		self.filename = "./output/output_files/" + filename + ".html"
 		self.title = filename
 		self.domain = domain
 		self.dims = domain.dim
