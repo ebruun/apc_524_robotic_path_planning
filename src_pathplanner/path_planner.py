@@ -23,6 +23,7 @@ import time
 from input.parse_data_class import ParseDataJSON
 from input.domain_class import Domain
 from solver.solution import Solution
+from output.results import Results
 from output.plot import Plot
 
 
@@ -83,7 +84,7 @@ def run_program():
 	obstacles_info = program_input.data_dict["ObstaclesInfo"]
 	rrt_algorithm_info = program_input.data_dict["RRTAlgorithmInfo"]
 
-	print("\nStep 2. Create Domain")
+	print("\nStep 2. Creating Domain")
 	domain_object = Domain(domain_info, obstacles_info, origin_goal_info)
 
 	print("\nStep 3. Running Program")
@@ -91,26 +92,16 @@ def run_program():
 	PathPlan.run_algorithm()
 	PathPlan.process_vertex_list()
 
-	print("Step 4. Print and Save Results")
-	################# REPLACE WITH PRINTING FUNCTION #######################
-	# print_results()
-	# save_results()
-	print("\n\n Vertices\n",PathPlan.recorder.vertices)
-	print("\n\n Parents\n",PathPlan.recorder.parents)
-	print("\n\n Costs\n",PathPlan.recorder.costs)
-	################# REPLACE WITH PRINTING FUNCTION #######################
+	print("Step 4. Printing and Saving Results")
+	results_object = Results(PathPlan.recorder)
+	results_object.print_results()
+	results_object.save_results()
 
-	################# REPLACE WITH SINGLE FUNCTION #######################
 	print("Step 5. Plotting Results")
 	plot_object = Plot("Path Planning Solution", domain_object)
-	# plot_results(arg1,arg2,arg3,...)
-	plot_object.plot_domain()
-	plot_object.plot_obstacles()
-	plot_object.plot_origin_goals()
-	plot_object.plot_solution_graph(PathPlan)
-	plot_object.draw()
+	plot_object.plot_results(PathPlan)
 	print("Finished! See plot in output folder")
-	################# REPLACE WITH SINGLE FUNCTION #######################
+
 
 
 if __name__ == '__main__':

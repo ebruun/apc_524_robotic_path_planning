@@ -293,4 +293,12 @@ class Plot:
 		"""
 		py.offline.plot(self.fig, filename=self.filename, auto_open=auto_open)
 
-	
+	def plot_results(self, solution=None):
+		"""
+		Render the plot to a file
+		"""
+		self.plot_domain()
+		self.plot_obstacles()
+		self.plot_origin_goals()
+		self.plot_solution_graph(solution)
+		self.draw()
