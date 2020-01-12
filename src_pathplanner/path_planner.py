@@ -58,11 +58,13 @@ def run_program():
 		PathPlan.process_vertex_list()
 
 		# Step 4.
-		print_results()
-		save_results()
+		results_object = Results(PathPlan)
+		results_object.print_results()
+		results_object.save_results()
 
 		# Step 5.
-		plot_results()
+		plot_object = Plot("Path Planning Solution", domain_object)
+		plot_object.plot_results(PathPlan)
 
 
 	"""
@@ -92,12 +94,12 @@ def run_program():
 	PathPlan.run_algorithm()
 	PathPlan.process_vertex_list()
 
-	print("Step 4. Printing and Saving Results")
-	results_object = Results(PathPlan.recorder)
+	print("\nStep 4. Printing and Saving Results")
+	results_object = Results(PathPlan)
 	results_object.print_results()
 	results_object.save_results()
 
-	print("Step 5. Plotting Results")
+	print("\nStep 5. Plotting Results")
 	plot_object = Plot("Path Planning Solution", domain_object)
 	plot_object.plot_results(PathPlan)
 	print("Finished! See plot in output folder")

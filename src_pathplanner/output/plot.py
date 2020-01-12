@@ -264,14 +264,15 @@ class Plot:
 			                width=15
         				)
 				))
-				extents = [[x_min,x_max],[y_min,y_max]]
+				eps = 0.15
+				extents = [[x_min-eps,x_max+eps],[y_min-eps,y_max+eps]]
 
 			elif self.domain.domain_shape == "rectangle":
 				ll_corner = self.domain.domain.ll_corner
 				ur_corner = self.domain.domain.ur_corner
 				extents = [[ll_corner[0],ur_corner[0]],[ll_corner[1],ur_corner[1]]]
 			
-			range_x = extents[0]
+			range_x = extents[0] 
 			self.fig.layout.update(
 				xaxis = dict(
 					range = range_x,
