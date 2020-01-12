@@ -23,17 +23,34 @@ class Obstacle():
   """
   def __init__(self, obstacle_info, origin_goal_info):
     """Constructor method
+
+    Parameters:
+
+      obstacle_info:
+        Dictionary containing information about the obstacles in the domain
+      origin_goal_info:
+        Dictionary containing information about the origin and goal
+
+    Attributes:
+      obstacle_info:
+        Dictionary containing information about the obstacles in the domain
+      dim :
+        Dimensions of the domain
+      obstacle_shape:
+        The shape of the obstacle
+      origin:
+        The point from where the rrt algorithm begins
     """
     self.obstacle_info = obstacle_info
     self.dim = self.obstacle_info["dim"]
     self.obstacle_shape = self.obstacle_info["shape_type"]
 
-    self.origin = np.asarray(origin_goal_info["origin"])
+    self.origin = np.asarray(origin_goal_info["origin"]).flatten()
 
     self.create_obstacle()
 
   def create_obstacle(self):
-    """Returns the obstacle object
+    """Creates the obstacle based on the shape and geometrical information provided in the obstacle information list
     """
     if(self.obstacle_shape=="rectangle"):
       self.obstacle = Rectangle(self.obstacle_info)
