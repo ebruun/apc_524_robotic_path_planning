@@ -59,18 +59,8 @@ class TestRRT_Basic(unittest.TestCase):
 		self.algorithm = None
 
 
-	def get_last_row_index(self,step):
-		self.algorithm.rrt_step(step)
-
-		bool_array = (np.isnan(recorder.vertices))
-		bool_index = np.where(bool_array == False)
-		index = np.amax(bool_index[0])
-
-		return index
-
-
 	def test_rrt_basic_00_vertices_increment(self):
-		recorder.vertices = np.array(
+		self.algorithm.recorder.vertices = np.array(
 			[[0.0, 0.0],
 			[1.0, 1.30],
 			[1.0, 1.40],
@@ -80,36 +70,63 @@ class TestRRT_Basic(unittest.TestCase):
 		)	
 
 		step = 4
-		index = self.get_last_row_index(step)
+		self.algorithm.rrt_step(step)
+
+		bool_array = (np.isnan(self.algorithm.recorder.vertices))
+		bool_index = np.where(bool_array == False)
+		index = np.amax(bool_index[0])
+
 		self.assertEqual(step,index,"vertices list not incremented")
 
 		step += 1
-		index = self.get_last_row_index(step)
+		self.algorithm.rrt_step(step)
+
+		bool_array = (np.isnan(self.algorithm.recorder.vertices))
+		bool_index = np.where(bool_array == False)
+		index = np.amax(bool_index[0])
 		self.assertEqual(step,index,"vertices list not incremented")
 		
 
 	def test_rrt_basic_01_parents_increment(self):
-		recorder.parents = np.array([0,1,3,np.nan,np.nan,np.nan])
+		self.algorithm.recorder.parents = np.array([0,1,3,np.nan,np.nan,np.nan])
 
 		step = 3
-		index = self.get_last_row_index(step)
+		self.algorithm.rrt_step(step)
+
+		bool_array = (np.isnan(self.algorithm.recorder.parents))
+		bool_index = np.where(bool_array == False)
+		index = np.amax(bool_index[0])
+
 		self.assertEqual(step,index,"parents list not incremented")
 
 		step += 1
-		index = self.get_last_row_index(step)
+		self.algorithm.rrt_step(step)
+
+		bool_array = (np.isnan(self.algorithm.recorder.parents))
+		bool_index = np.where(bool_array == False)
+		index = np.amax(bool_index[0])
+
 		self.assertEqual(step,index,"parents list not incremented")
 
 
 	def test_rrt_basic_02_costs_increment(self):
-		recorder.parents = np.array(
-			[0.0,np.nan,np.nan,np.nan,np.nan,np.nan])
+		self.algorithm.recorder.costs = np.array(
+			[0.0,3.5,np.nan,np.nan,np.nan,np.nan])
 
 		step = 2
-		index = self.get_last_row_index(step)
+		self.algorithm.rrt_step(step)
+
+		bool_array = (np.isnan(self.algorithm.recorder.costs))
+		bool_index = np.where(bool_array == False)
+		index = np.amax(bool_index[0])
 		self.assertEqual(step,index,"costs list not incremented")
 
 		step += 1
-		index = self.get_last_row_index(step)
+		self.algorithm.rrt_step(step)
+
+		bool_array = (np.isnan(self.algorithm.recorder.costs))
+		bool_index = np.where(bool_array == False)
+		index = np.amax(bool_index[0])
 		self.assertEqual(step,index,"costs list not incremented")
 
 
