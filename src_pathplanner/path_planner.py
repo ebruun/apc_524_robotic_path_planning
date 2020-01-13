@@ -28,7 +28,6 @@ from input.domain_class import Domain
 from solver.solution import Solution
 from output.results import Results
 from output.plot import Plot
-from output.animate import Animate
 
 def run_program():
 	"""
@@ -106,11 +105,6 @@ def run_program():
 	print("\nStep 5. Plotting Results")
 	plot_object = Plot(title, domain_object)
 	plot_object.plot_results(PathPlan)
-
-	print("\nStep 5. Animating Results")
-	animate_object = Animate(title, domain_object, PathPlan)
-	#animate_object.animate_results(PathPlan)
-
 
 if __name__ == '__main__':
 	run_program()

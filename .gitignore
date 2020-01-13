@@ -132,6 +132,5 @@ dmypy.json
 .pyre/
 
 #Output files
-*.html
 *.pdf
 *.png
