@@ -14,7 +14,7 @@ html:
 	htlatex ${filename}
 
 ps:	dvi
-	dvips -t letter ${filename}.dvi
+	dvips ${filename}.dvi
 
 dvi:
 	latex ${filename}
