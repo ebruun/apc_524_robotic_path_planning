@@ -6,7 +6,7 @@
 
 ## Executing Program
 
-Please see the Sphinx documentation for instructions on how to execute the program.
+Please see the Sphinx documentation (Section: Program Execution) for instructions on how to execute the program.
 
 ## Creating Documentation Files
 
