@@ -68,11 +68,11 @@ def run_program():
 
 	print("\nStep 1. Reading Parameters")
 	# The input file
-	#input_file = "./input/user_input_files/circle_regular_obstacles.json"
+	input_file = "./input/user_input_files/circle_regular_obstacles.json"
 	#input_file = "./input/user_input_files/circle_freeform_obstacles.json"
 	# input_file = "./input/user_input_files/circle_mixed_obstacles.json"
 	# input_file = "./input/user_input_files/circle_mixed_goals_obstacles.json"
-	input_file = "./input/user_input_files/profiling_3.json"
+	#input_file = "./input/user_input_files/profiling_3.json"
 
 	# Parsed JSON data
 	program_input = ParseDataJSON(input_file)
@@ -103,13 +103,13 @@ def run_program():
 
 	################# REPLACE WITH SINGLE FUNCTION #######################
 	print("Step 5. Plotting Results")
-	#plot_object = Plot("Path Planning Solution", domain_object)
+	plot_object = Plot("Path Planning Solution", domain_object)
 	## plot_results(arg1,arg2,arg3,...)
-	#plot_object.plot_domain()
-	#plot_object.plot_obstacles()
-	#plot_object.plot_origin_goals()
-	#plot_object.plot_solution_graph(PathPlan)
-	#plot_object.draw()
+	plot_object.plot_domain()
+	plot_object.plot_obstacles()
+	plot_object.plot_origin_goals()
+	plot_object.plot_solution_graph(PathPlan)
+	plot_object.draw()
 	print("Finished! See plot in output folder")
 	################ REPLACE WITH SINGLE FUNCTION #######################
 

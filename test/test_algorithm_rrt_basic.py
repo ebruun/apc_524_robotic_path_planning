@@ -110,8 +110,7 @@ class TestRRT_Basic(unittest.TestCase):
 
 
 	def test_rrt_basic_02_costs_increment(self):
-		self.algorithm.recorder.costs = np.array(
-			[0.0,3.5,np.nan,np.nan,np.nan,np.nan])
+		self.algorithm.recorder.costs = np.array([0.0,3.5,np.nan,np.nan,np.nan,np.nan])
 
 		step = 2
 		self.algorithm.rrt_step(step)
@@ -128,6 +127,35 @@ class TestRRT_Basic(unittest.TestCase):
 		bool_index = np.where(bool_array == False)
 		index = np.amax(bool_index[0])
 		self.assertEqual(step,index,"costs list not incremented")
+
+
+	def test_rrt_abstract_00_edge_blocked(self):
+
+		v1 = [0.5,0.7]
+		v2 = [0.5,0.3]
+
+		blocked = self.algorithm.is_new_edge_blocked(v1,v2)
+
+		self.assertTrue(blocked,"line should return blocked")
+
+	def test_rrt_abstract_01_edge_notblocked(self):
+
+		v1 = [0.39,0.7]
+		v2 = [0.39,0.3]
+
+		blocked = self.algorithm.is_new_edge_blocked(v1,v2)
+
+		self.assertFalse(blocked,"line should return not blocked")
+
+	def test_rrt_abstract_02_updatecost(self):
+		self.algorithm.recorder.costs = np.array([0.0,3.5,2.4,6.7])
+
+		new_parent = 2
+		new_cost = 1.7
+
+		cost_update= self.algorithm.update_path_cost(new_parent,new_cost)
+
+		self.assertEqual(cost_update,4.1,"line should return not blocked")
 
 
 
