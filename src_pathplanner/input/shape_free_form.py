@@ -22,7 +22,7 @@ class FreeForm2D(Shape):
   :type shape_info: dict
   
   """
-  def __init__(self, shape_info:dict):
+  def __init__(self, shape_info):
 
     super().__init__(shape_info)
 
@@ -88,7 +88,7 @@ class FreeForm2D(Shape):
 
   # Check if a new point is inside the shape
   # This is slow!!!
-  def is_point_inside(self, point:np.ndarray)->bool:
+  def is_point_inside(self, point):
     """Checks if a given point is inside the circle
 
     Computes the distance of the point from the center of the circle and compares it with the radius
@@ -105,17 +105,17 @@ class FreeForm2D(Shape):
       return False
     else:
       # Select all the points whose y values are within a tolerance of max(2.*hx, 2.*hy)
-      shape_points = self.all_points_array[self.all_points_array[:,1] < point[1]+2.1*self.hy]
-      shape_points = shape_points[shape_points[:,1] > point[1] -2.1*self.hy]
-      number_of_shape_points = shape_points.shape[0]
+      y_band = 2.1*self.hy
+      shape_points = self.all_points_array[self.all_points_array[:,1] < point[1]+y_band]
+      shape_points = shape_points[shape_points[:,1] > point[1] -y_band]
       _eps = 1.0e-1
+      relative_distance_array = np.linalg.norm(shape_points-point, axis = 1)
       test_radius = max(self.hx,self.hy)*(2.+_eps)
-      for shape_point in shape_points:
-        if(np.linalg.norm(point-shape_point) <= test_radius):
-          return True
+      if(relative_distance_array[np.argmin(relative_distance_array)] < test_radius):
+        return True
       return False
 
-  def is_intersected_by_edge(self, point_1:np.ndarray, point_2: np.ndarray)->bool:
+  def is_intersected_by_edge(self, point_1, point_2):
     """Checks if the line segment connecting two points intersects the free
     
     The method is adopted from `here`_. It is assumed that both the points are outside the circle
@@ -147,7 +147,7 @@ class FreeForm2D(Shape):
         return True
     return False
 
-  def sample_random_point(self)->np.ndarray:
+  def sample_random_point(self):
     """Generates a random point in the shape free form
 
     Returns:
