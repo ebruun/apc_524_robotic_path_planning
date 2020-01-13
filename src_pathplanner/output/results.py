@@ -4,6 +4,8 @@
 """
 Text output class
 """
+import numpy as np
+
 class Results:
 	""" A class to save and print the vertices, parents, costs, and final solution path.	
 	"""
@@ -38,10 +40,11 @@ class Results:
 		""" Saves the text output results of the algorithm to a .txt file"""
 		filename = "./output/output_files/{}.txt".format(name) 
 		with open(filename, "w") as f:
-			print("Vertices\n",self.recorder.vertices, file=f)
-			print("\n\n Parents\n",self.recorder.parents, file=f)
-			print("\n\n Costs\n",self.recorder.costs, file=f)
-			print("\n\n Solution Path(s)\n",self.solution_path, file=f)
+			with np.printoptions(precision=3, suppress=True, threshold=np.inf):
+				print("Vertices\n",self.recorder.vertices, file=f)
+				print("\n\n Parents\n",self.recorder.parents, file=f)
+				print("\n\n Costs\n",self.recorder.costs, file=f)
+				print("\n\n Solution Path(s)\n",self.solution_path, file=f)
 
 	def print_results(self):
 		""" Prints the text output results of the algorithm"""

@@ -312,9 +312,11 @@ class Plot:
 							y=[vertices[i, 1], vertices[parents[i], 1]],
 							line=dict(
 								color="red",
-								width=1
+								width=2
 							),
 							mode='lines+markers',
+							marker=dict(size=5,
+                			color="red"),
 							showlegend=False
 						))
 						
