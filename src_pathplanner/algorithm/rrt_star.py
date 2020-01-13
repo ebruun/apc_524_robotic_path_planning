@@ -135,7 +135,6 @@ class RRT_Star(RRT):
 			if neighbor_circle.is_point_inside(point):
 
 				dist_new = np.linalg.norm(point - self.new_v)
-				#dist_new = round(dist_new,6)
 
 				self.neighbor_indices.append(index)
 				self.neighbor_dist.append(dist_new)
