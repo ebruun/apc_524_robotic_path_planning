@@ -22,48 +22,54 @@
 		The Basic RRT algorithm was first proposed by Lavalle and Kuffner in 1998. While its development was a paradigm shift in the field of robotic motion planning (RRTs were significantly more efficient than the existing path planning methods), the main drawback of the Basic RRT is that it almost surely converges to a non-optimal value. Since the proposal of the Basic RRT, developing new algorithms modifying its underlying principles has been an active area of research. The most significant leap forward was the development of the RRT* (RRT Star) algorithm by Frazzoli in 2010, which is a variant of the Basic RRT that guarantees convergence to the optimal solution.
 
 	\subsection{Motivation}
-		The goal of this project is to develop a modular and scalable program that implements a variety of path-planning algorithms to seaach through a physical domain space populated with obstacles. The ultimate motivation for this work is to assess the relative efficiency and performance of a large set of different algorithms acting in various domains. Therefore, the program is developed in such a way that both the definition of the domain space, and the solution procedure is extensible in the future. 
+		The goal of this project is to develop a modular and scalable program that implements a variety of path-planning algorithms to search through a physical domain space populated with obstacles. The ultimate motivation for this work is to assess the relative efficiency and performance of a large set of different algorithms acting in various domains. Therefore, the program is developed in such a way that both the definition of the domain space, and the solution procedure is extensible in the future. 
 
-
-	\subsection{Program Limitations}
-		Currently only the Basic RRT and the RRT* algorithms are implemented. But examining the difference between these two algorithms is an adequate starting point for showing the difference between a random search method and one that approaches optimality.
-		
-		Currently only a 2D physical domain space has been implemented. The domain can only be a regular shape (circle or rectangle)
-		
-		Currently only bitmap (.pbm) shapes can be used to define any freeform (i.e. not regular shapes) obstacles or goals to be placed inside the domain.
 
 \newpage
-\section{Development Process (VK)}
+\section{Desired Code Functionality}
 
-	\subsection{Github Repo Setup}
-		TBD
+	The essential core functions of the code are the following:
+	
+	\begin{enumerate}
+		\item Parse a file of user-specified inputs that define the domain and algorithm parameters.
+		\begin{enumerate}
+			\item Obstacles can be defines as regular shapes (circle/rectangle).
+			\item Obstacles can be defined as freeform shapes input as bitmaps.
+			\item Goals can be defined as as regular shapes (circle/rectangle).
+			\item Goals can be defined as as freeform shapes input as bitmaps.
+			\item Domain can be defined as as regular shapes (circle/rectangle).
+		\end{enumerate}	
+		\item Execute the path-planning algorithm specified by the user on the constructed domain.
+		\begin{enumerate}
+				\item The algorithm must be able to find the solution to multiple goals in one domain.
+				\item The following algorithms can be used: Basic RRT, RRT Star.
+		\end{enumerate}		
+		\item Output a plot of the solution.
+	\end{enumerate}
 
-	\subsection{Writing Tests}
-		TBD
+	Additional features if time-permitting:
+	\begin{enumerate}
+		\item Allow the domain itself to be defined as a freeform shape.
+		\item Include additional RRT-type algorithms for the user to choose from.
+		\item Allow the definition of a 3D search space (define domain, obstacles, goals as volumes rather than areas)
+		\item Output an animation of the tree growing through each iteration.
+	\end{enumerate}
 
-	\subsection{Travis}
-		TBD
+	Currently only the Basic RRT and the RRT* algorithms are implemented. But examining the difference between these two algorithms is an adequate starting point for showing the difference between a random search method and one that approaches optimality.
 
-	\subsection{Issues and Lessons}
-		TBD
+	Currently only a 2D physical domain space has been implemented, so all the objects in the domain are areas rather than volumes. Also, the domain itself can only be a regular shape (circle or rectangle).
+
+	Currently only bitmap (.pbm) shapes can be used to define any freeform obstacles or goals to be placed inside the domain.
+
+\section{External Libraries}
 
 \newpage
-\section{Program Functionality (JF)}
+\section{UML Diagram}
+	The UML diagram can be found as a separate file in the documentation folder. Please refer to that file for this section and any following discussion referencing the class structure.
+
+	The submitted UML diagram is based on the team's preliminary brainstorming about the functionality of the code. While specific fundtions and interactions within classes of the program have changed as the code was written, the overall structure and hierarchy remains the same. The goal was to have a domain object constructed and then passed to a solver object, which executes a solution algorithm to find a feasible path from the origin to goals.
+
+\section{Class Explanation}
 	
-	\subsection{Main Program Execution}
-		How the code runs (high-level)
-	
-	\subsection{Design Features Implemented}
-		Summarize the shapes and algoirthms implemented.
-	
-	\subsection{Working Examples}
-		input files and images. compare and contrast RRT and RRT*, show some sample output (text and image)
-		
-\newpage
-\section{Code Profiling (VK)}
-	
-	\subsection{Summary of Hotspots}
-	
-	\subsection{Summary of Improvements}	
 	
 \end{document}
