@@ -60,6 +60,8 @@
 	Currently only a 2D physical domain space has been implemented, so all the objects in the domain are areas rather than volumes. Also, the domain itself can only be a regular shape (circle or rectangle).
 
 	Currently only bitmap (.pbm) shapes can be used to define any freeform obstacles or goals to be placed inside the domain.
+	
+	The code has been written in a sufficiently modular way so that the solution space can easily extended to 3-dimensions in the future. The variable "dims" is currently set to 2 in the user-input. With future extension in mind, this variable is referenced throughout the solver/algorithm code. Once the input/domain code is changed to assemble a 3d domain, the algorithm code can easily be adjusted to match.
 
 \section{External Libraries}
 
@@ -70,6 +72,27 @@
 	The submitted UML diagram is based on the team's preliminary brainstorming about the functionality of the code. While specific functions and interactions within classes of the program have changed as the code was written, the overall structure and hierarchy remains the same. The goal was to have a domain object constructed and then passed to a solver object, which executes a solution algorithm to find a feasible path from the origin to goals.
 
 \section{Class Explanation}
+
+	The program is organized around the following grouping of classes:
+	
+	\begin{enumerate}
+		\item Input
+		\item Domain 
+		\item Solver
+		\item Algorithm
+		\item Output
+	\end{enumerate}	
+
+	Input: This class performs the task of parsing the user input .json file into a data dictionary.
+	
+	Domain: These classes create the components required to define a domain, and assemble them into a single object that is passed to the solver class. Origin, goal, and obstacle objects are all created based on the parsed data. Obstacles and goals are created as shape objects based on the Circle, Rectangle, Freeform classes. The domain itself is created as either a Circle or Rectangle object.
+	
+	Solver: The central processing location for the program. Creates a set of empty containers that will record the data created during the execution of the algorithm. This class takes a domain object and then calls single iterations of the selected algorithm to act on it. Once all the iterations are complete it post-processes the data to find the lowest distance path from the origin to the goals (if such a path exists).
+	
+	Algorithm: These classes define the different path-planning algorithms that can be called by the solver class to act on the defined domain. They are currently all based on an abstract class that contains the basic functions required of an RRT algorithm. The RRT Basic and Star versions are then expanded as concrete classes with further individual functionality. This inheritance structure allows for future extension to the program, as new modified RRT algorithms can be easily added by subclassing any of the existing algorithms.
+	
+	Output: Takes the domain object, along with the raw and post-processed data from the solver class, and plots it. The plot shows the full solution tree, and the shortest path (if one is found). The solution can also be animated as the generation of trials is saved sequentially in the raw data.
+	
 	
 	
 \end{document}
