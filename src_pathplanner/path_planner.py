@@ -28,7 +28,7 @@ from input.domain_class import Domain
 from solver.solution import Solution
 from output.results import Results
 from output.plot import Plot
-
+from output.animate import Animate
 
 def run_program():
 	"""
@@ -74,10 +74,10 @@ def run_program():
 
 	print("\nStep 1. Reading Parameters")
 	# The input file
-	#input_file = "./input/user_input_files/circle_regular_obstacles.json"
+	input_file = "./input/user_input_files/circle_regular_obstacles.json"
 	#input_file = "./input/user_input_files/circle_freeform_obstacles.json"
 	#input_file = "./input/user_input_files/circle_mixed_obstacles.json"
-	input_file = "./input/user_input_files/circle_mixed_goals_obstacles.json"
+	#input_file = "./input/user_input_files/circle_mixed_goals_obstacles.json"
 	title = re.search('user_input_files/(.+?).json', input_file).group(1)
 
 	# Parsed JSON data
@@ -106,7 +106,11 @@ def run_program():
 	print("\nStep 5. Plotting Results")
 	plot_object = Plot(title, domain_object)
 	plot_object.plot_results(PathPlan)
-	
+
+	print("\nStep 5. Animating Results")
+	animate_object = Animate(title, domain_object, PathPlan)
+	#animate_object.animate_results(PathPlan)
+
 
 if __name__ == '__main__':
 	run_program()
