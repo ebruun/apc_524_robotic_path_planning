@@ -13,7 +13,7 @@ The domains are solved with the following algorithms::
 	Basic RRT
 	RRT Star
 
-Circlur Domain
+Circular Domain
 ****************
 
 Input Files

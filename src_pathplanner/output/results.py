@@ -18,14 +18,15 @@ class Results:
 			The solution_path and recorder object are assigned to instance attributes with same name.
 
 		Parameters:
-			solution: Solution object which holds the recorder object and solution path.
+			solution(:obj:`~solver.solution.Solution` object): 
+				Solution object which holds the recorder object and solution path.
 
 		Attributes:
-			solution_path: 
-				see :class:~solver.Solution	
+			solution_path(:obj:`~solver.solution.Solution` attribute): 
+				see Solution	
 
-			recorder: 
-				see :class:~solver.Recorder	
+			recorder (:obj:`~solver.recorder.Recorder` object): 
+				see Recorder	
 				
 		Note:
 			The output .txt file will be saved in a folder within the output folder named "output_files"

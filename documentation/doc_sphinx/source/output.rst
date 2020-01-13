@@ -1,20 +1,20 @@
 output package
 ==============
 
-This package does...
+This package displays the results of the path planning algorithm through visual plots as well as text files with pertinent data.
 
 plot module
 ---------------
 
 .. automodule:: output.plot
    :members:
-   :undoc-members:
-   :show-inheritance:
+   :special-members:
+   :exclude-members: __weakref__
 
-animate module
+results module
 ---------------
 
-.. automodule:: output.animate
+.. automodule:: output.results
    :members:
-   :undoc-members:
-   :show-inheritance:
+   :special-members:
+   :exclude-members: __weakref__

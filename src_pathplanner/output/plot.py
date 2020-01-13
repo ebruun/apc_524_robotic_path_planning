@@ -28,7 +28,7 @@ class Plot:
 
 		Parameters:
 			title: String used to title the plot and name the html file where the plot is saved.
-			domain: Domain object which holds the domain, obstacles, and goal/origin information.
+			domain(:obj:`~input.domain_class.Domain` object): Domain object which holds the domain, obstacles, and goal/origin information.
 
 		Attributes:
 			filename (:obj:`str`):
@@ -37,8 +37,8 @@ class Plot:
 			title (:obj:`str`):
 				The title of the plot.  
 
-			domain: 
-				see :class:~input.Domain	
+			domain(:obj:`~input.domain_class.Domain` object): 
+				see Domain	
 					
 			dims (:obj:`int`):
 				Dimensions of the domain.
