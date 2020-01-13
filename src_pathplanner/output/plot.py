@@ -83,10 +83,10 @@ class Plot:
 						y1=y_max,
 						line=dict(
 			                color="Black",
-			                width=15
+			                width=5
         				)
 				))
-				eps = 0.15
+				eps = 0.05
 				extents = [[x_min-eps,x_max+eps],[y_min-eps,y_max+eps]]
 
 			elif self.domain.domain_shape == "rectangle":
@@ -198,7 +198,7 @@ class Plot:
 				y = [self.domain.origin[1]],
 				mode="markers",
 				marker=dict(color="orange",
-				size=15),
+				size=10),
 				showlegend=False
 			))
 
@@ -291,9 +291,11 @@ class Plot:
 						y=[vertices[i, 1],vertices[parent, 1]],
 						line=dict(
 							color="grey",
-							width=2
+							width=1
 						),
 						mode='lines+markers',
+						marker=dict(size=3,
+                			color="grey"),
 						showlegend=False
 					))
 				
@@ -310,7 +312,7 @@ class Plot:
 							y=[vertices[i, 1], vertices[parents[i], 1]],
 							line=dict(
 								color="red",
-								width=4
+								width=1
 							),
 							mode='lines+markers',
 							showlegend=False
