@@ -1,18 +1,41 @@
 \section{Development Process}
-
+\label{sec:dev_process}
+As highlighted in section~\ref{sec:intro} and design document the key components of this software are geometrical set up (domain and obstacles), algorithm for path finding, solution method and results visualization. The goal of this project was to develop a modular and extensible path find software and the development process was decided based on this goal. The aforementioned tasks were divided amongst the group members, who were responsible for a given set of classes. Git was used for maintaining the collaborative work amongst the members. As tasks were fairly independent, it was important to have unit tests as well as integration tests to make sure that the program was working in a cohesive manner. Evolution of the software required automatic testing applications to make sure new additions did not break software. Along the way, various issues were faced and lesson learned. All the these are detailed in the following subsections.
 \subsection{Github Repo Setup}
-		TBD
-
+Given the flexibility offered by Git, it is unsurprising that various recipes for collaborative work have emerged over the years. A few common workflow models are:
+\begin{enumerate}
+	\item Centralized Workflow
+	\item Feature Branch Workflow
+	\item Gitflow Workflow
+	\item Forking Workflow
+\end{enumerate}
+Since there are only three developers involved in this project who communicated reasonably well, the second approach was adopted. The rationale being that each one of us is responsible for a given feature and only merges with development if all the tests pass. One of the developers was responsible for integration tests. This was a nice middle ground between the rigorous checks of option 1 and a complete mayhem that could result from working on master branch directly. The work flow of the software development can be best visualized as shown in the Figure
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{./figures/two_dimensional_sensing.pdf}
+	\caption{\label{fig:git_structure} Graph demonstrating the git work-flow between the developers}
+\end{figure}
+The key takeaways:
+\begin{enumerate}
+	\item 
+	\item 
+\end{enumerate}
 \subsection{Writing Tests}
-For the purpose of the projects, unit tests were written to evaluate the various classes. This was done in a continuous development manner, where whenever a new class was added it was made sure that the 
+For the purpose of the projects, unit tests were written to evaluate the various classes. This was done in a continuous testing manner, i.e. whenever a new class was added we made sure that a relevant test suite was written. This was done to expose any edge cases which other developers may not be considering. The tests had another benefit of 
+letting others know how to run and what attributes and methods to expect from a class. This became highly important as the classes evolved and we deviated from our initial design proposal.
+Two different approaches were taken by the team:
+\begin{enumerate}
+	\item A test class using unittest
+	\item Simple functions to test the methods of a class
+\end{enumerate}
 
 \subsection{Travis}
-Though Travis was added very early in the project, it could be utilized as it was showing up in our case.
+Though Travis was added very early in the project, it could be utilized as the private repo could not tested for some reasons. The authors tried their best but left it.
 
 \subsection{Issues and Lessons}
 Some of the issues faced during the development process and the lessons learned were:
 \begin{enumerate}
 \item Division of tasks
-\item 
+\item Tests : Maintaining the tests to reflect the current state of the code was cumbersome. This was compounded by the fact the authors could not get the travis to work, so it was decided to make sure each test pass manually. This required quite a discipline and nagging.
 \end{enumerate}
 

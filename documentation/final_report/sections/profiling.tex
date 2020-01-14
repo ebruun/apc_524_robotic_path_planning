@@ -7,7 +7,7 @@ A vanilla code profiling was performed to identify the bottle-neck functions or 
 \item The origin and goal was the same.
 \item The bounding box for each obstacle was the same.
 \end{enumerate}
-\begin{table}[h]
+\begin{table}[H]
 \centering
 {\tabulinesep=2.0mm
 \begin{tabu}{c c c c}
@@ -40,7 +40,7 @@ The results of the timing are shown in Table~\ref{tab:tot_time_original}. The fo
 \end{enumerate}
 \subsection{Summary of Hotspots}
 The profiling of the was performed using \textit{cProfile}. The key functions identified for improvement are shown in Table~\ref{tab:functions_original}
-\begin{table}[h]
+\begin{table}[H]
 \centering
 {\tabulinesep=2.0mm
 \begin{tabu}{c c}
@@ -122,7 +122,7 @@ def find_nearest_vertex(self,vertex_list,new_q):
 
 \subsection{Summary of Improvements}	
 The above changes were sufficient to reduce the total time of the run drastically as shown in Table~\ref{tab:tot_time_improved}.
-\begin{table}[h]
+\begin{table}[H]
 \centering
 {\tabulinesep=2.0mm
 \begin{tabu}{c c c c}
@@ -150,7 +150,7 @@ The above changes were sufficient to reduce the total time of the run drasticall
 \end{table}
 
 The corresponding time for the changed functions are shown in Table~\ref{tab:functions_improved}
-\begin{table}[h]
+\begin{table}[H]
 \centering
 {\tabulinesep=2.0mm
 \begin{tabu}{c c}
