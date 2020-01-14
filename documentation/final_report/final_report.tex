@@ -23,7 +23,7 @@
 		The Basic RRT algorithm was first proposed by Lavalle and Kuffner in 1998. While its development was a paradigm shift in the field of robotic motion planning (RRTs were significantly more efficient than the existing path planning methods), the main drawback of the Basic RRT is that it almost surely converges to a non-optimal value. Since the proposal of the Basic RRT, developing new algorithms modifying its underlying principles has been an active area of research. The most significant leap forward was the development of the RRT* (RRT Star) algorithm by Frazzoli in 2010, which is a variant of the Basic RRT that guarantees convergence to the optimal solution.
 
 	\subsection{Motivation}
-		The goal of this project is to develop a modular and scalable program that implements a variety of path-planning algorithms to seaach through a physical domain space populated with obstacles. The ultimate motivation for this work is to assess the relative efficiency and performance of a large set of different algorithms acting in various domains. Therefore, the program is developed in such a way that both the definition of the domain space, and the solution procedure is extensible in the future. 
+		The goal of this project is to develop a modular and scalable program that implements a variety of path-planning algorithms to search through a physical domain space populated with obstacles. The ultimate motivation for this work is to assess the relative efficiency and performance of a large set of different algorithms acting in various domains. Therefore, the program is developed in such a way that both the definition of the domain space, and the solution procedure is extensible in the future. 
 
 
 	\subsection{Program Limitations}
@@ -33,22 +33,12 @@
 		
 		Currently only bitmap (.pbm) shapes can be used to define any freeform (i.e. not regular shapes) obstacles or goals to be placed inside the domain.
 
-\newpage
 \input{./sections/development_process}
 
 
 \newpage
-\section{Program Functionality (JF)}
-	
-	\subsection{Main Program Execution}
-		How the code runs (high-level)
-	
-	\subsection{Design Features Implemented}
-		Summarize the shapes and algoirthms implemented.
-	
-	\subsection{Working Examples}
-		input files and images. compare and contrast RRT and RRT*, show some sample output (text and image)
-		
+\input{./sections/program_functionality}
+
 \newpage
 \input{./sections/profiling}	
 \end{document}
