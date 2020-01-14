@@ -73,13 +73,13 @@ def run_program():
 
 	print("\nStep 1. Reading Parameters")
 	# The input file
-	#input_file = "./input/user_input_files/circle_regular_obstacles.json"
+	#input_file = "./input/user_input_files/circle_regular_obstacles2.json"
 	#input_file = "./input/user_input_files/circle_freeform_obstacles.json"
 	#input_file = "./input/user_input_files/circle_mixed_obstacles.json"
 	#input_file = "./input/user_input_files/circle_mixed_goals_obstacles_basic.json"
 	#input_file = "./input/user_input_files/circle_mixed_goals_obstacles_star.json"
-	input_file = "./input/user_input_files/rectangle_mixed_goals_obstacles_basic.json"
-	#input_file = "./input/user_input_files/rectangle_mixed_goals_obstacles_star.json"
+	#input_file = "./input/user_input_files/rectangle_mixed_goals_obstacles_basic.json"
+	input_file = "./input/user_input_files/rectangle_mixed_goals_obstacles_star.json"
 	title = re.search('user_input_files/(.+?).json', input_file).group(1)
 
 	# Parsed JSON data
