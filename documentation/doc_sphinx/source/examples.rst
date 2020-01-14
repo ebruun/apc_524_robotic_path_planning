@@ -35,11 +35,11 @@ Basic RRT Output
 ----------------
 
 .. raw:: html
-	:file: ../../../src_pathplanner/output/output_files/rectangle_mixed_goals_obstacles_basic.html
+	:file: ./example_files/rectangle_mixed_goals_obstacles_basic.html
 
 Results text file
 
-.. literalinclude :: ../../../src_pathplanner/output/output_files/rectangle_mixed_goals_obstacles_basic.txt
+.. literalinclude :: ./example_files/rectangle_mixed_goals_obstacles_basic.txt
 	:emphasize-lines: 38,39
 
 RRT Star Input File
@@ -55,11 +55,11 @@ RRT Star Output
 ----------------
 
 .. raw:: html
-	:file: ../../../src_pathplanner/output/output_files/rectangle_mixed_goals_obstacles_star.html
+	:file: ./example_files/rectangle_mixed_goals_obstacles_star.html
 
 Results text file
 
-.. literalinclude :: ../../../src_pathplanner/output/output_files/rectangle_mixed_goals_obstacles_star.txt
+.. literalinclude :: ./example_files/rectangle_mixed_goals_obstacles_star.txt
 	:emphasize-lines: 32,33
 
 
@@ -80,11 +80,11 @@ Basic RRT Output
 Show plots and results
 
 .. raw:: html
-	:file: ../../../src_pathplanner/output/output_files/circle_mixed_goals_obstacles_basic.html
+	:file: ./example_files/circle_mixed_goals_obstacles_basic.html
 
 Results text file
 
-.. literalinclude :: ../../../src_pathplanner/output/output_files/circle_mixed_goals_obstacles_basic.txt
+.. literalinclude :: ./example_files/circle_mixed_goals_obstacles_basic.txt
 	:emphasize-lines: 101-104
 
 RRT Star Input File
@@ -101,11 +101,11 @@ RRT Star Output
 Show plots and results
 
 .. raw:: html
-	:file: ../../../src_pathplanner/output/output_files/circle_mixed_goals_obstacles_star.html
+	:file: ./example_files/circle_mixed_goals_obstacles_star.html
 
 Results text file
 
-.. literalinclude :: ../../../src_pathplanner/output/output_files/circle_mixed_goals_obstacles_star.txt
+.. literalinclude :: ./example_files/circle_mixed_goals_obstacles_star.txt
 	:emphasize-lines: 73-76
 
 
