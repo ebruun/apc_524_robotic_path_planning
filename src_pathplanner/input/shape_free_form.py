@@ -148,15 +148,16 @@ class FreeForm2D(Shape):
     if(point[0] < self.x_min_val or point[0] > self.x_max_val or point[1] < self.y_min_val or point[1] > self.y_max_val):
       return False
     else:
+
       # Select all the points whose y values are within +/- y_band
       y_band = 2.1*self.hy
       shape_points = self.all_points_array[self.all_points_array[:,1] < point[1]+y_band]
       shape_points = shape_points[shape_points[:,1] > point[1] -y_band]
       _eps = 1.0e-1
+      relative_distance_array = np.linalg.norm(shape_points-point, axis = 1)
       test_radius = max(self.hx,self.hy)*(2.+_eps)
-      for shape_point in shape_points:
-        if(np.linalg.norm(point-shape_point) <= test_radius):
-          return True
+      if(relative_distance_array[np.argmin(relative_distance_array)] < test_radius):
+        return True
       return False
 
   def is_intersected_by_edge(self, point_1, point_2):

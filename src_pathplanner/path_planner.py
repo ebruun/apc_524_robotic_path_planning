@@ -76,6 +76,8 @@ def run_program():
 	#input_file = "./input/user_input_files/circle_regular_obstacles2.json"
 	#input_file = "./input/user_input_files/circle_freeform_obstacles.json"
 	#input_file = "./input/user_input_files/circle_mixed_obstacles.json"
+	#input_file = "./input/user_input_files/circle_mixed_goals_obstacles.json"
+	#input_file = "./input/user_input_files/profiling_3.json"
 	#input_file = "./input/user_input_files/circle_mixed_goals_obstacles_basic.json"
 	#input_file = "./input/user_input_files/circle_mixed_goals_obstacles_star.json"
 	#input_file = "./input/user_input_files/rectangle_mixed_goals_obstacles_basic.json"
@@ -100,10 +102,33 @@ def run_program():
 	PathPlan.run_algorithm()
 	PathPlan.process_vertex_list()
 
+<<<<<<< HEAD
 	print("\nStep 4. Printing and Saving Results")
 	results_object = Results(PathPlan)
 	results_object.print_results()
 	results_object.save_results(title)
+=======
+	print("Step 4. Print and Save Results")
+	################# REPLACE WITH PRINTING FUNCTION #######################
+	# print_results()
+	# save_results()
+	print("\n\n Vertices\n",PathPlan.recorder.vertices)
+	print("\n\n Parents\n",PathPlan.recorder.parents)
+	print("\n\n Costs\n",PathPlan.recorder.costs)
+	################# REPLACE WITH PRINTING FUNCTION #######################
+
+	################# REPLACE WITH SINGLE FUNCTION #######################
+	print("Step 5. Plotting Results")
+	plot_object = Plot("Path Planning Solution", domain_object)
+	## plot_results(arg1,arg2,arg3,...)
+	plot_object.plot_domain()
+	plot_object.plot_obstacles()
+	plot_object.plot_origin_goals()
+	plot_object.plot_solution_graph(PathPlan)
+	plot_object.draw()
+	print("Finished! See plot in output folder")
+	################ REPLACE WITH SINGLE FUNCTION #######################
+>>>>>>> development
 
 	print("\nStep 5. Plotting Results")
 	plot_object = Plot(title, domain_object)

@@ -75,21 +75,7 @@ class Vertex():
 			shortest_distance (:obj:`float`): The distance from the closest vertex to the new configuration.
 
 		"""
-		dist_new = 0.0
-		shortest_distance = float('+inf') 
-		shortest_index = 0
-		
-		for i, vertex in enumerate(vertex_list):
-
-			if any(x == True for x in np.isnan(vertex)):
-				break # Ends loop when final vertex in current saved state is reached
-			else:
-				dist_new = np.linalg.norm(new_q - vertex)
-				#dist_new = round(dist_new,6)
-
-				if dist_new < shortest_distance:					
-					shortest_distance = dist_new
-					shortest_index = i
-		
-		return shortest_index, shortest_distance
+		existing_vertex_list = vertex_list[~np.isnan(vertex_list).any(axis=1)]
+		dist_norm = np.linalg.norm(existing_vertex_list-new_q, axis = 1)
+		return np.argmin(dist_norm), dist_norm[np.argmin(dist_norm)]
 
