@@ -58,8 +58,7 @@ $ make html
 
 
 
-
-[![Build Status](https://travis-ci.com/PrincetonUniversity/apc_524_robotic_path_planning.svg?token=s3m3VSxYkggvyCzmtTnX&branch=master)](https://travis-ci.com/PrincetonUniversity/apc_524_robotic_path_planning)
+[![Build Status](https://travis-ci.com/PrincetonUniversity/apc_524_robotic_path_planning.svg?token=s3m3VSxYkggvyCzmtTnX&branch=development)](https://travis-ci.com/PrincetonUniversity/apc_524_robotic_path_planning)
 
 
   
