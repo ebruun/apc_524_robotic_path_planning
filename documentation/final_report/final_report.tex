@@ -14,7 +14,7 @@
 \maketitle
 
 \section{Introduction}
-
+\label{sec:intro}
 	\subsection{Scientific Background}
 		Rapidly-exploring random trees (RRTs) are a class of algorithms used in autonomous robotic motion planning to efficiently calculate a path through a large unsearched domain. This domain can either represent a physical space (i.e. 2D or 3D Euclidean space), or a higher-dimensional robotic state space. The algorithm generates trajectories through the domain, and can easily handle multiple obstacles, goals, or other differential constraints that are applicable to a robotic motion planning problem.
 		
@@ -33,12 +33,13 @@
 		
 		Currently only bitmap (.pbm) shapes can be used to define any freeform (i.e. not regular shapes) obstacles or goals to be placed inside the domain.
 
+\newpage
 \input{./sections/development_process}
-
 
 \newpage
 \input{./sections/program_functionality}
 
 \newpage
 \input{./sections/profiling}	
+
 \end{document}
