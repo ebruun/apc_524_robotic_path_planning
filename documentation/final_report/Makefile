@@ -2,6 +2,8 @@ filename=final_report
 
 pdf:
 	pdflatex ${filename}.tex
+	pdflatex ${filename}.tex
+	pdflatex ${filename}.tex
 
 pdf-print: ps
 	ps2pdf -dColorConversionStrategy=/LeaveColorUnchanged -dPDFSETTINGS=/printer ${filename}.ps
