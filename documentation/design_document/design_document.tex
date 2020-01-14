@@ -1,6 +1,7 @@
 \documentclass[10pt]{article}
 
 \usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
 \setlength{\parskip}{\baselineskip}%
 \setlength{\parindent}{0pt}%
 
@@ -33,7 +34,7 @@
 	\begin{enumerate}
 		\item Parse a file of user-specified inputs that define the domain and algorithm parameters.
 		\begin{enumerate}
-			\item Obstacles can be defines as regular shapes (circle/rectangle).
+			\item Obstacles can be defined as regular shapes (circle/rectangle).
 			\item Obstacles can be defined as freeform shapes input as bitmaps.
 			\item Goals can be defined as as regular shapes (circle/rectangle).
 			\item Goals can be defined as as freeform shapes input as bitmaps.
@@ -64,7 +65,7 @@
 	The code has been written in a sufficiently modular way so that the solution space can easily extended to 3-dimensions in the future. The variable "dims" is currently set to 2 in the user-input. With future extension in mind, this variable is referenced throughout the solver/algorithm code. Once the input/domain code is changed to assemble a 3d domain, the algorithm code can easily be adjusted to match.
 
 \section{External Libraries}
-
+While most of the code would core python modules, the generation of free form shapes uses a third party software \href{https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_setup/py_intro/py_intro.html}{\ttfamily OpenCV}. It is widely used for computer vision applications and in the project it was used to read the bitmap images. The bitmap images are used to obtain a {\ttfamily numpy} array of coordinates by assuming a constant pixel size and, hence, a constant center to center spacing between them.
 \newpage
 \section{UML Diagram}
 	The UML diagram can be found as a separate file in the documentation folder. Please refer to that file for this section and any following discussion referencing the class structure.

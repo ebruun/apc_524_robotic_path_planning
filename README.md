@@ -1,5 +1,7 @@
 # APC524 Final Project
 
+[![Build Status](https://travis-ci.com/PrincetonUniversity/apc_524_robotic_path_planning.svg?token=s3m3VSxYkggvyCzmtTnX&branch=development)](https://travis-ci.com/PrincetonUniversity/apc_524_robotic_path_planning)
+
 # Team: Edvard Bruun, Vivek Kumar, Jessica Flores
 
 # Title: Robotic Path Planning Algorithm
@@ -54,9 +56,6 @@ for html:
 $ cd apc_524_robotic_path_planning/documentation/doc_spinx
 $ make html
 ```
-
-
-
 
 
 
