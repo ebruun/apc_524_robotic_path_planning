@@ -57,7 +57,7 @@ class Solution:
 		The chosen algorithm is initialized based on the input parameters. A single trial of the algorithm is executed in each iteration of the loop called in this function. The maximum number of trials is specified in the inout parameters.
 
 		Note:
-			Exits with an error if the user selects and algorithm that has not been implemented.	
+			Exits with an error if the user selects an algorithm that has not been implemented.	
 
 		Calls the :meth:`RRT.rrt_step() <algorithm.rrt.RRT.rrt_step()>` function in the loop.
 

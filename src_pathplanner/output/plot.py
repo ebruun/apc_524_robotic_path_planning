@@ -7,7 +7,6 @@ Plotting class
 
 import numpy as np
 import plotly as py
-
 from plotly import graph_objs as go
 from PIL import Image
 import subprocess
@@ -15,26 +14,109 @@ import os.path
 from os import path
 
 class Plot:
-	""" A class to plot the domain, obstacles, start and end points, as well as 
-		optionally the solution graph of the path planning algorithm.	
+	""" A class to plot the domain, obstacles, goal and origin points, as well as the option of plotting the solution graph of the path planning algorithm.	
 	"""
 	
-	def __init__(self, filename, domain):
+	def __init__(self, title, domain):
 		"""
-		Initializes the plot 
-		:param filename: filename for plot html
-		:type filename: string
+		Initializes the Plot class.  
 
+		The attributes values are initialized using the title and domain object passed. The filename, dimension, and plotly figure attributes are also created and initialized.
+
+		Note:
+			The title and domain object are assigned to instance attributes with same name.
+
+		Parameters:
+			title: String used to title the plot and name the html file where the plot is saved.
+			domain(:obj:`~input.domain_class.Domain` object): Domain object which holds the domain, obstacles, and goal/origin information.
+
+		Attributes:
+			filename (:obj:`str`):
+				The name and path of the output .html file for the plot. 
+
+			title (:obj:`str`):
+				The title of the plot.  
+
+			domain(:obj:`~input.domain_class.Domain` object): 
+				see Domain	
+					
+			dims (:obj:`int`):
+				Dimensions of the domain.
+
+			fig (:obj:`plotly.graph_objs.Figure`):
+				A figure attribute to store the data and layout information of the plot.
+
+		Note:
+			The output plot will be saved in a folder within the output folder named "output_files"
 		"""
-		self.filename = "./output/" + filename + ".html"
-		self.title = filename
+
+		self.filename = "./output/output_files/" + title + ".html"
+		self.title = title
 		self.domain = domain
 		self.dims = domain.dim
-
 		self.fig = go.Figure()
 		
+	def plot_domain(self):
+		"""
+		Sets the title and axes bounds for the plot. Also plots the domain shape (circle) if not a rectangle.
+		"""
+
+		self.fig.update_layout(
+				title=self.title)
+
+		if self.dims == 2:  # plot in 2D 
+			
+			if self.domain.domain_shape == "circle":
+				center = self.domain.domain.center
+				x_min = center[0]-self.domain.domain.radius
+				x_max = center[0]+self.domain.domain.radius
+				y_min = center[1]-self.domain.domain.radius
+				y_max = center[1]+self.domain.domain.radius
+				self.fig.add_shape(
+					go.layout.Shape(
+						type = "circle",
+						xref="x",
+						yref="y",
+						x0=x_min,
+						y0=y_min,
+						x1=x_max,
+						y1=y_max,
+						line=dict(
+			                color="Black",
+			                width=5
+        				)
+				))
+				eps = 0.05
+				extents = [[x_min-eps,x_max+eps],[y_min-eps,y_max+eps]]
+
+			elif self.domain.domain_shape == "rectangle":
+				ll_corner = self.domain.domain.ll_corner
+				ur_corner = self.domain.domain.ur_corner
+				extents = [[ll_corner[0],ur_corner[0]],[ll_corner[1],ur_corner[1]]]
+			
+			else: 
+				raise Exception('The domain shape is not implemented') #Freeform domain has not been implemented yet
+
+			#Ensures the aspect ratio of the axes is 1. 
+			range_x = extents[0] 
+			self.fig.layout.update(
+				xaxis = dict(
+					range = range_x,
+					constrain = 'domain',
+				),
+				yaxis = dict(
+					scaleanchor = "x",
+					scaleratio = 1,
+				),
+			)
+			self.fig.update_yaxes(range=extents[1])
+		
+		else: 
+			raise Exception('Plotting in > 2 dimensions is not yet implemented')
+
+
 	def plot_obstacles(self):
-		"""  This function plots the obstacles in the domain.  """
+		"""  This function plots the obstacles in the domain in black."""
 		
 		if self.dims == 2:
 			
@@ -106,18 +188,21 @@ class Plot:
 			raise Exception('Plotting in > 2 dimensions is not yet implemented')
 
 	def plot_origin_goals(self):
-		"""  This function plots the origin point and goal shapes.  """
+		"""  This function plots the origin point in orange and goal shapes in green.  """
 
 		if self.dims == 2:
+			
+			#Plot origin point
 			self.fig.add_trace(go.Scatter(
 				x = [self.domain.origin[0]],
 				y = [self.domain.origin[1]],
 				mode="markers",
 				marker=dict(color="orange",
-				size=15),
+				size=10),
 				showlegend=False
 			))
 
+			#Plot goal shapes
 			for goal in self.domain.goals:
 				if goal.name == "circle":
 					center = goal.center
@@ -186,7 +271,7 @@ class Plot:
 			raise Exception('Plotting in > 2 dimensions is not yet implemented')
 
 	def plot_solution_graph(self, solution=None):
-		"""  This function plots the solution graph if given. """
+		"""  This function plots the solution graph in grey and final solution path(s) in red. If a solution object is not given, nothing will be added. """
 		if solution == None:
 			pass
 
@@ -206,9 +291,11 @@ class Plot:
 						y=[vertices[i, 1],vertices[parent, 1]],
 						line=dict(
 							color="grey",
-							width=2
+							width=1
 						),
 						mode='lines+markers',
+						marker=dict(size=3,
+                			color="grey"),
 						showlegend=False
 					))
 				
@@ -225,72 +312,31 @@ class Plot:
 							y=[vertices[i, 1], vertices[parents[i], 1]],
 							line=dict(
 								color="red",
-								width=4
+								width=2
 							),
 							mode='lines+markers',
+							marker=dict(size=5,
+                			color="red"),
 							showlegend=False
 						))
 						
 			else:  # can't plot in higher dimensions
 				raise Exception('Plotting in > 2 dimensions is not yet implemented')
 
-	def plot_domain(self):
-		"""
-		Sets title and axes bounds for the plot, plots domain shape if not a rectangle.
-		"""
-
-		self.fig.update_layout(
-				title=self.title)
-
-		if self.dims == 2:  # plot in 2D 
-			
-			if self.domain.domain_shape == "circle":
-				center = self.domain.domain.center
-				x_min = center[0]-self.domain.domain.radius
-				x_max = center[0]+self.domain.domain.radius
-				y_min = center[1]-self.domain.domain.radius
-				y_max = center[1]+self.domain.domain.radius
-				self.fig.add_shape(
-					go.layout.Shape(
-						type = "circle",
-						xref="x",
-						yref="y",
-						x0=x_min,
-						y0=y_min,
-						x1=x_max,
-						y1=y_max,
-						line=dict(
-			                color="Black",
-			                width=15
-        				)
-				))
-				extents = [[x_min,x_max],[y_min,y_max]]
-
-			elif self.domain.domain_shape == "rectangle":
-				ll_corner = self.domain.domain.ll_corner
-				ur_corner = self.domain.domain.ur_corner
-				extents = [[ll_corner[0],ur_corner[0]],[ll_corner[1],ur_corner[1]]]
-			
-			range_x = extents[0]
-			self.fig.layout.update(
-				xaxis = dict(
-					range = range_x,
-					constrain = 'domain',
-				),
-				yaxis = dict(
-					scaleanchor = "x",
-					scaleratio = 1,
-				),
-			)
-			self.fig.update_yaxes(range=extents[1])
-		
-		else: 
-			raise Exception('Plotting in > 2 dimensions is not yet implemented')
-
+	
 	def draw(self, auto_open=True):
 		"""
-		Render the plot to a file
+		Renders the plot to the file specified.
 		"""
 		py.offline.plot(self.fig, filename=self.filename, auto_open=auto_open)
 
 	
+	def plot_results(self, solution=None):
+		"""
+		Runs all of the functions to give the final plot.
+		"""
+		self.plot_domain()
+		self.plot_obstacles()
+		self.plot_origin_goals()
+		self.plot_solution_graph(solution)
+		self.draw()

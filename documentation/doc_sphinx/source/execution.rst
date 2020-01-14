@@ -103,7 +103,7 @@ Program Output
 
 The program produces output in the following folder::
 	
-	USER_PATH/apc_524_robotic_path_planning/output
+	USER_PATH/apc_524_robotic_path_planning/output/output_files
 
 Produces::
 

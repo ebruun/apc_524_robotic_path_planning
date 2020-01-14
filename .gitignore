@@ -1,4 +1,4 @@
-## Ignore profiling results
+# Don't track profile results
 profiling_results/
 ## Core latex/pdflatex auxiliary files:
 *.aux
@@ -412,6 +412,5 @@ dmypy.json
 .pyre/
 
 #Output files
-*.html
 *.pdf
 *.png
