@@ -1,9 +1,16 @@
 Program Execution
 =================
 
-Create a virtual python environment based on the following file::
+Create a new conda virtual python environment::
+
+	$ conda create --name new_env_name python=3.7
+	$ conda activate new_env_name
+
+
+Install additional packages in the following file::
 
 	requirements.txt
+	$ pip install -r requirements.txt
 
 To plot freeform shapes, ensure that the ImageMagick tool is installed::
 
