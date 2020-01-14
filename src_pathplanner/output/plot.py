@@ -50,7 +50,7 @@ class Plot:
 			The output plot will be saved in a folder within the output folder named "output_files"
 		"""
 
-		self.filename = "./output/output_files/" + title + ".html"
+		self.filename = "./output/output_files/" + str(title) + ".html"
 		self.title = title
 		self.domain = domain
 		self.dims = domain.dim
@@ -61,11 +61,11 @@ class Plot:
 		Sets the title and axes bounds for the plot. Also plots the domain shape (circle) if not a rectangle.
 		"""
 
-		self.fig.update_layout(
-				title=self.title)
-
 		if self.dims == 2:  # plot in 2D 
-			
+				
+			self.fig.update_layout(
+					title=self.title)
+
 			if self.domain.domain_shape == "circle":
 				center = self.domain.domain.center
 				x_min = center[0]-self.domain.domain.radius

@@ -3,8 +3,6 @@
 import unittest
 from unittest.mock import Mock
 import numpy as np
-import io
-from contextlib import redirect_stdout
 
 from solver.solution import Solution
 from solver.recorder import Recorder
@@ -34,6 +32,7 @@ obstacles_info = {
 
 domain_test = Domain(domain_info, obstacles_info, origin_goal_info)	
 
+#Solution object with a solution path
 rrt_algorithm_info = {
 	'method': 'rrt_basic',
 	'n_trials': 100,
@@ -45,6 +44,7 @@ solution_test = Solution(rrt_algorithm_info,domain_test)
 solution_test.run_algorithm(print_vertex=False)
 solution_test.process_vertex_list()
 
+#Solution object without a solution path 
 rrt_algorithm_info_nosolution = {
 	'method': 'rrt_basic',
 	'n_trials': 1,
@@ -97,14 +97,6 @@ class TestResults(unittest.TestCase):
 		
 		self.assertEqual(len(self.results.solution_costs), len(self.results.solution_path),
 			"not enough solution costs saved")
-
-	def test_save_results(self):
-		pass
-
-	def test_print_results(self):
-		pass
-
-
 
 
 if __name__ == '__main__':
