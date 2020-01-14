@@ -1,5 +1,9 @@
 # Don't track profile results
 profiling_results/
+
+# Don't track output folder
+output/output_files/
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
