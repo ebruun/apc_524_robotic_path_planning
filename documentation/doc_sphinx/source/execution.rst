@@ -7,7 +7,7 @@ Create a new conda virtual python environment::
 	$ conda activate new_env_name
 
 
-Install additional packages in the following file::
+Install additional packages in thewq following file::
 
 	requirements.txt
 	$ pip install -r requirements.txt
