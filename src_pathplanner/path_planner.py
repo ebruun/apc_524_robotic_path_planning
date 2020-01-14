@@ -18,6 +18,7 @@ Imports the :class:`~output.plot.Plot` class
 
 """
 # Python imports
+from __future__ import print_function
 import sys
 import time
 import re
@@ -79,9 +80,9 @@ def run_program():
 	#input_file = "./input/user_input_files/circle_mixed_goals_obstacles.json"
 	#input_file = "./input/user_input_files/profiling_3.json"
 	#input_file = "./input/user_input_files/circle_mixed_goals_obstacles_basic.json"
-	#input_file = "./input/user_input_files/circle_mixed_goals_obstacles_star.json"
+	input_file = "./input/user_input_files/circle_mixed_goals_obstacles_star.json"
 	#input_file = "./input/user_input_files/rectangle_mixed_goals_obstacles_basic.json"
-	input_file = "./input/user_input_files/rectangle_mixed_goals_obstacles_star.json"
+	#input_file = "./input/user_input_files/rectangle_mixed_goals_obstacles_star.json"
 	title = re.search('user_input_files/(.+?).json', input_file).group(1)
 
 	# Parsed JSON data
