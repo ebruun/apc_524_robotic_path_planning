@@ -1,27 +1,22 @@
 \section{Development Process}
 \label{sec:dev_process}
-As highlighted in section~\ref{sec:intro} and design document the key components of this software are geometrical set up (domain and obstacles), algorithm for path finding, solution method and results visualization. The goal of this project was to develop a modular and extensible path find software and the development process was decided based on this goal. The aforementioned tasks were divided amongst the group members, who were responsible for a given set of classes. Git was used for maintaining the collaborative work amongst the members. As tasks were fairly independent, it was important to have unit tests as well as integration tests to make sure that the program was working in a cohesive manner. Evolution of the software required automatic testing applications to make sure new additions did not break software. Along the way, various issues were faced and lesson learned. All the these are detailed in the following subsections.
+As highlighted in section~\ref{sec:intro} and design document, the key components of this software are geometrical set up (domain and obstacles), algorithm for path finding, solution method and results visualization. The goal of this project was to develop a modular and extensible path find software and the development process was decided based on this goal. The aforementioned tasks were divided amongst the group members, who were responsible for a given set of classes. Git was used for maintaining the collaborative work amongst the members. As tasks were fairly independent, it was important to have unit tests as well as integration tests to make sure that the software was working in a cohesive manner. Evolution of the software required automatic testing applications to make sure new additions did not break it. Along the way, various issues were faced and lesson learned. The whole processes is detailed in the following subsections.
 \subsection{Github Repo Setup}
 Given the flexibility offered by Git, it is unsurprising that various recipes for collaborative work have emerged over the years. A few common workflow models are:
 \begin{enumerate}
-	\item Centralized Workflow
-	\item Feature Branch Workflow
-	\item Gitflow Workflow
-	\item Forking Workflow
+	\item \href{https://www.atlassian.com/git/tutorials/comparing-workflows#centralized-workflow}{Centralized Workflow}: Only one branch {\ttfamily master} is used and all the team members commit changes to this branch. This option is however prone to merge conflicts.
+	\item \href{https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow}{Feature Branch Workflow}: The core idea behind this approach is that any new feature development takes place on a dedicated branch which means that the {\ttfamily master} branch is never broken. Further this allows for pull requests which help to discuss the code before they are pushed to {\ttfamily master}.
+	\item \href{https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow}{Gitflow Workflow}: Popularized by Vincent Drienssen at \href{https://nvie.com/posts/a-successful-git-branching-model/}{nvie} this is used in larger projects which are focused on software release cycles. A {\ttfamily develop} branch is created from {\ttfamily master} which is used to create {\ttfamily feature} and {\ttfamily release} branches. Branch {\ttfamily feature} is merged to {\ttfamily develop}, while {\ttfamily release} is also merged with {\ttfamily master}. It further allows for a {\ttfamily hotfixe} branch to resolve issues with master.
+	\item \href{https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow}{Forking Workflow}: Commonly used in open source projects (e.g. \href{https://github.com/dealii/dealii}{DEAL.II}), this model gives each developer their own server-side repository. Only the maintainers of the software have write access to the official code, while giving contributors an option to create pull requests to add features to the open source project.
 \end{enumerate}
-Since there are only three developers involved in this project who communicated reasonably well, the second approach was adopted. The rationale being that each one of us is responsible for a given feature and only merges with development if all the tests pass. One of the developers was responsible for integration tests. This was a nice middle ground between the rigorous checks of option 1 and a complete mayhem that could result from working on master branch directly. The work flow of the software development can be best visualized as shown in the Figure
+Since there are only three developers involved in this project who communicated frequently in person, a mix of "Gitflow" and "Feature Branch" workflows was adopted. The rationale being that each one of us is responsible for a given feature and only merges with {\ttfamily development} branch if all the tests pass. One of the members was responsible for integration tests and to merge the {\ttfamily development} with {\ttfamily master}. This was a nice middle ground between the rigorous checks of option 3 and 4, and a complete mayhem that could result from working on master branch directly. The work flow of the software development can be best visualized as shown in the Figure~\ref{fig:git_structure}.
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.9\textwidth]{./figures/two_dimensional_sensing.pdf}
+	\includegraphics[width=0.9\textwidth]{./figures/git_work_flow.pdf}
 	\caption{\label{fig:git_structure} Graph demonstrating the git work-flow between the developers}
 \end{figure}
-The key takeaways:
-\begin{enumerate}
-	\item 
-	\item 
-\end{enumerate}
 \subsection{Writing Tests}
-For the purpose of the projects, unit tests were written to evaluate the various classes. This was done in a continuous testing manner, i.e. whenever a new class was added we made sure that a relevant test suite was written. This was done to expose any edge cases which other developers may not be considering. The tests had another benefit of 
+For the purpose of this project, unit tests were written to evaluate the various classes for expected behavior and determining edge cases. The project was not entirely test-driven, i.e. the tests were not written before the code, but rather tests were written along with the creation of new classes as well as whenever the functionality of a class changed. To make sure that the functionality of the software was never compromised, it was mandated that all the tests must pass before the code could be pushed to the {\ttfamily development} branch. The tests had another benefit of 
 letting others know how to run and what attributes and methods to expect from a class. This became highly important as the classes evolved and we deviated from our initial design proposal.
 Two different approaches were taken by the team:
 \begin{enumerate}
