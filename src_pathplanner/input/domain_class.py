@@ -66,9 +66,6 @@ class Domain():
     elif(self.domain_shape=="circle"):
       assert(self.dim==2)
       self.domain = Circle(self.domain_info)
-    elif(self.domain_shape=="free_form"):
-      assert(self.dim==2)
-      self.domain = FreeForm2D(self.domain_info)
     else:
       raise Exception('The domain shape is not implemented')
 
@@ -81,7 +78,8 @@ class Domain():
     """Creates the obstacles based on the shape and geometrical information provided in the obstacle information list
     """
     self.obstacles = [Obstacle(self.obstacle_info[key], self.origin_goal_info).obstacle for key in self.obstacle_info]
-    self.is_obstacle_inside()
+    for obstacle in self.obstacles:
+      assert(self.is_obstacle_inside(obstacle)==True)
 
   def create_goals(self):
     """Creates the goals based on the shape and geometrical information provided in the origin-goal information list
@@ -89,5 +87,61 @@ class Domain():
     self.goals = [Obstacle(self.goal_info[key], self.origin_goal_info).obstacle for key in self.goal_info]
 
   # Perform some sanity checks
-  def is_obstacle_inside(self):
-    pass
+  def is_obstacle_inside(self, obstacle):
+    """Checks if a given obstacle is inside the domain
+
+    Parameters:
+      obstacle (:obj:`obstacles_class.Obstacle`):
+        An obstacle object
+  
+    Returns:
+        bool::
+
+        True -- The edge intersects the shape
+        False -- The edge does not intersect the shape
+
+    """
+    if(self.domain_shape=="rectangle"):
+        if(obstacle.name=="rectangle"):
+          if(self.domain.is_point_inside(obstacle.ll_corner) and
+            self.domain.is_point_inside(obstacle.ur_corner)):
+            return True
+          else:
+            return False
+        elif(obstacle.name=="circle"):
+          if(obstacle.center[0]+obstacle.radius < self.domain.ur_corner[0] and 
+            obstacle.center[0]-obstacle.radius > self.domain.ll_corner[0] and
+            obstacle.center[1]+obstacle.radius < self.domain.ur_corner[1] and
+            obstacle.center[1]-obstacle.radius > self.domain.ll_corner[1]):
+            return True
+          else:
+            return False
+        else:
+          if(self.domain.is_point_inside(np.array([obstacle.x_min_val, obstacle.y_min_val])) and
+            self.domain.is_point_inside(np.array([obstacle.x_max_val, obstacle.y_max_val]))):
+            return True
+          else:
+            return False
+
+    else:
+      if(obstacle.name=="rectangle"):
+        if(self.domain.is_point_inside(obstacle.vertices[0]) and
+          self.domain.is_point_inside(obstacle.vertices[1]) and
+          self.domain.is_point_inside(obstacle.vertices[2]) and
+          self.domain.is_point_inside(obstacle.vertices[3])):
+          return True
+        else:
+          return False
+      elif(obstacle.name=="circle"):
+        if(np.linalg.norm(self.domain.center  - obstacle.center) + obstacle.radius <= self.domain.radius):
+          return True
+        else:
+          return False
+      else:
+        if(self.domain.is_point_inside(np.array([obstacle.x_min_val, obstacle.y_min_val])) and 
+          self.domain.is_point_inside(np.array([obstacle.x_max_val, obstacle.y_min_val])) and
+          self.domain.is_point_inside(np.array([obstacle.x_max_val, obstacle.y_max_val])) and 
+          self.domain.is_point_inside(np.array([obstacle.x_min_val, obstacle.y_max_val]))):
+          return True
+        else:
+          return False
