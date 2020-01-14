@@ -19,7 +19,7 @@ class RRT_Basic(RRT):
 		"""
 		super().__init__(domain_object,recorder,params)
 
-	def rrt_step(self,trial):
+	def rrt_step(self,trial, print_vertex=True):
 		"""This function performs a single step/iteration using the Basic RRT algorithm.
 
 		Notes::
@@ -33,7 +33,8 @@ class RRT_Basic(RRT):
 			Step 4. Record the iteration data (update: recorder.vertices, recorder.parents, recorder.costs lists)
 
 		"""
-		print("-- -- Calculating Vertex:", trial+1)
+		if print_vertex == True:
+			print("-- -- Calculating Vertex:", trial+1)
 
 		# Step 1. Find new configuration
 		self.new_q = self.new_config()

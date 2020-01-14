@@ -46,7 +46,7 @@ class RRT_Star(RRT):
 
 		self.recorder.parents_history[0,0:2] = -1
 
-	def rrt_step(self,trial):
+	def rrt_step(self,trial, print_vertex=True):
 		"""This function performs a single step/iteration using the RRT Star algorithm.
 
 		Notes::
@@ -70,7 +70,8 @@ class RRT_Star(RRT):
 			Step 9. Record the iteration data (update: recorder.parents_history list)
 
 		"""
-		print("-- -- Calculating Vertex:", trial+1)
+		if print_vertex == True:
+			print("-- -- Calculating Vertex:", trial+1)
 
 		# Step 1. Find new configuration
 		self.new_q = self.new_config()

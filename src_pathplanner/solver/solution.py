@@ -51,7 +51,7 @@ class Solution:
 		self.solution_path = [] 
 		self.algorithm = []
 
-	def run_algorithm(self):
+	def run_algorithm(self, print_vertex=True):
 		"""  This function runs through the full path planning algorithm.
 
 		The chosen algorithm is initialized based on the input parameters. A single trial of the algorithm is executed in each iteration of the loop called in this function. The maximum number of trials is specified in the inout parameters.
@@ -63,7 +63,8 @@ class Solution:
 
 		"""
 		if self.params["method"] == "rrt_basic":
-			print("-- Using Basic RRT Algorithm")
+			if print_vertex == True:
+				print("-- Using Basic RRT Algorithm")
 			self.algorithm = RRT_Basic(
 				self.domain_object, 
 				self.recorder,
@@ -80,7 +81,7 @@ class Solution:
 			exit("ERROR: No Valid Method")		
 
 		for trial in range(1,self.params["n_trials"]):
-			self.algorithm.rrt_step(trial)
+			self.algorithm.rrt_step(trial,print_vertex)
 
 	def process_vertex_list(self):
 		"""  This function post-processes the full vertex list generated from completing the specified number of iterations.
