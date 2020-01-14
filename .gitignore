@@ -2,7 +2,7 @@
 profiling_results/
 
 # Don't track output folder
-output/output_files/
+src_pathplanner/output/output_files/
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
