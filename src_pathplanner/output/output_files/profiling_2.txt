@@ -1,0 +1,13 @@
+Solution Path(s)
+
+[nan]
+
+
+Solution Vertices(s)
+
+nan 
+
+
+Solution Cost(s)
+
+nan
