@@ -1,0 +1,22 @@
+{
+    "python.terminal.activateEnvironment": false,
+    "python.terminal.executeInFileDir": true,
+    "python.envFile": "${workspaceFolder}/.vscode/.env",
+    //
+    //INTEGRATED TERMINAL
+    "terminal.integrated.tabs.enabled": true,
+    "terminal.integrated.copyOnSelection": true,
+    // "terminal.integrated.defaultProfile.windows": "Conda Prompt (workspace)",
+    "terminal.integrated.profiles.windows": {
+        "Conda Prompt (workspace)": {
+        "path": ["${env:windir}\\Sysnative\\cmd.exe", "${env:windir}\\System32\\cmd.exe"],
+        "args": ["/K", "C:\\ProgramData\\Anaconda3\\Scripts\\activate.bat apc_524"],
+        "icon": "terminal-cmd"
+        }
+    },
+    "files.exclude": {
+        "**/.git": false
+    },
+    "python-envs.defaultEnvManager": "ms-python.python:conda",
+    "python-envs.defaultPackageManager": "ms-python.python:conda",
+}
